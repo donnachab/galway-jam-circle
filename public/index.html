@@ -17,7 +17,7 @@
         .admin-controls, .admin-controls-inline { display: none; }
         body.admin-mode .admin-controls { display: block; } 
         body.admin-mode .admin-controls-inline { display: inline-flex; } 
-        #add-jam-form, #add-event-form, #add-photo-form { display: none; }
+        #add-jam-form, #add-event-form, #add-photo-form, #edit-cover-photo-form { display: none; }
         .jam-cancelled { background-color: #fee2e2 !important; }
         .jam-cancelled .jam-info { text-decoration: line-through; }
         .jam-special-day { border-color: var(--accent-color) !important; border-width: 2px; }
@@ -52,15 +52,32 @@
 
     <main>
         <section id="home" class="relative text-white text-center">
-            <img src="https://i.imgur.com/K1C3l4w.jpg" alt="A group of people playing instruments like guitars and ukuleles by a river in Galway." class="w-full h-[60vh] object-cover">
+            <img id="cover-photo" src="https://i.imgur.com/K1C3l4w.jpg" alt="A group of people playing instruments like guitars and ukuleles by a river in Galway." class="w-full h-[60vh] object-cover">
             <div class="absolute inset-0 bg-black/50 flex flex-col justify-center items-center p-6">
                 <h1 class="text-4xl md:text-6xl font-bold drop-shadow-lg">Welcome to the Galway Jam Circle</h1>
                 <p class="mt-4 text-lg md:text-xl max-w-2xl drop-shadow-md">A friendly, informal music-making community for all skill levels. Let's Jam!</p>
                 <a href="#jams" class="mt-8 px-8 py-3 bg-accent text-gray-900 font-bold rounded-full hover:bg-yellow-400 transition duration-300 transform hover:scale-105">See Regular Jams</a>
             </div>
         </section>
+        
+        <div class="container mx-auto px-6 text-center -mt-8 relative z-10">
+            <div class="admin-controls-inline">
+                <button id="edit-cover-photo-btn" class="px-4 py-2 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-600 transition duration-300">Change Cover Photo</button>
+            </div>
+            <form id="edit-cover-photo-form" class="max-w-xl mx-auto mt-4 p-6 bg-gray-50 rounded-lg shadow-md">
+                <h3 class="text-xl font-bold text-primary mb-4">Change Cover Photo</h3>
+                <div class="mb-4">
+                    <label for="cover-photo-url" class="block text-gray-700 font-bold mb-2">New Photo URL</label>
+                    <input type="url" id="cover-photo-url" class="w-full p-2 border rounded" placeholder="Paste direct image link...">
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="cancel-cover-photo-btn" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded hover:bg-purple-800">Save Photo</button>
+                </div>
+            </form>
+        </div>
 
-        <section id="jams" class="py-16 md:py-24 bg-white">
+        <section id="jams" class="pt-16 md:pt-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">Regular Jams</h2>
@@ -89,13 +106,27 @@
         <section id="gallery" class="py-16 md:py-24 bg-gray-100">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Jam Circle Gallery</h2>
+                
+                <h3 class="text-2xl font-bold text-center text-primary mb-8">Videos</h3>
+                <div class="aspect-w-16 aspect-h-9">
+                    <iframe 
+                        class="w-full h-96" 
+                        src="https://www.youtube.com/embed/videoseries?list=PLG9xaR5hTnatoLYd337wPFrbVkjHmWErw" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <h3 class="text-2xl font-bold text-center text-primary mt-16 mb-8">Photos</h3>
                 <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4"></div>
-                <div class="text-center mt-8 admin-controls-inline"><button id="add-photo-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300">Add Media</button></div>
+                <div class="text-center mt-8 admin-controls-inline"><button id="add-photo-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300">Add Photo</button></div>
                 <form id="add-photo-form" class="max-w-3xl mx-auto mt-8 p-6 bg-gray-50 rounded-lg shadow-inner">
-                    <h3 class="text-xl font-bold text-primary mb-4">Add New Media</h3>
+                    <h3 class="text-xl font-bold text-primary mb-4">Add New Photo</h3>
                     <div class="mb-4">
-                        <label for="photo-url" class="block text-gray-700 font-bold mb-2">Media URL</label>
-                        <input type="url" id="photo-url" class="w-full p-2 border rounded" placeholder="Paste direct image or YouTube link...">
+                        <label for="photo-url" class="block text-gray-700 font-bold mb-2">Photo URL</label>
+                        <input type="url" id="photo-url" class="w-full p-2 border rounded" placeholder="Paste direct image link...">
                     </div>
                     <div class="mb-4">
                         <label for="photo-caption" class="block text-gray-700 font-bold mb-2">Caption (Alt Text)</label>
@@ -103,7 +134,7 @@
                     </div>
                     <div class="flex justify-end space-x-4">
                         <button type="button" id="cancel-photo-btn" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button>
-                        <button type="submit" id="submit-photo-btn" class="px-4 py-2 bg-primary text-white rounded hover:bg-purple-800">Save Media</button>
+                        <button type="submit" id="submit-photo-btn" class="px-4 py-2 bg-primary text-white rounded hover:bg-purple-800">Save Photo</button>
                     </div>
                 </form>
             </div>
@@ -120,7 +151,7 @@
     
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, writeBatch } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, writeBatch, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyC4SnqaOMQWmEFulkN8zZALZsqJLK7hOh0",
@@ -158,6 +189,12 @@
             let events = [];
             let photos = [];
 
+            const coverPhotoElement = document.getElementById('cover-photo');
+            const editCoverPhotoBtn = document.getElementById('edit-cover-photo-btn');
+            const editCoverPhotoForm = document.getElementById('edit-cover-photo-form');
+            const coverPhotoUrlInput = document.getElementById('cover-photo-url');
+            const cancelCoverPhotoBtn = document.getElementById('cancel-cover-photo-btn');
+            
             const jamList = document.getElementById('jam-list');
             const addJamBtn = document.getElementById('add-jam-btn');
             const addJamForm = document.getElementById('add-jam-form');
@@ -317,20 +354,13 @@
                 galleryGrid.innerHTML = '';
                 photos = [...initialPhotos];
                 if (photos.length === 0) {
-                    galleryGrid.innerHTML = `<p class="text-center text-gray-500 col-span-full">The gallery is empty. Add some photos or videos!</p>`;
+                    galleryGrid.innerHTML = `<p class="text-center text-gray-500 col-span-full">The photo gallery is empty. Add some photos!</p>`;
                 }
                 photos.forEach(photo => {
                     const div = document.createElement('div');
                     div.className = 'gallery-item overflow-hidden rounded-lg shadow-lg';
-                    let mediaElement;
-                    if (photo.type === 'video') {
-                        const videoId = photo.url.split('v=')[1]?.split('&')[0] || photo.url.split('/').pop();
-                        mediaElement = `<iframe class="w-full h-full aspect-video" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-                    } else {
-                        mediaElement = `<img src="${photo.url}" alt="${photo.caption}" class="w-full h-full object-cover transform hover:scale-110 transition duration-500">`;
-                    }
                     div.innerHTML = `
-                        ${mediaElement}
+                        <img src="${photo.url}" alt="${photo.caption}" class="w-full h-full object-cover transform hover:scale-110 transition duration-500">
                         <button data-id="${photo.id}" class="delete-photo-btn admin-controls-inline bg-red-500 text-white rounded-full p-1 hover:bg-red-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                         </button>`;
@@ -475,6 +505,18 @@
                 if (target.classList.contains('edit-event-btn')) { const eventToEdit = initialEvents.find(ev => ev.id == eventId); if (eventToEdit) showEventForm('edit', eventToEdit); } 
                 else if (target.classList.contains('delete-event-btn')) { showModal('Are you sure you want to delete this event?', 'confirm', async () => { await deleteDoc(doc(db, "events", eventId)); await loadData(); }); }
             });
+            
+            editCoverPhotoBtn.addEventListener('click', () => { editCoverPhotoForm.style.display = 'block'; });
+            cancelCoverPhotoBtn.addEventListener('click', () => { editCoverPhotoForm.style.display = 'none'; });
+
+            editCoverPhotoForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const newUrl = coverPhotoUrlInput.value.trim();
+                if (!newUrl) { showModal('Please enter a URL.', 'alert'); return; }
+                await setDoc(doc(db, "site_config", "main"), { coverPhotoUrl: newUrl });
+                await loadData();
+                editCoverPhotoForm.style.display = 'none';
+            });
 
             addPhotoBtn.addEventListener('click', () => showPhotoForm());
             cancelPhotoBtn.addEventListener('click', hidePhotoForm);
@@ -487,10 +529,7 @@
 
                 if (!url || !caption) { showModal('Please provide both a URL and a caption.', 'alert'); return; }
                 
-                const isVideo = url.includes("youtube.com") || url.includes("youtu.be");
-                const type = isVideo ? 'video' : 'image';
-
-                const photoData = { id, type, url, caption };
+                const photoData = { id, type: 'image', url, caption };
                 await setDoc(doc(db, "photos", id), photoData);
                 await loadData();
                 hidePhotoForm();
@@ -534,22 +573,35 @@
                     const photoSnapshot = await getDocs(collection(db, "photos"));
                     initialPhotos = photoSnapshot.docs.map(doc => doc.data());
 
-                    if (initialJams.length === 0 && initialEvents.length === 0 && initialPhotos.length === 0) {
-                        showModal("Database is empty. Seeding with initial data. Please refresh if you don't see it.", "alert");
-                        const batch = writeBatch(db);
+                    const configDoc = await getDoc(doc(db, "site_config", "main"));
+                    if (configDoc.exists() && configDoc.data().coverPhotoUrl) {
+                        coverPhotoElement.src = configDoc.data().coverPhotoUrl;
+                    }
+
+                    // Modular seeding logic
+                    let needsSeeding = false;
+                    const batch = writeBatch(db);
+
+                    if (initialJams.length === 0) {
+                        needsSeeding = true;
                         const seedJams = [ { id: "1", day: "Saturday", date: "2 Aug:", venue: "Mechanics' Institute", cancelled: false }, { id: "2", day: "Saturday", date: "9 Aug:", venue: "Mechanics' Institute", cancelled: false }, { id: "3", day: "Saturday", date: "16 Aug:", venue: "Joyce's, Knocknacarra", cancelled: false }, { id: "4", day: "Saturday", date: "23 Aug:", venue: "Mechanics' Institute", cancelled: false }, { id: "5", day: "Saturday", date: "30 Aug:", venue: "Mechanics' Institute", cancelled: false }, { id: "6", day: "Saturday", date: "6 Sept:", venue: "Joyce's, Knocknacarra", cancelled: false }, { id: "7", day: "Saturday", date: "13 Sept:", venue: "Mechanics' Institute", cancelled: false }];
-                        const seedEvents = [{ id: "101", title: "Cleggan Fringe Festival", dates: "Friday, 12 Sept - Sunday, 14 Sept 2025", description: "The annual Cleggan Fringe Festival is a highlight of the year! Featuring a host of traditional and folk musicians in the pubs and venues around Cleggan. Keep an eye out for GJC members playing sessions!"}];
-                        const seedPhotos = [
-                            {id: "201", type: "image", url: "https://i.imgur.com/K1C3l4w.jpg", caption: "Jam session by the river."},
-                            {id: "301", type: "video", url: "https://www.youtube.com/watch?v=5zM6-o3-r-g", caption: "Galway Girl"},
-                            {id: "302", type: "video", url: "https://www.youtube.com/watch?v=TnbP_zE1p-s", caption: "The Irish Rover"},
-                            {id: "303", type: "video", url: "https://www.youtube.com/watch?v=f-1s-tBCFDo", caption: "Dirty Old Town"}
-                        ];
                         seedJams.forEach(jam => batch.set(doc(db, "jams", jam.id), jam));
+                    }
+                    if (initialEvents.length === 0) {
+                        needsSeeding = true;
+                        const seedEvents = [{ id: "101", title: "Cleggan Fringe Festival", dates: "Friday, 12 Sept - Sunday, 14 Sept 2025", description: "The annual Cleggan Fringe Festival is a highlight of the year! Featuring a host of traditional and folk musicians in the pubs and venues around Cleggan. Keep an eye out for GJC members playing sessions!"}];
                         seedEvents.forEach(event => batch.set(doc(db, "events", event.id), event));
+                    }
+                    if (initialPhotos.length === 0) {
+                        needsSeeding = true;
+                        const seedPhotos = [{id: "201", type: "image", url: "https://i.imgur.com/K1C3l4w.jpg", caption: "Jam session by the river."}];
                         seedPhotos.forEach(photo => batch.set(doc(db, "photos", photo.id), photo));
+                    }
+
+                    if (needsSeeding) {
+                        showModal("Database empty or incomplete. Seeding with initial data. Please refresh if you don't see it.", "alert");
                         await batch.commit();
-                        await loadData();
+                        await loadData(); // Reload data after seeding
                         return;
                     }
 
