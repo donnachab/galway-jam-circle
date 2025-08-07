@@ -17,10 +17,12 @@
         .admin-controls, .admin-controls-inline { display: none; }
         body.admin-mode .admin-controls { display: block; } 
         body.admin-mode .admin-controls-inline { display: inline-flex; } 
-        #add-jam-form, #add-event-form { display: none; }
+        #add-jam-form, #add-event-form, #add-photo-form { display: none; }
         .jam-cancelled { background-color: #fee2e2 !important; }
         .jam-cancelled .jam-info { text-decoration: line-through; }
         .jam-special-day { border-color: var(--accent-color) !important; border-width: 2px; }
+        .gallery-item { position: relative; }
+        .gallery-item .delete-photo-btn { position: absolute; top: 0.5rem; right: 0.5rem; }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -84,7 +86,28 @@
 
         <section id="format" class="py-16 md:py-24 bg-white"><div class="container mx-auto px-6"><h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Our Jam Format</h2><div class="grid md:grid-cols-3 gap-8 text-center"><div class="bg-white p-8 rounded-lg shadow-md"><h3 class="font-bold text-xl text-primary mb-2">1. Loop Songs First</h3><p class="text-gray-600">We begin with easy, repetitive songs to get everyone warmed up and in the groove.</p></div><div class="bg-white p-8 rounded-lg shadow-md"><h3 class="font-bold text-xl text-primary mb-2">2. Four Chords or Less</h3><p class="text-gray-600">Next, we move to songs that use four simple chords or fewer, making it easy for everyone to join in.</p></div><div class="bg-white p-8 rounded-lg shadow-md"><h3 class="font-bold text-xl text-primary mb-2">3. Then Anything Goes!</h3><p class="text-gray-600">In the final part of the jam, the floor is open! Bring out any song you'd like to play with the group.</p></div></div></div></section>
         
-        <section id="gallery" class="py-16 md:py-24 bg-gray-100"><div class="container mx-auto px-6"><h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Jam Circle Gallery</h2><div class="grid grid-cols-2 md:grid-cols-3 gap-4"><div class="overflow-hidden rounded-lg shadow-lg"><img src="https://i.imgur.com/K1C3l4w.jpg" alt="A group of people playing instruments by a river." class="w-full h-full object-cover transform hover:scale-110 transition duration-500"></div><div class="overflow-hidden rounded-lg shadow-lg"><img src="https://placehold.co/600x400/8C1B5F/FFFFFF?text=Great+Times" alt="Placeholder image" class="w-full h-full object-cover transform hover:scale-110 transition duration-500"></div><div class="overflow-hidden rounded-lg shadow-lg"><img src="https://placehold.co/600x400/8C1B5F/FFFFFF?text=More+Music" alt="Placeholder image" class="w-full h-full object-cover transform hover:scale-110 transition duration-500"></div><div class="overflow-hidden rounded-lg shadow-lg"><img src="https://placehold.co/600x400/8C1B5F/FFFFFF?text=Fun+Jams" alt="Placeholder image" class="w-full h-full object-cover transform hover:scale-110 transition duration-500"></div><div class="overflow-hidden rounded-lg shadow-lg"><img src="https://placehold.co/600x400/8C1B5F/FFFFFF?text=Singing" alt="Placeholder image" class="w-full h-full object-cover transform hover:scale-110 transition duration-500"></div><div class="overflow-hidden rounded-lg shadow-lg"><img src="https://placehold.co/600x400/8C1B5F/FFFFFF?text=Good+Vibes" alt="Placeholder image" class="w-full h-full object-cover transform hover:scale-110 transition duration-500"></div></div></div></section>
+        <section id="gallery" class="py-16 md:py-24 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Jam Circle Gallery</h2>
+                <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4"></div>
+                <div class="text-center mt-8 admin-controls-inline"><button id="add-photo-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300">Add Media</button></div>
+                <form id="add-photo-form" class="max-w-3xl mx-auto mt-8 p-6 bg-gray-50 rounded-lg shadow-inner">
+                    <h3 class="text-xl font-bold text-primary mb-4">Add New Media</h3>
+                    <div class="mb-4">
+                        <label for="photo-url" class="block text-gray-700 font-bold mb-2">Media URL</label>
+                        <input type="url" id="photo-url" class="w-full p-2 border rounded" placeholder="Paste direct image or YouTube link...">
+                    </div>
+                    <div class="mb-4">
+                        <label for="photo-caption" class="block text-gray-700 font-bold mb-2">Caption (Alt Text)</label>
+                        <input type="text" id="photo-caption" class="w-full p-2 border rounded" placeholder="e.g., Jam session by the river">
+                    </div>
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" id="cancel-photo-btn" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button>
+                        <button type="submit" id="submit-photo-btn" class="px-4 py-2 bg-primary text-white rounded hover:bg-purple-800">Save Media</button>
+                    </div>
+                </form>
+            </div>
+        </section>
         
         <section id="contact" class="py-16 md:py-24 bg-white"><div class="container mx-auto px-6 text-center"><h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-4">Join Us!</h2><p class="text-gray-600 max-w-xl mx-auto mb-8">Want to join our mailing list for updates or have a question? Get in touch! We'd love to hear from you.</p><a href="mailto:info@galwayjamcircle.ie" class="px-8 py-3 bg-primary text-white font-bold rounded-full hover:bg-purple-800 transition duration-300 transform hover:scale-105">Email Us</a></div></section>
     </main>
@@ -130,8 +153,10 @@
             const ADMIN_PASSWORD = 'galwayjamcircleadmin4519';
             let initialJams = [];
             let initialEvents = [];
+            let initialPhotos = [];
             let jams = [];
             let events = [];
+            let photos = [];
 
             const jamList = document.getElementById('jam-list');
             const addJamBtn = document.getElementById('add-jam-btn');
@@ -152,6 +177,13 @@
             const eventTitleInput = document.getElementById('event-title');
             const eventDatesInput = document.getElementById('event-dates');
             const eventDescriptionInput = document.getElementById('event-description');
+            
+            const galleryGrid = document.getElementById('gallery-grid');
+            const addPhotoBtn = document.getElementById('add-photo-btn');
+            const addPhotoForm = document.getElementById('add-photo-form');
+            const cancelPhotoBtn = document.getElementById('cancel-photo-btn');
+            const photoUrlInput = document.getElementById('photo-url');
+            const photoCaptionInput = document.getElementById('photo-caption');
 
             const modal = document.getElementById('custom-modal');
             const modalMessage = document.getElementById('modal-message');
@@ -281,6 +313,31 @@
                 });
             }
 
+            function renderGallery() {
+                galleryGrid.innerHTML = '';
+                photos = [...initialPhotos];
+                if (photos.length === 0) {
+                    galleryGrid.innerHTML = `<p class="text-center text-gray-500 col-span-full">The gallery is empty. Add some photos or videos!</p>`;
+                }
+                photos.forEach(photo => {
+                    const div = document.createElement('div');
+                    div.className = 'gallery-item overflow-hidden rounded-lg shadow-lg';
+                    let mediaElement;
+                    if (photo.type === 'video') {
+                        const videoId = photo.url.split('v=')[1]?.split('&')[0] || photo.url.split('/').pop();
+                        mediaElement = `<iframe class="w-full h-full aspect-video" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                    } else {
+                        mediaElement = `<img src="${photo.url}" alt="${photo.caption}" class="w-full h-full object-cover transform hover:scale-110 transition duration-500">`;
+                    }
+                    div.innerHTML = `
+                        ${mediaElement}
+                        <button data-id="${photo.id}" class="delete-photo-btn admin-controls-inline bg-red-500 text-white rounded-full p-1 hover:bg-red-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                        </button>`;
+                    galleryGrid.appendChild(div);
+                });
+            }
+
             function showJamForm(mode = 'add', jam = null) {
                 addJamForm.style.display = 'block';
                 if (mode === 'edit') { 
@@ -322,6 +379,9 @@
             }
 
             function hideEventForm() { addEventForm.style.display = 'none'; }
+
+            function showPhotoForm() { addPhotoForm.style.display = 'block'; }
+            function hidePhotoForm() { addPhotoForm.style.display = 'none'; }
             
             function toggleAdminMode(enable) {
                  if(enable) { 
@@ -337,10 +397,12 @@
                     adminModeBtn.classList.remove('bg-yellow-400'); 
                     mobileAdminBtn.classList.remove('bg-yellow-400', 'text-black');
                     hideJamForm(); 
-                    hideEventForm(); 
+                    hideEventForm();
+                    hidePhotoForm();
                  }
                  renderJams();
                  renderEvents();
+                 renderGallery();
             }
 
             function handleAdminClick() {
@@ -414,6 +476,38 @@
                 else if (target.classList.contains('delete-event-btn')) { showModal('Are you sure you want to delete this event?', 'confirm', async () => { await deleteDoc(doc(db, "events", eventId)); await loadData(); }); }
             });
 
+            addPhotoBtn.addEventListener('click', () => showPhotoForm());
+            cancelPhotoBtn.addEventListener('click', hidePhotoForm);
+
+            addPhotoForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const url = photoUrlInput.value.trim();
+                const caption = photoCaptionInput.value.trim();
+                const id = String(Date.now());
+
+                if (!url || !caption) { showModal('Please provide both a URL and a caption.', 'alert'); return; }
+                
+                const isVideo = url.includes("youtube.com") || url.includes("youtu.be");
+                const type = isVideo ? 'video' : 'image';
+
+                const photoData = { id, type, url, caption };
+                await setDoc(doc(db, "photos", id), photoData);
+                await loadData();
+                hidePhotoForm();
+            });
+            
+            galleryGrid.addEventListener('click', async (e) => {
+                const deleteBtn = e.target.closest('.delete-photo-btn');
+                if (!deleteBtn) return;
+
+                const photoId = deleteBtn.dataset.id;
+                showModal('Are you sure you want to delete this media?', 'confirm', async () => {
+                    await deleteDoc(doc(db, "photos", photoId));
+                    await loadData();
+                });
+            });
+
+
             testDateBtn.addEventListener('click', () => {
                 const testDateStr = testDateInput.value;
                 if (testDateStr) {
@@ -436,14 +530,19 @@
 
                     const eventSnapshot = await getDocs(collection(db, "events"));
                     initialEvents = eventSnapshot.docs.map(doc => doc.data());
+                    
+                    const photoSnapshot = await getDocs(collection(db, "photos"));
+                    initialPhotos = photoSnapshot.docs.map(doc => doc.data());
 
-                    if (initialJams.length === 0 && initialEvents.length === 0) {
+                    if (initialJams.length === 0 && initialEvents.length === 0 && initialPhotos.length === 0) {
                         showModal("Database is empty. Seeding with initial data. Please refresh if you don't see it.", "alert");
                         const batch = writeBatch(db);
                         const seedJams = [ { id: "1", day: "Saturday", date: "2 Aug:", venue: "Mechanics' Institute", cancelled: false }, { id: "2", day: "Saturday", date: "9 Aug:", venue: "Mechanics' Institute", cancelled: false }, { id: "3", day: "Saturday", date: "16 Aug:", venue: "Joyce's, Knocknacarra", cancelled: false }, { id: "4", day: "Saturday", date: "23 Aug:", venue: "Mechanics' Institute", cancelled: false }, { id: "5", day: "Saturday", date: "30 Aug:", venue: "Mechanics' Institute", cancelled: false }, { id: "6", day: "Saturday", date: "6 Sept:", venue: "Joyce's, Knocknacarra", cancelled: false }, { id: "7", day: "Saturday", date: "13 Sept:", venue: "Mechanics' Institute", cancelled: false }];
                         const seedEvents = [{ id: "101", title: "Cleggan Fringe Festival", dates: "Friday, 12 Sept - Sunday, 14 Sept 2025", description: "The annual Cleggan Fringe Festival is a highlight of the year! Featuring a host of traditional and folk musicians in the pubs and venues around Cleggan. Keep an eye out for GJC members playing sessions!"}];
+                        const seedPhotos = [{id: "201", type: "image", url: "https://i.imgur.com/K1C3l4w.jpg", caption: "Jam session by the river."}];
                         seedJams.forEach(jam => batch.set(doc(db, "jams", jam.id), jam));
                         seedEvents.forEach(event => batch.set(doc(db, "events", event.id), event));
+                        seedPhotos.forEach(photo => batch.set(doc(db, "photos", photo.id), photo));
                         await batch.commit();
                         await loadData();
                         return;
@@ -452,6 +551,7 @@
                     manageJamSchedule();
                     renderJams();
                     renderEvents();
+                    renderGallery();
                 } catch (error) {
                     console.error("Error loading data: ", error);
                     if (error.message.includes("Missing or insufficient permissions")) {
