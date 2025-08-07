@@ -1,668 +1,703 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galway Jam Circle - Official Website</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root { --primary-color: #8C1B5F; --accent-color: #FFD700; }
-        body { font-family: 'Inter', sans-serif; }
-        .bg-primary { background-color: var(--primary-color); }
-        .text-primary { color: var(--primary-color); }
-        .bg-accent { background-color: var(--accent-color); }
-        .border-primary { border-color: var(--primary-color); }
-        .admin-controls, .admin-controls-inline { display: none; }
-        body.admin-mode .admin-controls { display: block; } 
-        body.admin-mode .admin-controls-inline { display: inline-flex; } 
-        #add-jam-form, #add-event-form, #add-photo-form, #edit-cover-photo-form, #edit-featured-video-form { display: none; }
-        .jam-cancelled { background-color: #fee2e2 !important; }
-        .jam-cancelled .jam-info { text-decoration: line-through; }
-        .jam-special-day { border-color: var(--accent-color) !important; border-width: 2px; }
-        .gallery-item { position: relative; }
-        .gallery-item .delete-photo-btn { position: absolute; top: 0.5rem; right: 0.5rem; }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galway Jam Circle - Official Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root { --primary-color: #8C1B5F; --accent-color: #FFD700; }
+        body { font-family: 'Inter', sans-serif; }
+        .bg-primary { background-color: var(--primary-color); }
+        .text-primary { color: var(--primary-color); }
+        .bg-accent { background-color: var(--accent-color); }
+        .border-primary { border-color: var(--primary-color); }
+        .admin-controls, .admin-controls-inline { display: none; }
+        body.admin-mode .admin-controls { display: block; } 
+        body.admin-mode .admin-controls-inline { display: inline-flex; } 
+        #add-jam-form, #add-event-form, #add-photo-form, #edit-cover-photo-form, #edit-featured-video-form { display: none; }
+        .jam-cancelled { background-color: #fee2e2 !important; }
+        .jam-cancelled .jam-info { text-decoration: line-through; }
+        .jam-special-day { border-color: var(--accent-color) !important; border-width: 2px; }
+        .gallery-item { position: relative; }
+        .gallery-item .delete-photo-btn { position: absolute; top: 0.5rem; right: 0.5rem; }
+    </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-    <!-- HEADER SECTION -->
-    <header class="bg-primary shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <div class="w-16 h-16">
-                    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><defs><g id="guitar"><path d="M-5,0 C-5,-8 -2,-15 0,-15 C2,-15 5,-8 5,0 C5,8 2,15 0,15 C-2,15 -5,8 -5,0 Z M0,-15 L0,-20 M-2,-20 L2,-20" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M-8,5 C-12,0 -12,-15 -5,-20 C5,-20 12,-15 12,0 C12,15 5,20 -5,20 C-12,15 -12,10 -8,5 Z" fill="white"/><circle cx="0" cy="-2" r="3" fill="#8C1B5F"/></g><g id="sax"><path d="M0,0 C10,-5 10,-15 0,-20 L-5,-20 C-15,-15 -15,-5 -5,0 Z" fill="white"/><path d="M0,0 Q-5,5 -10,5 L-12,3" fill="none" stroke="white" stroke-width="1.5"/><path d="M-15,-5 L-18,-5 M-15,-10 L-18,-10" stroke="white" stroke-width="1"/></g><g id="banjo"><circle cx="0" cy="0" r="10" fill="white"/><circle cx="0" cy="0" r="7" fill="#8C1B5F"/><path d="M0,-10 L0,-25 M-3,-25 L3,-25" stroke="white" stroke-width="1.5"/></g><g id="fiddle"><path d="M-4,0 C-4,-8 -2,-15 0,-15 C2,-15 4,-8 4,0 C4,8 2,15 0,15 C-2,15 -4,8 -4,0 Z" fill="white"/><path d="M0,-15 L0,-25 L-8,-20 C-8,-15 -5,-18 0,-15" stroke="white" stroke-width="1.5" fill="white"/><path d="M-2,5 C-1,3 1,3 2,5 M-2,0 C-1,-2 1,-2 2,0" stroke="#8C1B5F" stroke-width="0.5"/></g></defs><circle cx="60" cy="60" r="48" fill="white" stroke="none"/><g stroke="none"><use href="#guitar" transform="translate(60, 10) scale(0.9)"/><use href="#sax" transform="translate(100, 28) rotate(45) scale(0.8)"/><use href="#banjo" transform="translate(110, 60) rotate(90) scale(0.8)"/><use href="#fiddle" transform="translate(95, 95) rotate(135) scale(0.9)"/><use href="#guitar" transform="translate(60, 110) rotate(180) scale(0.9)"/><use href="#sax" transform="translate(20, 92) rotate(225) scale(0.8)"/><use href="#banjo" transform="translate(10, 60) rotate(270) scale(0.8)"/><use href="#fiddle" transform="translate(25, 25) rotate(315) scale(0.9)"/></g><text x="60" y="50" font-family="Inter, sans-serif" font-size="14" fill="#8C1B5F" text-anchor="middle" font-weight="bold">Galway</text><text x="60" y="68" font-family="Inter, sans-serif" font-size="14" fill="#8C1B5F" text-anchor="middle" font-weight="bold">Jam</text><text x="60" y="86" font-family="Inter, sans-serif" font-size="14" fill="#8C1B5F" text-anchor="middle" font-weight="bold">Circle</text></svg>
-                </div>
-                <div class="text-white text-xl md:text-2xl font-bold">Galway Jam Circle</div>
-            </div>
-            <div class="hidden md:flex items-center space-x-4">
-                <a href="#home" class="text-white hover:text-yellow-300 transition duration-300">Home</a><a href="#jams" class="text-white hover:text-yellow-300 transition duration-300">Regular Jams</a><a href="#special-events" class="text-white hover:text-yellow-300 transition duration-300">Festivals & Events</a><a href="#gallery" class="text-white hover:text-yellow-300 transition duration-300">Gallery</a><a href="#contact" class="text-white hover:text-yellow-300 transition duration-300">Contact</a>
-                <button id="admin-mode-btn" class="ml-4 px-3 py-1 text-sm bg-gray-100 text-primary rounded hover:bg-gray-200 transition duration-300">Admin Mode</button>
-            </div>
-            <div class="md:hidden">
-                <button id="menu-btn" class="text-white focus:outline-none"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
-            </div>
-        </nav>
-        <div id="mobile-menu" class="md:hidden hidden bg-primary/90">
-            <a href="#home" class="block text-white text-center py-2 hover:bg-white/20">Home</a><a href="#jams" class="block text-white text-center py-2 hover:bg-white/20">Regular Jams</a><a href="#special-events" class="block text-white text-center py-2 hover:bg-white/20">Festivals & Events</a><a href="#gallery" class="block text-white text-center py-2 hover:bg-white/20">Gallery</a><a href="#contact" class="block text-white text-center py-2 hover:bg-white/20">Contact</a>
-            <a href="#" id="mobile-admin-btn" class="block text-white text-center py-2 bg-primary/50 hover:bg-white/20 mt-2">Admin Mode</a>
-        </div>
-    </header>
+        <header class="bg-primary shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="w-16 h-16">
+                    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><defs><g id="guitar"><path d="M-5,0 C-5,-8 -2,-15 0,-15 C2,-15 5,-8 5,0 C5,8 2,15 0,15 C-2,15 -5,8 -5,0 Z M0,-15 L0,-20 M-2,-20 L2,-20" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M-8,5 C-12,0 -12,-15 -5,-20 C5,-20 12,-15 12,0 C12,15 5,20 -5,20 C-12,15 -12,10 -8,5 Z" fill="white"/><circle cx="0" cy="-2" r="3" fill="#8C1B5F"/></g><g id="sax"><path d="M0,0 C10,-5 10,-15 0,-20 L-5,-20 C-15,-15 -15,-5 -5,0 Z" fill="white"/><path d="M0,0 Q-5,5 -10,5 L-12,3" fill="none" stroke="white" stroke-width="1.5"/><path d="M-15,-5 L-18,-5 M-15,-10 L-18,-10" stroke="white" stroke-width="1"/></g><g id="banjo"><circle cx="0" cy="0" r="10" fill="white"/><circle cx="0" cy="0" r="7" fill="#8C1B5F"/><path d="M0,-10 L0,-25 M-3,-25 L3,-25" stroke="white" stroke-width="1.5"/></g><g id="fiddle"><path d="M-4,0 C-4,-8 -2,-15 0,-15 C2,-15 4,-8 4,0 C4,8 2,15 0,15 C-2,15 -4,8 -4,0 Z" fill="white"/><path d="M0,-15 L0,-25 L-8,-20 C-8,-15 -5,-18 0,-15" stroke="white" stroke-width="1.5" fill="white"/><path d="M-2,5 C-1,3 1,3 2,5 M-2,0 C-1,-2 1,-2 2,0" stroke="#8C1B5F" stroke-width="0.5"/></g></defs><circle cx="60" cy="60" r="48" fill="white" stroke="none"/><g stroke="none"><use href="#guitar" transform="translate(60, 10) scale(0.9)"/><use href="#sax" transform="translate(100, 28) rotate(45) scale(0.8)"/><use href="#banjo" transform="translate(110, 60) rotate(90) scale(0.8)"/><use href="#fiddle" transform="translate(95, 95) rotate(135) scale(0.9)"/><use href="#guitar" transform="translate(60, 110) rotate(180) scale(0.9)"/><use href="#sax" transform="translate(20, 92) rotate(225) scale(0.8)"/><use href="#banjo" transform="translate(10, 60) rotate(270) scale(0.8)"/><use href="#fiddle" transform="translate(25, 25) rotate(315) scale(0.9)"/></g><text x="60" y="50" font-family="Inter, sans-serif" font-size="14" fill="#8C1B5F" text-anchor="middle" font-weight="bold">Galway</text><text x="60" y="68" font-family="Inter, sans-serif" font-size="14" fill="#8C1B5F" text-anchor="middle" font-weight="bold">Jam</text><text x="60" y="86" font-family="Inter, sans-serif" font-size="14" fill="#8C1B5F" text-anchor="middle" font-weight="bold">Circle</text></svg>
+                </div>
+                <div class="text-white text-xl md:text-2xl font-bold">Galway Jam Circle</div>
+            </div>
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="#home" class="text-white hover:text-yellow-300 transition duration-300">Home</a><a href="#jams" class="text-white hover:text-yellow-300 transition duration-300">Regular Jams</a><a href="#special-events" class="text-white hover:text-yellow-300 transition duration-300">Festivals & Events</a><a href="#gallery" class="text-white hover:text-yellow-300 transition duration-300">Gallery</a><a href="#contact" class="text-white hover:text-yellow-300 transition duration-300">Contact</a>
+                <button id="admin-mode-btn" class="ml-4 px-3 py-1 text-sm bg-gray-100 text-primary rounded hover:bg-gray-200 transition duration-300">Admin Mode</button>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-white focus:outline-none"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="md:hidden hidden bg-primary/90">
+            <a href="#home" class="block text-white text-center py-2 hover:bg-white/20">Home</a><a href="#jams" class="block text-white text-center py-2 hover:bg-white/20">Regular Jams</a><a href="#special-events" class="block text-white text-center py-2 hover:bg-white/20">Festivals & Events</a><a href="#gallery" class="block text-white text-center py-2 hover:bg-white/20">Gallery</a><a href="#contact" class="block text-white text-center py-2 hover:bg-white/20">Contact</a>
+            <a href="#" id="mobile-admin-btn" class="block text-white text-center py-2 bg-primary/50 hover:bg-white/20 mt-2">Admin Mode</a>
+        </div>
+    </header>
 
-    <main>
-        <section id="home" class="relative text-white text-center">
-            <img id="cover-photo" src="https://i.imgur.com/K1C3l4w.jpg" alt="A group of people playing instruments like guitars and ukuleles by a river in Galway." class="w-full h-[60vh] object-cover">
-            <div class="absolute inset-0 bg-black/50 flex flex-col justify-center items-center p-6">
-                <h1 class="text-4xl md:text-6xl font-bold drop-shadow-lg">Welcome to the Galway Jam Circle</h1>
-                <p class="mt-4 text-lg md:text-xl max-w-2xl drop-shadow-md">A friendly, informal music-making community for all skill levels. Let's Jam!</p>
-                <a href="#jams" class="mt-8 px-8 py-3 bg-accent text-gray-900 font-bold rounded-full hover:bg-yellow-400 transition duration-300 transform hover:scale-105">See Regular Jams</a>
-            </div>
-        </section>
-        
-        <div class="container mx-auto px-6 text-center -mt-8 relative z-10">
-            <div class="admin-controls-inline">
-                <button id="edit-cover-photo-btn" class="px-4 py-2 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-600 transition duration-300">Change Cover Photo</button>
-            </div>
-            <form id="edit-cover-photo-form" class="max-w-xl mx-auto mt-4 p-6 bg-gray-50 rounded-lg shadow-md">
-                <h3 class="text-xl font-bold text-primary mb-4">Change Cover Photo</h3>
-                <div class="mb-4">
-                    <label for="cover-photo-url" class="block text-gray-700 font-bold mb-2">New Photo URL</label>
-                    <input type="url" id="cover-photo-url" class="w-full p-2 border rounded" placeholder="Paste direct image link...">
-                </div>
-                <div class="flex justify-end space-x-4">
-                    <button type="button" id="cancel-cover-photo-btn" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button>
-                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded hover:bg-purple-800">Save Photo</button>
-                </div>
-            </form>
-        </div>
+    <main>
+        <section id="home" class="relative text-white text-center">
+            <img id="cover-photo" src="https://i.imgur.com/K1C3l4w.jpg" alt="A group of people playing instruments like guitars and ukuleles by a river in Galway." class="w-full h-[60vh] object-cover">
+            <div class="absolute inset-0 bg-black/50 flex flex-col justify-center items-center p-6">
+                <h1 class="text-4xl md:text-6xl font-bold drop-shadow-lg">Welcome to the Galway Jam Circle</h1>
+                <p class="mt-4 text-lg md:text-xl max-w-2xl drop-shadow-md">A friendly, informal music-making community for all skill levels. Let's Jam!</p>
+                <a href="#jams" class="mt-8 px-8 py-3 bg-accent text-gray-900 font-bold rounded-full hover:bg-yellow-400 transition duration-300 transform hover:scale-105">See Regular Jams</a>
+            </div>
+        </section>
+        
+        <div class="container mx-auto px-6 text-center -mt-8 relative z-10">
+            <div class="admin-controls-inline">
+                <button id="edit-cover-photo-btn" class="px-4 py-2 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-600 transition duration-300">Change Cover Photo</button>
+            </div>
+            <form id="edit-cover-photo-form" class="max-w-xl mx-auto mt-4 p-6 bg-gray-50 rounded-lg shadow-md">
+                <h3 class="text-xl font-bold text-primary mb-4">Change Cover Photo</h3>
+                <div class="mb-4">
+                    <label for="cover-photo-url" class="block text-gray-700 font-bold mb-2">New Photo URL</label>
+                    <input type="url" id="cover-photo-url" class="w-full p-2 border rounded" placeholder="Paste direct image link...">
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="cancel-cover-photo-btn" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded hover:bg-purple-800">Save Photo</button>
+                </div>
+            </form>
+        </div>
 
-        <section id="jams" class="pt-16 md:pt-24 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">Regular Jams</h2>
-                    <p class="text-gray-600">Our weekly jam schedule. Voluntary donations are welcome to help cover venue costs.</p>
-                </div>
-                <div class="max-w-2xl mx-auto">
-                    <ul id="jam-list" class="space-y-4"></ul>
-                    <div class="text-center mt-6 admin-controls-inline"><button id="add-jam-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300">Add New Jam</button></div>
-                    <form id="add-jam-form" class="mt-8 p-6 bg-gray-50 rounded-lg shadow-inner"><h3 id="form-title" class="text-xl font-bold text-primary mb-4">Add/Edit Jam</h3><input type="hidden" id="edit-jam-id"><div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4"><div class="md:col-span-2"><label for="jam-date" class="block text-gray-700 font-bold mb-2">Date</label><input type="text" id="jam-date" class="w-full p-2 border rounded" placeholder="Select a date..."></div><div><label for="jam-day" class="block text-gray-700 font-bold mb-2">Day</label><input type="text" id="jam-day" class="w-full p-2 border rounded bg-gray-200" readonly></div></div><div class="mb-4"><label for="jam-venue" class="block text-gray-700 font-bold mb-2">Venue</label><input type="text" id="jam-venue" list="venue-list" class="w-full p-2 border rounded" placeholder="Select or type a venue..."><datalist id="venue-list"><option value="Mechanics' Institute"><option value="Joyce's, Knocknacarra"></datalist></div><div class="flex justify-end space-x-4"><button type="button" id="cancel-btn" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button><button type="submit" id="submit-btn" class="px-4 py-2 bg-primary text-white rounded hover:bg-purple-800">Save Jam</button></div></form>
-                    <div class="admin-controls mt-8 border-t pt-6 border-gray-300"><div class="w-full"><h4 class="text-lg font-bold text-gray-700 mb-2">Date Testing Module</h4><p class="text-sm text-gray-600 mb-2">See how the list will look on a specific date.</p><div class="flex space-x-2"><input type="text" id="test-date-input" class="w-full p-2 border rounded" placeholder="Select a test date..."><button id="test-date-btn" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 whitespace-nowrap">Test Date</button><button id="reset-date-btn" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Reset</button></div></div></div>
-                </div>
-            </div>
-        </section>
+        <section id="jams" class="pt-16 md:pt-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">Regular Jams</h2>
+                    <p class="text-gray-600">Our weekly jam schedule. Voluntary donations are welcome to help cover venue costs.</p>
+                </div>
+                <div class="max-w-2xl mx-auto">
+                    <ul id="jam-list" class="space-y-4"></ul>
+                    <div class="text-center mt-6 admin-controls-inline"><button id="add-jam-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300">Add New Jam</button></div>
+                    <form id="add-jam-form" class="mt-8 p-6 bg-gray-50 rounded-lg shadow-inner">
+                        <h3 id="form-title" class="text-xl font-bold text-primary mb-4">Add/Edit Jam</h3>
+                        <input type="hidden" id="edit-jam-id">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div class="md:col-span-2">
+                                <label for="jam-date" class="block text-gray-700 font-bold mb-2">Date</label>
+                                <input type="text" id="jam-date" class="w-full p-2 border rounded" placeholder="Select a date...">
+                            </div>
+                            <div>
+                                <label for="jam-day" class="block text-gray-700 font-bold mb-2">Day</label>
+                                <input type="text" id="jam-day" class="w-full p-2 border rounded bg-gray-200" readonly>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="jam-venue" class="block text-gray-700 font-bold mb-2">Venue</label>
+                            <input type="text" id="jam-venue" list="venue-list" class="w-full p-2 border rounded" placeholder="Select or type a venue...">
+                            <datalist id="venue-list">
+                                <option value="Mechanics' Institute">
+                                <option value="Joyce's, Knocknacarra">
+                            </datalist>
+                        </div>
+                        <div class="mb-4">
+                            <label for="jam-map-link" class="block text-gray-700 font-bold mb-2">Google Maps Link</label>
+                            <input type="url" id="jam-map-link" class="w-full p-2 border rounded" placeholder="Paste a Google Maps link (optional)...">
+                        </div>
+                        <div class="flex justify-end space-x-4">
+                            <button type="button" id="cancel-btn" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button>
+                            <button type="submit" id="submit-btn" class="px-4 py-2 bg-primary text-white rounded hover:bg-purple-800">Save Jam</button>
+                        </div>
+                    </form>
+                    <div class="admin-controls mt-8 border-t pt-6 border-gray-300"><div class="w-full"><h4 class="text-lg font-bold text-gray-700 mb-2">Date Testing Module</h4><p class="text-sm text-gray-600 mb-2">See how the list will look on a specific date.</p><div class="flex space-x-2"><input type="text" id="test-date-input" class="w-full p-2 border rounded" placeholder="Select a test date..."><button id="test-date-btn" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 whitespace-nowrap">Test Date</button><button id="reset-date-btn" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Reset</button></div></div></div>
+                </div>
+            </div>
+        </section>
 
-        <section id="special-events" class="py-16 md:py-24 bg-gray-100">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Festivals & Special Events</h2>
-                <div id="event-list" class="max-w-3xl mx-auto space-y-8"></div>
-                <div class="text-center mt-8 admin-controls-inline"><button id="add-event-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300">Add New Event</button></div>
-                <form id="add-event-form" class="max-w-3xl mx-auto mt-8 p-6 bg-gray-50 rounded-lg shadow-inner"><h3 id="event-form-title" class="text-xl font-bold text-primary mb-4">Add a New Event</h3><input type="hidden" id="edit-event-id"><div class="mb-4"><label for="event-title" class="block text-gray-700 font-bold mb-2">Title</label><input type="text" id="event-title" class="w-full p-2 border rounded" placeholder="e.g., Cleggan Fringe Festival"></div><div class="mb-4"><label for="event-dates" class="block text-gray-700 font-bold mb-2">Dates</label><input type="text" id="event-dates" class="w-full p-2 border rounded" placeholder="Select a date or date range..."></div><div class="mb-4"><label for="event-description" class="block text-gray-700 font-bold mb-2">Description</label><textarea id="event-description" class="w-full p-2 border rounded" rows="4" placeholder="Enter event details..."></textarea></div><div class="flex justify-end space-x-4"><button type="button" id="cancel-event-btn" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button><button type="submit" id="submit-event-btn" class="px-4 py-2 bg-primary text-white rounded hover:bg-purple-800">Save Event</button></div></form>
-            </div>
-        </section>
+        <section id="special-events" class="py-16 md:py-24 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Festivals & Special Events</h2>
+                <div id="event-list" class="max-w-3xl mx-auto space-y-8"></div>
+                <div class="text-center mt-8 admin-controls-inline"><button id="add-event-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300">Add New Event</button></div>
+                <form id="add-event-form" class="max-w-3xl mx-auto mt-8 p-6 bg-gray-50 rounded-lg shadow-inner"><h3 id="event-form-title" class="text-xl font-bold text-primary mb-4">Add a New Event</h3><input type="hidden" id="edit-event-id"><div class="mb-4"><label for="event-title" class="block text-gray-700 font-bold mb-2">Title</label><input type="text" id="event-title" class="w-full p-2 border rounded" placeholder="e.g., Cleggan Fringe Festival"></div><div class="mb-4"><label for="event-dates" class="block text-gray-700 font-bold mb-2">Dates</label><input type="text" id="event-dates" class="w-full p-2 border rounded" placeholder="Select a date or date range..."></div><div class="mb-4"><label for="event-description" class="block text-gray-700 font-bold mb-2">Description</label><textarea id="event-description" class="w-full p-2 border rounded" rows="4" placeholder="Enter event details..."></textarea></div><div class="flex justify-end space-x-4"><button type="button" id="cancel-event-btn" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button><button type="submit" id="submit-event-btn" class="px-4 py-2 bg-primary text-white rounded hover:bg-purple-800">Save Event</button></div></form>
+            </div>
+        </section>
 
-        <section id="format" class="py-16 md:py-24 bg-white"><div class="container mx-auto px-6"><h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Our Jam Format</h2><div class="grid md:grid-cols-3 gap-8 text-center"><div class="bg-white p-8 rounded-lg shadow-md"><h3 class="font-bold text-xl text-primary mb-2">1. Loop Songs First</h3><p class="text-gray-600">We begin with easy, repetitive songs to get everyone warmed up and in the groove.</p></div><div class="bg-white p-8 rounded-lg shadow-md"><h3 class="font-bold text-xl text-primary mb-2">2. Four Chords or Less</h3><p class="text-gray-600">Next, we move to songs that use four simple chords or fewer, making it easy for everyone to join in.</p></div><div class="bg-white p-8 rounded-lg shadow-md"><h3 class="font-bold text-xl text-primary mb-2">3. Then Anything Goes!</h3><p class="text-gray-600">In the final part of the jam, the floor is open! Bring out any song you'd like to play with the group.</p></div></div></div></section>
-        
-        <section id="gallery" class="py-16 md:py-24 bg-gray-100">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Jam Circle Gallery</h2>
-                
-                <h3 class="text-2xl font-bold text-center text-primary mb-8">Videos</h3>
-                <div class="aspect-w-16 aspect-h-9">
-                    <iframe id="featured-video-player" class="w-full h-96 rounded-lg shadow-lg" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <div class="text-center mt-4 admin-controls-inline">
-                    <button id="edit-featured-video-btn" class="px-4 py-2 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-600 transition duration-300">Change Featured Video</button>
-                </div>
-                 <div class="text-center mt-4">
-                    <a href="https://youtube.com/playlist?list=PLG9xaR5hTnatoLYd337wPFrbVkjHmWErw" target="_blank" class="inline-block px-8 py-3 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 transition duration-300">
-                        See our YouTube Channel
-                    </a>
-                </div>
-                <form id="edit-featured-video-form" class="max-w-xl mx-auto mt-4 p-6 bg-gray-50 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-primary mb-4">Change Featured Video</h3>
-                    <div class="mb-4">
-                        <label for="featured-video-url" class="block text-gray-700 font-bold mb-2">New YouTube Video URL</label>
-                        <input type="url" id="featured-video-url" class="w-full p-2 border rounded" placeholder="Paste YouTube video link...">
-                    </div>
-                    <div class="flex justify-end space-x-4">
-                        <button type="button" id="cancel-featured-video-btn" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button>
-                        <button type="submit" class="px-4 py-2 bg-primary text-white rounded hover:bg-purple-800">Save Video</button>
-                    </div>
-                </form>
+        <section id="format" class="py-16 md:py-24 bg-white"><div class="container mx-auto px-6"><h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Our Jam Format</h2><div class="grid md:grid-cols-3 gap-8 text-center"><div class="bg-white p-8 rounded-lg shadow-md"><h3 class="font-bold text-xl text-primary mb-2">1. Loop Songs First</h3><p class="text-gray-600">We begin with easy, repetitive songs to get everyone warmed up and in the groove.</p></div><div class="bg-white p-8 rounded-lg shadow-md"><h3 class="font-bold text-xl text-primary mb-2">2. Four Chords or Less</h3><p class="text-gray-600">Next, we move to songs that use four simple chords or fewer, making it easy for everyone to join in.</p></div><div class="bg-white p-8 rounded-lg shadow-md"><h3 class="font-bold text-xl text-primary mb-2">3. Then Anything Goes!</h3><p class="text-gray-600">In the final part of the jam, the floor is open! Bring out any song you'd like to play with the group.</p></div></div></div></section>
+        
+        <section id="gallery" class="py-16 md:py-24 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Jam Circle Gallery</h2>
+                
+                <h3 class="text-2xl font-bold text-center text-primary mb-8">Videos</h3>
+                <div class="aspect-w-16 aspect-h-9">
+                    <iframe id="featured-video-player" class="w-full h-96 rounded-lg shadow-lg" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="text-center mt-4 admin-controls-inline">
+                    <button id="edit-featured-video-btn" class="px-4 py-2 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-600 transition duration-300">Change Featured Video</button>
+                </div>
+                 <div class="text-center mt-4">
+                    <a href="https://youtube.com/playlist?list=PLG9xaR5hTnatoLYd337wPFrbVkjHmWErw" target="_blank" class="inline-block px-8 py-3 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 transition duration-300">
+                        See our YouTube Channel
+                    </a>
+                </div>
+                <form id="edit-featured-video-form" class="max-w-xl mx-auto mt-4 p-6 bg-gray-50 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold text-primary mb-4">Change Featured Video</h3>
+                    <div class="mb-4">
+                        <label for="featured-video-url" class="block text-gray-700 font-bold mb-2">New YouTube Video URL</label>
+                        <input type="url" id="featured-video-url" class="w-full p-2 border rounded" placeholder="Paste YouTube video link...">
+                    </div>
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" id="cancel-featured-video-btn" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button>
+                        <button type="submit" class="px-4 py-2 bg-primary text-white rounded hover:bg-purple-800">Save Video</button>
+                    </div>
+                </form>
 
-                <h3 class="text-2xl font-bold text-center text-primary mt-16 mb-8">Photos</h3>
-                <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4"></div>
-                <div class="text-center mt-8 admin-controls-inline"><button id="add-photo-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300">Add Photo</button></div>
-                <form id="add-photo-form" class="max-w-3xl mx-auto mt-8 p-6 bg-gray-50 rounded-lg shadow-inner">
-                    <h3 class="text-xl font-bold text-primary mb-4">Add New Photo</h3>
-                    <div class="mb-4">
-                        <label for="photo-url" class="block text-gray-700 font-bold mb-2">Photo URL</label>
-                        <input type="url" id="photo-url" class="w-full p-2 border rounded" placeholder="Paste direct image link...">
-                    </div>
-                    <div class="mb-4">
-                        <label for="photo-caption" class="block text-gray-700 font-bold mb-2">Caption (Alt Text)</label>
-                        <input type="text" id="photo-caption" class="w-full p-2 border rounded" placeholder="e.g., Jam session by the river">
-                    </div>
-                    <div class="flex justify-end space-x-4">
-                        <button type="button" id="cancel-photo-btn" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button>
-                        <button type="submit" id="submit-photo-btn" class="px-4 py-2 bg-primary text-white rounded hover:bg-purple-800">Save Photo</button>
-                    </div>
-                </form>
-            </div>
-        </section>
-        
-        <section id="contact" class="py-16 md:py-24 bg-white"><div class="container mx-auto px-6 text-center"><h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-4">Join Us!</h2><p class="text-gray-600 max-w-xl mx-auto mb-8">Want to join our mailing list for updates or have a question? Get in touch! We'd love to hear from you.</p><a href="mailto:info@galwayjamcircle.ie" class="px-8 py-3 bg-primary text-white font-bold rounded-full hover:bg-purple-800 transition duration-300 transform hover:scale-105">Email Us</a></div></section>
-    </main>
-    
-    <footer class="bg-gray-800 text-white py-8"><div class="container mx-auto px-6 text-center"><p>&copy; 2025 Galway Jam Circle. All Rights Reserved.</p><p class="text-sm text-gray-400 mt-2">Bringing music to the people of Galway.</p></div></footer>
+                <h3 class="text-2xl font-bold text-center text-primary mt-16 mb-8">Photos</h3>
+                <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4"></div>
+                <div class="text-center mt-8 admin-controls-inline"><button id="add-photo-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300">Add Photo</button></div>
+                <form id="add-photo-form" class="max-w-3xl mx-auto mt-8 p-6 bg-gray-50 rounded-lg shadow-inner">
+                    <h3 class="text-xl font-bold text-primary mb-4">Add New Photo</h3>
+                    <div class="mb-4">
+                        <label for="photo-url" class="block text-gray-700 font-bold mb-2">Photo URL</label>
+                        <input type="url" id="photo-url" class="w-full p-2 border rounded" placeholder="Paste direct image link...">
+                    </div>
+                    <div class="mb-4">
+                        <label for="photo-caption" class="block text-gray-700 font-bold mb-2">Caption (Alt Text)</label>
+                        <input type="text" id="photo-caption" class="w-full p-2 border rounded" placeholder="e.g., Jam session by the river">
+                    </div>
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" id="cancel-photo-btn" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button>
+                        <button type="submit" id="submit-photo-btn" class="px-4 py-2 bg-primary text-white rounded hover:bg-purple-800">Save Photo</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        
+        <section id="contact" class="py-16 md:py-24 bg-white"><div class="container mx-auto px-6 text-center"><h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-4">Join Us!</h2><p class="text-gray-600 max-w-xl mx-auto mb-8">Want to join our mailing list for updates or have a question? Get in touch! We'd love to hear from you.</p><a href="mailto:info@galwayjamcircle.ie" class="px-8 py-3 bg-primary text-white font-bold rounded-full hover:bg-purple-800 transition duration-300 transform hover:scale-105">Email Us</a></div></section>
+    </main>
+    
+    <footer class="bg-gray-800 text-white py-8"><div class="container mx-auto px-6 text-center"><p>&copy; 2025 Galway Jam Circle. All Rights Reserved.</p><p class="text-sm text-gray-400 mt-2">Bringing music to the people of Galway.</p></div></footer>
 
-    <div id="custom-modal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center"><div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full mx-4"><p id="modal-message" class="text-lg mb-4"></p><input type="password" id="modal-input" class="w-full p-2 border rounded mb-4 hidden" placeholder="Enter password..."><div id="modal-buttons" class="flex justify-end space-x-4"></div></div></div>
+    <div id="custom-modal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center"><div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full mx-4"><p id="modal-message" class="text-lg mb-4"></p><input type="password" id="modal-input" class="w-full p-2 border rounded mb-4 hidden" placeholder="Enter password..."><div id="modal-buttons" class="flex justify-end space-x-4"></div></div></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, writeBatch, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, writeBatch, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyC4SnqaOMQWmEFulkN8zZALZsqJLK7hOh0",
-            authDomain: "galway-jam-circle-live.firebaseapp.com",
-            projectId: "galway-jam-circle-live",
-            storageBucket: "galway-jam-circle-live.appspot.com",
-            messagingSenderId: "140452021164",
-            appId: "1:140452021164:web:69703d13213d4ce49a3009"
-        };
+        const firebaseConfig = {
+            apiKey: "AIzaSyC4SnqaOMQWmEFulkN8zZALZsqJLK7hOh0",
+            authDomain: "galway-jam-circle-live.firebaseapp.com",
+            projectId: "galway-jam-circle-live",
+            storageBucket: "galway-jam-circle-live.appspot.com",
+            messagingSenderId: "140452021164",
+            appId: "1:140452021164:web:69703d13213d4ce49a3009"
+        };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-        document.addEventListener('DOMContentLoaded', async () => {
-            const menuBtn = document.getElementById('menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const adminModeBtn = document.getElementById('admin-mode-btn');
-            const mobileAdminBtn = document.getElementById('mobile-admin-btn');
+        document.addEventListener('DOMContentLoaded', async () => {
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const adminModeBtn = document.getElementById('admin-mode-btn');
+            const mobileAdminBtn = document.getElementById('mobile-admin-btn');
 
-            menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-            const mobileLinks = mobileMenu.getElementsByTagName('a');
-            for (let link of mobileLinks) {
-                link.addEventListener('click', () => {
-                    if(link.id !== 'mobile-admin-btn') {
-                        mobileMenu.classList.add('hidden')
-                    }
-                });
-            }
+            menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            const mobileLinks = mobileMenu.getElementsByTagName('a');
+            for (let link of mobileLinks) {
+                link.addEventListener('click', () => {
+                    if(link.id !== 'mobile-admin-btn') {
+                        mobileMenu.classList.add('hidden')
+                    }
+                });
+            }
 
-            const ADMIN_PASSWORD = 'galwayjamcircleadmin4519';
-            let initialJams = [];
-            let initialEvents = [];
-            let initialPhotos = [];
-            let jams = [];
-            let events = [];
-            let photos = [];
+            const ADMIN_PASSWORD = 'galwayjamcircleadmin4519';
+            let initialJams = [];
+            let initialEvents = [];
+            let initialPhotos = [];
+            let jams = [];
+            let events = [];
+            let photos = [];
 
-            const coverPhotoElement = document.getElementById('cover-photo');
-            const editCoverPhotoBtn = document.getElementById('edit-cover-photo-btn');
-            const editCoverPhotoForm = document.getElementById('edit-cover-photo-form');
-            const coverPhotoUrlInput = document.getElementById('cover-photo-url');
-            const cancelCoverPhotoBtn = document.getElementById('cancel-cover-photo-btn');
-            
-            const jamList = document.getElementById('jam-list');
-            const addJamBtn = document.getElementById('add-jam-btn');
-            const addJamForm = document.getElementById('add-jam-form');
-            const cancelBtn = document.getElementById('cancel-btn');
-            const formTitle = document.getElementById('form-title');
-            const editJamIdInput = document.getElementById('edit-jam-id');
-            const jamDateInput = document.getElementById('jam-date');
-            const jamDayInput = document.getElementById('jam-day');
-            const jamVenueInput = document.getElementById('jam-venue');
-            
-            const eventList = document.getElementById('event-list');
-            const addEventBtn = document.getElementById('add-event-btn');
-            const addEventForm = document.getElementById('add-event-form');
-            const cancelEventBtn = document.getElementById('cancel-event-btn');
-            const eventFormTitle = document.getElementById('event-form-title');
-            const editEventIdInput = document.getElementById('edit-event-id');
-            const eventTitleInput = document.getElementById('event-title');
-            const eventDatesInput = document.getElementById('event-dates');
-            const eventDescriptionInput = document.getElementById('event-description');
-            
-            const galleryGrid = document.getElementById('gallery-grid');
-            const addPhotoBtn = document.getElementById('add-photo-btn');
-            const addPhotoForm = document.getElementById('add-photo-form');
-            const cancelPhotoBtn = document.getElementById('cancel-photo-btn');
-            const photoUrlInput = document.getElementById('photo-url');
-            const photoCaptionInput = document.getElementById('photo-caption');
+            const coverPhotoElement = document.getElementById('cover-photo');
+            const editCoverPhotoBtn = document.getElementById('edit-cover-photo-btn');
+            const editCoverPhotoForm = document.getElementById('edit-cover-photo-form');
+            const coverPhotoUrlInput = document.getElementById('cover-photo-url');
+            const cancelCoverPhotoBtn = document.getElementById('cancel-cover-photo-btn');
+            
+            const jamList = document.getElementById('jam-list');
+            const addJamBtn = document.getElementById('add-jam-btn');
+            const addJamForm = document.getElementById('add-jam-form');
+            const cancelBtn = document.getElementById('cancel-btn');
+            const formTitle = document.getElementById('form-title');
+            const editJamIdInput = document.getElementById('edit-jam-id');
+            const jamDateInput = document.getElementById('jam-date');
+            const jamDayInput = document.getElementById('jam-day');
+            const jamVenueInput = document.getElementById('jam-venue');
+            const jamMapLinkInput = document.getElementById('jam-map-link');
+            
+            const eventList = document.getElementById('event-list');
+            const addEventBtn = document.getElementById('add-event-btn');
+            const addEventForm = document.getElementById('add-event-form');
+            const cancelEventBtn = document.getElementById('cancel-event-btn');
+            const eventFormTitle = document.getElementById('event-form-title');
+            const editEventIdInput = document.getElementById('edit-event-id');
+            const eventTitleInput = document.getElementById('event-title');
+            const eventDatesInput = document.getElementById('event-dates');
+            const eventDescriptionInput = document.getElementById('event-description');
+            
+            const galleryGrid = document.getElementById('gallery-grid');
+            const addPhotoBtn = document.getElementById('add-photo-btn');
+            const addPhotoForm = document.getElementById('add-photo-form');
+            const cancelPhotoBtn = document.getElementById('cancel-photo-btn');
+            const photoUrlInput = document.getElementById('photo-url');
+            const photoCaptionInput = document.getElementById('photo-caption');
 
-            const featuredVideoPlayer = document.getElementById('featured-video-player');
-            const editFeaturedVideoBtn = document.getElementById('edit-featured-video-btn');
-            const editFeaturedVideoForm = document.getElementById('edit-featured-video-form');
-            const featuredVideoUrlInput = document.getElementById('featured-video-url');
-            const cancelFeaturedVideoBtn = document.getElementById('cancel-featured-video-btn');
+            const featuredVideoPlayer = document.getElementById('featured-video-player');
+            const editFeaturedVideoBtn = document.getElementById('edit-featured-video-btn');
+            const editFeaturedVideoForm = document.getElementById('edit-featured-video-form');
+            const featuredVideoUrlInput = document.getElementById('featured-video-url');
+            const cancelFeaturedVideoBtn = document.getElementById('cancel-featured-video-btn');
 
-            const modal = document.getElementById('custom-modal');
-            const modalMessage = document.getElementById('modal-message');
-            const modalInput = document.getElementById('modal-input');
-            const modalButtons = document.getElementById('modal-buttons');
-            const testDateInput = document.getElementById('test-date-input');
-            const testDateBtn = document.getElementById('test-date-btn');
-            const resetDateBtn = document.getElementById('reset-date-btn');
+            const modal = document.getElementById('custom-modal');
+            const modalMessage = document.getElementById('modal-message');
+            const modalInput = document.getElementById('modal-input');
+            const modalButtons = document.getElementById('modal-buttons');
+            const testDateInput = document.getElementById('test-date-input');
+            const testDateBtn = document.getElementById('test-date-btn');
+            const resetDateBtn = document.getElementById('reset-date-btn');
 
-            const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-            const jamDatepicker = flatpickr(jamDateInput, {
-                dateFormat: "j M:",
-                onChange: function(selectedDates) {
-                    if (selectedDates.length > 0) {
-                        jamDayInput.value = dayNames[selectedDates[0].getDay()];
-                    }
-                },
-            });
+            const jamDatepicker = flatpickr(jamDateInput, {
+                dateFormat: "j M:",
+                onChange: function(selectedDates) {
+                    if (selectedDates.length > 0) {
+                        jamDayInput.value = dayNames[selectedDates[0].getDay()];
+                    }
+                },
+            });
 
-            const eventDatepicker = flatpickr(eventDatesInput, {
-                mode: "range",
-                dateFormat: "j M Y",
-                onClose: function(selectedDates, dateStr, instance) {
-                    if (selectedDates.length === 2) {
-                        const start = selectedDates[0];
-                        const end = selectedDates[1];
-                        const format = (date) => `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}`;
-                        instance.input.value = `${format(start)} - ${format(end)} ${end.getFullYear()}`;
-                    }
-                }
-            });
+            const eventDatepicker = flatpickr(eventDatesInput, {
+                mode: "range",
+                dateFormat: "j M Y",
+                onClose: function(selectedDates, dateStr, instance) {
+                    if (selectedDates.length === 2) {
+                        const start = selectedDates[0];
+                        const end = selectedDates[1];
+                        const format = (date) => `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}`;
+                        instance.input.value = `${format(start)} - ${format(end)} ${end.getFullYear()}`;
+                    }
+                }
+            });
 
-            flatpickr(testDateInput, { dateFormat: "Y-m-d" });
+            flatpickr(testDateInput, { dateFormat: "Y-m-d" });
 
-            function parseJamDate(dateStr) {
-                const year = 2025;
-                const dateWithYear = dateStr.replace(':', '').trim() + ` ${year}`;
-                return new Date(dateWithYear);
-            }
+            function parseJamDate(dateStr) {
+                const year = 2025;
+                const dateWithYear = dateStr.replace(':', '').trim() + ` ${year}`;
+                return new Date(dateWithYear);
+            }
 
-            function formatJamDate(dateObj) {
-                return `${dateObj.getDate()} ${dateObj.toLocaleString('default', { month: 'short' })}:`;
-            }
+            function formatJamDate(dateObj) {
+                return `${dateObj.getDate()} ${dateObj.toLocaleString('default', { month: 'short' })}:`;
+            }
 
-            function manageJamSchedule(testDate = null) {
-                const today = testDate || new Date();
-                today.setHours(0, 0, 0, 0);
-                let confirmedJams = JSON.parse(JSON.stringify(initialJams));
-                let upcomingConfirmed = confirmedJams.filter(jam => { const jamDate = parseJamDate(jam.date); return jamDate && jamDate >= today; });
-                let displayJams = [...upcomingConfirmed];
-                let lastDate;
-                if (displayJams.length > 0) { lastDate = displayJams.map(jam => parseJamDate(jam.date)).reduce((max, d) => d > max ? d : max); } 
-                else { lastDate = new Date(today); lastDate.setDate(today.getDate() + (6 - today.getDay() + 7) % 7); lastDate.setDate(lastDate.getDate() - 7); }
-                while (displayJams.length < 5) {
-                    lastDate.setDate(lastDate.getDate() + 7);
-                    const newId = String(Date.now() + displayJams.length);
-                    displayJams.push({ id: newId, day: "Saturday", date: formatJamDate(new Date(lastDate)), venue: 'To be decided...', cancelled: false, isProposal: true });
-                }
-                jams = displayJams;
-            }
+            function manageJamSchedule(testDate = null) {
+                const today = testDate || new Date();
+                today.setHours(0, 0, 0, 0);
+                let confirmedJams = JSON.parse(JSON.stringify(initialJams));
+                let upcomingConfirmed = confirmedJams.filter(jam => { const jamDate = parseJamDate(jam.date); return jamDate && jamDate >= today; });
+                let displayJams = [...upcomingConfirmed];
+                let lastDate;
+                if (displayJams.length > 0) { lastDate = displayJams.map(jam => parseJamDate(jam.date)).reduce((max, d) => d > max ? d : max); } 
+                else { lastDate = new Date(today); lastDate.setDate(today.getDate() + (6 - today.getDay() + 7) % 7); lastDate.setDate(lastDate.getDate() - 7); }
+                while (displayJams.length < 5) {
+                    lastDate.setDate(lastDate.getDate() + 7);
+                    const newId = String(Date.now() + displayJams.length);
+                    displayJams.push({ id: newId, day: "Saturday", date: formatJamDate(new Date(lastDate)), venue: 'To be decided...', mapLink: '', cancelled: false, isProposal: true });
+                }
+                jams = displayJams;
+            }
 
-            function showModal(message, type = 'alert', onConfirm = () => {}, onCancel = () => {}) {
-                modalMessage.textContent = message;
-                modalButtons.innerHTML = '';
-                modalInput.classList.add('hidden');
-                if (type === 'alert') { const okButton = document.createElement('button'); okButton.textContent = 'OK'; okButton.className = 'px-4 py-2 bg-primary text-white rounded'; okButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onConfirm(); }; modalButtons.appendChild(okButton); } 
-                else if (type === 'confirm') { const confirmButton = document.createElement('button'); confirmButton.textContent = 'Confirm'; confirmButton.className = 'px-4 py-2 bg-red-500 text-white rounded'; confirmButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onConfirm(); }; const cancelButton = document.createElement('button'); cancelButton.textContent = 'Cancel'; cancelButton.className = 'px-4 py-2 bg-gray-500 text-white rounded'; cancelButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onCancel(); }; modalButtons.appendChild(cancelButton); modalButtons.appendChild(confirmButton); } 
-                else if (type === 'prompt') { modalInput.classList.remove('hidden'); modalInput.value = ''; modalInput.type = 'password'; const submitButton = document.createElement('button'); submitButton.textContent = 'Submit'; submitButton.className = 'px-4 py-2 bg-primary text-white rounded'; submitButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onConfirm(modalInput.value); }; const cancelButton = document.createElement('button'); cancelButton.textContent = 'Cancel'; cancelButton.className = 'px-4 py-2 bg-gray-500 text-white rounded'; cancelButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onCancel(); }; modalButtons.appendChild(cancelButton); modalButtons.appendChild(submitButton); }
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                if(type === 'prompt') modalInput.focus();
-            }
+            function showModal(message, type = 'alert', onConfirm = () => {}, onCancel = () => {}) {
+                modalMessage.textContent = message;
+                modalButtons.innerHTML = '';
+                modalInput.classList.add('hidden');
+                if (type === 'alert') { const okButton = document.createElement('button'); okButton.textContent = 'OK'; okButton.className = 'px-4 py-2 bg-primary text-white rounded'; okButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onConfirm(); }; modalButtons.appendChild(okButton); } 
+                else if (type === 'confirm') { const confirmButton = document.createElement('button'); confirmButton.textContent = 'Confirm'; confirmButton.className = 'px-4 py-2 bg-red-500 text-white rounded'; confirmButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onConfirm(); }; const cancelButton = document.createElement('button'); cancelButton.textContent = 'Cancel'; cancelButton.className = 'px-4 py-2 bg-gray-500 text-white rounded'; cancelButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onCancel(); }; modalButtons.appendChild(cancelButton); modalButtons.appendChild(confirmButton); } 
+                else if (type === 'prompt') { modalInput.classList.remove('hidden'); modalInput.value = ''; modalInput.type = 'password'; const submitButton = document.createElement('button'); submitButton.textContent = 'Submit'; submitButton.className = 'px-4 py-2 bg-primary text-white rounded'; submitButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onConfirm(modalInput.value); }; const cancelButton = document.createElement('button'); cancelButton.textContent = 'Cancel'; cancelButton.className = 'px-4 py-2 bg-gray-500 text-white rounded'; cancelButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onCancel(); }; modalButtons.appendChild(cancelButton); modalButtons.appendChild(submitButton); }
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                if(type === 'prompt') modalInput.focus();
+            }
 
-            function renderJams() {
-                jamList.innerHTML = '';
-                if (jams.length === 0) { jamList.innerHTML = `<li class="text-center text-gray-500">No upcoming jams scheduled.</li>`; }
-                jams.sort((a, b) => parseJamDate(a.date) - parseJamDate(b.date)).forEach(jam => {
-                    const li = document.createElement('li');
-                    const isSaturday = jam.day.toLowerCase() === 'saturday';
-                    li.className = 'p-4 rounded-lg shadow-sm border-l-4 flex justify-between items-center';
-                    li.classList.toggle('jam-special-day', !isSaturday);
-                    li.classList.toggle('border-primary', isSaturday);
+            function renderJams() {
+                jamList.innerHTML = '';
+                if (jams.length === 0) { jamList.innerHTML = `<li class="text-center text-gray-500">No upcoming jams scheduled.</li>`; }
+                jams.sort((a, b) => parseJamDate(a.date) - parseJamDate(b.date)).forEach(jam => {
+                    const li = document.createElement('li');
+                    const isSaturday = jam.day.toLowerCase() === 'saturday';
+                    li.className = 'p-4 rounded-lg shadow-sm border-l-4 flex justify-between items-center';
+                    li.classList.toggle('jam-special-day', !isSaturday);
+                    li.classList.toggle('border-primary', isSaturday);
 
-                    if (jam.cancelled) { li.classList.add('jam-cancelled'); } else { li.classList.add('bg-gray-50'); }
-                    
-                    let adminButtons = `<button data-id="${jam.id}" class="edit-btn text-blue-500 hover:text-blue-700">Edit</button>`;
-                    if (!jam.isProposal) {
-                        if (isSaturday) {
-                             if (jam.cancelled) { adminButtons += `<button data-id="${jam.id}" class="reinstate-btn text-green-600 hover:text-green-800 ml-2">Reinstate</button>`; } 
-                             else { adminButtons += `<button data-id="${jam.id}" class="cancel-btn text-yellow-600 hover:text-yellow-800 ml-2">Cancel</button>`; }
-                        } else {
-                            adminButtons += `<button data-id="${jam.id}" class="delete-btn text-red-500 hover:text-red-700 ml-2">Delete</button>`;
-                        }
-                    }
+                    if (jam.cancelled) { li.classList.add('jam-cancelled'); } else { li.classList.add('bg-gray-50'); }
+                    
+                    let adminButtons = `<button data-id="${jam.id}" class="edit-btn text-blue-500 hover:text-blue-700">Edit</button>`;
+                    if (!jam.isProposal) {
+                        if (isSaturday) {
+                             if (jam.cancelled) { adminButtons += `<button data-id="${jam.id}" class="reinstate-btn text-green-600 hover:text-green-800 ml-2">Reinstate</button>`; } 
+                             else { adminButtons += `<button data-id="${jam.id}" class="cancel-btn text-yellow-600 hover:text-yellow-800 ml-2">Cancel</button>`; }
+                        } else {
+                            adminButtons += `<button data-id="${jam.id}" class="delete-btn text-red-500 hover:text-red-700 ml-2">Delete</button>`;
+                        }
+                    }
 
-                    li.innerHTML = `
-                        <div class="flex-grow jam-info">
-                            <div class="flex items-center">
-                                <span class="font-bold text-lg ${isSaturday ? 'text-gray-500' : 'text-yellow-600'}">${jam.day}</span>
-                                <span class="text-lg font-bold text-primary ml-4">${jam.date}</span>
-                            </div>
-                            <span class="text-gray-700 text-lg ml-2">${jam.venue}</span>
-                            ${jam.cancelled ? '<span class="font-bold text-red-600 ml-4">(CANCELLED)</span>' : ''}
-                        </div>
-                        <div class="admin-controls-inline space-x-2">${adminButtons}</div>`;
-                    jamList.appendChild(li);
-                });
-            }
+                    const venueContent = jam.mapLink ? `<a href="${jam.mapLink}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                                                                  ${jam.venue} <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                                                                  </a>` : jam.venue;
 
-            function renderEvents() {
-                eventList.innerHTML = '';
-                events = [...initialEvents];
-                if (events.length === 0) { eventList.innerHTML = `<p class="text-center text-gray-500">No special events scheduled at this time.</p>`; }
-                events.forEach(event => {
-                    const div = document.createElement('div');
-                    div.className = 'bg-white p-6 rounded-lg shadow-md relative';
-                    div.innerHTML = `
-                        <div class="admin-controls-inline absolute top-2 right-2 space-x-2">
-                            <button data-id="${event.id}" class="edit-event-btn text-blue-500 hover:text-blue-700">Edit</button>
-                            <button data-id="${event.id}" class="delete-event-btn text-red-500 hover:text-red-700">Delete</button>
-                        </div>
-                        <h3 class="text-2xl font-bold text-primary">${event.title}</h3>
-                        <p class="text-lg font-semibold text-gray-700 mt-1">${event.dates}</p>
-                        <p class="mt-4 text-gray-600">${event.description}</p>`;
-                    eventList.appendChild(div);
-                });
-            }
+                    li.innerHTML = `
+                        <div class="flex-grow jam-info">
+                            <div class="flex items-center">
+                                <span class="font-bold text-lg ${isSaturday ? 'text-gray-500' : 'text-yellow-600'}">${jam.day}</span>
+                                <span class="text-lg font-bold text-primary ml-4">${jam.date}</span>
+                            </div>
+                            <span class="text-gray-700 text-lg ml-2">${venueContent}</span>
+                            ${jam.cancelled ? '<span class="font-bold text-red-600 ml-4">(CANCELLED)</span>' : ''}
+                        </div>
+                        <div class="admin-controls-inline space-x-2">${adminButtons}</div>`;
+                    jamList.appendChild(li);
+                });
+            }
 
-            function renderGallery() {
-                galleryGrid.innerHTML = '';
-                photos = [...initialPhotos];
-                if (photos.length === 0) {
-                    galleryGrid.innerHTML = `<p class="text-center text-gray-500 col-span-full">The photo gallery is empty. Add some photos!</p>`;
-                }
-                photos.forEach(photo => {
-                    const div = document.createElement('div');
-                    div.className = 'gallery-item overflow-hidden rounded-lg shadow-lg';
-                    div.innerHTML = `
-                        <img src="${photo.url}" alt="${photo.caption}" class="w-full h-full object-cover transform hover:scale-110 transition duration-500">
-                        <button data-id="${photo.id}" class="delete-photo-btn admin-controls-inline bg-red-500 text-white rounded-full p-1 hover:bg-red-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-                        </button>`;
-                    galleryGrid.appendChild(div);
-                });
-            }
+            function renderEvents() {
+                eventList.innerHTML = '';
+                events = [...initialEvents];
+                if (events.length === 0) { eventList.innerHTML = `<p class="text-center text-gray-500">No special events scheduled at this time.</p>`; }
+                events.forEach(event => {
+                    const div = document.createElement('div');
+                    div.className = 'bg-white p-6 rounded-lg shadow-md relative';
+                    div.innerHTML = `
+                        <div class="admin-controls-inline absolute top-2 right-2 space-x-2">
+                            <button data-id="${event.id}" class="edit-event-btn text-blue-500 hover:text-blue-700">Edit</button>
+                            <button data-id="${event.id}" class="delete-event-btn text-red-500 hover:text-red-700">Delete</button>
+                        </div>
+                        <h3 class="text-2xl font-bold text-primary">${event.title}</h3>
+                        <p class="text-lg font-semibold text-gray-700 mt-1">${event.dates}</p>
+                        <p class="mt-4 text-gray-600">${event.description}</p>`;
+                    eventList.appendChild(div);
+                });
+            }
 
-            function showJamForm(mode = 'add', jam = null) {
-                addJamForm.style.display = 'block';
-                if (mode === 'edit') { 
-                    formTitle.textContent = 'Edit Jam'; 
-                    editJamIdInput.value = jam.id; 
-                    jamDatepicker.setDate(parseJamDate(jam.date));
-                    jamDayInput.value = jam.day; 
-                    jamVenueInput.value = jam.venue; 
-                } else { 
-                    formTitle.textContent = 'Add a New Jam'; 
-                    editJamIdInput.value = ''; 
-                    const lastJamDate = jams.length > 0 ? parseJamDate(jams[jams.length - 1].date) : new Date();
-                    lastJamDate.setDate(lastJamDate.getDate() + 7);
-                    jamDatepicker.setDate(lastJamDate);
-                    jamDayInput.value = dayNames[lastJamDate.getDay()];
-                    jamVenueInput.value = ''; 
-                }
-                jamVenueInput.focus();
-            }
+            function renderGallery() {
+                galleryGrid.innerHTML = '';
+                photos = [...initialPhotos];
+                if (photos.length === 0) {
+                    galleryGrid.innerHTML = `<p class="text-center text-gray-500 col-span-full">The photo gallery is empty. Add some photos!</p>`;
+                }
+                photos.forEach(photo => {
+                    const div = document.createElement('div');
+                    div.className = 'gallery-item overflow-hidden rounded-lg shadow-lg';
+                    div.innerHTML = `
+                        <img src="${photo.url}" alt="${photo.caption}" class="w-full h-full object-cover transform hover:scale-110 transition duration-500">
+                        <button data-id="${photo.id}" class="delete-photo-btn admin-controls-inline bg-red-500 text-white rounded-full p-1 hover:bg-red-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                        </button>`;
+                    galleryGrid.appendChild(div);
+                });
+            }
 
-            function hideJamForm() { addJamForm.style.display = 'none'; }
+            function showJamForm(mode = 'add', jam = null) {
+                addJamForm.style.display = 'block';
+                if (mode === 'edit') { 
+                    formTitle.textContent = 'Edit Jam'; 
+                    editJamIdInput.value = jam.id; 
+                    jamDatepicker.setDate(parseJamDate(jam.date));
+                    jamDayInput.value = jam.day; 
+                    jamVenueInput.value = jam.venue;
+                    jamMapLinkInput.value = jam.mapLink || '';
+                } else { 
+                    formTitle.textContent = 'Add a New Jam'; 
+                    editJamIdInput.value = ''; 
+                    const lastJamDate = jams.length > 0 ? parseJamDate(jams[jams.length - 1].date) : new Date();
+                    lastJamDate.setDate(lastJamDate.getDate() + 7);
+                    jamDatepicker.setDate(lastJamDate);
+                    jamDayInput.value = dayNames[lastJamDate.getDay()];
+                    jamVenueInput.value = '';
+                    jamMapLinkInput.value = '';
+                }
+                jamVenueInput.focus();
+            }
 
-            function showEventForm(mode = 'add', event = null) {
-                addEventForm.style.display = 'block';
-                if (mode === 'edit') { 
-                    eventFormTitle.textContent = 'Edit Event'; 
-                    editEventIdInput.value = event.id; 
-                    eventTitleInput.value = event.title; 
-                    eventDatesInput.value = event.dates; 
-                    eventDescriptionInput.value = event.description; 
-                } else { 
-                    eventFormTitle.textContent = 'Add a New Event'; 
-                    editEventIdInput.value = ''; 
-                    eventTitleInput.value = ''; 
-                    eventDatesInput.value = ''; 
-                    eventDescriptionInput.value = ''; 
-                }
-                eventTitleInput.focus();
-            }
+            function hideJamForm() { addJamForm.style.display = 'none'; }
 
-            function hideEventForm() { addEventForm.style.display = 'none'; }
+            function showEventForm(mode = 'add', event = null) {
+                addEventForm.style.display = 'block';
+                if (mode === 'edit') { 
+                    eventFormTitle.textContent = 'Edit Event'; 
+                    editEventIdInput.value = event.id; 
+                    eventTitleInput.value = event.title; 
+                    eventDatesInput.value = event.dates; 
+                    eventDescriptionInput.value = event.description; 
+                } else { 
+                    eventFormTitle.textContent = 'Add a New Event'; 
+                    editEventIdInput.value = ''; 
+                    eventTitleInput.value = ''; 
+                    eventDatesInput.value = ''; 
+                    eventDescriptionInput.value = ''; 
+                }
+                eventTitleInput.focus();
+            }
 
-            function showPhotoForm() { addPhotoForm.style.display = 'block'; }
-            function hidePhotoForm() { addPhotoForm.style.display = 'none'; }
-            
-            function toggleAdminMode(enable) {
-                 if(enable) { 
-                    document.body.classList.add('admin-mode'); 
-                    adminModeBtn.textContent = 'Exit Admin'; 
-                    mobileAdminBtn.textContent = 'Exit Admin';
-                    adminModeBtn.classList.add('bg-yellow-400');
-                    mobileAdminBtn.classList.add('bg-yellow-400', 'text-black');
-                 } else { 
-                    document.body.classList.remove('admin-mode'); 
-                    adminModeBtn.textContent = 'Admin Mode'; 
-                    mobileAdminBtn.textContent = 'Admin Mode';
-                    adminModeBtn.classList.remove('bg-yellow-400'); 
-                    mobileAdminBtn.classList.remove('bg-yellow-400', 'text-black');
-                    hideJamForm(); 
-                    hideEventForm();
-                    hidePhotoForm();
-                 }
-                 renderJams();
-                 renderEvents();
-                 renderGallery();
-            }
+            function hideEventForm() { addEventForm.style.display = 'none'; }
 
-            function handleAdminClick() {
-                const isAdmin = document.body.classList.contains('admin-mode');
-                if (isAdmin) { toggleAdminMode(false); } 
-                else { showModal('Enter admin password:', 'prompt', (password) => { if (password === ADMIN_PASSWORD) { toggleAdminMode(true); } else { showModal('Incorrect password.', 'alert'); } }); }
-            }
+            function showPhotoForm() { addPhotoForm.style.display = 'block'; }
+            function hidePhotoForm() { addPhotoForm.style.display = 'none'; }
+            
+            function toggleAdminMode(enable) {
+                 if(enable) { 
+                    document.body.classList.add('admin-mode'); 
+                    adminModeBtn.textContent = 'Exit Admin'; 
+                    mobileAdminBtn.textContent = 'Exit Admin';
+                    adminModeBtn.classList.add('bg-yellow-400');
+                    mobileAdminBtn.classList.add('bg-yellow-400', 'text-black');
+                 } else { 
+                    document.body.classList.remove('admin-mode'); 
+                    adminModeBtn.textContent = 'Admin Mode'; 
+                    mobileAdminBtn.textContent = 'Admin Mode';
+                    adminModeBtn.classList.remove('bg-yellow-400'); 
+                    mobileAdminBtn.classList.remove('bg-yellow-400', 'text-black');
+                    hideJamForm(); 
+                    hideEventForm();
+                    hidePhotoForm();
+                 }
+                 renderJams();
+                 renderEvents();
+                 renderGallery();
+            }
 
-            adminModeBtn.addEventListener('click', handleAdminClick);
-            mobileAdminBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                handleAdminClick();
-                mobileMenu.classList.add('hidden');
-            });
+            function handleAdminClick() {
+                const isAdmin = document.body.classList.contains('admin-mode');
+                if (isAdmin) { toggleAdminMode(false); } 
+                else { showModal('Enter admin password:', 'prompt', (password) => { if (password === ADMIN_PASSWORD) { toggleAdminMode(true); } else { showModal('Incorrect password.', 'alert'); } }); }
+            }
 
-            addJamBtn.addEventListener('click', () => showJamForm('add'));
-            cancelBtn.addEventListener('click', hideJamForm);
+            adminModeBtn.addEventListener('click', handleAdminClick);
+            mobileAdminBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                handleAdminClick();
+                mobileMenu.classList.add('hidden');
+            });
 
-            async function saveJam(jamData) {
-                const jamRef = doc(db, "jams", String(jamData.id));
-                await setDoc(jamRef, jamData);
-                await loadData();
-            }
+            addJamBtn.addEventListener('click', () => showJamForm('add'));
+            cancelBtn.addEventListener('click', hideJamForm);
 
-            addJamForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const date = jamDateInput.value.trim(); const day = jamDayInput.value.trim(); const venue = jamVenueInput.value.trim(); let id = editJamIdInput.value;
-                if (!date || !venue || !day) { showModal('Please fill in all jam fields.', 'alert'); return; }
-                
-                const jamDate = date.endsWith(':') ? date : date + ':';
-                if (!id || jams.find(j => j.id === id)?.isProposal) {
-                    id = String(Date.now());
-                }
+            async function saveJam(jamData) {
+                const jamRef = doc(db, "jams", String(jamData.id));
+                await setDoc(jamRef, jamData);
+                await loadData();
+            }
 
-                const jamData = { id, date: jamDate, day, venue, cancelled: false };
-                await saveJam(jamData);
-                hideJamForm();
-            });
+            addJamForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const date = jamDateInput.value.trim(); const day = jamDayInput.value.trim(); const venue = jamVenueInput.value.trim(); const mapLink = jamMapLinkInput.value.trim(); let id = editJamIdInput.value;
+                if (!date || !venue || !day) { showModal('Please fill in all jam fields.', 'alert'); return; }
+                
+                const jamDate = date.endsWith(':') ? date : date + ':';
+                if (!id || jams.find(j => j.id === id)?.isProposal) {
+                    id = String(Date.now());
+                }
 
-            jamList.addEventListener('click', async (e) => {
-                const target = e.target; const jamId = target.dataset.id; if (!jamId) return;
-                const jamInDisplay = jams.find(j => j.id === jamId);
-                
-                if (target.classList.contains('edit-btn')) { if (jamInDisplay) showJamForm('edit', jamInDisplay); } 
-                else if (target.classList.contains('delete-btn')) { showModal('Are you sure you want to delete this special jam?', 'confirm', async () => { await deleteDoc(doc(db, "jams", jamId)); await loadData(); }); } 
-                else if (target.classList.contains('cancel-btn')) { if (jamInDisplay) { jamInDisplay.cancelled = true; await saveJam(jamInDisplay); } } 
-                else if (target.classList.contains('reinstate-btn')) { if (jamInDisplay) { jamInDisplay.cancelled = false; await saveJam(jamInDisplay); } }
-            });
+                const jamData = { id, date: jamDate, day, venue, mapLink, cancelled: false };
+                await saveJam(jamData);
+                hideJamForm();
+            });
 
-            async function saveEvent(eventData) {
-                const eventRef = doc(db, "events", String(eventData.id));
-                await setDoc(eventRef, eventData);
-                await loadData();
-            }
+            jamList.addEventListener('click', async (e) => {
+                const target = e.target; const jamId = target.dataset.id; if (!jamId) return;
+                const jamInDisplay = jams.find(j => j.id === jamId);
+                
+                if (target.classList.contains('edit-btn')) { if (jamInDisplay) showJamForm('edit', jamInDisplay); } 
+                else if (target.classList.contains('delete-btn')) { showModal('Are you sure you want to delete this special jam?', 'confirm', async () => { await deleteDoc(doc(db, "jams", jamId)); await loadData(); }); } 
+                else if (target.classList.contains('cancel-btn')) { if (jamInDisplay) { jamInDisplay.cancelled = true; await saveJam(jamInDisplay); } } 
+                else if (target.classList.contains('reinstate-btn')) { if (jamInDisplay) { jamInDisplay.cancelled = false; await saveJam(jamInDisplay); } }
+            });
 
-            addEventBtn.addEventListener('click', () => showEventForm('add'));
-            cancelEventBtn.addEventListener('click', hideEventForm);
+            async function saveEvent(eventData) {
+                const eventRef = doc(db, "events", String(eventData.id));
+                await setDoc(eventRef, eventData);
+                await loadData();
+            }
 
-            addEventForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const title = eventTitleInput.value.trim(); const dates = eventDatesInput.value.trim(); const description = eventDescriptionInput.value.trim(); let id = editEventIdInput.value;
-                if (!title || !dates || !description) { showModal('Please fill in all event fields.', 'alert'); return; }
-                if (!id) { id = String(Date.now()); }
-                await saveEvent({ id, title, dates, description });
-                hideEventForm();
-            });
+            addEventBtn.addEventListener('click', () => showEventForm('add'));
+            cancelEventBtn.addEventListener('click', hideEventForm);
 
-            eventList.addEventListener('click', async (e) => {
-                const target = e.target; const eventId = target.dataset.id; if (!eventId) return;
-                if (target.classList.contains('edit-event-btn')) { const eventToEdit = initialEvents.find(ev => ev.id == eventId); if (eventToEdit) showEventForm('edit', eventToEdit); } 
-                else if (target.classList.contains('delete-event-btn')) { showModal('Are you sure you want to delete this event?', 'confirm', async () => { await deleteDoc(doc(db, "events", eventId)); await loadData(); }); }
-            });
-            
-            editCoverPhotoBtn.addEventListener('click', () => { editCoverPhotoForm.style.display = 'block'; });
-            cancelCoverPhotoBtn.addEventListener('click', () => { editCoverPhotoForm.style.display = 'none'; });
+            addEventForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const title = eventTitleInput.value.trim(); const dates = eventDatesInput.value.trim(); const description = eventDescriptionInput.value.trim(); let id = editEventIdInput.value;
+                if (!title || !dates || !description) { showModal('Please fill in all event fields.', 'alert'); return; }
+                if (!id) { id = String(Date.now()); }
+                await saveEvent({ id, title, dates, description });
+                hideEventForm();
+            });
 
-            editCoverPhotoForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const newUrl = coverPhotoUrlInput.value.trim();
-                if (!newUrl) { showModal('Please enter a URL.', 'alert'); return; }
-                await setDoc(doc(db, "site_config", "main"), { coverPhotoUrl: newUrl }, { merge: true });
-                await loadData();
-                editCoverPhotoForm.style.display = 'none';
-            });
+            eventList.addEventListener('click', async (e) => {
+                const target = e.target; const eventId = target.dataset.id; if (!eventId) return;
+                if (target.classList.contains('edit-event-btn')) { const eventToEdit = initialEvents.find(ev => ev.id == eventId); if (eventToEdit) showEventForm('edit', eventToEdit); } 
+                else if (target.classList.contains('delete-event-btn')) { showModal('Are you sure you want to delete this event?', 'confirm', async () => { await deleteDoc(doc(db, "events", eventId)); await loadData(); }); }
+            });
+            
+            editCoverPhotoBtn.addEventListener('click', () => { editCoverPhotoForm.style.display = 'block'; });
+            cancelCoverPhotoBtn.addEventListener('click', () => { editCoverPhotoForm.style.display = 'none'; });
 
-            editFeaturedVideoBtn.addEventListener('click', () => { editFeaturedVideoForm.style.display = 'block'; });
-            cancelFeaturedVideoBtn.addEventListener('click', () => { editFeaturedVideoForm.style.display = 'none'; });
+            editCoverPhotoForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const newUrl = coverPhotoUrlInput.value.trim();
+                if (!newUrl) { showModal('Please enter a URL.', 'alert'); return; }
+                await setDoc(doc(db, "site_config", "main"), { coverPhotoUrl: newUrl }, { merge: true });
+                await loadData();
+                editCoverPhotoForm.style.display = 'none';
+            });
 
-            editFeaturedVideoForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const newUrl = featuredVideoUrlInput.value.trim();
-                if (!newUrl) { showModal('Please enter a YouTube URL.', 'alert'); return; }
-                await setDoc(doc(db, "site_config", "main"), { featuredVideoUrl: newUrl }, { merge: true });
-                await loadData();
-                editFeaturedVideoForm.style.display = 'none';
-            });
+            editFeaturedVideoBtn.addEventListener('click', () => { editFeaturedVideoForm.style.display = 'block'; });
+            cancelFeaturedVideoBtn.addEventListener('click', () => { editFeaturedVideoForm.style.display = 'none'; });
 
-            addPhotoBtn.addEventListener('click', () => showPhotoForm());
-            cancelPhotoBtn.addEventListener('click', hidePhotoForm);
+            editFeaturedVideoForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const newUrl = featuredVideoUrlInput.value.trim();
+                if (!newUrl) { showModal('Please enter a YouTube URL.', 'alert'); return; }
+                await setDoc(doc(db, "site_config", "main"), { featuredVideoUrl: newUrl }, { merge: true });
+                await loadData();
+                editFeaturedVideoForm.style.display = 'none';
+            });
 
-            addPhotoForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const url = photoUrlInput.value.trim();
-                const caption = photoCaptionInput.value.trim();
-                const id = String(Date.now());
+            addPhotoBtn.addEventListener('click', () => showPhotoForm());
+            cancelPhotoBtn.addEventListener('click', hidePhotoForm);
 
-                if (!url || !caption) { showModal('Please provide both a URL and a caption.', 'alert'); return; }
-                
-                const photoData = { id, type: 'image', url, caption };
-                await setDoc(doc(db, "photos", id), photoData);
-                await loadData();
-                hidePhotoForm();
-            });
-            
-            galleryGrid.addEventListener('click', async (e) => {
-                const deleteBtn = e.target.closest('.delete-photo-btn');
-                if (!deleteBtn) return;
+            addPhotoForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const url = photoUrlInput.value.trim();
+                const caption = photoCaptionInput.value.trim();
+                const id = String(Date.now());
 
-                const photoId = deleteBtn.dataset.id;
-                showModal('Are you sure you want to delete this media?', 'confirm', async () => {
-                    await deleteDoc(doc(db, "photos", photoId));
-                    await loadData();
-                });
-            });
+                if (!url || !caption) { showModal('Please provide both a URL and a caption.', 'alert'); return; }
+                
+                const photoData = { id, type: 'image', url, caption };
+                await setDoc(doc(db, "photos", id), photoData);
+                await loadData();
+                hidePhotoForm();
+            });
+            
+            galleryGrid.addEventListener('click', async (e) => {
+                const deleteBtn = e.target.closest('.delete-photo-btn');
+                if (!deleteBtn) return;
+
+                const photoId = deleteBtn.dataset.id;
+                showModal('Are you sure you want to delete this media?', 'confirm', async () => {
+                    await deleteDoc(doc(db, "photos", photoId));
+                    await loadData();
+                });
+            });
 
 
-            testDateBtn.addEventListener('click', () => {
-                const testDateStr = testDateInput.value;
-                if (testDateStr) {
-                    const testDate = new Date(testDateStr);
-                    if (!isNaN(testDate.getTime())) {
-                        manageJamSchedule(testDate);
-                        renderJams();
-                    } else {
-                        showModal('Invalid date format.', 'alert');
-                    }
-                }
-            });
+            testDateBtn.addEventListener('click', () => {
+                const testDateStr = testDateInput.value;
+                if (testDateStr) {
+                    const testDate = new Date(testDateStr);
+                    if (!isNaN(testDate.getTime())) {
+                        manageJamSchedule(testDate);
+                        renderJams();
+                    } else {
+                        showModal('Invalid date format.', 'alert');
+                    }
+                }
+            });
 
-            resetDateBtn.addEventListener('click', () => { manageJamSchedule(); renderJams(); testDateInput.value = ''; });
+            resetDateBtn.addEventListener('click', () => { manageJamSchedule(); renderJams(); testDateInput.value = ''; });
 
-            async function loadData() {
-                try {
-                    const jamSnapshot = await getDocs(collection(db, "jams"));
-                    initialJams = jamSnapshot.docs.map(doc => doc.data());
+            async function loadData() {
+                try {
+                    const jamSnapshot = await getDocs(collection(db, "jams"));
+                    initialJams = jamSnapshot.docs.map(doc => doc.data());
 
-                    const eventSnapshot = await getDocs(collection(db, "events"));
-                    initialEvents = eventSnapshot.docs.map(doc => doc.data());
-                    
-                    const photoSnapshot = await getDocs(collection(db, "photos"));
-                    initialPhotos = photoSnapshot.docs.map(doc => doc.data());
+                    const eventSnapshot = await getDocs(collection(db, "events"));
+                    initialEvents = eventSnapshot.docs.map(doc => doc.data());
+                    
+                    const photoSnapshot = await getDocs(collection(db, "photos"));
+                    initialPhotos = photoSnapshot.docs.map(doc => doc.data());
 
-                    const configDoc = await getDoc(doc(db, "site_config", "main"));
-                    if (configDoc.exists()) {
-                        const configData = configDoc.data();
-                        if (configData.coverPhotoUrl) {
-                            coverPhotoElement.src = configData.coverPhotoUrl;
-                        }
-                        if (configData.featuredVideoUrl) {
-                            const videoId = configData.featuredVideoUrl.split('v=')[1]?.split('&')[0] || configData.featuredVideoUrl.split('/').pop();
-                            featuredVideoPlayer.src = `https://www.youtube.com/embed/${videoId}`;
-                        } else {
-                             featuredVideoPlayer.src = `https://www.youtube.com/embed/s_eC222j2yA`; // Default video
-                        }
-                    }
+                    const configDoc = await getDoc(doc(db, "site_config", "main"));
+                    if (configDoc.exists()) {
+                        const configData = configDoc.data();
+                        if (configData.coverPhotoUrl) {
+                            coverPhotoElement.src = configData.coverPhotoUrl;
+                        }
+                        if (configData.featuredVideoUrl) {
+                            const videoId = configData.featuredVideoUrl.split('v=')[1]?.split('&')[0] || configData.featuredVideoUrl.split('/').pop();
+                            featuredVideoPlayer.src = `https://www.youtube.com/embed/${videoId}`;
+                        } else {
+                             featuredVideoPlayer.src = `https://www.youtube.com/embed/s_eC222j2yA`; // Default video
+                        }
+                    }
 
-                    // Modular seeding logic
-                    let needsSeeding = false;
-                    const batch = writeBatch(db);
+                    // Modular seeding logic
+                    let needsSeeding = false;
+                    const batch = writeBatch(db);
 
-                    if (initialJams.length === 0) {
-                        needsSeeding = true;
-                        const seedJams = [ { id: "1", day: "Saturday", date: "2 Aug:", venue: "Mechanics' Institute", cancelled: false }, { id: "2", day: "Saturday", date: "9 Aug:", venue: "Mechanics' Institute", cancelled: false }, { id: "3", day: "Saturday", date: "16 Aug:", venue: "Joyce's, Knocknacarra", cancelled: false }, { id: "4", day: "Saturday", date: "23 Aug:", venue: "Mechanics' Institute", cancelled: false }, { id: "5", day: "Saturday", date: "30 Aug:", venue: "Mechanics' Institute", cancelled: false }, { id: "6", day: "Saturday", date: "6 Sept:", venue: "Joyce's, Knocknacarra", cancelled: false }, { id: "7", day: "Saturday", date: "13 Sept:", venue: "Mechanics' Institute", cancelled: false }];
-                        seedJams.forEach(jam => batch.set(doc(db, "jams", jam.id), jam));
-                    }
-                    if (initialEvents.length === 0) {
-                        needsSeeding = true;
-                        const seedEvents = [{ id: "101", title: "Cleggan Fringe Festival", dates: "Friday, 12 Sept - Sunday, 14 Sept 2025", description: "The annual Cleggan Fringe Festival is a highlight of the year! Featuring a host of traditional and folk musicians in the pubs and venues around Cleggan. Keep an eye out for GJC members playing sessions!"}];
-                        seedEvents.forEach(event => batch.set(doc(db, "events", event.id), event));
-                    }
-                    if (initialPhotos.length === 0) {
-                        needsSeeding = true;
-                        const seedPhotos = [{id: "201", type: "image", url: "https://i.imgur.com/K1C3l4w.jpg", caption: "Jam session by the river."}];
-                        seedPhotos.forEach(photo => batch.set(doc(db, "photos", photo.id), photo));
-                    }
+                    if (initialJams.length === 0) {
+                        needsSeeding = true;
+                        const seedJams = [ { id: "1", day: "Saturday", date: "2 Aug:", venue: "Mechanics' Institute", mapLink: "https://maps.app.goo.gl/9uT2i4tGv3d85J456", cancelled: false }, { id: "2", day: "Saturday", date: "9 Aug:", venue: "Mechanics' Institute", mapLink: "https://maps.app.goo.gl/9uT2i4tGv3d85J456", cancelled: false }, { id: "3", day: "Saturday", date: "16 Aug:", venue: "Joyce's, Knocknacarra", mapLink: "https://maps.app.goo.gl/X9b6e82p8v5S8BwD8", cancelled: false }, { id: "4", day: "Saturday", date: "23 Aug:", venue: "Mechanics' Institute", mapLink: "https://maps.app.goo.gl/9uT2i4tGv3d85J456", cancelled: false }, { id: "5", day: "Saturday", date: "30 Aug:", venue: "Mechanics' Institute", mapLink: "https://maps.app.goo.gl/9uT2i4tGv3d85J456", cancelled: false }, { id: "6", day: "Saturday", date: "6 Sept:", venue: "Joyce's, Knocknacarra", mapLink: "https://maps.app.goo.gl/X9b6e82p8v5S8BwD8", cancelled: false }, { id: "7", day: "Saturday", date: "13 Sept:", venue: "Mechanics' Institute", mapLink: "https://maps.app.goo.gl/9uT2i4tGv3d85J456", cancelled: false }];
+                        seedJams.forEach(jam => batch.set(doc(db, "jams", jam.id), jam));
+                    }
+                    if (initialEvents.length === 0) {
+                        needsSeeding = true;
+                        const seedEvents = [{ id: "101", title: "Cleggan Fringe Festival", dates: "Friday, 12 Sept - Sunday, 14 Sept 2025", description: "The annual Cleggan Fringe Festival is a highlight of the year! Featuring a host of traditional and folk musicians in the pubs and venues around Cleggan. Keep an eye out for GJC members playing sessions!"}];
+                        seedEvents.forEach(event => batch.set(doc(db, "events", event.id), event));
+                    }
+                    if (initialPhotos.length === 0) {
+                        needsSeeding = true;
+                        const seedPhotos = [{id: "201", type: "image", url: "https://i.imgur.com/K1C3l4w.jpg", caption: "Jam session by the river"}];
+                        seedPhotos.forEach(photo => batch.set(doc(db, "photos", photo.id), photo));
+                    }
 
-                    if (needsSeeding) {
-                        showModal("Database empty or incomplete. Seeding with initial data. Please refresh if you don't see it.", "alert");
-                        await batch.commit();
-                        await loadData(); // Reload data after seeding
-                        return;
-                    }
+                    if (needsSeeding) {
+                        showModal("Database empty or incomplete. Seeding with initial data. Please refresh if you don't see it.", "alert");
+                        await batch.commit();
+                        await loadData(); // Reload data after seeding
+                        return;
+                    }
 
-                    manageJamSchedule();
-                    renderJams();
-                    renderEvents();
-                    renderGallery();
-                } catch (error) {
-                    console.error("Error loading data: ", error);
-                    if (error.message.includes("Missing or insufficient permissions")) {
-                        showModal("Could not connect to the database. Please ensure your Firestore security rules are set to test mode: rules_version = '2'; service cloud.firestore { match /databases/{database}/documents { match /{document=**} { allow read, write: if true; } } }", "alert");
-                    } else if (firebaseConfig.apiKey.includes("PASTE")) {
-                        showModal("Firebase is not configured. Please paste your firebaseConfig object into the HTML file.", "alert");
-                    } else {
-                        showModal("Could not load data from the database.", "alert");
-                    }
-                }
-            }
+                    manageJamSchedule();
+                    renderJams();
+                    renderEvents();
+                    renderGallery();
+                } catch (error) {
+                    console.error("Error loading data: ", error);
+                    if (error.message.includes("Missing or insufficient permissions")) {
+                        showModal("Could not connect to the database. Please ensure your Firestore security rules are set to test mode: rules_version = '2'; service cloud.firestore { match /databases/{database}/documents { match /{document=**} { allow read, write: if true; } } }", "alert");
+                    } else if (firebaseConfig.apiKey.includes("PASTE")) {
+                        showModal("Firebase is not configured. Please paste your firebaseConfig object into the HTML file.", "alert");
+                    } else {
+                        showModal("Could not load data from the database.", "alert");
+                    }
+                }
+            }
 
-            await loadData();
-        });
-    </script>
+            await loadData();
+        });
+    </script>
 
 </body>
 </html>
