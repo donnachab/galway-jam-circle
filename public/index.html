@@ -539,7 +539,12 @@
                         const batch = writeBatch(db);
                         const seedJams = [ { id: "1", day: "Saturday", date: "2 Aug:", venue: "Mechanics' Institute", cancelled: false }, { id: "2", day: "Saturday", date: "9 Aug:", venue: "Mechanics' Institute", cancelled: false }, { id: "3", day: "Saturday", date: "16 Aug:", venue: "Joyce's, Knocknacarra", cancelled: false }, { id: "4", day: "Saturday", date: "23 Aug:", venue: "Mechanics' Institute", cancelled: false }, { id: "5", day: "Saturday", date: "30 Aug:", venue: "Mechanics' Institute", cancelled: false }, { id: "6", day: "Saturday", date: "6 Sept:", venue: "Joyce's, Knocknacarra", cancelled: false }, { id: "7", day: "Saturday", date: "13 Sept:", venue: "Mechanics' Institute", cancelled: false }];
                         const seedEvents = [{ id: "101", title: "Cleggan Fringe Festival", dates: "Friday, 12 Sept - Sunday, 14 Sept 2025", description: "The annual Cleggan Fringe Festival is a highlight of the year! Featuring a host of traditional and folk musicians in the pubs and venues around Cleggan. Keep an eye out for GJC members playing sessions!"}];
-                        const seedPhotos = [{id: "201", type: "image", url: "https://i.imgur.com/K1C3l4w.jpg", caption: "Jam session by the river."}];
+                        const seedPhotos = [
+                            {id: "201", type: "image", url: "https://i.imgur.com/K1C3l4w.jpg", caption: "Jam session by the river."},
+                            {id: "301", type: "video", url: "https://www.youtube.com/watch?v=5zM6-o3-r-g", caption: "Galway Girl"},
+                            {id: "302", type: "video", url: "https://www.youtube.com/watch?v=TnbP_zE1p-s", caption: "The Irish Rover"},
+                            {id: "303", type: "video", url: "https://www.youtube.com/watch?v=f-1s-tBCFDo", caption: "Dirty Old Town"}
+                        ];
                         seedJams.forEach(jam => batch.set(doc(db, "jams", jam.id), jam));
                         seedEvents.forEach(event => batch.set(doc(db, "events", event.id), event));
                         seedPhotos.forEach(photo => batch.set(doc(db, "photos", photo.id), photo));
