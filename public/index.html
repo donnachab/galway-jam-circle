@@ -58,7 +58,7 @@
                 <a href="#jams" class="mt-8 px-8 py-3 bg-accent text-gray-900 font-bold rounded-full hover:bg-yellow-400 transition duration-300 transform hover:scale-105">See Regular Jams</a>
             </div>
         </section>
-        
+        
         <div class="container mx-auto px-6 text-center -mt-8 relative z-10">
             <div class="admin-controls-inline">
                 <button id="edit-cover-photo-btn" class="px-4 py-2 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-600 transition duration-300">Change Cover Photo</button>
@@ -130,11 +130,11 @@
         </section>
 
         <section id="format" class="py-16 md:py-24 bg-white"><div class="container mx-auto px-6"><h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Our Jam Format</h2><div class="grid md:grid-cols-3 gap-8 text-center"><div class="bg-white p-8 rounded-lg shadow-md"><h3 class="font-bold text-xl text-primary mb-2">1. Loop Songs First</h3><p class="text-gray-600">We begin with easy, repetitive songs to get everyone warmed up and in the groove.</p></div><div class="bg-white p-8 rounded-lg shadow-md"><h3 class="font-bold text-xl text-primary mb-2">2. Four Chords or Less</h3><p class="text-gray-600">Next, we move to songs that use four simple chords or fewer, making it easy for everyone to join in.</p></div><div class="bg-white p-8 rounded-lg shadow-md"><h3 class="font-bold text-xl text-primary mb-2">3. Then Anything Goes!</h3><p class="text-gray-600">In the final part of the jam, the floor is open! Bring out any song you'd like to play with the group.</p></div></div></div></section>
-        
+        
         <section id="gallery" class="py-16 md:py-24 bg-gray-100">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Jam Circle Gallery</h2>
-                
+                
                 <h3 class="text-2xl font-bold text-center text-primary mb-8">Videos</h3>
                 <div class="aspect-w-16 aspect-h-9">
                     <iframe id="featured-video-player" class="w-full h-96 rounded-lg shadow-lg" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -179,16 +179,16 @@
                 </form>
             </div>
         </section>
-        
+        
         <section id="contact" class="py-16 md:py-24 bg-white"><div class="container mx-auto px-6 text-center"><h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-4">Join Us!</h2><p class="text-gray-600 max-w-xl mx-auto mb-8">Want to join our mailing list for updates or have a question? Get in touch! We'd love to hear from you.</p><a href="mailto:info@galwayjamcircle.ie" class="px-8 py-3 bg-primary text-white font-bold rounded-full hover:bg-purple-800 transition duration-300 transform hover:scale-105">Email Us</a></div></section>
     </main>
-    
+    
     <footer class="bg-gray-800 text-white py-8"><div class="container mx-auto px-6 text-center"><p>&copy; 2025 Galway Jam Circle. All Rights Reserved.</p><p class="text-sm text-gray-400 mt-2">Bringing music to the people of Galway.</p></div></footer>
 
     <div id="custom-modal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center"><div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full mx-4"><p id="modal-message" class="text-lg mb-4"></p><input type="password" id="modal-input" class="w-full p-2 border rounded mb-4 hidden" placeholder="Enter password..."><div id="modal-buttons" class="flex justify-end space-x-4"></div></div></div>
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    
+    
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
         import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, writeBatch, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
@@ -456,7 +456,6 @@
                     editEventIdInput.value = ''; 
                     eventTitleInput.value = ''; 
                     eventDatesInput.value = ''; 
-                    eventDescriptionInput.value = ''; 
                 }
                 eventTitleInput.focus();
             }
@@ -658,7 +657,7 @@
 
                     if (initialJams.length === 0) {
                         needsSeeding = true;
-                        const seedJams = [ { id: "1", day: "Saturday", date: "2 Aug:", venue: "Mechanics' Institute", mapLink: "https://maps.app.goo.gl/9uT2i4tGv3d85J456", cancelled: false }, { id: "2", day: "Saturday", date: "9 Aug:", venue: "Mechanics' Institute", mapLink: "https://maps.app.goo.gl/9uT2i4tGv3d85J456", cancelled: false }, { id: "3", day: "Saturday", date: "16 Aug:", venue: "Joyce's, Knocknacarra", mapLink: "https://maps.app.goo.gl/X9b6e82p8v5S8BwD8", cancelled: false }, { id: "4", day: "Saturday", date: "23 Aug:", venue: "Mechanics' Institute", mapLink: "https://maps.app.goo.gl/9uT2i4tGv3d85J456", cancelled: false }, { id: "5", day: "Saturday", date: "30 Aug:", venue: "Mechanics' Institute", mapLink: "https://maps.app.goo.gl/9uT2i4tGv3d85J456", cancelled: false }, { id: "6", day: "Saturday", date: "6 Sept:", venue: "Joyce's, Knocknacarra", mapLink: "https://maps.app.goo.gl/X9b6e82p8v5S8BwD8", cancelled: false }, { id: "7", day: "Saturday", date: "13 Sept:", venue: "Mechanics' Institute", mapLink: "https://maps.app.goo.gl/9uT2i4tGv3d85J456", cancelled: false }];
+                        const seedJams = [ { id: "1", day: "Saturday", date: "2 Aug:", venue: "Mechanics' Institute", mapLink: "https://maps.app.goo.gl/Fk9zS48vNfD8RkG8A", cancelled: false }, { id: "2", day: "Saturday", date: "9 Aug:", venue: "Mechanics' Institute", mapLink: "https://maps.app.goo.gl/Fk9zS48vNfD8RkG8A", cancelled: false }, { id: "3", day: "Saturday", date: "16 Aug:", venue: "Joyce's, Knocknacarra", mapLink: "https://maps.app.goo.gl/3pTzB38vNfD8RkG8A", cancelled: false }, { id: "4", day: "Saturday", date: "23 Aug:", venue: "Mechanics' Institute", mapLink: "https://maps.app.goo.gl/Fk9zS48vNfD8RkG8A", cancelled: false }, { id: "5", day: "Saturday", date: "30 Aug:", venue: "Mechanics' Institute", mapLink: "https://maps.app.goo.gl/Fk9zS48vNfD8RkG8A", cancelled: false }, { id: "6", day: "Saturday", date: "6 Sept:", venue: "Joyce's, Knocknacarra", mapLink: "https://maps.app.goo.gl/3pTzB38vNfD8RkG8A", cancelled: false }, { id: "7", day: "Saturday", date: "13 Sept:", venue: "Mechanics' Institute", mapLink: "https://maps.app.goo.gl/Fk9zS48vNfD8RkG8A", cancelled: false }];
                         seedJams.forEach(jam => batch.set(doc(db, "jams", jam.id), jam));
                     }
                     if (initialEvents.length === 0) {
