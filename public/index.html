@@ -735,6 +735,16 @@
                         const seedPhotos = [{id: "201", type: "image", url: "https://i.imgur.com/K1C3l4w.jpg", caption: "Jam session by the river."}];
                         seedPhotos.forEach(photo => batch.set(doc(db, "photos", photo.id), photo));
                     }
+                    
+                    if (!configDoc.exists()) {
+                        needsSeeding = true;
+                        const defaultConfig = {
+                            coverPhotoUrl: "https://i.imgur.com/K1C3l4w.jpg",
+                            featuredVideoUrl: "https://www.youtube.com/watch?v=SeFUhhhVZ9k"
+                        };
+                        batch.set(doc(db, "site_config", "main"), defaultConfig);
+                    }
+
 
                     if (needsSeeding) {
                         showModal("Database empty or incomplete. Seeding with initial data. Please refresh if you don't see it.", "alert");
