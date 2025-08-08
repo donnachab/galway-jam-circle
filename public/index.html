@@ -34,26 +34,33 @@
         .jam-special-day { border-color: #FBBF24 !important; border-width: 2px; } /* Amber for special days */
         .gallery-item { position: relative; }
         .gallery-item .delete-photo-btn { position: absolute; top: 0.5rem; right: 0.5rem; }
+        details > summary {
+            cursor: pointer;
+        }
+        .countdown-banner {
+            display: none; /* Hidden by default */
+        }
     </style>
 </head>
 <body class="text-gray-800">
 
     <!-- HEADER SECTION -->
     <header class="bg-primary shadow-lg sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <div class="w-24 h-24">
+                <div class="w-14 h-14">
                     <img src="images/logo.jpg" alt="Galway Jam Circle Logo" class="rounded-full">
                 </div>
-                <div class="text-white text-3xl md:text-4xl font-bold tracking-tight">Galway Jam Circle</div>
+                <div class="text-white text-xl md:text-2xl font-bold tracking-tight">Galway Jam Circle</div>
             </div>
             <div class="hidden md:flex items-center space-x-2">
-                <a href="#home" class="text-white px-4 py-3 rounded-md hover:bg-white/10 transition duration-300">Home</a>
-                <a href="#jams" class="text-white px-4 py-3 rounded-md hover:bg-white/10 transition duration-300">Regular Jams</a>
-                <a href="#special-events" class="text-white px-4 py-3 rounded-md hover:bg-white/10 transition duration-300">Festivals & Events</a>
-                <a href="#format" class="text-white px-4 py-3 rounded-md hover:bg-white/10 transition duration-300">Our Format</a>
-                <a href="#gallery" class="text-white px-4 py-3 rounded-md hover:bg-white/10 transition duration-300">Gallery</a>
-                <a href="#contact" class="text-white px-4 py-3 rounded-md hover:bg-white/10 transition duration-300">Contact</a>
+                <a href="#home" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Home</a>
+                <a href="#jams" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Regular Jams</a>
+                <a href="#special-events" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Festivals & Events</a>
+                <a href="#format" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Our Format</a>
+                <a href="#gallery" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Gallery</a>
+                <a href="https://drive.google.com/file/d/1V3X3K5hwUHxZtn3o29Wd6ZZ4twz4x0j_/view?usp=sharing" target="_blank" class="text-primary bg-accent px-4 py-3 rounded-md hover:bg-opacity-80 transition duration-300 font-bold">Songbook</a>
+                <a href="#contact" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Contact</a>
             </div>
             <div class="md:hidden">
                 <button id="menu-btn" class="text-white focus:outline-none"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
@@ -65,17 +72,31 @@
             <a href="#special-events" class="block text-white text-center py-3 hover:bg-white/10">Festivals & Events</a>
             <a href="#format" class="block text-white text-center py-3 hover:bg-white/10">Our Format</a>
             <a href="#gallery" class="block text-white text-center py-3 hover:bg-white/10">Gallery</a>
+            <a href="https://drive.google.com/file/d/1V3X3K5hwUHxZtn3o29Wd6ZZ4twz4x0j_/view?usp=sharing" target="_blank" class="block text-primary text-center font-bold py-3 bg-accent hover:bg-opacity-80">Songbook</a>
             <a href="#contact" class="block text-white text-center py-3 hover:bg-white/10">Contact</a>
         </div>
     </header>
 
     <main>
+        <div id="countdown-container" class="bg-accent/50 border-b-2 border-amber-300">
+            <div id="jam-countdown-banner" class="countdown-banner text-center p-2 text-primary font-bold"></div>
+            <div id="event-countdown-banner" class="countdown-banner text-center p-2 text-primary font-bold border-t border-amber-300/50"></div>
+        </div>
+
         <section id="home" class="relative text-white text-center">
             <img id="cover-photo" src="https://i.imgur.com/K1C3l4w.jpg" alt="A group of people playing instruments like guitars and ukuleles by a river in Galway." class="w-full h-[70vh] object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end items-center p-12">
                 <h1 class="text-4xl md:text-6xl font-bold text-white drop-shadow-2xl">Welcome to the Galway Jam Circle</h1>
                 <p class="mt-4 text-lg md:text-xl max-w-2xl text-white/90 drop-shadow-xl">A friendly, informal music-making community for all skill levels. Let's Jam!</p>
-                <a href="#jams" class="mt-8 px-8 py-3 bg-accent text-primary font-bold rounded-full hover:bg-opacity-80 transition duration-300 transform hover:scale-105 shadow-lg">See Regular Jams</a>
+                <div class="mt-8 flex items-center space-x-4">
+                    <a href="#jams" class="px-8 py-3 bg-accent text-primary font-bold rounded-full hover:bg-opacity-80 transition duration-300 transform hover:scale-105 shadow-lg">See Regular Jams</a>
+                    <a href="https://www.facebook.com/groups/116675615376726" target="_blank" class="text-white hover:text-accent transition duration-300">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V21.878A10.001 10.001 0 0022 12z" clip-rule="evenodd" /></svg>
+                    </a>
+                    <a href="https://www.instagram.com/galwayjamcircle42/?hl=en" target="_blank" class="text-white hover:text-accent transition duration-300">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.792 2.013 10.146 2 12.315 2zm0 1.623c-2.403 0-2.748.01-3.728.058-1.006.047-1.634.21-2.203.434a3.272 3.272 0 00-1.15 1.15c-.224.57-.386 1.198-.434 2.203-.048.98-.058 1.325-.058 3.728s.01 2.748.058 3.728c.048 1.006.21 1.634.434 2.203a3.272 3.272 0 001.15 1.15c.57.224 1.198.386 2.203.434.98.048 1.325.058 3.728.058s2.748-.01 3.728-.058c1.006-.047 1.634-.21 2.203-.434a3.272 3.272 0 001.15-1.15c.224-.57.386-1.198.434-2.203.048-.98.058-1.325.058-3.728s-.01-2.748-.058-3.728c-.048-1.006-.21-1.634-.434-2.203a3.272 3.272 0 00-1.15-1.15c-.57-.224-1.198-.386-2.203-.434C15.063 3.633 14.718 3.623 12.315 3.623zM12 9.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm0 6a3.75 3.75 0 110-7.5 3.75 3.75 0 010 7.5zM16.965 6.57a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" /></svg>
+                    </a>
+                </div>
             </div>
         </section>
         
@@ -114,6 +135,9 @@
         <section id="special-events" class="py-16 md:py-24 bg-stone-50 border-y border-stone-200">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Festivals & Special Events</h2>
+                <div class="mb-12">
+                    <iframe src="https://calendar.google.com/calendar/embed?src=galwayjamcircle%40gmail.com&ctz=Europe%2FDublin" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+                </div>
                 <div id="event-list" class="max-w-3xl mx-auto space-y-8"></div>
                 <div class="text-center mt-8 admin-controls-inline"><button id="add-event-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300 shadow-md">Add New Event</button></div>
                 <form id="add-event-form" class="max-w-3xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-inner border"><h3 id="event-form-title" class="text-xl font-bold text-primary mb-4">Add a New Event</h3><input type="hidden" id="edit-event-id"><div class="mb-4"><label for="event-title" class="block text-gray-700 font-bold mb-2 text-left">Title</label><input type="text" id="event-title" class="w-full p-2 border rounded" placeholder="e.g., Cleggan Fringe Festival"></div><div class="mb-4"><label for="event-dates" class="block text-gray-700 font-bold mb-2 text-left">Dates</label><input type="text" id="event-dates" class="w-full p-2 border rounded" placeholder="Select a date or date range..."></div><div class="mb-4"><label for="event-description" class="block text-gray-700 font-bold mb-2 text-left">Description</label><textarea id="event-description" class="w-full p-2 border rounded" rows="4" placeholder="Enter event details..."></textarea></div><div class="flex justify-end space-x-4"><button type="button" id="cancel-event-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button><button type="submit" id="submit-event-btn" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Save Event</button></div></form>
@@ -126,6 +150,42 @@
                     <div class="bg-stone-50/80 p-8 rounded-lg shadow-sm border border-stone-200"><h3 class="font-bold text-xl text-primary mb-2">1. Loop Songs First</h3><p class="text-gray-600">We begin with easy, repetitive songs to get everyone warmed up and in the groove.</p></div>
                     <div class="bg-stone-50/80 p-8 rounded-lg shadow-sm border border-stone-200"><h3 class="font-bold text-xl text-primary mb-2">2. Four Chords or Less</h3><p class="text-gray-600">Next, we move to songs that use four simple chords or fewer, making it easy for everyone to join in.</p></div>
                     <div class="bg-stone-50/80 p-8 rounded-lg shadow-sm border border-stone-200"><h3 class="font-bold text-xl text-primary mb-2">3. Then Anything Goes!</h3><p class="text-gray-600">In the final part of the jam, the floor is open! Bring out any song you'd like to play with the group.</p></div>
+                </div>
+                <div class="max-w-3xl mx-auto mt-12">
+                    <details class="p-4 rounded-lg bg-stone-50 border border-stone-200">
+                        <summary class="font-bold text-lg text-primary">Jamming Guidelines</summary>
+                        <div class="mt-4 space-y-4 text-gray-700 text-left prose">
+                            <p class="italic">’Jammin’s where the magic happens!’’</p>
+                            <p>Jam circles are relaxed, open, inclusive gatherings of musicians and singers who sit in a circle facing each other. Jammers play for enjoyment rather than for audiences, but listeners are welcome.</p>
+                            <p>A jam is a safe space to learn and grow jamming skills.</p>
+                            <p>Jams are acoustic. Instruments such as bass and keyboards are exceptions.</p>
+                            <p>The most important skill that each Jammer brings to a jam is their ability to listen.</p>
+                            <p>Jammers play and harmonise during songs at a volume that allows singers and soloists to be heard. If you can’t hear the singer/soloist, reduce your volume.</p>
+                            <p>The jam circle flows in a clockwise direction.</p>
+                            <p>Jammers take turns to Play, Pass, or Pick.</p>
+                            <ul class="list-disc list-inside">
+                                <li><strong>Play</strong> means to play a song.</li>
+                                <li><strong>Pass</strong> means pass to the next jammer.</li>
+                                <li><strong>Pick</strong> means pick a song that another jammer plays.</li>
+                            </ul>
+                            <p>To keep the circle moving, Jammers ideally need to make their choice in advance.</p>
+                            <p>To respect the singer, Jammers avoid talking or joining/leaving the circle mid-song.</p>
+                            <p>When joining the circle, Jammers wait for their turn to play, pass or pick, unless offered a turn.</p>
+                            <p>Jam songs are “Jammable” i.e. they are fun, easy to play- typically 3-4 chords, ideally in the same key.</p>
+                            <p>A key feature of jam circles are solos or breaks -- where one Jammer improvises a melody, for approximately a verse and/or chorus.</p>
+                            <p>Only one instrument solos at a time and Jammers don’t solo over the singer.</p>
+                            <p>Seasoned Jammers encourage less experienced to solo, giving them ‘space to grow’.</p>
+                            <p>The singer is the song leader. Jammers need to listen when singers describe the song. Singers name the song, choose the song key, its tempo, and during the song, they invite musicians to solo and/or sing.</p>
+                            <p>Any Jammer wishing to take a solo should make eye contact with the singer, indicating their willingness to take a solo. They start to solo when the singer gives them ‘the nod’.</p>
+                            <p>The soloist stops the solo after a verse and/or a chorus, attending to the singer’s signals.</p>
+                            <p>The singer signals when the song is about to end, commonly by lifting their instrument slightly, or raising a leg, or saying, “one more time”.</p>
+                            <p>Jammers tune quietly where possible, and avoid ‘noodling’ between or during songs.</p>
+                            <p>When two or more bassists or percussionists are present, they collaborate and/or alternate playing songs, using simple beats and bass lines.</p>
+                            <p>Please consider buying a drink if jam venues are provided free.</p>
+                            <p>Galway Jam Circle supports jamming for everyone, irrespective of their age, ethnicity, culture, gender identity, religion, language, sexual orientation, ability, disability or social circumstances.</p>
+                            <p>We use video and photography at our jam sessions and at performances for social media. If you are uncomfortable with this at a jam, please feel free to ask that you are not filmed/photographed. At performances, please be advised that we have no control over what audience members record.</p>
+                        </div>
+                    </details>
                 </div>
                 <div class="mt-12 text-center bg-accent/30 p-8 rounded-lg max-w-3xl mx-auto border border-amber-200">
                     <img src="images/lets_jam_logo.png" alt="Let's Jam Ireland Logo Placeholder" class="mx-auto mb-4 rounded-md h-20">
@@ -188,6 +248,14 @@
     
     <footer class="bg-primary text-white/80 py-8">
         <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://www.facebook.com/groups/116675615376726" target="_blank" class="text-white hover:text-accent transition duration-300">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V21.878A10.001 10.001 0 0022 12z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="https://www.instagram.com/galwayjamcircle42/?hl=en" target="_blank" class="text-white hover:text-accent transition duration-300">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.792 2.013 10.146 2 12.315 2zm0 1.623c-2.403 0-2.748.01-3.728.058-1.006.047-1.634.21-2.203.434a3.272 3.272 0 00-1.15 1.15c-.224.57-.386 1.198-.434 2.203-.048.98-.058 1.325-.058 3.728s.01 2.748.058 3.728c.048 1.006.21 1.634.434 2.203a3.272 3.272 0 001.15 1.15c.57.224 1.198.386 2.203.434.98.048 1.325.058 3.728.058s2.748-.01 3.728-.058c1.006-.047 1.634-.21 2.203-.434a3.272 3.272 0 001.15-1.15c.224-.57.386-1.198.434-2.203.048-.98.058-1.325.058-3.728s-.01-2.748-.058-3.728c-.048-1.006-.21-1.634-.434-2.203a3.272 3.272 0 00-1.15-1.15c-.57-.224-1.198-.386-2.203-.434C15.063 3.633 14.718 3.623 12.315 3.623zM12 9.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm0 6a3.75 3.75 0 110-7.5 3.75 3.75 0 010 7.5zM16.965 6.57a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" /></svg>
+                </a>
+            </div>
             <p>&copy; 2025 Galway Jam Circle. v1.1. All Rights Reserved.</p>
             <p class="text-sm text-stone-400 mt-2">Bringing music to the people of Galway.</p>
             <a href="#" id="admin-mode-btn" class="text-sm text-stone-400 hover:text-white mt-4 inline-block">Admin</a>
