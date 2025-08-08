@@ -33,54 +33,8 @@
             <div class="flex items-center space-x-4">
                 <div class="w-16 h-16">
                     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="100" height="100" fill="#8C1B5F" />
-                        <g transform="translate(50 50)">
-                            <!-- Instruments -->
-                            <g transform="rotate(0) translate(0 -45) scale(0.9)">
-                                <path d="M-6,0 a6,6 0 0 1 12,0 v-10 a6,6 0 0 1 -12,0 z" fill="white" />
-                                <rect x="-7" y="-1" width="14" height="2" fill="white"/>
-                                <path d="M-2,0 v5 a2,2 0 0 0 4,0 v-5" fill="none" stroke="#8C1B5F" stroke-width="1.5"/>
-                            </g>
-                            <g transform="rotate(40) translate(0 -45) scale(0.8)">
-                                <path d="M-10 -8 H10 V8 H-10z M-8 -6 V6 M-6 -6 V6 M-4 -6 V6 M-2 -6 V6 M0 -6 V6 M2 -6 V6 M4 -6 V6 M6 -6 V6" stroke="#8C1B5F" stroke-width="0.5" fill="white"/>
-                                <path d="M-12 -10 H12 V-8 H-12z M-12 8 H12 V10 H-12z" fill="white"/>
-                            </g>
-                            <g transform="rotate(75) translate(0 -45) scale(0.7)">
-                                <circle cx="-6" cy="-4" r="5" fill="white" /><path d="M-6 -9 l2 10" stroke="#8C1B5F" stroke-width="1"/>
-                                <circle cx="6" cy="4" r="5" fill="white" /><path d="M6 9 l-2 -10" stroke="#8C1B5F" stroke-width="1"/>
-                            </g>
-                            <g transform="rotate(110) translate(0 -45) scale(0.9)">
-                                <path d="M-10 5 a15 15 0 0 1 20 0" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                                <path d="M-10 5 h20 M-8 -5 h16" stroke="white" stroke-width="2"/>
-                            </g>
-                            <g transform="rotate(155) translate(0 -45) scale(0.9)">
-                                <path d="M0,10 C-15,10 -15,-15 0,-15 C15,-15 15,10 0,10 Z" fill="white"/>
-                                <path d="M0,-15 v-10 h2" stroke="white" stroke-width="2"/>
-                                <circle cx="0" cy="-2" r="4" fill="#8C1B5F"/>
-                            </g>
-                            <g transform="rotate(200) translate(0 -45) scale(0.9)">
-                                <path d="M-12 -6 h24 v12 h-24 z" fill="white"/>
-                                <path d="M-9 -6v12 m3 0v-12 m3 0v-12 m3 0v-12 m3 0v-12 m3 0v-12" stroke="#8C1B5F" stroke-width="0.5"/>
-                                <path d="M-7.5 -6 v6 h-3 v-6 z m6 0 v6 h-3 v-6 z m6 0 v6 h-3 v-6 z" fill="#8C1B5F"/>
-                            </g>
-                            <g transform="rotate(245) translate(0 -45) rotate(-10) scale(0.9)">
-                                <path d="M0,0 a10 10 0 0 1 -15 10 l-5 -15 a10 10 0 0 1 15 -5 Z" fill="white"/>
-                                <circle cx="-2" cy="2" r="1" fill="#8C1B5F"/><circle cx="-6" cy="0" r="1" fill="#8C1B5F"/><circle cx="-10" cy="-5" r="1" fill="#8C1B5F"/>
-                            </g>
-                            <g transform="rotate(290) translate(0 -45) scale(0.9)">
-                                <path d="M0,10 C-15,10 -12,-20 0,-20 C12,-20 15,10 0,10 Z" fill="white"/>
-                                <path d="M0,-20 v-8 h2" stroke="white" stroke-width="2"/>
-                                <circle cx="0" cy="-5" r="4" fill="#8C1B5F"/>
-                            </g>
-                            <g transform="rotate(335) translate(0 -45) scale(0.9)">
-                                <path d="M-12 -6 h24 v12 h-24 z" fill="white"/>
-                                <path d="M-9 -6v12 m3 0v-12 m3 0v-12 m3 0v-12 m3 0v-12 m3 0v-12" stroke="#8C1B5F" stroke-width="0.5"/>
-                                <path d="M-7.5 -6 v6 h-3 v-6 z m6 0 v6 h-3 v-6 z m6 0 v6 h-3 v-6 z" fill="#8C1B5F"/>
-                            </g>
-                            
-                            <!-- Central Circle -->
-                            <circle cx="0" cy="0" r="38" fill="white"/>
-                        </g>
+                        <circle cx="50" cy="50" r="50" fill="#8C1B5F"/>
+                        <circle cx="50" cy="50" r="38" fill="white"/>
                         <text x="50" y="42" font-family="Inter, sans-serif" font-size="12" fill="#8C1B5F" text-anchor="middle" font-weight="bold">Galway</text>
                         <text x="50" y="58" font-family="Inter, sans-serif" font-size="12" fill="#8C1B5F" text-anchor="middle" font-weight="bold">Jam</text>
                         <text x="50" y="74" font-family="Inter, sans-serif" font-size="12" fill="#8C1B5F" text-anchor="middle" font-weight="bold">Circle</text>
@@ -388,7 +342,7 @@
                         }
                     }
 
-                    let mapLink = jam.mapLink ? `<a href="${jam.mapLink}" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline ml-2">(View Map)</a>` : '';
+                    let mapLink = jam.mapLink ? `<button onclick="window.open('${jam.mapLink}', '_blank')" class="text-blue-500 hover:underline ml-2">(View Map)</button>` : '';
 
                     li.innerHTML = `
                         <div class="flex-grow jam-info">
