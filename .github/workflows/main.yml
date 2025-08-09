@@ -32,5 +32,5 @@ jobs:
       - name: Output Deployment URLs
         run: |
           echo "### 🚀 Deployment Successful! 🚀" >> $GITHUB_STEP_SUMMARY
-          echo "**Main Site URL:** ${{ steps.deploy_action.outputs.urls }}/index.html" >> $GITHUB_STEP_SUMMARY
-          echo "**Feedback Page URL:** ${{ steps.deploy_action.outputs.urls }}/feedback.html" >> $GITHUB_STEP_SUMMARY
+          echo "**Main Site URL:** ${{ steps.deploy_action.outputs.deployment_url }}/index.html" >> $GITHUB_STEP_SUMMARY
+          echo "**Feedback Page URL:** ${{ steps.deploy_action.outputs.deployment_url }}/feedback.html" >> $GITHUB_STEP_SUMMARY
