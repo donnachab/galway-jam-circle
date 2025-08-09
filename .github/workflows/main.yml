@@ -28,9 +28,9 @@ jobs:
           channelId: live
           projectId: galway-jam-circle-live
       
-      # NEW STEP: This will print the live URLs in the action's summary for easy access
+      # NEW & IMPROVED STEP: This will print the live URLs in the action's summary for easy access
       - name: Output Deployment URLs
         run: |
-          echo "🚀 Deployment successful! 🚀"
-          echo "Main Site URL: ${{ steps.deploy_action.outputs.urls }}/index.html"
-          echo "Feedback Page URL: ${{ steps.deploy_action.outputs.urls }}/feedback.html"
+          echo "### 🚀 Deployment Successful! 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "**Main Site URL:** ${{ steps.deploy_action.outputs.urls }}/index.html" >> $GITHUB_STEP_SUMMARY
+          echo "**Feedback Page URL:** ${{ steps.deploy_action.outputs.urls }}/feedback.html" >> $GITHUB_STEP_SUMMARY
