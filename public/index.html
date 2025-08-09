@@ -744,17 +744,22 @@
 
             async function loadData() {
                 try {
+                    console.log("Loading data from Firestore...");
                     const jamSnapshot = await getDocs(collection(db, "jams"));
                     initialJams = jamSnapshot.docs.map(doc => doc.data());
+                    console.log("Jams loaded:", initialJams.length);
 
                     const eventSnapshot = await getDocs(collection(db, "events"));
                     initialEvents = eventSnapshot.docs.map(doc => doc.data());
+                    console.log("Events loaded:", initialEvents.length);
                     
                     const photoSnapshot = await getDocs(collection(db, "photos"));
                     initialPhotos = photoSnapshot.docs.map(doc => doc.data());
+                    console.log("Photos loaded:", initialPhotos.length);
 
                     const venueSnapshot = await getDocs(collection(db, "venues"));
                     initialVenues = venueSnapshot.docs.map(doc => doc.data());
+                    console.log("Venues loaded:", initialVenues.length);
                     
                     const configDoc = await getDoc(doc(db, "site_config", "main"));
                     if (configDoc.exists()) {
