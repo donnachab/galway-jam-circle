@@ -121,7 +121,7 @@
                         <button id="add-jam-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300 shadow-md">Add New Jam</button>
                         <button id="manage-venues-btn" class="ml-4 px-6 py-2 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-600 transition duration-300 shadow-md">Manage Venues</button>
                     </div>
-                    <form id="add-jam-form" class="mt-8 p-6 bg-gray-50/50 rounded-lg shadow-inner border"><h3 id="form-title" class="text-xl font-bold text-primary mb-4">Add/Edit Jam</h3><input type="hidden" id="edit-jam-id"><div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4"><div class="md:col-span-2"><label for="jam-date" class="block text-gray-700 font-bold mb-2 text-left">Date</label><input type="text" id="jam-date" class="w-full p-2 border rounded" placeholder="Select a date..."></div><div><label for="jam-day" class="block text-gray-700 font-bold mb-2 text-left">Day</label><input type="text" id="jam-day" class="w-full p-2 border rounded bg-gray-200" readonly></div></div><div class="mb-4"><label for="jam-time" class="block text-gray-700 font-bold mb-2 text-left">Time</label><input type="text" id="jam-time" class="w-full p-2 border rounded" placeholder="Select a time..."></div><div class="mb-4"><label for="jam-venue" class="block text-gray-700 font-bold mb-2 text-left">Venue</label><select id="jam-venue" class="w-full p-2 border rounded"></select></div><div class="mb-4"><label for="jam-map-link" class="block text-gray-700 font-bold mb-2 text-left">Google Maps Link (Optional)</label><input type="url" id="jam-map-link" class="w-full p-2 border rounded" placeholder="Paste Google Maps share link..."></div><div class="flex justify-end space-x-4"><button type="button" id="cancel-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button><button type="submit" id="submit-btn" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Save Jam</button></div></form>
+                    <form id="add-jam-form" class="mt-8 p-6 bg-gray-50/50 rounded-lg shadow-inner border"><h3 id="form-title" class="text-xl font-bold text-primary mb-4">Add/Edit Jam</h3><input type="hidden" id="edit-jam-id"><div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4"><div class="md:col-span-2"><label for="jam-date" class="block text-gray-700 font-bold mb-2 text-left">Date</label><input type="text" id="jam-date" class="w-full p-2 border rounded" placeholder="Select a date..."></div><div><label for="jam-day" class="block text-gray-700 font-bold mb-2 text-left">Day</label><input type="text" id="jam-day" class="w-full p-2 border rounded bg-gray-200" readonly></div></div><div class="mb-4"><label for="jam-time" class="block text-gray-700 font-bold mb-2 text-left">Time</label><input type="text" id="jam-time" class="w-full p-2 border rounded" placeholder="Select a time..."></div><div class="mb-4"><label for="jam-venue" class="block text-gray-700 font-bold mb-2 text-left">Venue</label><select id="jam-venue" class="w-full p-2 border rounded"></select></div><div class="mb-4"><label for="jam-map-link" class="block text-gray-700 font-bold mb-2 text-left">Google Maps Link (Optional)</label><input type="url" id="jam-map-link" class="w-full p-2 border rounded" placeholder="Paste Google Maps share link..."></div><div class="flex justify-end space-x-4"><button type="button" id="cancel-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Exit</button><button type="submit" id="submit-btn" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Save Jam</button></div></form>
                     <div id="venue-management-section" class="mt-8 p-6 bg-gray-50/50 rounded-lg shadow-inner border">
                         <h3 class="text-xl font-bold text-primary mb-4">Manage Venues</h3>
                         <ul id="venue-list-admin" class="space-y-2 mb-4"></ul>
@@ -160,7 +160,7 @@
                     <details class="p-4 rounded-lg bg-stone-50 border border-stone-200">
                         <summary class="font-bold text-lg text-primary">Jamming Guidelines</summary>
                         <div class="mt-4 space-y-4 text-gray-700 text-left prose">
-                            <p class="italic">’Jammin’s where the magic happens!’’</p>
+                            <p class="italic">"Jamming's where the magic happens"</p>
                             <p>Jam circles are relaxed, open, inclusive gatherings of musicians and singers who sit in a circle facing each other. Jammers play for enjoyment rather than for audiences, but listeners are welcome.</p>
                             <p>A jam is a safe space to learn and grow jamming skills.</p>
                             <p>Jams are acoustic. Instruments such as bass and keyboards are exceptions.</p>
@@ -302,7 +302,7 @@
                 });
             }
 
-            const ADMIN_PASSWORD = 'galwayjamcircleadmin4519';
+            const ADMIN_PASSWORD = '4519';
             let initialJams = [];
             let initialEvents = [];
             let initialPhotos = [];
@@ -447,7 +447,7 @@
                     if (!jam.isProposal) {
                         if (isSaturday) {
                              if (jam.cancelled) { adminButtons += `<button data-id="${jam.id}" class="reinstate-btn text-green-600 hover:text-green-800 ml-2">Reinstate</button>`; } 
-                             else { adminButtons += `<button data-id="${jam.id}" class="cancel-btn text-yellow-600 hover:text-yellow-800 ml-2">Cancel</button>`; }
+                             else { adminButtons += `<button data-id="${jam.id}" class="cancel-btn text-yellow-600 hover:text-yellow-800 ml-2">Cancel Jam</button>`; }
                         } else {
                             adminButtons += `<button data-id="${jam.id}" class="delete-btn text-red-500 hover:text-red-700 ml-2">Delete</button>`;
                         }
@@ -579,6 +579,7 @@
                  if(enable) { 
                     document.body.classList.add('admin-mode'); 
                     adminModeBtn.textContent = 'Exit Admin'; 
+                    document.getElementById('jams').scrollIntoView({ behavior: 'smooth' });
                  } else { 
                     document.body.classList.remove('admin-mode'); 
                     adminModeBtn.textContent = 'Admin'; 
@@ -639,7 +640,7 @@
                 
                 if (target.classList.contains('edit-btn')) { if (jamInDisplay) showJamForm('edit', jamInDisplay); } 
                 else if (target.classList.contains('delete-btn')) { showModal('Are you sure you want to delete this special jam?', 'confirm', async () => { await deleteDoc(doc(db, "jams", jamId)); await loadData(); }); } 
-                else if (target.classList.contains('cancel-btn')) { if (jamInDisplay) { jamInDisplay.cancelled = true; await saveJam(jamInDisplay); } } 
+                else if (target.classList.contains('cancel-btn')) { showModal('Are you sure you want to cancel this jam?', 'confirm', async () => { if (jamInDisplay) { jamInDisplay.cancelled = true; await saveJam(jamInDisplay); } }); } 
                 else if (target.classList.contains('reinstate-btn')) { if (jamInDisplay) { jamInDisplay.cancelled = false; await saveJam(jamInDisplay); } }
             });
 
@@ -764,7 +765,7 @@
                     } else {
                         // If config doesn't exist, create it with defaults
                         const defaultConfig = {
-                            coverPhotoUrl: "https://i.imgur.com/K1C3l4w.jpg",
+                            coverPhotoUrl: "https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/340126198_1202888093755813_6375467148998027340_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=2285d6&_nc_ohc=wA-6pUbx_XYQ7kNvwHkWjV3&_nc_oc=Adnd0Bbs-9bBGiNkVlqTm636JeXERyh16eo2fUrKp5p7sPkeFMlKHcYdyTj8qGDYzQk&_nc_zt=23&_nc_ht=scontent-dub4-1.xx&_nc_gid=Pse2aOVgLI3EOs4_MVhu_Q&oh=00_AfWMKMB5g8K5fFbQO5RjBf8Wp9epHYVIZ5FuDYFFu1qEsg&oe=689D27F9",
                             featuredVideoUrl: "https://www.youtube.com/watch?v=SeFUhhhVZ9k"
                         };
                         await setDoc(doc(db, "site_config", "main"), defaultConfig);
