@@ -1,21 +1,36 @@
+# GitHub Actions workflow to deploy the website to Firebase Hosting
+
 name: Deploy to Firebase Hosting on merge
+
+# Triggers the workflow on push events but only for the main branch
 'on':
   push:
     branches:
       - main
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # This is the new debugging step
+      # This is a useful debugging step to confirm your files are where you expect them
       - name: List files in repository
         run: ls -R
 
+      # This is the main deployment action
       - uses: FirebaseExtended/action-hosting-deploy@v0
+        id: deploy_action # Add an ID to reference the output of this step
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GALWAY_JAM_CIRCLE_LIVE }}'
           channelId: live
           projectId: galway-jam-circle-live
+      
+      # NEW STEP: This will print the live URLs in the action's summary for easy access
+      - name: Output Deployment URLs
+        run: |
+          echo "🚀 Deployment successful! 🚀"
+          echo "Main Site URL: ${{ steps.deploy_action.outputs.urls }}/index.html"
+          echo "Feedback Page URL: ${{ steps.deploy_action.outputs.urls }}/feedback.html"
