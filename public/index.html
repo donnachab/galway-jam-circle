@@ -28,7 +28,7 @@
         .admin-controls, .admin-controls-inline { display: none; }
         body.admin-mode .admin-controls { display: block; } 
         body.admin-mode .admin-controls-inline { display: inline-flex; } 
-        #add-jam-form, #add-event-form, #add-photo-form, #edit-cover-photo-form, #edit-featured-video-form { display: none; }
+        #add-jam-form, #add-event-form, #add-photo-form, #edit-cover-photo-form, #edit-featured-video-form, #venue-management-section { display: none; }
         .jam-cancelled { background-color: #fee2e2 !important; }
         .jam-cancelled .jam-info { text-decoration: line-through; }
         .jam-special-day { border-color: #FBBF24 !important; border-width: 2px; } /* Amber for special days */
@@ -118,7 +118,7 @@
                 <div class="max-w-2xl mx-auto">
                     <ul id="jam-list" class="space-y-4"></ul>
                     <div class="text-center mt-8 admin-controls-inline"><button id="add-jam-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300 shadow-md">Add New Jam</button></div>
-                    <form id="add-jam-form" class="mt-8 p-6 bg-gray-50/50 rounded-lg shadow-inner border"><h3 id="form-title" class="text-xl font-bold text-primary mb-4">Add/Edit Jam</h3><input type="hidden" id="edit-jam-id"><div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4"><div class="md:col-span-2"><label for="jam-date" class="block text-gray-700 font-bold mb-2 text-left">Date</label><input type="text" id="jam-date" class="w-full p-2 border rounded" placeholder="Select a date..."></div><div><label for="jam-day" class="block text-gray-700 font-bold mb-2 text-left">Day</label><input type="text" id="jam-day" class="w-full p-2 border rounded bg-gray-200" readonly></div></div><div class="mb-4"><label for="jam-time" class="block text-gray-700 font-bold mb-2 text-left">Time</label><input type="text" id="jam-time" class="w-full p-2 border rounded" placeholder="Select a time..."></div><div class="mb-4"><label for="jam-venue" class="block text-gray-700 font-bold mb-2 text-left">Venue</label><input type="text" id="jam-venue" list="venue-list" class="w-full p-2 border rounded" placeholder="Select or type a venue..."><datalist id="venue-list"><option value="Mechanics' Institute"><option value="Joyce's, Knocknacarra"></datalist></div><div class="mb-4"><label for="jam-map-link" class="block text-gray-700 font-bold mb-2 text-left">Google Maps Link (Optional)</label><input type="url" id="jam-map-link" class="w-full p-2 border rounded" placeholder="Paste Google Maps share link..."></div><div class="flex justify-end space-x-4"><button type="button" id="cancel-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button><button type="submit" id="submit-btn" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Save Jam</button></div></form>
+                    <form id="add-jam-form" class="mt-8 p-6 bg-gray-50/50 rounded-lg shadow-inner border"><h3 id="form-title" class="text-xl font-bold text-primary mb-4">Add/Edit Jam</h3><input type="hidden" id="edit-jam-id"><div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4"><div class="md:col-span-2"><label for="jam-date" class="block text-gray-700 font-bold mb-2 text-left">Date</label><input type="text" id="jam-date" class="w-full p-2 border rounded" placeholder="Select a date..."></div><div><label for="jam-day" class="block text-gray-700 font-bold mb-2 text-left">Day</label><input type="text" id="jam-day" class="w-full p-2 border rounded bg-gray-200" readonly></div></div><div class="mb-4"><label for="jam-time" class="block text-gray-700 font-bold mb-2 text-left">Time</label><input type="text" id="jam-time" class="w-full p-2 border rounded" placeholder="Select a time..."></div><div class="mb-4"><label for="jam-venue" class="block text-gray-700 font-bold mb-2 text-left">Venue</label><select id="jam-venue" class="w-full p-2 border rounded"></select></div><div class="mb-4"><label for="jam-map-link" class="block text-gray-700 font-bold mb-2 text-left">Google Maps Link (Optional)</label><input type="url" id="jam-map-link" class="w-full p-2 border rounded" placeholder="Paste Google Maps share link..."></div><div class="flex justify-end space-x-4"><button type="button" id="cancel-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button><button type="submit" id="submit-btn" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Save Jam</button></div></form>
                     <div class="admin-controls mt-8 border-t pt-6 border-gray-200"><div class="w-full"><h4 class="text-lg font-bold text-gray-700 mb-2">Date Testing Module</h4><p class="text-sm text-gray-600 mb-2">See how the list will look on a specific date.</p><div class="flex space-x-2"><input type="text" id="test-date-input" class="w-full p-2 border rounded" placeholder="Select a test date..."><button id="test-date-btn" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 whitespace-nowrap">Test Date</button><button id="reset-date-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Reset</button></div></div></div>
                 </div>
             </div>
@@ -293,6 +293,7 @@
             let initialJams = [];
             let initialEvents = [];
             let initialPhotos = [];
+            let initialVenues = [];
             let jams = [];
             let events = [];
             let photos = [];
@@ -603,6 +604,13 @@
                 hideJamForm();
             });
 
+            jamVenueInput.addEventListener('change', () => {
+                const selectedVenue = initialVenues.find(v => v.name === jamVenueInput.value);
+                if (selectedVenue) {
+                    jamMapLinkInput.value = selectedVenue.mapLink;
+                }
+            });
+
             jamList.addEventListener('click', async (e) => {
                 const target = e.target; const jamId = target.dataset.id; if (!jamId) return;
                 const jamInDisplay = jams.find(j => j.id === jamId);
@@ -716,6 +724,9 @@
                     const photoSnapshot = await getDocs(collection(db, "photos"));
                     initialPhotos = photoSnapshot.docs.map(doc => doc.data());
 
+                    const venueSnapshot = await getDocs(collection(db, "venues"));
+                    initialVenues = venueSnapshot.docs.map(doc => doc.data());
+                    
                     const configDoc = await getDoc(doc(db, "site_config", "main"));
                     if (configDoc.exists()) {
                         const configData = configDoc.data();
@@ -728,6 +739,15 @@
                         } else {
                              featuredVideoPlayer.src = `https://www.youtube.com/embed/SeFUhhhVZ9k`; // Correct Default video
                         }
+                    } else {
+                        // If config doesn't exist, create it with defaults
+                        const defaultConfig = {
+                            coverPhotoUrl: "https://i.imgur.com/K1C3l4w.jpg",
+                            featuredVideoUrl: "https://www.youtube.com/watch?v=SeFUhhhVZ9k"
+                        };
+                        await setDoc(doc(db, "site_config", "main"), defaultConfig);
+                        await loadData();
+                        return;
                     }
 
                     // Modular seeding logic
@@ -749,6 +769,15 @@
                         const seedPhotos = [{id: "201", type: "image", url: "https://i.imgur.com/K1C3l4w.jpg", caption: "Jam session by the river."}];
                         seedPhotos.forEach(photo => batch.set(doc(db, "photos", photo.id), photo));
                     }
+                    if (initialVenues.length === 0) {
+                        needsSeeding = true;
+                        const seedVenues = [
+                            {id: "v1", name: "Mechanics' Institute", mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu"},
+                            {id: "v2", name: "Joyce's, Knocknacarra", mapLink: "https://www.google.com/maps/place/Joyce's+Community+Centre/@53.2622295,-9.1052034,17z/data=!3m1!4b1!4m6!3m5!1s0x485b97cce9b72d61:0x894c2f7a9d809558!8m2!3d53.2622295!4d-9.1052034!16s%2Fg%2F11j4dtw7tt?entry=ttu"}
+                        ];
+                        seedVenues.forEach(venue => batch.set(doc(db, "venues", venue.id), venue));
+                    }
+
 
                     if (needsSeeding) {
                         showModal("Database empty or incomplete. Seeding with initial data. Please refresh if you don't see it.", "alert");
