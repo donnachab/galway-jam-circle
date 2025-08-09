@@ -538,7 +538,7 @@
                     comment: "The idea to add specific songbooks for each phase of the jam is brilliant. It would really help newcomers get up to speed and encourage more people to join in on songs they know.",
                     name: "Donnacha on behalf of Sarah",
                     timestamp: serverTimestamp(),
-                    upvotes: 15, downvotes: 0
+                    upvotes: 0, downvotes: 0
                 });
                 await addDoc(feedbackCol, {
                     topic: "Website Section: Look and Feel",
@@ -552,7 +552,9 @@
 
         // --- Initialize the page ---
         async function init() {
-            isInitialized = true; // Set flag to prevent re-initialization
+            if (isInitialized) return; // Prevent re-initialization
+            isInitialized = true; 
+            
             const snapshot = await getDocs(collection(db, "feedback"));
             if (snapshot.empty) {
                 await seedDummyPosts();
@@ -560,9 +562,7 @@
             listenForFeedback();
         }
 
-        if (!isInitialized) {
-            init();
-        }
+        init();
 
     </script>
 
