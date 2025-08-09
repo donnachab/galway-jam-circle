@@ -37,9 +37,6 @@
         details > summary {
             cursor: pointer;
         }
-        .countdown-banner {
-            display: none; /* Hidden by default */
-        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -78,11 +75,6 @@
     </header>
 
     <main>
-        <div id="countdown-container" class="bg-accent/50 border-b-2 border-amber-300">
-            <div id="jam-countdown-banner" class="countdown-banner text-center p-2 text-primary font-bold"></div>
-            <div id="event-countdown-banner" class="countdown-banner text-center p-2 text-primary font-bold border-t border-amber-300/50"></div>
-        </div>
-
         <section id="home" class="relative text-white text-center">
             <img id="cover-photo" src="https://i.imgur.com/K1C3l4w.jpg" alt="A group of people playing instruments like guitars and ukuleles by a river in Galway." class="w-full h-[70vh] object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end items-center p-12">
@@ -489,7 +481,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                         </button>`;
                     galleryGrid.appendChild(div);
-                });
+                }
             }
 
             function showJamForm(mode = 'add', jam = null) {
@@ -735,16 +727,6 @@
                         const seedPhotos = [{id: "201", type: "image", url: "https://i.imgur.com/K1C3l4w.jpg", caption: "Jam session by the river."}];
                         seedPhotos.forEach(photo => batch.set(doc(db, "photos", photo.id), photo));
                     }
-                    
-                    if (!configDoc.exists()) {
-                        needsSeeding = true;
-                        const defaultConfig = {
-                            coverPhotoUrl: "https://i.imgur.com/K1C3l4w.jpg",
-                            featuredVideoUrl: "https://www.youtube.com/watch?v=SeFUhhhVZ9k"
-                        };
-                        batch.set(doc(db, "site_config", "main"), defaultConfig);
-                    }
-
 
                     if (needsSeeding) {
                         showModal("Database empty or incomplete. Seeding with initial data. Please refresh if you don't see it.", "alert");
