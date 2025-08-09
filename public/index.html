@@ -509,6 +509,15 @@
 
             function showJamForm(mode = 'add', jam = null) {
                 addJamForm.style.display = 'block';
+                // Populate the venue dropdown
+                jamVenueInput.innerHTML = '';
+                initialVenues.forEach(venue => {
+                    const option = document.createElement('option');
+                    option.value = venue.name;
+                    option.textContent = venue.name;
+                    jamVenueInput.appendChild(option);
+                });
+
                 if (mode === 'edit') { 
                     formTitle.textContent = 'Edit Jam'; 
                     editJamIdInput.value = jam.id; 
