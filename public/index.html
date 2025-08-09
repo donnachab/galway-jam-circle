@@ -833,7 +833,7 @@
                     }
                     if (initialPhotos.length === 0) {
                         needsSeeding = true;
-                        const seedPhotos = [{id: "201", type: "image", url: "https://i.imgur.com/K1C3l4w.jpg", caption: "Jam session by the river."}];
+                        const seedPhotos = [{id: "201", type: "image", url: "https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/340126198_1202888093755813_6375467148998027340_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=2285d6&_nc_ohc=wA-6pUbx_XYQ7kNvwHkWjV3&_nc_oc=Adnd0Bbs-9bBGiNkVlqTm636JeXERyh16eo2fUrKp5p7sPkeFMlKHcYdyTj8qGDYzQk&_nc_zt=23&_nc_ht=scontent-dub4-1.xx&_nc_gid=Pse2aOVgLI3EOs4_MVhu_Q&oh=00_AfWMKMB5g8K5fFbQO5RjBf8Wp9epHYVIZ5FuDYFFu1qEsg&oe=689D27F9", caption: "Jam session by the river."}];
                         seedPhotos.forEach(photo => batch.set(doc(db, "photos", photo.id), photo));
                     }
                     if (initialVenues.length === 0) {
