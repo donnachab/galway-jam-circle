@@ -51,6 +51,12 @@
         .tab-content.active {
             display: block;
         }
+        .vote-btn.voted-up {
+            color: #10B981; /* Green-500 */
+        }
+        .vote-btn.voted-down {
+            color: #EF4444; /* Red-500 */
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -163,7 +169,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query, orderBy, getDocs, doc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query, orderBy, getDocs, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
         // IMPORTANT: Use the same Firebase config as your main website
         const firebaseConfig = {
@@ -195,7 +201,9 @@
                     topic: topicDropdown.value,
                     comment: comment,
                     name: document.getElementById('feedback-name').value || 'Anonymous',
-                    timestamp: serverTimestamp()
+                    timestamp: serverTimestamp(),
+                    upvotes: 0,
+                    downvotes: 0
                 });
                 feedbackForm.reset();
             } catch (error) {
@@ -205,56 +213,48 @@
         });
 
         // --- Main listener for feedback and replies ---
-        const q = query(collection(db, "feedback"), orderBy("timestamp", "desc"));
+        function listenForFeedback() {
+            const q = query(collection(db, "feedback"), orderBy("timestamp", "desc"));
+            onSnapshot(q, (snapshot) => {
+                tabContainer.innerHTML = '';
+                tabContentContainer.innerHTML = '';
 
-        onSnapshot(q, (snapshot) => {
-            // Clear UI
-            tabContainer.innerHTML = '';
-            tabContentContainer.innerHTML = '';
-
-            if (snapshot.empty) {
-                seedDummyPosts(); // Add dummy post if collection is empty
-                tabContentContainer.innerHTML = '<p>No feedback yet. Be the first to leave a comment!</p>';
-                return;
-            }
-
-            const postsByTopic = new Map();
-            snapshot.forEach(doc => {
-                const feedback = doc.data();
-                feedback.id = doc.id;
-                if (!postsByTopic.has(feedback.topic)) {
-                    postsByTopic.set(feedback.topic, []);
+                if (snapshot.empty) {
+                    tabContentContainer.innerHTML = '<p>No feedback yet. Be the first to leave a comment!</p>';
+                    return;
                 }
-                postsByTopic.get(feedback.topic).push(feedback);
-            });
 
-            // Determine which topics have posts
-            const activeTopics = allPossibleTopics.filter(topic => postsByTopic.has(topic));
+                const postsByTopic = new Map();
+                snapshot.forEach(doc => {
+                    const feedback = doc.data();
+                    feedback.id = doc.id;
+                    if (!postsByTopic.has(feedback.topic)) postsByTopic.set(feedback.topic, []);
+                    postsByTopic.get(feedback.topic).push(feedback);
+                });
 
-            // Build tabs and content panels only for active topics
-            activeTopics.forEach((topic, index) => {
-                // Create tab button
-                const button = document.createElement('button');
-                button.className = `tab-button whitespace-nowrap ${index === 0 ? 'active' : ''}`;
-                button.textContent = topic;
-                button.dataset.tab = topic;
-                tabContainer.appendChild(button);
+                const activeTopics = allPossibleTopics.filter(topic => postsByTopic.has(topic));
 
-                // Create content panel
-                const contentDiv = document.createElement('div');
-                contentDiv.className = `tab-content space-y-6 ${index === 0 ? 'active' : ''}`;
-                contentDiv.dataset.tabContent = topic;
-                tabContentContainer.appendChild(contentDiv);
+                activeTopics.forEach((topic, index) => {
+                    const button = document.createElement('button');
+                    button.className = `tab-button whitespace-nowrap ${index === 0 ? 'active' : ''}`;
+                    button.textContent = topic;
+                    button.dataset.tab = topic;
+                    tabContainer.appendChild(button);
 
-                // Populate panel with posts
-                const posts = postsByTopic.get(topic);
-                posts.forEach(post => {
-                    const postElement = createPostElement(post);
-                    contentDiv.appendChild(postElement);
-                    loadReplies(post.id, postElement.querySelector('.replies-container'));
+                    const contentDiv = document.createElement('div');
+                    contentDiv.className = `tab-content space-y-6 ${index === 0 ? 'active' : ''}`;
+                    contentDiv.dataset.tabContent = topic;
+                    tabContentContainer.appendChild(contentDiv);
+
+                    const posts = postsByTopic.get(topic);
+                    posts.forEach(post => {
+                        const postElement = createPostElement(post);
+                        contentDiv.appendChild(postElement);
+                        loadReplies(post.id, postElement.querySelector('.replies-container'));
+                    });
                 });
             });
-        });
+        }
         
         // --- Tab Switching Logic ---
         tabContainer.addEventListener('click', (e) => {
@@ -271,6 +271,7 @@
             const element = document.createElement('div');
             element.className = 'p-5 bg-white border border-gray-200 rounded-lg shadow-sm';
             const date = feedback.timestamp ? feedback.timestamp.toDate().toLocaleString('en-IE') : 'Just now';
+            const votedStatus = getVoteStatus(feedback.id);
 
             element.innerHTML = `
                 <div class="flex justify-between items-center mb-2">
@@ -280,7 +281,21 @@
                 <p class="text-gray-700 whitespace-pre-wrap">${feedback.comment}</p>
                 <div class="flex justify-between items-center mt-4">
                     <p class="text-sm font-semibold text-gray-800">- ${feedback.name}</p>
-                    <button data-post-id="${feedback.id}" class="reply-btn text-sm text-primary font-semibold hover:underline">Reply</button>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-1">
+                            <button data-post-id="${feedback.id}" data-vote-type="up" class="vote-btn p-1 rounded-full hover:bg-gray-200 ${votedStatus === 'up' ? 'voted-up' : 'text-gray-500'}">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333V17a1 1 0 001 1h6.364a1 1 0 00.942-.67l2.716-6A1 1 0 0016 9.333H12.5A1.5 1.5 0 0111 7.833V4.667a2 2 0 00-2-2h-1a2 2 0 00-2 2v5.666z"></path></svg>
+                            </button>
+                            <span class="text-sm font-semibold text-gray-700">${feedback.upvotes || 0}</span>
+                        </div>
+                        <div class="flex items-center space-x-1">
+                            <button data-post-id="${feedback.id}" data-vote-type="down" class="vote-btn p-1 rounded-full hover:bg-gray-200 ${votedStatus === 'down' ? 'voted-down' : 'text-gray-500'}">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667V3a1 1 0 00-1-1h-6.364a1 1 0 00-.942.67l-2.716 6A1 1 0 004 10.667H7.5A1.5 1.5 0 019 12.167v3.166a2 2 0 002 2h1a2 2 0 002-2V9.667z"></path></svg>
+                            </button>
+                            <span class="text-sm font-semibold text-gray-700">${feedback.downvotes || 0}</span>
+                        </div>
+                        <button data-post-id="${feedback.id}" class="reply-btn text-sm text-primary font-semibold hover:underline">Reply</button>
+                    </div>
                 </div>
                 <div class="replies-container ml-8 mt-4 space-y-3 border-l-2 border-gray-200 pl-4"></div>
                 <div class="reply-form-container ml-8 mt-3"></div>
@@ -313,19 +328,17 @@
 
         // --- Handle Reply Button Clicks ---
         tabContentContainer.addEventListener('click', (e) => {
-            if (e.target.classList.contains('reply-btn')) {
-                const button = e.target;
-                const formContainer = button.closest('.p-5').querySelector('.reply-form-container');
-                
+            const replyBtn = e.target.closest('.reply-btn');
+            if (replyBtn) {
+                const formContainer = replyBtn.closest('.p-5').querySelector('.reply-form-container');
                 if (formContainer.innerHTML !== '') {
                     formContainer.innerHTML = '';
-                    button.textContent = 'Reply';
+                    replyBtn.textContent = 'Reply';
                     return;
                 }
-
-                button.textContent = 'Cancel';
+                replyBtn.textContent = 'Cancel';
                 formContainer.innerHTML = `
-                    <form class="reply-form" data-post-id="${button.dataset.postId}">
+                    <form class="reply-form" data-post-id="${replyBtn.dataset.postId}">
                         <textarea name="reply-comment" class="w-full p-2 border border-gray-300 rounded-md text-sm" rows="3" placeholder="Write a reply..." required></textarea>
                         <div class="flex justify-end items-center mt-2 space-x-2">
                              <input type="text" name="reply-name" class="w-1/2 p-2 border border-gray-300 rounded-md text-sm" placeholder="Your name (Optional)">
@@ -344,20 +357,49 @@
                 const postId = form.dataset.postId;
                 const comment = form.querySelector('[name="reply-comment"]').value;
                 const name = form.querySelector('[name="reply-name"]').value || 'Anonymous';
-
                 if (!comment.trim()) return;
-
                 try {
-                    const replyRef = collection(db, `feedback/${postId}/replies`);
-                    await addDoc(replyRef, { comment, name, timestamp: serverTimestamp() });
-                    form.closest('.reply-form-container').innerHTML = '';
-                    document.querySelector(`.reply-btn[data-post-id="${postId}"]`).textContent = 'Reply';
+                    await addDoc(collection(db, `feedback/${postId}/replies`), { comment, name, timestamp: serverTimestamp() });
                 } catch (error) {
                     console.error("Error adding reply: ", error);
                     alert('Could not post reply.');
                 }
             }
         });
+
+        // --- Handle Voting ---
+        tabContentContainer.addEventListener('click', (e) => {
+            const voteBtn = e.target.closest('.vote-btn');
+            if (voteBtn) {
+                handleVote(voteBtn.dataset.postId, voteBtn.dataset.voteType);
+            }
+        });
+
+        function getVoteStatus(postId) {
+            const votes = JSON.parse(localStorage.getItem('gjc_votes') || '{}');
+            return votes[postId]; // Will be 'up', 'down', or undefined
+        }
+
+        async function handleVote(postId, voteType) {
+            const docRef = doc(db, "feedback", postId);
+            const votes = JSON.parse(localStorage.getItem('gjc_votes') || '{}');
+            const currentVote = votes[postId];
+            let updates = {};
+
+            if (currentVote === voteType) { // Un-voting
+                updates[`${voteType}votes`] = increment(-1);
+                delete votes[postId];
+            } else { // New vote or changing vote
+                updates[`${voteType}votes`] = increment(1);
+                if (currentVote) { // Changing vote
+                    updates[`${currentVote}votes`] = increment(-1);
+                }
+                votes[postId] = voteType;
+            }
+            
+            localStorage.setItem('gjc_votes', JSON.stringify(votes));
+            await updateDoc(docRef, updates);
+        }
 
         // --- Seed dummy posts if the collection is empty ---
         async function seedDummyPosts() {
@@ -366,31 +408,37 @@
             if (snapshot.empty) {
                 console.log('Feedback collection is empty. Seeding dummy posts.');
 
-                // Post 1: Donnacha's Post
                 const donnachaPostRef = await addDoc(feedbackCol, {
                     topic: "New Idea: Songbooks by Phase",
                     comment: "The idea to add specific songbooks for each phase of the jam is brilliant. It would really help newcomers get up to speed and encourage more people to join in on songs they know.",
                     name: "Donnacha on behalf of Sarah",
-                    timestamp: serverTimestamp()
+                    timestamp: serverTimestamp(),
+                    upvotes: 15, downvotes: 0
                 });
 
-                // A reply to Donnacha's post
-                const replyRef = collection(db, `feedback/${donnachaPostRef.id}/replies`);
-                await addDoc(replyRef, {
+                await addDoc(collection(db, `feedback/${donnachaPostRef.id}/replies`), {
                     comment: "I agree! Having the loop songs in a separate, easy-to-find book would be a game-changer for the start of the jam.",
                     name: "Aoife",
                     timestamp: serverTimestamp()
                 });
 
-                // Post 2: Gemini's Post
                 await addDoc(feedbackCol, {
                     topic: "Website Section: Look and Feel",
                     comment: "This is a great start! One small suggestion for the main homepage image: the white 'Welcome to the Galway Jam Circle' text can be a little difficult to read when it's over a bright part of the background photo (like the sky or water).\n\nA slightly stronger, darker overlay behind the text could really make it pop and improve readability on all screen sizes. What do you think?",
                     name: "Gemini",
-                    timestamp: serverTimestamp()
+                    timestamp: serverTimestamp(),
+                    upvotes: 12, downvotes: 1
                 });
             }
         }
+
+        // --- Initialize the page ---
+        async function init() {
+            await seedDummyPosts();
+            listenForFeedback();
+        }
+
+        init();
 
     </script>
 
