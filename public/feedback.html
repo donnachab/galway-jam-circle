@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GJC Website - Feedback & Discussion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root { 
+            --primary-color: #371087; /* Correct Purple */
+            --accent-color: #F3EAD3;  /* Warm Cream */
+            --background-color: #f9fafb; /* Light Gray */
+            --text-dark: #1f2937;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--background-color);
+            color: var(--text-dark);
+        }
+        .bg-primary { background-color: var(--primary-color); }
+        .text-primary { color: var(--primary-color); }
+        .bg-accent { background-color: var(--accent-color); }
+        .prose h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .prose h3 {
+            color: var(--text-dark);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        /* Tab styling */
+        .tab-button {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- HEADER -->
+    <header class="bg-primary shadow-md">
+        <div class="container mx-auto px-6 py-4">
+            <h1 class="text-3xl font-bold text-white">Galway Jam Circle</h1>
+            <p class="text-lg text-white/90">Website Feedback & Discussion Forum</p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container mx-auto px-6 py-8">
+        <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
+            <div class="prose max-w-none">
+                
+                <h2>Welcome! Let's Build Our Website Together.</h2>
+                <p>This page is a space for all members of the Galway Jam Circle to review, discuss, and give feedback on our new official website. The goal is to create a central, easy-to-use hub for our community. Your input is crucial to make sure it works for everyone, so please read through the features below and share your thoughts in the form at the bottom!</p>
+
+                <hr class="my-8">
+
+                <h2>What the Site Offers (The 'Why')</h2>
+                <p>The main idea was to create a reliable, single source of truth for all GJC info, making it easier for current members and newcomers to know what's happening.</p>
+
+                <h3>1. A Live & Automated Jam Schedule</h3>
+                <p><strong>The Thinking:</strong> Instead of scrolling through Facebook posts, you can instantly see the next five upcoming jams. The schedule is "smart"—it automatically removes past jams and adds future ones, so it should always be up to date.</p>
+
+                <h3>2. Easy Updates for Organisers (Admin Mode)</h3>
+                <p><strong>The Thinking:</strong> We need a simple way for organisers to make changes without needing any tech skills. 'Admin Mode' allows a few designated people to update the site directly.</p>
+                <p><strong>How it works:</strong> On the main website, scroll to the very bottom of the page and click the 'Admin' link in the footer. You will be prompted for a password to unlock the editing controls.</p>
+                
+                <h3>3. Discussion Point: A Potential Payment Option</h3>
+                <p><strong>The Idea:</strong> To make the voluntary €5 contribution easier, we're proposing an online payment option using a service called <strong>SumUp</strong>. This would be an alternative for those who don't carry cash.</p>
+                <ul>
+                    <li><strong>No Monthly Cost:</strong> The group pays nothing to have this feature.</li>
+                    <li><strong>Tiny Fee:</strong> SumUp takes a small fee (€0.13) from each €5 contribution. The group would receive €4.87.</li>
+                    <li><strong>Easy Tracking:</strong> It provides a clear record of contributions for our treasurer.</li>
+                </ul>
+                <p>A disabled button is on the site now for demonstration. Should we activate this feature? Share your thoughts below.</p>
+
+                <hr class="my-8">
+
+                <h2>How You Can Help: Give Us Your Feedback!</h2>
+                <p>This is where you come in. Please share any thoughts, ideas, or suggestions using the form below. Your comment will be posted publicly on this page for everyone to see and discuss.</p>
+
+                <div class="mt-6 p-6 bg-gray-50 rounded-lg border border-gray-200">
+                    <h3 class="text-xl font-bold text-primary mt-0">Leave a Comment</h3>
+                    <form id="feedback-form">
+                        <div class="mb-4">
+                            <label for="feedback-topic" class="block text-sm font-bold text-gray-700 mb-2">1. What part of the site is your feedback about?</label>
+                            <select id="feedback-topic" name="topic" class="w-full p-2 border border-gray-300 rounded-md">
+                                <option>General Feedback</option>
+                                <option>Website Section: Look and Feel</option>
+                                <option>Website Section: Home Page</option>
+                                <option>Website Section: Regular Jams</option>
+                                <option>Website Section: Festivals & Events</option>
+                                <option>Website Section: Our Format</option>
+                                <option>Website Section: Gallery</option>
+                                <option>Website Section: Contact & Footer</option>
+                                <option>Website Feature: Admin Mode</option>
+                                <option>New Idea: Songbooks by Phase</option>
+                                <option>New Idea: Payment Feature</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="feedback-comment" class="block text-sm font-bold text-gray-700 mb-2">2. What are your thoughts, ideas, or suggestions?</label>
+                            <textarea id="feedback-comment" name="comment" rows="6" class="w-full p-2 border border-gray-300 rounded-md" placeholder="Please be as specific as you can..." required></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="feedback-name" class="block text-sm font-bold text-gray-700 mb-2">3. Your Name (Optional)</label>
+                            <input type="text" id="feedback-name" name="name" class="w-full p-2 border border-gray-300 rounded-md" placeholder="Let us know who you are!">
+                        </div>
+
+                        <div class="text-right">
+                            <button type="submit" id="submit-feedback-btn" class="px-6 py-2 bg-primary text-white font-bold rounded-md hover:opacity-90 transition-opacity">Post Feedback</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Feedback Display Section -->
+                <div class="mt-12">
+                    <h2 class="text-2xl font-bold text-primary">Community Feedback</h2>
+                    
+                    <!-- Tab Navigation -->
+                    <div id="tab-container" class="border-b border-gray-200 mb-4">
+                        <nav class="-mb-px flex flex-wrap gap-x-4 gap-y-2" aria-label="Tabs">
+                            <!-- Tabs will be inserted here by JS -->
+                        </nav>
+                    </div>
+
+                    <!-- Tab Content Panels -->
+                    <div id="tab-content-container">
+                         <!-- Content panels will be inserted here by JS -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white/80 py-6 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Galway Jam Circle</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query, orderBy, getDocs, doc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+        // IMPORTANT: Use the same Firebase config as your main website
+        const firebaseConfig = {
+            apiKey: "AIzaSyC4SnqaOMQWmEFulkN8zZALZsqJLK7hOh0",
+            authDomain: "galway-jam-circle-live.firebaseapp.com",
+            projectId: "galway-jam-circle-live",
+            storageBucket: "galway-jam-circle-live.appspot.com",
+            messagingSenderId: "140452021164",
+            appId: "1:140452021164:web:69703d13213d4ce49a3009"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const feedbackForm = document.getElementById('feedback-form');
+        const tabContainer = document.getElementById('tab-container').querySelector('nav');
+        const tabContentContainer = document.getElementById('tab-content-container');
+        const topicDropdown = document.getElementById('feedback-topic');
+        const allPossibleTopics = Array.from(topicDropdown.options).map(opt => opt.value);
+
+        // --- Post new feedback to Firestore ---
+        feedbackForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const comment = document.getElementById('feedback-comment').value;
+            if (!comment.trim()) return;
+
+            try {
+                await addDoc(collection(db, "feedback"), {
+                    topic: topicDropdown.value,
+                    comment: comment,
+                    name: document.getElementById('feedback-name').value || 'Anonymous',
+                    timestamp: serverTimestamp()
+                });
+                feedbackForm.reset();
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert('Sorry, there was an error submitting your feedback. Please try again.');
+            }
+        });
+
+        // --- Main listener for feedback and replies ---
+        const q = query(collection(db, "feedback"), orderBy("timestamp", "desc"));
+
+        onSnapshot(q, (snapshot) => {
+            // Clear UI
+            tabContainer.innerHTML = '';
+            tabContentContainer.innerHTML = '';
+
+            if (snapshot.empty) {
+                seedDummyPosts(); // Add dummy post if collection is empty
+                tabContentContainer.innerHTML = '<p>No feedback yet. Be the first to leave a comment!</p>';
+                return;
+            }
+
+            const postsByTopic = new Map();
+            snapshot.forEach(doc => {
+                const feedback = doc.data();
+                feedback.id = doc.id;
+                if (!postsByTopic.has(feedback.topic)) {
+                    postsByTopic.set(feedback.topic, []);
+                }
+                postsByTopic.get(feedback.topic).push(feedback);
+            });
+
+            // Determine which topics have posts
+            const activeTopics = allPossibleTopics.filter(topic => postsByTopic.has(topic));
+
+            // Build tabs and content panels only for active topics
+            activeTopics.forEach((topic, index) => {
+                // Create tab button
+                const button = document.createElement('button');
+                button.className = `tab-button whitespace-nowrap ${index === 0 ? 'active' : ''}`;
+                button.textContent = topic;
+                button.dataset.tab = topic;
+                tabContainer.appendChild(button);
+
+                // Create content panel
+                const contentDiv = document.createElement('div');
+                contentDiv.className = `tab-content space-y-6 ${index === 0 ? 'active' : ''}`;
+                contentDiv.dataset.tabContent = topic;
+                tabContentContainer.appendChild(contentDiv);
+
+                // Populate panel with posts
+                const posts = postsByTopic.get(topic);
+                posts.forEach(post => {
+                    const postElement = createPostElement(post);
+                    contentDiv.appendChild(postElement);
+                    loadReplies(post.id, postElement.querySelector('.replies-container'));
+                });
+            });
+        });
+        
+        // --- Tab Switching Logic ---
+        tabContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('tab-button')) {
+                const targetTab = e.target.dataset.tab;
+                tabContainer.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                tabContentContainer.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                document.querySelector(`[data-tab-content="${targetTab}"]`).classList.add('active');
+            }
+        });
+
+        function createPostElement(feedback) {
+            const element = document.createElement('div');
+            element.className = 'p-5 bg-white border border-gray-200 rounded-lg shadow-sm';
+            const date = feedback.timestamp ? feedback.timestamp.toDate().toLocaleString('en-IE') : 'Just now';
+
+            element.innerHTML = `
+                <div class="flex justify-between items-center mb-2">
+                    <span class="px-3 py-1 text-xs font-semibold text-primary bg-accent rounded-full">${feedback.topic}</span>
+                    <span class="text-xs text-gray-500">${date}</span>
+                </div>
+                <p class="text-gray-700 whitespace-pre-wrap">${feedback.comment}</p>
+                <div class="flex justify-between items-center mt-4">
+                    <p class="text-sm font-semibold text-gray-800">- ${feedback.name}</p>
+                    <button data-post-id="${feedback.id}" class="reply-btn text-sm text-primary font-semibold hover:underline">Reply</button>
+                </div>
+                <div class="replies-container ml-8 mt-4 space-y-3 border-l-2 border-gray-200 pl-4"></div>
+                <div class="reply-form-container ml-8 mt-3"></div>
+            `;
+            return element;
+        }
+        
+        function loadReplies(postId, container) {
+            const repliesQuery = query(collection(db, `feedback/${postId}/replies`), orderBy("timestamp", "asc"));
+            onSnapshot(repliesQuery, (snapshot) => {
+                container.innerHTML = ''; // Clear old replies
+                snapshot.forEach(doc => {
+                    container.appendChild(createReplyElement(doc.data()));
+                });
+            });
+        }
+
+        function createReplyElement(reply) {
+            const element = document.createElement('div');
+            element.className = 'p-3 bg-gray-50 rounded-md border';
+            const date = reply.timestamp ? reply.timestamp.toDate().toLocaleString('en-IE') : 'Just now';
+            element.innerHTML = `
+                <p class="text-gray-700 text-sm whitespace-pre-wrap">${reply.comment}</p>
+                <div class="text-right text-xs text-gray-600 mt-2">
+                    <strong>- ${reply.name}</strong> on ${date}
+                </div>
+            `;
+            return element;
+        }
+
+        // --- Handle Reply Button Clicks ---
+        tabContentContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('reply-btn')) {
+                const button = e.target;
+                const formContainer = button.closest('.p-5').querySelector('.reply-form-container');
+                
+                if (formContainer.innerHTML !== '') {
+                    formContainer.innerHTML = '';
+                    button.textContent = 'Reply';
+                    return;
+                }
+
+                button.textContent = 'Cancel';
+                formContainer.innerHTML = `
+                    <form class="reply-form" data-post-id="${button.dataset.postId}">
+                        <textarea name="reply-comment" class="w-full p-2 border border-gray-300 rounded-md text-sm" rows="3" placeholder="Write a reply..." required></textarea>
+                        <div class="flex justify-end items-center mt-2 space-x-2">
+                             <input type="text" name="reply-name" class="w-1/2 p-2 border border-gray-300 rounded-md text-sm" placeholder="Your name (Optional)">
+                             <button type="submit" class="px-4 py-1 bg-primary text-white text-sm font-bold rounded-md hover:opacity-90">Submit</button>
+                        </div>
+                    </form>
+                `;
+            }
+        });
+
+        // --- Handle Reply Form Submission ---
+        tabContentContainer.addEventListener('submit', async (e) => {
+            if (e.target.classList.contains('reply-form')) {
+                e.preventDefault();
+                const form = e.target;
+                const postId = form.dataset.postId;
+                const comment = form.querySelector('[name="reply-comment"]').value;
+                const name = form.querySelector('[name="reply-name"]').value || 'Anonymous';
+
+                if (!comment.trim()) return;
+
+                try {
+                    const replyRef = collection(db, `feedback/${postId}/replies`);
+                    await addDoc(replyRef, { comment, name, timestamp: serverTimestamp() });
+                    form.closest('.reply-form-container').innerHTML = '';
+                    document.querySelector(`.reply-btn[data-post-id="${postId}"]`).textContent = 'Reply';
+                } catch (error) {
+                    console.error("Error adding reply: ", error);
+                    alert('Could not post reply.');
+                }
+            }
+        });
+
+        // --- Seed dummy posts if the collection is empty ---
+        async function seedDummyPosts() {
+            const feedbackCol = collection(db, "feedback");
+            const snapshot = await getDocs(feedbackCol);
+            if (snapshot.empty) {
+                console.log('Feedback collection is empty. Seeding dummy posts.');
+
+                // Post 1: Donnacha's Post
+                const donnachaPostRef = await addDoc(feedbackCol, {
+                    topic: "New Idea: Songbooks by Phase",
+                    comment: "The idea to add specific songbooks for each phase of the jam is brilliant. It would really help newcomers get up to speed and encourage more people to join in on songs they know.",
+                    name: "Donnacha on behalf of Sarah",
+                    timestamp: serverTimestamp()
+                });
+
+                // A reply to Donnacha's post
+                const replyRef = collection(db, `feedback/${donnachaPostRef.id}/replies`);
+                await addDoc(replyRef, {
+                    comment: "I agree! Having the loop songs in a separate, easy-to-find book would be a game-changer for the start of the jam.",
+                    name: "Aoife",
+                    timestamp: serverTimestamp()
+                });
+
+                // Post 2: Gemini's Post
+                await addDoc(feedbackCol, {
+                    topic: "Website Section: Look and Feel",
+                    comment: "This is a great start! One small suggestion for the main homepage image: the white 'Welcome to the Galway Jam Circle' text can be a little difficult to read when it's over a bright part of the background photo (like the sky or water).\n\nA slightly stronger, darker overlay behind the text could really make it pop and improve readability on all screen sizes. What do you think?",
+                    name: "Gemini",
+                    timestamp: serverTimestamp()
+                });
+            }
+        }
+
+    </script>
+
+</body>
+</html>
