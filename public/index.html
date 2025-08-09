@@ -313,6 +313,7 @@
             const jamDayInput = document.getElementById('jam-day');
             const jamVenueInput = document.getElementById('jam-venue');
             const jamMapLinkInput = document.getElementById('jam-map-link');
+            const jamTimeInput = document.getElementById('jam-time');
             
             const eventList = document.getElementById('event-list');
             const addEventBtn = document.getElementById('add-event-btn');
@@ -355,6 +356,13 @@
                     }
                 },
             });
+            
+            flatpickr(jamTimeInput, {
+                enableTime: true,
+                noCalendar: true,
+                dateFormat: "H:i",
+                defaultDate: "14:00"
+            });
 
             const eventDatepicker = flatpickr(eventDatesInput, {
                 mode: "range",
@@ -393,7 +401,7 @@
                 while (displayJams.length < 5) {
                     lastDate.setDate(lastDate.getDate() + 7);
                     const newId = String(Date.now() + displayJams.length);
-                    displayJams.push({ id: newId, day: "Saturday", date: formatJamDate(new Date(lastDate)), venue: 'To be decided...', cancelled: false, isProposal: true });
+                    displayJams.push({ id: newId, day: "Saturday", date: formatJamDate(new Date(lastDate)), venue: 'To be decided...', cancelled: false, isProposal: true, time: "2:00 PM" });
                 }
                 jams = displayJams;
             }
@@ -438,6 +446,7 @@
                             <div class="flex items-center">
                                 <span class="font-bold text-lg ${isSaturday ? 'text-gray-500' : 'text-yellow-600'}">${jam.day}</span>
                                 <span class="text-lg font-bold text-primary ml-4">${jam.date}</span>
+                                <span class="text-lg font-bold text-gray-600 ml-2">${jam.time || '2:00 PM'}</span>
                             </div>
                             <span class="text-gray-700 text-lg ml-2">${jam.venue} ${mapLink}</span>
                             ${jam.cancelled ? '<span class="font-bold text-red-600 ml-4">(CANCELLED)</span>' : ''}
@@ -493,6 +502,12 @@
                     jamDayInput.value = jam.day; 
                     jamVenueInput.value = jam.venue; 
                     jamMapLinkInput.value = jam.mapLink || '';
+                    flatpickr(jamTimeInput, {
+                        enableTime: true,
+                        noCalendar: true,
+                        dateFormat: "H:i",
+                        defaultDate: jam.time || "14:00"
+                    });
                 } else { 
                     formTitle.textContent = 'Add a New Jam'; 
                     editJamIdInput.value = ''; 
@@ -502,6 +517,12 @@
                     jamDayInput.value = dayNames[lastJamDate.getDay()];
                     jamVenueInput.value = ''; 
                     jamMapLinkInput.value = '';
+                     flatpickr(jamTimeInput, {
+                        enableTime: true,
+                        noCalendar: true,
+                        dateFormat: "H:i",
+                        defaultDate: "14:00"
+                    });
                 }
                 jamVenueInput.focus();
             }
@@ -569,6 +590,7 @@
                 e.preventDefault();
                 const date = jamDateInput.value.trim(); const day = jamDayInput.value.trim(); const venue = jamVenueInput.value.trim(); let id = editJamIdInput.value;
                 const mapLink = jamMapLinkInput.value.trim();
+                const time = jamTimeInput.value.trim();
                 if (!date || !venue || !day) { showModal('Please fill in all jam fields.', 'alert'); return; }
                 
                 const jamDate = date.endsWith(':') ? date : date + ':';
@@ -576,7 +598,7 @@
                     id = String(Date.now());
                 }
 
-                const jamData = { id, date: jamDate, day, venue, cancelled: false, mapLink };
+                const jamData = { id, date: jamDate, day, venue, cancelled: false, mapLink, time };
                 await saveJam(jamData);
                 hideJamForm();
             });
@@ -714,7 +736,7 @@
 
                     if (initialJams.length === 0) {
                         needsSeeding = true;
-                        const seedJams = [ { id: "1", day: "Saturday", date: "2 Aug:", venue: "Mechanics' Institute", cancelled: false, mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu" }, { id: "2", day: "Saturday", date: "9 Aug:", venue: "Mechanics' Institute", cancelled: false, mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu" }, { id: "3", day: "Saturday", date: "16 Aug:", venue: "Joyce's, Knocknacarra", cancelled: false, mapLink: "https://www.google.com/maps/place/Joyce's+Community+Centre/@53.2622295,-9.1052034,17z/data=!3m1!4b1!4m6!3m5!1s0x485b97cce9b72d61:0x894c2f7a9d809558!8m2!3d53.2622295!4d-9.1052034!16s%2Fg%2F11j4dtw7tt?entry=ttu" }, { id: "4", day: "Saturday", date: "23 Aug:", venue: "Mechanics' Institute", cancelled: false, mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu" }, { id: "5", day: "Saturday", date: "30 Aug:", venue: "Mechanics' Institute", cancelled: false, mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu" }, { id: "6", day: "Saturday", date: "6 Sept:", venue: "Joyce's, Knocknacarra", cancelled: false, mapLink: "https://www.google.com/maps/place/Joyce's+Community+Centre/@53.2622295,-9.1052034,17z/data=!3m1!4b1!4m6!3m5!1s0x485b97cce9b72d61:0x894c2f7a9d809558!8m2!3d53.2622295!4d-9.1052034!16s%2Fg%2F11j4dtw7tt?entry=ttu" }, { id: "7", day: "Saturday", date: "13 Sept:", venue: "Mechanics' Institute", cancelled: false, mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu" }];
+                        const seedJams = [ { id: "1", day: "Saturday", date: "2 Aug:", venue: "Mechanics' Institute", cancelled: false, mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu", time: "2:00 PM" }, { id: "2", day: "Saturday", date: "9 Aug:", venue: "Mechanics' Institute", cancelled: false, mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu", time: "2:00 PM" }, { id: "3", day: "Saturday", date: "16 Aug:", venue: "Joyce's, Knocknacarra", cancelled: false, mapLink: "https://www.google.com/maps/place/Joyce's+Community+Centre/@53.2622295,-9.1052034,17z/data=!3m1!4b1!4m6!3m5!1s0x485b97cce9b72d61:0x894c2f7a9d809558!8m2!3d53.2622295!4d-9.1052034!16s%2Fg%2F11j4dtw7tt?entry=ttu", time: "2:00 PM" }, { id: "4", day: "Saturday", date: "23 Aug:", venue: "Mechanics' Institute", cancelled: false, mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu", time: "2:00 PM" }, { id: "5", day: "Saturday", date: "30 Aug:", venue: "Mechanics' Institute", cancelled: false, mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu", time: "2:00 PM" }, { id: "6", day: "Saturday", date: "6 Sept:", venue: "Joyce's, Knocknacarra", cancelled: false, mapLink: "https://www.google.com/maps/place/Joyce's+Community+Centre/@53.2622295,-9.1052034,17z/data=!3m1!4b1!4m6!3m5!1s0x485b97cce9b72d61:0x894c2f7a9d809558!8m2!3d53.2622295!4d-9.1052034!16s%2Fg%2F11j4dtw7tt?entry=ttu", time: "2:00 PM" }, { id: "7", day: "Saturday", date: "13 Sept:", venue: "Mechanics' Institute", cancelled: false, mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu", time: "2:00 PM" }];
                         seedJams.forEach(jam => batch.set(doc(db, "jams", jam.id), jam));
                     }
                     if (initialEvents.length === 0) {
