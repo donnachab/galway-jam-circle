@@ -742,6 +742,13 @@
 
             resetDateBtn.addEventListener('click', () => { manageJamSchedule(); renderJams(); testDateInput.value = ''; });
 
+            // *** FIX: ADD EVENT LISTENER FOR MANAGE VENUES BUTTON ***
+            console.log("Attempting to add event listener to Manage Venues button...");
+            manageVenuesBtn.addEventListener('click', () => {
+                console.log("Manage Venues button clicked!");
+                venueManagementSection.style.display = venueManagementSection.style.display === 'none' ? 'block' : 'none';
+            });
+
             async function loadData() {
                 try {
                     console.log("Loading data from Firestore...");
@@ -841,4 +848,4 @@
     </script>
 
 </body>
-</html> 
+</html>
