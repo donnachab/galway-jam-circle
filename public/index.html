@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galway Jam Circle - Official Website</title>
+    <title>GJC Website - Feedback & Discussion</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root { 
             --primary-color: #371087; /* Correct Purple */
-            --accent-color: #F3EAD3;  /* Warm Cream */
-            --background-color: #FFFFFF;
+            --accent-color: #FFF7E0;  /* Lighter, Warmer Cream */
+            --background-color: #f8f9fa; /* Lighter Gray */
             --text-dark: #1f2937;
-            --text-light: #FFFFFF;
         }
         body { 
             font-family: 'Inter', sans-serif; 
@@ -23,280 +21,205 @@
         .bg-primary { background-color: var(--primary-color); }
         .text-primary { color: var(--primary-color); }
         .bg-accent { background-color: var(--accent-color); }
-        .text-accent { color: var(--accent-color); }
-        .border-primary { border-color: var(--primary-color); }
-        .admin-controls, .admin-controls-inline { display: none; }
-        body.admin-mode .admin-controls { display: block; } 
-        body.admin-mode .admin-controls-inline { display: inline-flex; } 
-        #add-jam-form, #add-event-form, #add-photo-form, #edit-cover-photo-form, #edit-featured-video-form, #venue-management-section { display: none; }
-        .jam-cancelled { background-color: #fee2e2 !important; }
-        .jam-cancelled .jam-info { text-decoration: line-through; }
-        .jam-special-day { border-color: #FBBF24 !important; border-width: 2px; } /* Amber for special days */
-        .gallery-item { position: relative; }
-        .gallery-item .delete-photo-btn { position: absolute; top: 0.5rem; right: 0.5rem; }
-        details > summary {
+        
+        /* Custom heading style */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--primary-color);
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        .section-header h2 {
+             margin-bottom: 0 !important;
+        }
+
+        /* Tab styling */
+        .tab-button {
             cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .vote-btn.voted-up {
+            color: #10B981; /* Green-500 */
+        }
+        .vote-btn.voted-down {
+            color: #EF4444; /* Red-500 */
         }
     </style>
 </head>
 <body class="text-gray-800">
 
-    <!-- HEADER SECTION -->
-    <header class="bg-primary shadow-lg sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <div class="w-14 h-14">
-                    <img src="images/logo.jpg" alt="Galway Jam Circle Logo" class="rounded-full">
-                </div>
-                <div class="text-white text-xl md:text-2xl font-bold tracking-tight">Galway Jam Circle</div>
+    <!-- HEADER -->
+    <header class="bg-primary shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-bold text-white">Galway Jam Circle</h1>
+                <p class="text-lg text-white/90">Website Feedback & Discussion Forum</p>
             </div>
-            <div class="hidden md:flex items-center space-x-2">
-                <a href="#home" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Home</a>
-                <a href="#jams" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Regular Jams</a>
-                <a href="#special-events" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Festivals & Events</a>
-                <a href="#format" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Our Format</a>
-                <a href="#gallery" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Gallery</a>
-                <a href="https://drive.google.com/file/d/1V3X3K5hwUHxZtn3o29Wd6ZZ4twz4x0j_/view?usp=sharing" target="_blank" class="text-primary bg-accent px-4 py-3 rounded-md hover:bg-opacity-80 transition duration-300 font-bold">Songbook</a>
-                <a href="#contact" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Contact</a>
-            </div>
-            <div class="md:hidden">
-                <button id="menu-btn" class="text-white focus:outline-none"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
-            </div>
-        </nav>
-        <div id="mobile-menu" class="md:hidden hidden bg-primary/95">
-            <a href="#home" class="block text-white text-center py-3 hover:bg-white/10">Home</a>
-            <a href="#jams" class="block text-white text-center py-3 hover:bg-white/10">Regular Jams</a>
-            <a href="#special-events" class="block text-white text-center py-3 hover:bg-white/10">Festivals & Events</a>
-            <a href="#format" class="block text-white text-center py-3 hover:bg-white/10">Our Format</a>
-            <a href="#gallery" class="block text-white text-center py-3 hover:bg-white/10">Gallery</a>
-            <a href="https://drive.google.com/file/d/1V3X3K5hwUHxZtn3o29Wd6ZZ4twz4x0j_/view?usp=sharing" target="_blank" class="block text-primary text-center font-bold py-3 bg-accent hover:bg-opacity-80">Songbook</a>
-            <a href="#contact" class="block text-white text-center py-3 hover:bg-white/10">Contact</a>
+            <a href="index.html" class="px-4 py-2 bg-white/20 text-white font-semibold rounded-md hover:bg-white/30 transition-colors">
+                &larr; Back to Main Site
+            </a>
         </div>
     </header>
 
-    <main>
-        <section id="home" class="relative text-white text-center">
-            <img id="cover-photo" src="https://i.imgur.com/K1C3l4w.jpg" alt="A group of people playing instruments like guitars and ukuleles by a river in Galway." class="w-full h-[70vh] object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end items-center p-12">
-                <h1 class="text-4xl md:text-6xl font-bold text-white drop-shadow-2xl">Welcome to the Galway Jam Circle</h1>
-                <p class="mt-4 text-lg md:text-xl max-w-2xl text-white/90 drop-shadow-xl">A friendly, informal music-making community for all skill levels. Let's Jam!</p>
-                <div class="mt-8 flex items-center space-x-4">
-                    <a href="#jams" class="px-8 py-3 bg-accent text-primary font-bold rounded-full hover:bg-opacity-80 transition duration-300 transform hover:scale-105 shadow-lg">See Regular Jams</a>
-                    <a href="https://www.facebook.com/groups/116675615376726" target="_blank" class="text-white hover:text-accent transition duration-300">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V21.878A10.001 10.001 0 0022 12z" clip-rule="evenodd" /></svg>
-                    </a>
-                    <a href="https://www.instagram.com/galwayjamcircle42/?hl=en" target="_blank" class="text-white hover:text-accent transition duration-300">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.792 2.013 10.146 2 12.315 2zm0 1.623c-2.403 0-2.748.01-3.728.058-1.006.047-1.634.21-2.203.434a3.272 3.272 0 00-1.15 1.15c-.224.57-.386 1.198-.434 2.203-.048.98-.058 1.325-.058 3.728s.01 2.748.058 3.728c.048 1.006.21 1.634.434 2.203a3.272 3.272 0 001.15 1.15c.57.224 1.198.386 2.203.434.98.048 1.325.058 3.728.058s2.748-.01 3.728-.058c1.006-.047 1.634-.21 2.203-.434a3.272 3.272 0 001.15-1.15c.224-.57.386-1.198.434-2.203.048-.98.058-1.325.058-3.728s-.01-2.748-.058-3.728c-.048-1.006-.21-1.634-.434-2.203a3.272 3.272 0 00-1.15-1.15c-.57-.224-1.198-.386-2.203-.434C15.063 3.633 14.718 3.623 12.315 3.623zM12 9.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm0 6a3.75 3.75 0 110-7.5 3.75 3.75 0 010 7.5zM16.965 6.57a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" /></svg>
-                    </a>
-                </div>
-            </div>
-        </section>
-        
-        <div class="container mx-auto px-6 text-center -mt-8 relative z-10">
-            <div class="admin-controls-inline items-center justify-center">
-                <button id="edit-cover-photo-btn" class="px-4 py-2 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-600 transition duration-300 shadow-md">Change Cover Photo</button>
-                <button class="exit-admin-btn px-4 py-2 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 transition duration-300 shadow-md ml-4">Exit Admin Mode</button>
-            </div>
-            <form id="edit-cover-photo-form" class="max-w-xl mx-auto mt-4 p-6 bg-white rounded-lg shadow-xl border border-gray-200">
-                <h3 class="text-xl font-bold text-primary mb-4">Change Cover Photo</h3>
-                <div class="mb-4">
-                    <label for="cover-photo-url" class="block text-gray-700 font-bold mb-2 text-left">New Photo URL</label>
-                    <input type="url" id="cover-photo-url" class="w-full p-2 border rounded" placeholder="Paste direct image link...">
-                </div>
-                <div class="flex justify-end space-x-4">
-                    <button type="button" id="cancel-cover-photo-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button>
-                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Save Photo</button>
-                </div>
-            </form>
-        </div>
-
-        <section id="jams" class="pt-24 md:pt-32 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">Regular Jams</h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Our weekly jam schedule. Voluntary donations are welcome to help cover venue costs.</p>
-                    
-                    <!-- MOCK BUTTON AND DESCRIPTION - START -->
-                    <div class="mt-6">
-                        <!-- The button is styled to look slightly disabled and does nothing when clicked -->
-                        <a href="#" onclick="return false;" class="px-8 py-3 bg-accent text-primary font-bold rounded-full transition duration-300 shadow-lg opacity-60 cursor-not-allowed">
-                            Contribute €5 for the Jam
-                        </a>
-                        <p class="text-sm text-gray-500 mt-2 font-semibold">(Payment feature coming soon - for demonstration only)</p>
+    <!-- MAIN CONTENT -->
+    <main class="container mx-auto px-6 py-12">
+        <div class="max-w-4xl mx-auto space-y-12">
+            
+            <!-- Introduction Card -->
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+                <div class="prose max-w-none">
+                    <div class="section-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <h2 class="m-0 p-0 border-none text-3xl font-bold">Welcome! Let's Build Our Website Together.</h2>
                     </div>
-                    <!-- MOCK BUTTON AND DESCRIPTION - END -->
-
-                </div>
-                <div class="max-w-2xl mx-auto">
-                    <ul id="jam-list" class="space-y-4"></ul>
-                    <div class="text-center mt-8 admin-controls-inline items-center justify-center">
-                        <button id="add-jam-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300 shadow-md">Add New Jam</button>
-                        <button id="manage-venues-btn" class="ml-4 px-6 py-2 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-600 transition duration-300 shadow-md">Manage Venues</button>
-                        <button class="exit-admin-btn px-4 py-2 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 transition duration-300 shadow-md ml-4">Exit Admin Mode</button>
-                    </div>
-                    <form id="add-jam-form" class="mt-8 p-6 bg-gray-50/50 rounded-lg shadow-inner border"><h3 id="form-title" class="text-xl font-bold text-primary mb-4">Add/Edit Jam</h3><input type="hidden" id="edit-jam-id"><div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4"><div class="md:col-span-2"><label for="jam-date" class="block text-gray-700 font-bold mb-2 text-left">Date</label><input type="text" id="jam-date" class="w-full p-2 border rounded" placeholder="Select a date..."></div><div><label for="jam-day" class="block text-gray-700 font-bold mb-2 text-left">Day</label><input type="text" id="jam-day" class="w-full p-2 border rounded bg-gray-200" readonly></div></div><div class="mb-4"><label for="jam-time" class="block text-gray-700 font-bold mb-2 text-left">Time</label><input type="text" id="jam-time" class="w-full p-2 border rounded" placeholder="Select a time..."></div><div class="mb-4"><label for="jam-venue" class="block text-gray-700 font-bold mb-2 text-left">Venue</label><select id="jam-venue" class="w-full p-2 border rounded"></select></div><div class="mb-4"><label for="jam-map-link" class="block text-gray-700 font-bold mb-2 text-left">Google Maps Link (Optional)</label><input type="url" id="jam-map-link" class="w-full p-2 border rounded" placeholder="Paste Google Maps share link..."></div><div class="flex justify-end space-x-4"><button type="button" id="cancel-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Exit</button><button type="submit" id="submit-btn" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Save Jam</button></div></form>
-                    <div id="venue-management-section" class="mt-8 p-6 bg-gray-50/50 rounded-lg shadow-inner border">
-                        <h3 class="text-xl font-bold text-primary mb-4">Manage Venues</h3>
-                        <ul id="venue-list-admin" class="space-y-2 mb-4"></ul>
-                        <form id="add-venue-form">
-                            <h4 class="text-lg font-bold text-primary mb-2">Add New Venue</h4>
-                            <div class="mb-2"><input type="text" id="new-venue-name" class="w-full p-2 border rounded" placeholder="Venue Name"></div>
-                            <div class="mb-2"><input type="url" id="new-venue-map-link" class="w-full p-2 border rounded" placeholder="Google Maps Link"></div>
-                            <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Add Venue</button>
-                        </form>
-                    </div>
-                    <div class="admin-controls mt-8 border-t pt-6 border-gray-200"><div class="w-full"><h4 class="text-lg font-bold text-gray-700 mb-2">Date Testing Module</h4><p class="text-sm text-gray-600 mb-2">See how the list will look on a specific date.</p><div class="flex space-x-2"><input type="text" id="test-date-input" class="w-full p-2 border rounded" placeholder="Select a test date..."><button id="test-date-btn" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 whitespace-nowrap">Test Date</button><button id="reset-date-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Reset</button></div></div></div>
+                    <p class="mt-6 text-lg text-gray-600">This page is a space for all members to review, discuss, and give feedback on our new official website. The goal is to create a central, easy-to-use hub for our community. Your input is crucial, so please read through the features below and share your thoughts in the form at the bottom!</p>
                 </div>
             </div>
-        </section>
 
-        <section id="special-events" class="py-16 md:py-24 bg-stone-50 border-y border-stone-200">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Festivals & Special Events</h2>
-                <div class="mb-12">
-                    <iframe src="https://calendar.google.com/calendar/embed?src=galwayjamcircle%40gmail.com&ctz=Europe%2FDublin" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
-                </div>
-                <div id="event-list" class="max-w-3xl mx-auto space-y-8"></div>
-                <div class="text-center mt-8 admin-controls-inline items-center justify-center">
-                    <button id="add-event-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300 shadow-md">Add New Event</button>
-                    <button class="exit-admin-btn px-4 py-2 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 transition duration-300 shadow-md ml-4">Exit Admin Mode</button>
-                </div>
-                <form id="add-event-form" class="max-w-3xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-inner border"><h3 id="event-form-title" class="text-xl font-bold text-primary mb-4">Add a New Event</h3><input type="hidden" id="edit-event-id"><div class="mb-4"><label for="event-title" class="block text-gray-700 font-bold mb-2 text-left">Title</label><input type="text" id="event-title" class="w-full p-2 border rounded" placeholder="e.g., Cleggan Fringe Festival"></div><div class="mb-4"><label for="event-dates" class="block text-gray-700 font-bold mb-2 text-left">Dates</label><input type="text" id="event-dates" class="w-full p-2 border rounded" placeholder="Select a date or date range..."></div><div class="mb-4"><label for="event-description" class="block text-gray-700 font-bold mb-2 text-left">Description</label><textarea id="event-description" class="w-full p-2 border rounded" rows="4" placeholder="Enter event details..."></textarea></div><div class="flex justify-end space-x-4"><button type="button" id="cancel-event-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button><button type="submit" id="submit-event-btn" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Save Event</button></div></form>
-            </div>
-        </section>
+            <!-- Site Features Card -->
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+                <div class="prose max-w-none">
+                    <div class="section-header">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.707.707M12 21v-1" /></svg>
+                        <h2 class="m-0 p-0 border-none text-3xl font-bold">What the Site Offers (The 'Why')</h2>
+                    </div>
+                    <p class="mt-6 text-lg text-gray-600">The main idea was to create a reliable, single source of truth for all GJC info, making it easier for current members and newcomers to know what's happening.</p>
 
-        <section id="format" class="py-16 md:py-24 bg-white"><div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Our Jam Format</h2>
-                <div class="grid md:grid-cols-3 gap-8 text-center max-w-5xl mx-auto">
-                    <div class="bg-stone-50/80 p-8 rounded-lg shadow-sm border border-stone-200"><h3 class="font-bold text-xl text-primary mb-2">1. Loop Songs First</h3><p class="text-gray-600">We begin with easy, repetitive songs to get everyone warmed up and in the groove.</p></div>
-                    <div class="bg-stone-50/80 p-8 rounded-lg shadow-sm border border-stone-200"><h3 class="font-bold text-xl text-primary mb-2">2. Four Chords or Less</h3><p class="text-gray-600">Next, we move to songs that use four simple chords or fewer, making it easy for everyone to join in.</p></div>
-                    <div class="bg-stone-50/80 p-8 rounded-lg shadow-sm border border-stone-200"><h3 class="font-bold text-xl text-primary mb-2">3. Then Anything Goes!</h3><p class="text-gray-600">In the final part of the jam, the floor is open! Bring out any song you'd like to play with the group.</p></div>
-                </div>
-                <div class="max-w-3xl mx-auto mt-12">
-                    <details class="p-4 rounded-lg bg-stone-50 border border-stone-200">
-                        <summary class="font-bold text-lg text-primary">Jamming Guidelines</summary>
-                        <div class="mt-4 space-y-4 text-gray-700 text-left prose">
-                            <p class="italic">"Jamming's where the magic happens"</p>
-                            <p>Jam circles are relaxed, open, inclusive gatherings of musicians and singers who sit in a circle facing each other. Jammers play for enjoyment rather than for audiences, but listeners are welcome.</p>
-                            <p>A jam is a safe space to learn and grow jamming skills.</p>
-                            <p>Jams are acoustic. Instruments such as bass and keyboards are exceptions.</p>
-                            <p>The most important skill that each Jammer brings to a jam is their ability to listen.</p>
-                            <p>Jammers play and harmonise during songs at a volume that allows singers and soloists to be heard. If you can’t hear the singer/soloist, reduce your volume.</p>
-                            <p>The jam circle flows in a clockwise direction.</p>
-                            <p>Jammers take turns to Play, Pass, or Pick.</p>
-                            <ul class="list-disc list-inside">
-                                <li><strong>Play</strong> means to play a song.</li>
-                                <li><strong>Pass</strong> means pass to the next jammer.</li>
-                                <li><strong>Pick</strong> means pick a song that another jammer plays.</li>
-                            </ul>
-                            <p>To keep the circle moving, Jammers ideally need to make their choice in advance.</p>
-                            <p>To respect the singer, Jammers avoid talking or joining/leaving the circle mid-song.</p>
-                            <p>When joining the circle, Jammers wait for their turn to play, pass or pick, unless offered a turn.</p>
-                            <p>Jam songs are “Jammable” i.e. they are fun, easy to play- typically 3-4 chords, ideally in the same key.</p>
-                            <p>A key feature of jam circles are solos or breaks -- where one Jammer improvises a melody, for approximately a verse and/or chorus.</p>
-                            <p>Only one instrument solos at a time and Jammers don’t solo over the singer.</p>
-                            <p>Seasoned Jammers encourage less experienced to solo, giving them ‘space to grow’.</p>
-                            <p>The singer is the song leader. Jammers need to listen when singers describe the song. Singers name the song, choose the song key, its tempo, and during the song, they invite musicians to solo and/or sing.</p>
-                            <p>Any Jammer wishing to take a solo should make eye contact with the singer, indicating their willingness to take a solo. They start to solo when the singer gives them ‘the nod’.</p>
-                            <p>The soloist stops the solo after a verse and/or a chorus, attending to the singer’s signals.</p>
-                            <p>The singer signals when the song is about to end, commonly by lifting their instrument slightly, or raising a leg, or saying, “one more time”.</p>
-                            <p>Jammers tune quietly where possible, and avoid ‘noodling’ between or during songs.</p>
-                            <p>When two or more bassists or percussionists are present, they collaborate and/or alternate playing songs, using simple beats and bass lines.</p>
-                            <p>Please consider buying a drink if jam venues are provided free.</p>
-                            <p>Galway Jam Circle supports jamming for everyone, irrespective of their age, ethnicity, culture, gender identity, religion, language, sexual orientation, ability, disability or social circumstances.</p>
-                            <p>We use video and photography at our jam sessions and at performances for social media. If you are uncomfortable with this at a jam, please feel free to ask that you are not filmed/photographed. At performances, please be advised that we have no control over what audience members record.</p>
+                    <div class="mt-8 grid md:grid-cols-2 gap-8">
+                        <!-- Feature 1 -->
+                        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                            <h3 class="font-bold text-lg text-gray-800 flex items-center gap-2">
+                                <span class="bg-accent text-primary p-2 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg></span>
+                                <a href="index.html#jams" class="text-primary hover:underline">Live & Automated Jam Schedule</a>
+                            </h3>
+                            <p class="mt-2 text-gray-600">See the next five jams at a glance. The schedule is always up-to-date, removing the need to search through social media.</p>
                         </div>
-                    </details>
-                </div>
-                <div class="mt-12 text-center bg-accent/30 p-8 rounded-lg max-w-3xl mx-auto border border-amber-200">
-                    <img src="images/lets_jam_logo.png" alt="Let's Jam Ireland Logo Placeholder" class="mx-auto mb-4 rounded-md h-20">
-                    <p class="text-gray-700">Fuller information about the format and rules will be made available on the Let's Jam Ireland site when it is up and running.</p>
+                        <!-- Feature 2 -->
+                        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                            <h3 class="font-bold text-lg text-gray-800 flex items-center gap-2">
+                                <span class="bg-accent text-primary p-2 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg></span>
+                                Easy Updates (Admin Mode)
+                            </h3>
+                            <p class="mt-2 text-gray-600">A simple, password-protected way for organisers to update the schedule, gallery, and events without any technical skills.</p>
+                        </div>
+                        <!-- Feature 3 -->
+                        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                             <h3 class="font-bold text-lg text-gray-800 flex items-center gap-2">
+                                <span class="bg-accent text-primary p-2 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg></span>
+                                Discussion Point: Photo Strategy
+                            </h3>
+                            <p class="mt-2 text-gray-600">A proposed "quality over quantity" approach: use social media for lots of photos, but a curated, <a href="index.html#gallery" class="text-primary hover:underline">permission-based gallery</a> on the site.</p>
+                        </div>
+                        <!-- Feature 4 -->
+                        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                             <h3 class="font-bold text-lg text-gray-800 flex items-center gap-2">
+                                <span class="bg-accent text-primary p-2 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg></span>
+                                Discussion Point: Payment Option
+                            </h3>
+                            <p class="mt-2 text-gray-600">A proposal to add a simple, no-monthly-fee online option for the voluntary €5 contribution. A <a href="index.html#jams" class="text-primary hover:underline">disabled button is on the site now</a> for demonstration.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
-        
-        <section id="gallery" class="py-16 md:py-24 bg-stone-50 border-t border-stone-200">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Jam Circle Gallery</h2>
-                
-                <h3 class="text-2xl font-bold text-center text-primary mb-8">Videos</h3>
-                <div class="aspect-w-16 aspect-h-9">
-                    <iframe id="featured-video-player" class="w-full h-96 rounded-lg shadow-lg" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <div class="text-center mt-4 admin-controls-inline items-center justify-center">
-                    <button id="edit-featured-video-btn" class="px-4 py-2 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-600 transition duration-300 shadow-md">Change Featured Video</button>
-                    <button class="exit-admin-btn px-4 py-2 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 transition duration-300 shadow-md ml-4">Exit Admin Mode</button>
-                </div>
-                   <div class="text-center mt-4">
-                    <a href="https://youtube.com/playlist?list=PLG9xaR5hTnatoLYd337wPFrbVkjHmWErw" target="_blank" class="inline-block px-8 py-3 bg-accent text-primary font-bold rounded-full hover:bg-opacity-80 transition duration-300 shadow-md">
-                        See our YouTube Channel
-                    </a>
-                </div>
-                <form id="edit-featured-video-form" class="max-w-xl mx-auto mt-4 p-6 bg-white rounded-lg shadow-xl border border-gray-200">
-                    <h3 class="text-xl font-bold text-primary mb-4">Change Featured Video</h3>
-                    <div class="mb-4">
-                        <label for="featured-video-url" class="block text-gray-700 font-bold mb-2 text-left">New YouTube Video URL</label>
-                        <input type="url" id="featured-video-url" class="w-full p-2 border rounded" placeholder="Paste YouTube video link...">
-                    </div>
-                    <div class="flex justify-end space-x-4">
-                        <button type="button" id="cancel-featured-video-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button>
-                        <button type="submit" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Save Video</button>
-                    </div>
-                </form>
 
-                <h3 class="text-2xl font-bold text-center text-primary mt-16 mb-8">Photos</h3>
-                <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4"></div>
-                <div class="text-center mt-8 admin-controls-inline items-center justify-center">
-                    <button id="add-photo-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300 shadow-md">Add Photo</button>
-                    <button class="exit-admin-btn px-4 py-2 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 transition duration-300 shadow-md ml-4">Exit Admin Mode</button>
+            <!-- Feedback Form Card -->
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+                 <div class="section-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
+                    <h2 class="m-0 p-0 border-none text-3xl font-bold">How You Can Help: Give Us Your Feedback!</h2>
                 </div>
-                <form id="add-photo-form" class="max-w-3xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-inner border">
-                    <h3 class="text-xl font-bold text-primary mb-4">Add New Photo</h3>
-                    <div class="mb-4">
-                        <label for="photo-url" class="block text-gray-700 font-bold mb-2 text-left">Photo URL</label>
-                        <input type="url" id="photo-url" class="w-full p-2 border rounded" placeholder="Paste direct image link...">
-                    </div>
-                    <div class="mb-4">
-                        <label for="photo-caption" class="block text-gray-700 font-bold mb-2 text-left">Caption (Alt Text)</label>
-                        <input type="text" id="photo-caption" class="w-full p-2 border rounded" placeholder="e.g., Jam session by the river">
-                    </div>
-                    <div class="flex justify-end space-x-4">
-                        <button type="button" id="cancel-photo-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button>
-                        <button type="submit" id="submit-photo-btn" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Save Photo</button>
-                    </div>
-                </form>
+                <p class="mt-6 text-lg text-gray-600">This is where you come in. Please share any thoughts, ideas, or suggestions using the form below. Your comment will be posted publicly on this page for everyone to see and discuss.</p>
+
+                <div class="mt-8 p-6 bg-gray-50 rounded-lg border border-gray-200">
+                    <h3 class="text-xl font-bold text-primary mt-0">Leave a Comment</h3>
+                    <form id="feedback-form" class="mt-4">
+                        <div class="mb-4">
+                            <label for="feedback-topic" class="block text-sm font-bold text-gray-700 mb-2">1. What part of the site is your feedback about?</label>
+                            <select id="feedback-topic" name="topic" class="w-full p-2 border border-gray-300 rounded-md">
+                                <option>General Feedback</option>
+                                <option>Website Section: Look and Feel</option>
+                                <option>Website Section: Home Page</option>
+                                <option>Website Section: Regular Jams</option>
+                                <option>Website Section: Festivals & Events</option>
+                                <option>Website Section: Our Format</option>
+                                <option>Website Section: Gallery</option>
+                                <option>Website Section: Contact & Footer</option>
+                                <option>Website Feature: Admin Mode</option>
+                                <option>Discussion Point: Photo Strategy</option>
+                                <option>Discussion Point: Payment Feature</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="feedback-comment" class="block text-sm font-bold text-gray-700 mb-2">2. What are your thoughts, ideas, or suggestions?</label>
+                            <textarea id="feedback-comment" name="comment" rows="6" class="w-full p-2 border border-gray-300 rounded-md" placeholder="Please be as specific as you can..." required></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="feedback-name" class="block text-sm font-bold text-gray-700 mb-2">3. Your Name (Optional)</label>
+                            <input type="text" id="feedback-name" name="name" class="w-full p-2 border border-gray-300 rounded-md" placeholder="Let us know who you are!">
+                        </div>
+
+                        <div class="text-right">
+                            <button type="submit" id="submit-feedback-btn" class="px-6 py-2 bg-primary text-white font-bold rounded-md hover:opacity-90 transition-opacity">Post Feedback</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </section>
-        
-        <section id="contact" class="py-16 md:py-24 bg-white"><div class="container mx-auto px-6 text-center"><h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-4">Join Us!</h2><p class="text-gray-600 max-w-xl mx-auto mb-8">Want to join our mailing list for updates or have a question? Get in touch! We'd love to hear from you.</p><a href="mailto:info@galwayjamcircle.ie" class="px-8 py-3 bg-primary text-white font-bold rounded-full hover:opacity-90 transition duration-300 transform hover:scale-105 shadow-md">Email Us</a></div></section>
+
+            <!-- Feedback Display Section -->
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+                <div class="section-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V6a2 2 0 012-2h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293H17z" /></svg>
+                    <h2 class="m-0 p-0 border-none text-3xl font-bold">Community Feedback</h2>
+                </div>
+                
+                <!-- Tab Navigation -->
+                <div id="tab-container" class="border-b border-gray-200 mt-6 mb-4">
+                    <nav class="-mb-px flex flex-wrap gap-x-4 gap-y-2" aria-label="Tabs">
+                        <!-- Tabs will be inserted here by JS -->
+                    </nav>
+                </div>
+
+                <!-- Tab Content Panels -->
+                <div id="tab-content-container">
+                     <!-- Content panels will be inserted here by JS -->
+                </div>
+            </div>
+        </div>
     </main>
-    
-    <footer class="bg-primary text-white/80 py-8">
+
+    <footer class="bg-gray-800 text-white/80 py-6 mt-12">
         <div class="container mx-auto px-6 text-center">
-            <div class="flex justify-center space-x-6 mb-4">
-                <a href="https://www.facebook.com/groups/116675615376726" target="_blank" class="text-white hover:text-accent transition duration-300">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V21.878A10.001 10.001 0 0022 12z" clip-rule="evenodd" /></svg>
-                </a>
-                <a href="https://www.instagram.com/galwayjamcircle42/?hl=en" target="_blank" class="text-white hover:text-accent transition duration-300">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.792 2.013 10.146 2 12.315 2zm0 1.623c-2.403 0-2.748.01-3.728.058-1.006.047-1.634.21-2.203.434a3.272 3.272 0 00-1.15 1.15c-.224.57-.386 1.198-.434 2.203-.048.98-.058 1.325-.058 3.728s.01 2.748.058 3.728c.048 1.006.21 1.634.434 2.203a3.272 3.272 0 001.15 1.15c.57.224 1.198.386 2.203.434.98.048 1.325.058 3.728.058s2.748-.01 3.728-.058c1.006-.047 1.634-.21 2.203-.434a3.272 3.272 0 001.15-1.15c.224-.57.386-1.198.434-2.203.048-.98.058-1.325.058-3.728s-.01-2.748-.058-3.728c-.048-1.006-.21-1.634-.434-2.203a3.272 3.272 0 00-1.15-1.15c-.57-.224-1.198-.386-2.203-.434C15.063 3.633 14.718 3.623 12.315 3.623zM12 9.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm0 6a3.75 3.75 0 110-7.5 3.75 3.75 0 010 7.5zM16.965 6.57a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" /></svg>
-                </a>
-            </div>
-            <p>&copy; 2025 Galway Jam Circle. v1.1. All Rights Reserved.</p>
-            <p class="text-sm text-stone-400 mt-2">Bringing music to the people of Galway.</p>
             <div class="space-x-4">
-                 <a href="feedback.html" class="text-sm text-stone-400 hover:text-white mt-4 inline-block">Website Feedback</a>
-                 <a href="#" id="admin-mode-btn" class="text-sm text-stone-400 hover:text-white mt-4 inline-block">Admin</a>
+                <a href="#" id="admin-login-btn" class="text-sm text-stone-400 hover:text-white inline-block">Admin Login</a>
             </div>
+            <p>&copy; 2025 Galway Jam Circle</p>
         </div>
     </footer>
-
+    
     <div id="custom-modal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center"><div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full mx-4"><p id="modal-message" class="text-lg mb-4"></p><input type="password" id="modal-input" class="w-full p-2 border rounded mb-4 hidden" placeholder="Enter password..."><div id="modal-buttons" class="flex justify-end space-x-4"></div></div></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, writeBatch, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query, orderBy, getDocs, doc, updateDoc, increment, deleteDoc, writeBatch } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyC4SnqaOMQWmEFulkN8zZALZsqJLK7hOh0",
@@ -310,572 +233,358 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        document.addEventListener('DOMContentLoaded', async () => {
-            const menuBtn = document.getElementById('menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const adminModeBtn = document.getElementById('admin-mode-btn');
-            
-            menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-            const mobileLinks = mobileMenu.getElementsByTagName('a');
-            for (let link of mobileLinks) {
-                link.addEventListener('click', () => {
-                    if(link.id !== 'mobile-admin-btn') {
-                        mobileMenu.classList.add('hidden')
-                    }
+        const feedbackForm = document.getElementById('feedback-form');
+        const tabContainer = document.getElementById('tab-container').querySelector('nav');
+        const tabContentContainer = document.getElementById('tab-content-container');
+        const topicDropdown = document.getElementById('feedback-topic');
+        const allPossibleTopics = Array.from(topicDropdown.options).map(opt => opt.value);
+        const adminLoginBtn = document.getElementById('admin-login-btn');
+        const ADMIN_PASSWORD = '4519';
+        let feedbackUnsubscribe = null;
+        let isInitialized = false; 
+
+        // --- Post new feedback to Firestore ---
+        feedbackForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const comment = document.getElementById('feedback-comment').value;
+            if (!comment.trim()) return;
+
+            try {
+                await addDoc(collection(db, "feedback"), {
+                    topic: topicDropdown.value,
+                    comment: comment,
+                    name: document.getElementById('feedback-name').value || 'Anonymous',
+                    timestamp: serverTimestamp(),
+                    upvotes: 0,
+                    downvotes: 0
                 });
+                feedbackForm.reset();
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert('Sorry, there was an error submitting your feedback. Please try again.');
             }
-
-            const ADMIN_PASSWORD = '4519';
-            let initialJams = [];
-            let initialEvents = [];
-            let initialPhotos = [];
-            let initialVenues = [];
-            let jams = [];
-            let events = [];
-            let photos = [];
-
-            const coverPhotoElement = document.getElementById('cover-photo');
-            const editCoverPhotoBtn = document.getElementById('edit-cover-photo-btn');
-            const editCoverPhotoForm = document.getElementById('edit-cover-photo-form');
-            const coverPhotoUrlInput = document.getElementById('cover-photo-url');
-            const cancelCoverPhotoBtn = document.getElementById('cancel-cover-photo-btn');
-            
-            const jamList = document.getElementById('jam-list');
-            const addJamBtn = document.getElementById('add-jam-btn');
-            const addJamForm = document.getElementById('add-jam-form');
-            const cancelBtn = document.getElementById('cancel-btn');
-            const formTitle = document.getElementById('form-title');
-            const editJamIdInput = document.getElementById('edit-jam-id');
-            const jamDateInput = document.getElementById('jam-date');
-            const jamDayInput = document.getElementById('jam-day');
-            const jamVenueInput = document.getElementById('jam-venue');
-            const jamMapLinkInput = document.getElementById('jam-map-link');
-            const jamTimeInput = document.getElementById('jam-time');
-            
-            const eventList = document.getElementById('event-list');
-            const addEventBtn = document.getElementById('add-event-btn');
-            const addEventForm = document.getElementById('add-event-form');
-            const cancelEventBtn = document.getElementById('cancel-event-btn');
-            const eventFormTitle = document.getElementById('event-form-title');
-            const editEventIdInput = document.getElementById('edit-event-id');
-            const eventTitleInput = document.getElementById('event-title');
-            const eventDatesInput = document.getElementById('event-dates');
-            const eventDescriptionInput = document.getElementById('event-description');
-            
-            const galleryGrid = document.getElementById('gallery-grid');
-            const addPhotoBtn = document.getElementById('add-photo-btn');
-            const addPhotoForm = document.getElementById('add-photo-form');
-            const cancelPhotoBtn = document.getElementById('cancel-photo-btn');
-            const photoUrlInput = document.getElementById('photo-url');
-            const photoCaptionInput = document.getElementById('photo-caption');
-
-            const featuredVideoPlayer = document.getElementById('featured-video-player');
-            const editFeaturedVideoBtn = document.getElementById('edit-featured-video-btn');
-            const editFeaturedVideoForm = document.getElementById('edit-featured-video-form');
-            const featuredVideoUrlInput = document.getElementById('featured-video-url');
-            const cancelFeaturedVideoBtn = document.getElementById('cancel-featured-video-btn');
-
-            const modal = document.getElementById('custom-modal');
-            const modalMessage = document.getElementById('modal-message');
-            const modalInput = document.getElementById('modal-input');
-            const modalButtons = document.getElementById('modal-buttons');
-            const testDateInput = document.getElementById('test-date-input');
-            const testDateBtn = document.getElementById('test-date-btn');
-            const resetDateBtn = document.getElementById('reset-date-btn');
-            const manageVenuesBtn = document.getElementById('manage-venues-btn');
-            const venueManagementSection = document.getElementById('venue-management-section');
-            const addVenueForm = document.getElementById('add-venue-form');
-            const newVenueNameInput = document.getElementById('new-venue-name');
-            const newVenueMapLinkInput = document.getElementById('new-venue-map-link');
-            const venueListAdmin = document.getElementById('venue-list-admin');
-
-            const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-            const jamDatepicker = flatpickr(jamDateInput, {
-                dateFormat: "j M:",
-                onChange: function(selectedDates) {
-                    if (selectedDates.length > 0) {
-                        jamDayInput.value = dayNames[selectedDates[0].getDay()];
-                    }
-                },
-            });
-            
-            flatpickr(jamTimeInput, {
-                enableTime: true,
-                noCalendar: true,
-                dateFormat: "H:i",
-                defaultDate: "14:00"
-            });
-
-            const eventDatepicker = flatpickr(eventDatesInput, {
-                mode: "range",
-                dateFormat: "j M Y",
-                onClose: function(selectedDates, dateStr, instance) {
-                    if (selectedDates.length === 2) {
-                        const start = selectedDates[0];
-                        const end = selectedDates[1];
-                        const format = (date) => `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}`;
-                        instance.input.value = `${format(start)} - ${format(end)} ${end.getFullYear()}`;
-                    }
-                }
-            });
-
-            flatpickr(testDateInput, { dateFormat: "Y-m-d" });
-
-            function parseJamDate(dateStr) {
-                const year = 2025;
-                const dateWithYear = dateStr.replace(':', '').trim() + ` ${year}`;
-                return new Date(dateWithYear);
-            }
-
-            function formatJamDate(dateObj) {
-                return `${dateObj.getDate()} ${dateObj.toLocaleString('default', { month: 'short' })}:`;
-            }
-
-            function manageJamSchedule(testDate = null) {
-                const today = testDate || new Date();
-                today.setHours(0, 0, 0, 0);
-                let confirmedJams = JSON.parse(JSON.stringify(initialJams));
-                let upcomingConfirmed = confirmedJams.filter(jam => { const jamDate = parseJamDate(jam.date); return jamDate && jamDate >= today; });
-                let displayJams = [...upcomingConfirmed];
-                let lastDate;
-                if (displayJams.length > 0) { lastDate = displayJams.map(jam => parseJamDate(jam.date)).reduce((max, d) => d > max ? d : max); } 
-                else { lastDate = new Date(today); lastDate.setDate(today.getDate() + (6 - today.getDay() + 7) % 7); lastDate.setDate(lastDate.getDate() - 7); }
-                while (displayJams.length < 5) {
-                    lastDate.setDate(lastDate.getDate() + 7);
-                    const newId = String(Date.now() + displayJams.length);
-                    displayJams.push({ id: newId, day: "Saturday", date: formatJamDate(new Date(lastDate)), venue: 'To be decided...', cancelled: false, isProposal: true, time: "2:00 PM" });
-                }
-                jams = displayJams;
-            }
-
-            function showModal(message, type = 'alert', onConfirm = () => {}, onCancel = () => {}) {
-                modalMessage.textContent = message;
-                modalButtons.innerHTML = '';
-                modalInput.classList.add('hidden');
-                if (type === 'alert') { const okButton = document.createElement('button'); okButton.textContent = 'OK'; okButton.className = 'px-4 py-2 bg-accent text-primary font-bold rounded-md'; okButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onConfirm(); }; modalButtons.appendChild(okButton); } 
-                else if (type === 'confirm') { const confirmButton = document.createElement('button'); confirmButton.textContent = 'Confirm'; confirmButton.className = 'px-4 py-2 bg-red-500 text-white rounded-md'; confirmButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onConfirm(); }; const cancelButton = document.createElement('button'); cancelButton.textContent = 'Cancel'; cancelButton.className = 'px-4 py-2 bg-stone-600 text-white rounded-md'; cancelButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onCancel(); }; modalButtons.appendChild(cancelButton); modalButtons.appendChild(confirmButton); } 
-                else if (type === 'prompt') { modalInput.classList.remove('hidden'); modalInput.value = ''; modalInput.type = 'password'; const submitButton = document.createElement('button'); submitButton.textContent = 'Submit'; submitButton.className = 'px-4 py-2 bg-accent text-primary font-bold rounded-md'; submitButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onConfirm(modalInput.value); }; const cancelButton = document.createElement('button'); cancelButton.textContent = 'Cancel'; cancelButton.className = 'px-4 py-2 bg-stone-600 text-white rounded-md'; cancelButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onCancel(); }; modalButtons.appendChild(cancelButton); modalButtons.appendChild(submitButton); }
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                if(type === 'prompt') modalInput.focus();
-            }
-
-            function renderJams() {
-                jamList.innerHTML = '';
-                if (jams.length === 0) { jamList.innerHTML = `<li class="text-center text-gray-500">No upcoming jams scheduled.</li>`; }
-                jams.sort((a, b) => parseJamDate(a.date) - parseJamDate(b.date)).forEach(jam => {
-                    const li = document.createElement('li');
-                    const isSaturday = jam.day.toLowerCase() === 'saturday';
-                    li.className = 'p-4 rounded-lg shadow-sm border-l-4 flex justify-between items-center bg-white border-gray-200';
-                    li.classList.toggle('jam-special-day', !isSaturday);
-                    
-                    if (jam.cancelled) { li.classList.add('jam-cancelled'); } 
-                    
-                    let adminButtons = `<button data-id="${jam.id}" class="edit-btn text-blue-500 hover:text-blue-700">Edit</button>`;
-                    if (!jam.isProposal) {
-                        if (isSaturday) {
-                             if (jam.cancelled) { adminButtons += `<button data-id="${jam.id}" class="reinstate-btn text-green-600 hover:text-green-800 ml-2">Reinstate</button>`; } 
-                             else { adminButtons += `<button data-id="${jam.id}" class="cancel-btn text-yellow-600 hover:text-yellow-800 ml-2">Cancel Jam</button>`; }
-                        } else {
-                            adminButtons += `<button data-id="${jam.id}" class="delete-btn text-red-500 hover:text-red-700 ml-2">Delete</button>`;
-                        }
-                    }
-
-                    let mapLink = jam.mapLink ? `<a href="${jam.mapLink}" onclick="window.open(this.href, '_blank'); return false;" class="text-blue-500 hover:underline ml-2">(View Map)</a>` : '';
-
-                    li.innerHTML = `
-                        <div class="flex-grow jam-info">
-                            <div class="flex items-center">
-                                <span class="font-bold text-lg ${isSaturday ? 'text-gray-500' : 'text-yellow-600'}">${jam.day}</span>
-                                <span class="text-lg font-bold text-primary ml-4">${jam.date}</span>
-                                <span class="text-lg font-bold text-gray-600 ml-2">${jam.time || '2:00 PM'}</span>
-                            </div>
-                            <span class="text-gray-700 text-lg ml-2">${jam.venue} ${mapLink}</span>
-                            ${jam.cancelled ? '<span class="font-bold text-red-600 ml-4">(CANCELLED)</span>' : ''}
-                        </div>
-                        <div class="admin-controls-inline space-x-2">${adminButtons}</div>`;
-                    jamList.appendChild(li);
-                });
-            }
-
-            function renderEvents() {
-                eventList.innerHTML = '';
-                events = [...initialEvents];
-                if (events.length === 0) { eventList.innerHTML = `<p class="text-center text-gray-500">No special events scheduled at this time.</p>`; }
-                events.forEach(event => {
-                    const div = document.createElement('div');
-                    div.className = 'bg-white p-6 rounded-lg shadow-md relative border border-gray-200';
-                    div.innerHTML = `
-                        <div class="admin-controls-inline absolute top-2 right-2 space-x-2">
-                            <button data-id="${event.id}" class="edit-event-btn text-blue-500 hover:text-blue-700">Edit</button>
-                            <button data-id="${event.id}" class="delete-event-btn text-red-500 hover:text-red-700">Delete</button>
-                        </div>
-                        <h3 class="text-2xl font-bold text-primary">${event.title}</h3>
-                        <p class="text-lg font-semibold text-gray-700 mt-1">${event.dates}</p>
-                        <p class="mt-4 text-gray-600">${event.description}</p>`;
-                    eventList.appendChild(div);
-                });
-            }
-
-            function renderGallery() {
-                galleryGrid.innerHTML = '';
-                photos = [...initialPhotos];
-                if (photos.length === 0) {
-                    galleryGrid.innerHTML = `<p class="text-center text-gray-500 col-span-full">The photo gallery is empty. Add some photos!</p>`;
-                }
-                photos.forEach(photo => {
-                    const div = document.createElement('div');
-                    div.className = 'gallery-item overflow-hidden rounded-lg shadow-lg';
-                    div.innerHTML = `
-                        <img src="${photo.url}" alt="${photo.caption}" class="w-full h-full object-cover transform hover:scale-110 transition duration-500">
-                        <button data-id="${photo.id}" class="delete-photo-btn admin-controls-inline bg-red-500 text-white rounded-full p-1 hover:bg-red-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-                        </button>`;
-                    galleryGrid.appendChild(div);
-                });
-            }
-
-            function showJamForm(mode = 'add', jam = null) {
-                addJamForm.style.display = 'block';
-                // Populate the venue dropdown
-                jamVenueInput.innerHTML = '';
-                initialVenues.forEach(venue => {
-                    const option = document.createElement('option');
-                    option.value = venue.name;
-                    option.textContent = venue.name;
-                    jamVenueInput.appendChild(option);
-                });
-
-                if (mode === 'edit') { 
-                    formTitle.textContent = 'Edit Jam'; 
-                    editJamIdInput.value = jam.id; 
-                    jamDatepicker.setDate(parseJamDate(jam.date));
-                    jamDayInput.value = jam.day; 
-                    jamVenueInput.value = jam.venue; 
-                    jamMapLinkInput.value = jam.mapLink || '';
-                    flatpickr(jamTimeInput, {
-                        enableTime: true,
-                        noCalendar: true,
-                        dateFormat: "H:i",
-                        defaultDate: jam.time || "14:00"
-                    });
-                } else { 
-                    formTitle.textContent = 'Add a New Jam'; 
-                    editJamIdInput.value = ''; 
-                    const lastJamDate = jams.length > 0 ? parseJamDate(jams[jams.length - 1].date) : new Date();
-                    lastJamDate.setDate(lastJamDate.getDate() + 7);
-                    jamDatepicker.setDate(lastJamDate);
-                    jamDayInput.value = dayNames[lastJamDate.getDay()];
-                    jamVenueInput.value = ''; 
-                    jamMapLinkInput.value = '';
-                     flatpickr(jamTimeInput, {
-                        enableTime: true,
-                        noCalendar: true,
-                        dateFormat: "H:i",
-                        defaultDate: "14:00"
-                    });
-                }
-                jamVenueInput.focus();
-            }
-
-            function hideJamForm() { addJamForm.style.display = 'none'; }
-
-            function showEventForm(mode = 'add', event = null) {
-                addEventForm.style.display = 'block';
-                if (mode === 'edit') { 
-                    eventFormTitle.textContent = 'Edit Event'; 
-                    editEventIdInput.value = event.id; 
-                    eventTitleInput.value = event.title; 
-                    eventDatesInput.value = event.dates; 
-                    eventDescriptionInput.value = event.description; 
-                } else { 
-                    eventFormTitle.textContent = 'Add a New Event'; 
-                    editEventIdInput.value = ''; 
-                    eventTitleInput.value = ''; 
-                    eventDatesInput.value = ''; 
-                    eventDescriptionInput.value = ''; 
-                }
-                eventTitleInput.focus();
-            }
-
-            function hideEventForm() { addEventForm.style.display = 'none'; }
-
-            function showPhotoForm() { addPhotoForm.style.display = 'block'; }
-            function hidePhotoForm() { addPhotoForm.style.display = 'none'; }
-            
-            function toggleAdminMode(enable) {
-                 if(enable) { 
-                     document.body.classList.add('admin-mode'); 
-                     adminModeBtn.textContent = 'Exit Admin'; 
-                     document.getElementById('jams').scrollIntoView({ behavior: 'smooth' });
-                 } else { 
-                     document.body.classList.remove('admin-mode'); 
-                     adminModeBtn.textContent = 'Admin'; 
-                     hideJamForm(); 
-                     hideEventForm();
-                     hidePhotoForm();
-                     venueManagementSection.style.display = 'none';
-                 }
-                 renderJams();
-                 renderEvents();
-                 renderGallery();
-            }
-
-            function handleAdminClick(e) {
-                e.preventDefault();
-                const isAdmin = document.body.classList.contains('admin-mode');
-                if (isAdmin) { toggleAdminMode(false); } 
-                else { showModal('Enter admin password:', 'prompt', (password) => { if (password === ADMIN_PASSWORD) { toggleAdminMode(true); } else { showModal('Incorrect password.', 'alert'); } }); }
-            }
-
-            adminModeBtn.addEventListener('click', handleAdminClick);
-            
-            // Handle all "Exit Admin Mode" buttons
-            document.body.addEventListener('click', (e) => {
-                if (e.target.classList.contains('exit-admin-btn')) {
-                    toggleAdminMode(false);
-                }
-            });
-
-            addJamBtn.addEventListener('click', () => showJamForm('add'));
-            cancelBtn.addEventListener('click', hideJamForm);
-
-            async function saveJam(jamData) {
-                const jamRef = doc(db, "jams", String(jamData.id));
-                await setDoc(jamRef, jamData);
-                await loadData();
-            }
-
-            addJamForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const date = jamDateInput.value.trim(); const day = jamDayInput.value.trim(); const venue = jamVenueInput.value.trim(); let id = editJamIdInput.value;
-                const mapLink = jamMapLinkInput.value.trim();
-                const time = jamTimeInput.value.trim();
-                if (!date || !venue || !day) { showModal('Please fill in all jam fields.', 'alert'); return; }
-                
-                const jamDate = date.endsWith(':') ? date : date + ':';
-                if (!id || jams.find(j => j.id === id)?.isProposal) {
-                    id = String(Date.now());
-                }
-
-                const jamData = { id, date: jamDate, day, venue, cancelled: false, mapLink, time };
-                await saveJam(jamData);
-                hideJamForm();
-            });
-
-            jamVenueInput.addEventListener('change', () => {
-                const selectedVenue = initialVenues.find(v => v.name === jamVenueInput.value);
-                if (selectedVenue) {
-                    jamMapLinkInput.value = selectedVenue.mapLink;
-                }
-            });
-
-            jamList.addEventListener('click', async (e) => {
-                const target = e.target; const jamId = target.dataset.id; if (!jamId) return;
-                const jamInDisplay = jams.find(j => j.id === jamId);
-                
-                if (target.classList.contains('edit-btn')) { if (jamInDisplay) showJamForm('edit', jamInDisplay); } 
-                else if (target.classList.contains('delete-btn')) { showModal('Are you sure you want to delete this special jam?', 'confirm', async () => { await deleteDoc(doc(db, "jams", jamId)); await loadData(); }); } 
-                else if (target.classList.contains('cancel-btn')) { showModal('Are you sure you want to cancel this jam?', 'confirm', async () => { if (jamInDisplay) { jamInDisplay.cancelled = true; await saveJam(jamInDisplay); } }); } 
-                else if (target.classList.contains('reinstate-btn')) { if (jamInDisplay) { jamInDisplay.cancelled = false; await saveJam(jamInDisplay); } }
-            });
-
-            async function saveEvent(eventData) {
-                const eventRef = doc(db, "events", String(eventData.id));
-                await setDoc(eventRef, eventData);
-                await loadData();
-            }
-
-            addEventBtn.addEventListener('click', () => showEventForm('add'));
-            cancelEventBtn.addEventListener('click', hideEventForm);
-
-            addEventForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const title = eventTitleInput.value.trim(); const dates = eventDatesInput.value.trim(); const description = eventDescriptionInput.value.trim(); let id = editEventIdInput.value;
-                if (!title || !dates || !description) { showModal('Please fill in all event fields.', 'alert'); return; }
-                if (!id) { id = String(Date.now()); }
-                await saveEvent({ id, title, dates, description });
-                hideEventForm();
-            });
-
-            eventList.addEventListener('click', async (e) => {
-                const target = e.target; const eventId = target.dataset.id; if (!eventId) return;
-                if (target.classList.contains('edit-event-btn')) { const eventToEdit = initialEvents.find(ev => ev.id == eventId); if (eventToEdit) showEventForm('edit', eventToEdit); } 
-                else if (target.classList.contains('delete-event-btn')) { showModal('Are you sure you want to delete this event?', 'confirm', async () => { await deleteDoc(doc(db, "events", eventId)); await loadData(); }); }
-            });
-            
-            editCoverPhotoBtn.addEventListener('click', () => { editCoverPhotoForm.style.display = 'block'; });
-            cancelCoverPhotoBtn.addEventListener('click', () => { editCoverPhotoForm.style.display = 'none'; });
-
-            editCoverPhotoForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const newUrl = coverPhotoUrlInput.value.trim();
-                if (!newUrl) { showModal('Please enter a URL.', 'alert'); return; }
-                await setDoc(doc(db, "site_config", "main"), { coverPhotoUrl: newUrl }, { merge: true });
-                await loadData();
-                editCoverPhotoForm.style.display = 'none';
-            });
-
-            editFeaturedVideoBtn.addEventListener('click', () => { editFeaturedVideoForm.style.display = 'block'; });
-            cancelFeaturedVideoBtn.addEventListener('click', () => { editFeaturedVideoForm.style.display = 'none'; });
-
-            editFeaturedVideoForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const newUrl = featuredVideoUrlInput.value.trim();
-                if (!newUrl) { showModal('Please enter a YouTube URL.', 'alert'); return; }
-                await setDoc(doc(db, "site_config", "main"), { featuredVideoUrl: newUrl }, { merge: true });
-                await loadData();
-                editFeaturedVideoForm.style.display = 'none';
-            });
-
-            addPhotoBtn.addEventListener('click', () => showPhotoForm());
-            cancelPhotoBtn.addEventListener('click', hidePhotoForm);
-
-            addPhotoForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const url = photoUrlInput.value.trim();
-                const caption = photoCaptionInput.value.trim();
-                const id = String(Date.now());
-
-                if (!url || !caption) { showModal('Please provide both a URL and a caption.', 'alert'); return; }
-                
-                const photoData = { id, type: 'image', url, caption };
-                await setDoc(doc(db, "photos", id), photoData);
-                await loadData();
-                hidePhotoForm();
-            });
-            
-            galleryGrid.addEventListener('click', async (e) => {
-                const deleteBtn = e.target.closest('.delete-photo-btn');
-                if (!deleteBtn) return;
-
-                const photoId = deleteBtn.dataset.id;
-                showModal('Are you sure you want to delete this media?', 'confirm', async () => {
-                    await deleteDoc(doc(db, "photos", photoId));
-                    await loadData();
-                });
-            });
-
-
-            testDateBtn.addEventListener('click', () => {
-                const testDateStr = testDateInput.value;
-                if (testDateStr) {
-                    const testDate = new Date(testDateStr);
-                    if (!isNaN(testDate.getTime())) {
-                        manageJamSchedule(testDate);
-                        renderJams();
-                    } else {
-                        showModal('Invalid date format.', 'alert');
-                    }
-                }
-            });
-
-            resetDateBtn.addEventListener('click', () => { manageJamSchedule(); renderJams(); testDateInput.value = ''; });
-
-            // *** FIX: ADD EVENT LISTENER FOR MANAGE VENUES BUTTON ***
-            console.log("Attempting to add event listener to Manage Venues button...");
-            manageVenuesBtn.addEventListener('click', () => {
-                console.log("Manage Venues button clicked!");
-                venueManagementSection.style.display = venueManagementSection.style.display === 'none' ? 'block' : 'none';
-            });
-
-            async function loadData() {
-                try {
-                    console.log("Loading data from Firestore...");
-                    const jamSnapshot = await getDocs(collection(db, "jams"));
-                    initialJams = jamSnapshot.docs.map(doc => doc.data());
-                    console.log("Jams loaded:", initialJams.length);
-
-                    const eventSnapshot = await getDocs(collection(db, "events"));
-                    initialEvents = eventSnapshot.docs.map(doc => doc.data());
-                    console.log("Events loaded:", initialEvents.length);
-                    
-                    const photoSnapshot = await getDocs(collection(db, "photos"));
-                    initialPhotos = photoSnapshot.docs.map(doc => doc.data());
-                    console.log("Photos loaded:", initialPhotos.length);
-
-                    const venueSnapshot = await getDocs(collection(db, "venues"));
-                    initialVenues = venueSnapshot.docs.map(doc => doc.data());
-                    console.log("Venues loaded:", initialVenues.length);
-                    
-                    const configDoc = await getDoc(doc(db, "site_config", "main"));
-                    if (configDoc.exists()) {
-                        const configData = configDoc.data();
-                        if (configData.coverPhotoUrl) {
-                            coverPhotoElement.src = configData.coverPhotoUrl;
-                        }
-                        if (configData.featuredVideoUrl) {
-                            const videoId = configData.featuredVideoUrl.split('v=')[1]?.split('&')[0] || configData.featuredVideoUrl.split('/').pop();
-                            featuredVideoPlayer.src = `https://www.youtube.com/embed/${videoId}`;
-                        } else {
-                             featuredVideoPlayer.src = `https://www.youtube.com/embed/SeFUhhhVZ9k`; // Correct Default video
-                        }
-                    } else {
-                        // If config doesn't exist, create it with defaults
-                        const defaultConfig = {
-                            coverPhotoUrl: "https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/340126198_1202888093755813_6375467148998027340_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=2285d6&_nc_ohc=wA-6pUbx_XYQ7kNvwHkWjV3&_nc_oc=Adnd0Bbs-9bBGiNkVlqTm636JeXERyh16eo2fUrKp5p7sPkeFMlKHcYdyTj8qGDYzQk&_nc_zt=23&_nc_ht=scontent-dub4-1.xx&_nc_gid=Pse2aOVgLI3EOs4_MVhu_Q&oh=00_AfWMKMB5g8K5fFbQO5RjBf8Wp9epHYVIZ5FuDYFFu1qEsg&oe=689D27F9",
-                            featuredVideoUrl: "https://www.youtube.com/watch?v=SeFUhhhVZ9k"
-                        };
-                        await setDoc(doc(db, "site_config", "main"), defaultConfig);
-                        await loadData();
-                        return;
-                    }
-
-                    // Modular seeding logic
-                    let needsSeeding = false;
-                    const batch = writeBatch(db);
-
-                    if (initialJams.length === 0) {
-                        needsSeeding = true;
-                        const seedJams = [ { id: "1", day: "Saturday", date: "2 Aug:", venue: "Mechanics' Institute", cancelled: false, mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu", time: "2:00 PM" }, { id: "2", day: "Saturday", date: "9 Aug:", venue: "Mechanics' Institute", cancelled: false, mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu", time: "2:00 PM" }, { id: "3", day: "Saturday", date: "16 Aug:", venue: "Joyce's, Knocknacarra", cancelled: false, mapLink: "https://www.google.com/maps/place/Joyce's+Community+Centre/@53.2622295,-9.1052034,17z/data=!3m1!4b1!4m6!3m5!1s0x485b97cce9b72d61:0x894c2f7a9d809558!8m2!3d53.2622295!4d-9.1052034!16s%2Fg%2F11j4dtw7tt?entry=ttu", time: "2:00 PM" }, { id: "4", day: "Saturday", date: "23 Aug:", venue: "Mechanics' Institute", cancelled: false, mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu", time: "2:00 PM" }, { id: "5", day: "Saturday", date: "30 Aug:", venue: "Mechanics' Institute", cancelled: false, mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu", time: "2:00 PM" }, { id: "6", day: "Saturday", date: "6 Sept:", venue: "Joyce's, Knocknacarra", cancelled: false, mapLink: "https://www.google.com/maps/place/Joyce's+Community+Centre/@53.2622295,-9.1052034,17z/data=!3m1!4b1!4m6!3m5!1s0x485b97cce9b72d61:0x894c2f7a9d809558!8m2!3d53.2622295!4d-9.1052034!16s%2Fg%2F11j4dtw7tt?entry=ttu", time: "2:00 PM" }, { id: "7", day: "Saturday", date: "13 Sept:", venue: "Mechanics' Institute", cancelled: false, mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu", time: "2:00 PM" }];
-                        seedJams.forEach(jam => batch.set(doc(db, "jams", jam.id), jam));
-                    }
-                    if (initialEvents.length === 0) {
-                        needsSeeding = true;
-                        const seedEvents = [{ id: "101", title: "Cleggan Fringe Festival", dates: "Friday, 12 Sept - Sunday, 14 Sept 2025", description: "The annual Cleggan Fringe Festival is a highlight of the year! Featuring a host of traditional and folk musicians in the pubs and venues around Cleggan. Keep an eye out for GJC members playing sessions!"}];
-                        seedEvents.forEach(event => batch.set(doc(db, "events", event.id), event));
-                    }
-                    if (initialPhotos.length === 0) {
-                        needsSeeding = true;
-                        const seedPhotos = [{id: "201", type: "image", url: "https://i.imgur.com/K1C3l4w.jpg", caption: "Jam session by the river."}];
-                        seedPhotos.forEach(photo => batch.set(doc(db, "photos", photo.id), photo));
-                    }
-                    if (initialVenues.length === 0) {
-                        needsSeeding = true;
-                        const seedVenues = [
-                            {id: "v1", name: "Mechanics' Institute", mapLink: "https://www.google.com/maps/place/Galway+Mechanics+Institute/@53.2726003,-9.0544726,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96e539b4b7ed:0x94513e0a1c71c67b!8m2!3d53.2725971!4d-9.0518977!16s%2Fg%2F1hdzhkt0f?entry=ttu"},
-                            {id: "v2", name: "Joyce's, Knocknacarra", mapLink: "https://www.google.com/maps/place/Joyce's+Community+Centre/@53.2622295,-9.1052034,17z/data=!3m1!4b1!4m6!3m5!1s0x485b97cce9b72d61:0x894c2f7a9d809558!8m2!3d53.2622295!4d-9.1052034!16s%2Fg%2F11j4dtw7tt?entry=ttu"}
-                        ];
-                        seedVenues.forEach(venue => batch.set(doc(db, "venues", venue.id), venue));
-                    }
-
-
-                    if (needsSeeding) {
-                        showModal("Database empty or incomplete. Seeding with initial data. Please refresh if you don't see it.", "alert");
-                        await batch.commit();
-                        await loadData(); // Reload data after seeding
-                        return;
-                    }
-
-                    manageJamSchedule();
-                    renderJams();
-                    renderEvents();
-                    renderGallery();
-                } catch (error) {
-                    console.error("Error loading data: ", error);
-                    if (error.message.includes("Missing or insufficient permissions")) {
-                        showModal("Could not connect to the database. Please ensure your Firestore security rules are set to test mode: rules_version = '2'; service cloud.firestore { match /databases/{database}/documents { match /{document=**} { allow read, write: if true; } } }", "alert");
-                    } else if (firebaseConfig.apiKey.includes("PASTE")) {
-                        showModal("Firebase is not configured. Please paste your firebaseConfig object into the HTML file.", "alert");
-                    } else {
-                        showModal("Could not load data from the database.", "alert");
-                    }
-                }
-            }
-
-            await loadData();
         });
+
+        // --- Main listener for feedback and replies ---
+        function listenForFeedback() {
+             if (feedbackUnsubscribe) {
+                feedbackUnsubscribe(); // Detach any old listener
+            }
+            const q = query(collection(db, "feedback"), orderBy("timestamp", "desc"));
+            feedbackUnsubscribe = onSnapshot(q, (snapshot) => {
+                renderAllPosts(snapshot);
+            });
+        }
+        
+        function renderAllPosts(snapshot) {
+            tabContainer.innerHTML = '';
+            tabContentContainer.innerHTML = '';
+
+            if (snapshot.empty) {
+                tabContentContainer.innerHTML = '<p class="text-center text-gray-500 py-4">No feedback yet. Be the first to leave a comment!</p>';
+                return;
+            }
+
+            const postsByTopic = new Map();
+            snapshot.forEach(doc => {
+                const feedback = doc.data();
+                feedback.id = doc.id;
+                if (!postsByTopic.has(feedback.topic)) postsByTopic.set(feedback.topic, []);
+                postsByTopic.get(feedback.topic).push(feedback);
+            });
+
+            const activeTopics = allPossibleTopics.filter(topic => postsByTopic.has(topic));
+
+            activeTopics.forEach((topic, index) => {
+                const button = document.createElement('button');
+                button.className = `tab-button whitespace-nowrap ${index === 0 ? 'active' : ''}`;
+                button.textContent = topic;
+                button.dataset.tab = topic;
+                tabContainer.appendChild(button);
+
+                const contentDiv = document.createElement('div');
+                contentDiv.className = `tab-content space-y-6 ${index === 0 ? 'active' : ''}`;
+                contentDiv.dataset.tabContent = topic;
+                tabContentContainer.appendChild(contentDiv);
+
+                const posts = postsByTopic.get(topic);
+                posts.forEach(post => {
+                    const postElement = createPostElement(post);
+                    contentDiv.appendChild(postElement);
+                    loadReplies(post.id, postElement.querySelector('.replies-container'));
+                });
+            });
+        }
+        
+        // --- Tab Switching Logic ---
+        tabContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('tab-button')) {
+                const targetTab = e.target.dataset.tab;
+                tabContainer.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                tabContentContainer.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                document.querySelector(`[data-tab-content="${targetTab}"]`).classList.add('active');
+            }
+        });
+
+        function createPostElement(feedback) {
+            const element = document.createElement('div');
+            element.className = 'p-5 bg-white border border-gray-200 rounded-lg shadow-sm';
+            const date = feedback.timestamp ? feedback.timestamp.toDate().toLocaleString('en-IE') : 'Just now';
+            const votedStatus = getVoteStatus(feedback.id);
+
+            const topicLinks = {
+                "Website Section: Home Page": "index.html#home",
+                "Website Section: Regular Jams": "index.html#jams",
+                "Website Section: Festivals & Events": "index.html#special-events",
+                "Website Section: Our Format": "index.html#format",
+                "Website Section: Gallery": "index.html#gallery",
+                "Website Section: Contact & Footer": "index.html#contact",
+                "Discussion Point: Photo Strategy": "index.html#gallery",
+                "Discussion Point: Payment Feature": "index.html#jams"
+            };
+            const link = topicLinks[feedback.topic];
+            const linkHtml = link ? `<a href="${link}" target="_blank" class="text-xs text-primary hover:underline font-semibold ml-auto mr-4">View Section &rarr;</a>` : '';
+
+            element.innerHTML = `
+                <div class="flex justify-between items-center mb-2">
+                    <span class="px-3 py-1 text-xs font-semibold text-primary bg-accent rounded-full">${feedback.topic}</span>
+                    <div class="flex items-center">
+                        ${linkHtml}
+                        <span class="text-xs text-gray-500">${date}</span>
+                    </div>
+                </div>
+                <p class="text-gray-700 whitespace-pre-wrap">${feedback.comment}</p>
+                <div class="flex justify-between items-center mt-4">
+                    <p class="text-sm font-semibold text-gray-800">- ${feedback.name}</p>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-1">
+                            <button data-post-id="${feedback.id}" data-vote-type="up" class="vote-btn p-1 rounded-full hover:bg-gray-200 ${votedStatus === 'up' ? 'voted-up' : 'text-gray-500'}">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333V17a1 1 0 001 1h6.364a1 1 0 00.942-.67l2.716-6A1 1 0 0016 9.333H12.5A1.5 1.5 0 0111 7.833V4.667a2 2 0 00-2-2h-1a2 2 0 00-2 2v5.666z"></path></svg>
+                            </button>
+                            <span class="text-sm font-semibold text-gray-700">${feedback.upvotes || 0}</span>
+                        </div>
+                        <div class="flex items-center space-x-1">
+                            <button data-post-id="${feedback.id}" data-vote-type="down" class="vote-btn p-1 rounded-full hover:bg-gray-200 ${votedStatus === 'down' ? 'voted-down' : 'text-gray-500'}">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667V3a1 1 0 00-1-1h-6.364a1 1 0 00-.942.67l-2.716 6A1 1 0 004 10.667H7.5A1.5 1.5 0 019 12.167v3.166a2 2 0 002 2h1a2 2 0 002-2V9.667z"></path></svg>
+                            </button>
+                            <span class="text-sm font-semibold text-gray-700">${feedback.downvotes || 0}</span>
+                        </div>
+                        <button data-post-id="${feedback.id}" class="reply-btn text-sm text-primary font-semibold hover:underline">Reply</button>
+                        <button data-post-id="${feedback.id}" class="delete-post-btn text-sm text-red-600 font-semibold hover:underline" style="display: none;">Delete</button>
+                    </div>
+                </div>
+                <div class="replies-container ml-8 mt-4 space-y-3 border-l-2 border-gray-200 pl-4"></div>
+                <div class="reply-form-container ml-8 mt-3"></div>
+            `;
+            return element;
+        }
+        
+        function loadReplies(postId, container) {
+            const repliesQuery = query(collection(db, `feedback/${postId}/replies`), orderBy("timestamp", "asc"));
+            onSnapshot(repliesQuery, (snapshot) => {
+                container.innerHTML = ''; // Clear old replies
+                snapshot.forEach(doc => {
+                    const replyData = doc.data();
+                    replyData.id = doc.id;
+                    replyData.postId = postId;
+                    container.appendChild(createReplyElement(replyData));
+                });
+            });
+        }
+
+        function createReplyElement(reply) {
+            const element = document.createElement('div');
+            element.className = 'p-3 bg-gray-50 rounded-md border relative';
+            const date = reply.timestamp ? reply.timestamp.toDate().toLocaleString('en-IE') : 'Just now';
+            element.innerHTML = `
+                <p class="text-gray-700 text-sm whitespace-pre-wrap">${reply.comment}</p>
+                <div class="text-right text-xs text-gray-600 mt-2">
+                    <strong>- ${reply.name}</strong> on ${date}
+                </div>
+                <button data-post-id="${reply.postId}" data-reply-id="${reply.id}" class="delete-reply-btn absolute top-1 right-1 text-red-500 hover:text-red-700" style="display: none;">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            `;
+            return element;
+        }
+
+        // --- Handle Reply Button Clicks ---
+        tabContentContainer.addEventListener('click', (e) => {
+            const replyBtn = e.target.closest('.reply-btn');
+            if (replyBtn) {
+                const formContainer = replyBtn.closest('.p-5').querySelector('.reply-form-container');
+                if (formContainer.innerHTML !== '') {
+                    formContainer.innerHTML = '';
+                    replyBtn.textContent = 'Reply';
+                    return;
+                }
+                replyBtn.textContent = 'Cancel';
+                formContainer.innerHTML = `
+                    <form class="reply-form" data-post-id="${replyBtn.dataset.postId}">
+                        <textarea name="reply-comment" class="w-full p-2 border border-gray-300 rounded-md text-sm" rows="3" placeholder="Write a reply..." required></textarea>
+                        <div class="flex justify-end items-center mt-2 space-x-2">
+                             <input type="text" name="reply-name" class="w-1/2 p-2 border border-gray-300 rounded-md text-sm" placeholder="Your name (Optional)">
+                             <button type="submit" class="px-4 py-1 bg-primary text-white text-sm font-bold rounded-md hover:opacity-90">Submit</button>
+                        </div>
+                    </form>
+                `;
+            }
+        });
+
+        // --- Handle Reply Form Submission ---
+        tabContentContainer.addEventListener('submit', async (e) => {
+            if (e.target.classList.contains('reply-form')) {
+                e.preventDefault();
+                const form = e.target;
+                const postId = form.dataset.postId;
+                const comment = form.querySelector('[name="reply-comment"]').value;
+                const name = form.querySelector('[name="reply-name"]').value || 'Anonymous';
+                if (!comment.trim()) return;
+                try {
+                    await addDoc(collection(db, `feedback/${postId}/replies`), { comment, name, timestamp: serverTimestamp() });
+                } catch (error) {
+                    console.error("Error adding reply: ", error);
+                    alert('Could not post reply.');
+                }
+            }
+        });
+
+        // --- Handle Voting ---
+        tabContentContainer.addEventListener('click', (e) => {
+            const voteBtn = e.target.closest('.vote-btn');
+            if (voteBtn) {
+                handleVote(voteBtn.dataset.postId, voteBtn.dataset.voteType);
+            }
+        });
+
+        function getVoteStatus(postId) {
+            const votes = JSON.parse(localStorage.getItem('gjc_votes') || '{}');
+            return votes[postId]; // Will be 'up', 'down', or undefined
+        }
+
+        async function handleVote(postId, voteType) {
+            const docRef = doc(db, "feedback", postId);
+            const votes = JSON.parse(localStorage.getItem('gjc_votes') || '{}');
+            const currentVote = votes[postId];
+            let updates = {};
+
+            if (currentVote === voteType) { // Un-voting
+                updates[`${voteType}votes`] = increment(-1);
+                delete votes[postId];
+            } else { // New vote or changing vote
+                updates[`${voteType}votes`] = increment(1);
+                if (currentVote) { // Changing vote
+                    updates[`${currentVote}votes`] = increment(-1);
+                }
+                votes[postId] = voteType;
+            }
+            
+            localStorage.setItem('gjc_votes', JSON.stringify(votes));
+            await updateDoc(docRef, updates);
+        }
+
+        // --- Admin Functionality ---
+        adminLoginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (document.body.classList.contains('admin-mode')) {
+                toggleAdmin(false);
+            } else {
+                showModal('Enter admin password:', 'prompt', (password) => {
+                    if (password === ADMIN_PASSWORD) {
+                        toggleAdmin(true);
+                    } else {
+                        showModal('Incorrect password.', 'alert');
+                    }
+                });
+            }
+        });
+
+        function toggleAdmin(isAdmin) {
+            document.body.classList.toggle('admin-mode', isAdmin);
+            adminLoginBtn.textContent = isAdmin ? 'Admin Logout' : 'Admin Login';
+            document.querySelectorAll('.delete-post-btn, .delete-reply-btn').forEach(btn => {
+                btn.style.display = isAdmin ? 'inline-block' : 'none';
+            });
+        }
+
+        tabContentContainer.addEventListener('click', async (e) => {
+            const deletePostBtn = e.target.closest('.delete-post-btn');
+            if (deletePostBtn) {
+                const postId = deletePostBtn.dataset.postId;
+                if (confirm('Are you sure you want to delete this entire post and all its replies?')) {
+                    const repliesRef = collection(db, `feedback/${postId}/replies`);
+                    const repliesSnapshot = await getDocs(repliesRef);
+                    const batch = writeBatch(db);
+                    repliesSnapshot.forEach(doc => batch.delete(doc.ref));
+                    await batch.commit();
+                    await deleteDoc(doc(db, "feedback", postId));
+                }
+            }
+            
+            const deleteReplyBtn = e.target.closest('.delete-reply-btn');
+            if (deleteReplyBtn) {
+                const postId = deleteReplyBtn.dataset.postId;
+                const replyId = deleteReplyBtn.dataset.replyId;
+                 if (confirm('Are you sure you want to delete this reply?')) {
+                    await deleteDoc(doc(db, `feedback/${postId}/replies`, replyId));
+                }
+            }
+        });
+
+        // --- Modal ---
+        const modal = document.getElementById('custom-modal');
+        const modalMessage = document.getElementById('modal-message');
+        const modalInput = document.getElementById('modal-input');
+        const modalButtons = document.getElementById('modal-buttons');
+        function showModal(message, type = 'alert', onConfirm = () => {}) {
+            modalMessage.textContent = message;
+            modalButtons.innerHTML = '';
+            modalInput.classList.add('hidden');
+            if (type === 'alert') { const okButton = document.createElement('button'); okButton.textContent = 'OK'; okButton.className = 'px-4 py-2 bg-accent text-primary font-bold rounded-md'; okButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onConfirm(); }; modalButtons.appendChild(okButton); } 
+            else if (type === 'prompt') { modalInput.classList.remove('hidden'); modalInput.value = ''; modalInput.type = 'password'; const submitButton = document.createElement('button'); submitButton.textContent = 'Submit'; submitButton.className = 'px-4 py-2 bg-accent text-primary font-bold rounded-md'; submitButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); onConfirm(modalInput.value); }; const cancelButton = document.createElement('button'); cancelButton.textContent = 'Cancel'; cancelButton.className = 'px-4 py-2 bg-stone-600 text-white rounded-md'; cancelButton.onclick = () => { modal.classList.add('hidden'); modal.classList.remove('flex');}; modalButtons.appendChild(cancelButton); modalButtons.appendChild(submitButton); }
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            if(type === 'prompt') modalInput.focus();
+        }
+
+        // --- Seed dummy posts if the collection is empty ---
+        async function seedDummyPosts() {
+            const feedbackCol = collection(db, "feedback");
+            const snapshot = await getDocs(feedbackCol);
+            if (snapshot.empty) {
+                console.log('Feedback collection is empty. Seeding dummy posts.');
+                await addDoc(feedbackCol, {
+                    topic: "Website Section: Our Format",
+                    comment: "The idea to add specific songbooks for each phase of the jam is brilliant. It would really help newcomers get up to speed and encourage more people to join in on songs they know.",
+                    name: "Donnacha on behalf of Sarah",
+                    timestamp: serverTimestamp(),
+                    upvotes: 0, downvotes: 0
+                });
+                await addDoc(feedbackCol, {
+                    topic: "Website Section: Look and Feel",
+                    comment: "This is a great start! One small suggestion for the main homepage image: the white 'Welcome to the Galway Jam Circle' text can be a little difficult to read when it's over a bright part of the background photo (like the sky or water).\n\nA slightly stronger, darker overlay behind the text could really make it pop and improve readability on all screen sizes. What do you think?",
+                    name: "Gemini",
+                    timestamp: serverTimestamp(),
+                    upvotes: 0, downvotes: 0
+                });
+            }
+        }
+
+        // --- Initialize the page ---
+        async function init() {
+            if (isInitialized) return; // Prevent re-initialization
+            isInitialized = true; 
+            
+            const snapshot = await getDocs(collection(db, "feedback"));
+            if (snapshot.empty) {
+                await seedDummyPosts();
+            }
+            listenForFeedback();
+        }
+
+        init();
+
     </script>
 
 </body>
