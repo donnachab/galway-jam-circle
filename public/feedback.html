@@ -236,6 +236,7 @@
         const adminLoginBtn = document.getElementById('admin-login-btn');
         const ADMIN_PASSWORD = '4519';
         let feedbackUnsubscribe = null;
+        let isInitialized = false; // <-- FIX: Global initialization flag
 
         // --- Post new feedback to Firestore ---
         feedbackForm.addEventListener('submit', async (e) => {
@@ -551,6 +552,7 @@
 
         // --- Initialize the page ---
         async function init() {
+            isInitialized = true; // Set flag to prevent re-initialization
             const snapshot = await getDocs(collection(db, "feedback"));
             if (snapshot.empty) {
                 await seedDummyPosts();
@@ -558,7 +560,9 @@
             listenForFeedback();
         }
 
-        init();
+        if (!isInitialized) {
+            init();
+        }
 
     </script>
 
