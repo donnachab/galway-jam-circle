@@ -41,6 +41,7 @@
 </head>
 <body class="text-gray-800">
 
+    <!-- HEADER SECTION -->
     <header class="bg-primary shadow-lg sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-4">
@@ -114,6 +115,17 @@
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">Regular Jams</h2>
                     <p class="text-gray-600 max-w-2xl mx-auto">Our weekly jam schedule. Voluntary donations are welcome to help cover venue costs.</p>
+                    
+                    <!-- MOCK BUTTON AND DESCRIPTION - START -->
+                    <div class="mt-6">
+                        <!-- The button is styled to look slightly disabled and does nothing when clicked -->
+                        <a href="#" onclick="return false;" class="px-8 py-3 bg-accent text-primary font-bold rounded-full transition duration-300 shadow-lg opacity-60 cursor-not-allowed">
+                            Contribute €5 for the Jam
+                        </a>
+                        <p class="text-sm text-gray-500 mt-2 font-semibold">(Payment feature coming soon - for demonstration only)</p>
+                    </div>
+                    <!-- MOCK BUTTON AND DESCRIPTION - END -->
+
                 </div>
                 <div class="max-w-2xl mx-auto">
                     <ul id="jam-list" class="space-y-4"></ul>
