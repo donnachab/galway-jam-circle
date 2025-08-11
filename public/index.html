@@ -588,12 +588,23 @@
             const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
             flatpickr(jamDateInput, { dateFormat: "j M:", onChange: function(selectedDates) { if (selectedDates.length > 0) { jamDayInput.value = dayNames[selectedDates[0].getDay()]; } }, });
-            flatpickr(jamTimeInput, { enableTime: true, noCalendar: true, dateFormat: "H:i", defaultDate: "14:00" });
+            flatpickr(jamTimeInput, { enableTime: true, noCalendar: true, dateFormat: "h:i K", defaultDate: "2:00 PM" });
             flatpickr(eventDatesInput, { mode: "range", dateFormat: "j M Y", onClose: function(selectedDates, dateStr, instance) { if (selectedDates.length === 2) { const start = selectedDates[0]; const end = selectedDates[1]; const format = (date) => `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}`; instance.input.value = `${format(start)} - ${format(end)} ${end.getFullYear()}`; } } });
             flatpickr(testDateInput, { dateFormat: "Y-m-d" });
 
             function parseJamDate(dateStr) { const year = 2025; const dateWithYear = dateStr.replace(':', '').trim() + ` ${year}`; return new Date(dateWithYear); }
             function formatJamDate(dateObj) { return `${dateObj.getDate()} ${dateObj.toLocaleString('default', { month: 'short' })}:`; }
+            
+            function formatTime(timeStr) {
+                if (!timeStr || !timeStr.includes(':')) return timeStr; 
+                if (timeStr.toLowerCase().includes('am') || timeStr.toLowerCase().includes('pm')) return timeStr; 
+                
+                const [hours, minutes] = timeStr.split(':');
+                const h = parseInt(hours, 10);
+                const suffix = h >= 12 ? 'PM' : 'AM';
+                const formattedHours = ((h + 11) % 12 + 1);
+                return `${formattedHours}:${minutes} ${suffix}`;
+            }
 
             function manageJamSchedule(testDate = null) {
                 const today = testDate || new Date();
@@ -639,7 +650,7 @@
                         else { adminButtons += `<button data-id="${jam.id}" class="delete-btn text-red-500 hover:text-red-700 ml-2">Delete</button>`; }
                     }
                     let mapLink = jam.mapLink ? `<a href="${jam.mapLink}" onclick="window.open(this.href, '_blank'); return false;" class="text-blue-500 hover:underline ml-2">(View Map)</a>` : '';
-                    li.innerHTML = `<div class="flex-grow jam-info"><div class="flex flex-col sm:flex-row sm:items-center"><span class="font-bold text-lg ${isSaturday ? 'text-gray-500' : 'text-yellow-600'}">${jam.day}</span><span class="text-lg font-bold text-primary sm:ml-4">${jam.date}</span><span class="text-lg font-bold text-gray-600 sm:ml-2">${jam.time || '2:00 PM'}</span></div><span class="text-gray-700 text-lg">${jam.venue} ${mapLink}</span>${jam.cancelled ? '<span class="font-bold text-red-600 mt-1 sm:ml-4">(CANCELLED)</span>' : ''}</div><div class="admin-controls-inline space-x-2 mt-2 sm:mt-0">${adminButtons}</div>`;
+                    li.innerHTML = `<div class="flex-grow jam-info"><div class="flex flex-col sm:flex-row sm:items-center"><span class="font-bold text-lg ${isSaturday ? 'text-gray-500' : 'text-yellow-600'}">${jam.day}</span><span class="text-lg font-bold text-primary sm:ml-4">${jam.date}</span><span class="text-lg font-bold text-gray-600 sm:ml-2">${formatTime(jam.time || '2:00 PM')}</span></div><span class="text-gray-700 text-lg">${jam.venue} ${mapLink}</span>${jam.cancelled ? '<span class="font-bold text-red-600 mt-1 sm:ml-4">(CANCELLED)</span>' : ''}</div><div class="admin-controls-inline space-x-2 mt-2 sm:mt-0">${adminButtons}</div>`;
                     jamList.appendChild(li);
                 });
             }
@@ -719,8 +730,8 @@
                 addJamForm.style.display = 'block';
                 jamVenueInput.innerHTML = '';
                 initialVenues.forEach(venue => { const option = document.createElement('option'); option.value = venue.name; option.textContent = venue.name; jamVenueInput.appendChild(option); });
-                if (mode === 'edit') { formTitle.textContent = 'Edit Jam'; editJamIdInput.value = jam.id; jamDatepicker.setDate(parseJamDate(jam.date)); jamDayInput.value = jam.day; jamVenueInput.value = jam.venue; jamMapLinkInput.value = jam.mapLink || ''; flatpickr(jamTimeInput, { enableTime: true, noCalendar: true, dateFormat: "H:i", defaultDate: jam.time || "14:00" }); } 
-                else { formTitle.textContent = 'Add a New Jam'; editJamIdInput.value = ''; const lastJamDate = jams.length > 0 ? parseJamDate(jams[jams.length - 1].date) : new Date(); lastJamDate.setDate(lastJamDate.getDate() + 7); jamDatepicker.setDate(lastJamDate); jamDayInput.value = dayNames[lastJamDate.getDay()]; jamVenueInput.value = ''; jamMapLinkInput.value = ''; flatpickr(jamTimeInput, { enableTime: true, noCalendar: true, dateFormat: "H:i", defaultDate: "14:00" }); }
+                if (mode === 'edit') { formTitle.textContent = 'Edit Jam'; editJamIdInput.value = jam.id; jamDatepicker.setDate(parseJamDate(jam.date)); jamDayInput.value = jam.day; jamVenueInput.value = jam.venue; jamMapLinkInput.value = jam.mapLink || ''; flatpickr(jamTimeInput, { enableTime: true, noCalendar: true, dateFormat: "h:i K", defaultDate: jam.time || "2:00 PM" }); } 
+                else { formTitle.textContent = 'Add a New Jam'; editJamIdInput.value = ''; const lastJamDate = jams.length > 0 ? parseJamDate(jams[jams.length - 1].date) : new Date(); lastJamDate.setDate(lastJamDate.getDate() + 7); jamDatepicker.setDate(lastJamDate); jamDayInput.value = dayNames[lastJamDate.getDay()]; jamVenueInput.value = ''; jamMapLinkInput.value = ''; flatpickr(jamTimeInput, { enableTime: true, noCalendar: true, dateFormat: "h:i K", defaultDate: "2:00 PM" }); }
                 jamVenueInput.focus();
             }
             function hideJamForm() { addJamForm.style.display = 'none'; }
