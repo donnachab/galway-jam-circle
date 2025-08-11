@@ -39,7 +39,7 @@
         details > summary {
             cursor: pointer;
         }
-        /* ADDED: Custom Swiper Carousel Styles */
+        /* MODIFIED: Custom Swiper Carousel Styles */
         .festival-carousel {
             padding-top: 1rem;
             padding-bottom: 3rem; /* Space for pagination */
@@ -54,12 +54,10 @@
             max-height: 90px;
             width: auto;
             object-fit: contain;
-            filter: grayscale(100%);
-            opacity: 0.6;
+            opacity: 0.9;
             transition: all 0.3s ease;
         }
         .festival-carousel .swiper-slide:hover img {
-            filter: grayscale(0%);
             opacity: 1;
             transform: scale(1.05);
         }
@@ -399,11 +397,11 @@
                 });
             }
 
-            // ADDED: Initialize the festival carousel
+            // MODIFIED: Initialize the festival carousel
             const swiper = new Swiper('.festival-carousel', {
                 loop: true,
                 autoplay: {
-                    delay: 3000,
+                    delay: 4000,
                     disableOnInteraction: false,
                 },
                 pagination: {
@@ -418,8 +416,8 @@
                         spaceBetween: 30,
                     },
                     1024: {
-                        slidesPerView: 4,
-                        spaceBetween: 40,
+                        slidesPerView: 5,
+                        spaceBetween: 50,
                     }
                 }
             });
