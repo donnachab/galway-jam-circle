@@ -67,7 +67,6 @@
         /* Community Slideshow Styles */
         .community-swiper {
             width: 100%;
-            border-radius: 0.5rem;
         }
         .community-swiper .swiper-slide {
             position: relative;
@@ -103,7 +102,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 0.5rem 0.5rem 0 0;
             overflow: hidden;
         }
         .community-image-container img {
@@ -738,7 +736,7 @@
                         }
 
                         slide.innerHTML = `
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                            <div class="bg-white rounded-lg overflow-hidden border border-gray-200">
                                 <div class="relative community-image-container">
                                     <img src="${item.imageUrl}" alt="${item.description.substring(0, 50)}">
                                     <div class="slide-admin-controls admin-controls-inline space-x-2">
