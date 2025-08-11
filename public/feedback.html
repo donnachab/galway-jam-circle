@@ -241,7 +241,7 @@
         const allPossibleTopics = Array.from(topicDropdown.options).map(opt => ({
             value: opt.value,
             longText: opt.textContent,
-            shortText: opt.textContent.replace('Website Section: ', 'Section: ').replace('Discussion Point: ', 'Idea: ')
+            shortText: opt.textContent.replace('Section: ', '').replace('Discussion: ', '')
         }));
         const adminLoginBtn = document.getElementById('admin-login-btn');
         const ADMIN_PASSWORD = '4519';
@@ -563,38 +563,51 @@
                 const batch = writeBatch(db);
                 const posts = [
                     { 
-                        topic: "Section: Home Page",
+                        topic: "Section: Look and Feel",
                         comment: "This is a great start! One small suggestion for the main homepage image: the white 'Welcome to the Galway Jam Circle' text can be a little difficult to read when it's over a bright part of the background photo (like the sky or water).\n\nA slightly stronger, darker overlay behind the text could really make it pop and improve readability on all screen sizes. What do you think?",
                         name: "Gemini",
                         timestamp: serverTimestamp(),
                         upvotes: 2, downvotes: 0
                     },
                     { 
-                        topic: "Section: Our Format",
-                        comment: "The idea to add specific songbooks for each phase of the jam is brilliant. It would really help newcomers get up to speed and encourage more people to join in on songs they know.",
-                        name: "Donnacha on behalf of Sarah",
-                        timestamp: serverTimestamp(),
-                        upvotes: 5, downvotes: 0
-                    },
-                    { 
                         topic: "Discussion: Photo Strategy",
-                        comment: "Thanks for the feedback on this. We've gone with the proposed strategy: a curated, permission-based gallery on the main site that can be easily updated via the admin panel. This keeps the main site looking clean while social media can be used for more candid shots.",
-                        name: "Donnacha Bushe",
+                        comment: "A proposed 'quality over quantity' approach: use social media for lots of photos, but a curated, permission-based gallery on the site.",
+                        name: "Initial Proposal",
                         timestamp: serverTimestamp(),
-                        upvotes: 3, downvotes: 0
+                        upvotes: 10, downvotes: 1
                     },
                     { 
                         topic: "Discussion: Payment Feature",
-                        comment: "This has been implemented for demonstration. A disabled 'Contribute' button is now on the Regular Jams section. We can look at connecting this to a service like Stripe or PayPal in the future if the community feels it's a good idea.",
-                        name: "Donnacha Bushe",
+                        comment: "A proposal to add a simple, no-monthly-fee online option for the voluntary €5 contribution. A disabled button is on the site now for demonstration.",
+                        name: "Initial Proposal",
                         timestamp: serverTimestamp(),
-                        upvotes: 4, downvotes: 0
+                        upvotes: 7, downvotes: 0
                     }
                 ];
                 posts.forEach(post => {
                     const docRef = doc(feedbackCol); // automatically generate unique ID
                     batch.set(docRef, post);
                 });
+
+                // Add replies as sub-collections
+                const photoStrategyPostRef = doc(feedbackCol);
+                batch.set(photoStrategyPostRef, posts[1]);
+                const photoReplyRef = doc(collection(db, "feedback", photoStrategyPostRef.id, "replies"));
+                batch.set(photoReplyRef, {
+                    comment: "Thanks for the feedback on this. We've gone with the proposed strategy: a curated, permission-based gallery on the main site that can be easily updated via the admin panel. This keeps the main site looking clean while social media can be used for more candid shots.",
+                    name: "Donnacha Bushe",
+                    timestamp: serverTimestamp()
+                });
+
+                const paymentFeaturePostRef = doc(feedbackCol);
+                batch.set(paymentFeaturePostRef, posts[2]);
+                const paymentReplyRef = doc(collection(db, "feedback", paymentFeaturePostRef.id, "replies"));
+                 batch.set(paymentReplyRef, {
+                    comment: "This has been implemented for demonstration. A disabled 'Contribute' button is now on the Regular Jams section. We can look at connecting this to a service like Stripe or PayPal in the future if the community feels it's a good idea.",
+                    name: "Donnacha Bushe",
+                    timestamp: serverTimestamp()
+                });
+
                 await batch.commit();
             }
         }
