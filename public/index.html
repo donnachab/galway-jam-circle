@@ -260,7 +260,32 @@
 
                 <div id="event-list" class="max-w-4xl mx-auto space-y-8 mt-12"></div>
                 <div class="text-center mt-8 admin-controls-inline"><button id="add-event-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300 shadow-md">Add New Event</button></div>
-                <form id="add-event-form" class="max-w-4xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-inner border"><h3 id="event-form-title" class="text-xl font-bold text-primary mb-4">Add a New Event</h3><input type="hidden" id="edit-event-id"><div class="mb-4"><label for="event-title" class="block text-gray-700 font-bold mb-2 text-left">Title</label><input type="text" id="event-title" class="w-full p-2 border rounded" placeholder="e.g., Cleggan Fringe Festival"></div><div class="mb-4"><label for="event-dates" class="block text-gray-700 font-bold mb-2 text-left">Dates</label><input type="text" id="event-dates" class="w-full p-2 border rounded" placeholder="Select a date or date range..."></div><div class="mb-4"><label for="event-description" class="block text-gray-700 font-bold mb-2 text-left">Description</label><textarea id="event-description" class="w-full p-2 border rounded" rows="4" placeholder="Enter event details..."></textarea></div><div class="flex justify-end space-x-4"><button type="button" id="cancel-event-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button><button type="submit" id="submit-event-btn" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Save Event</button></div></form>
+                <form id="add-event-form" class="max-w-4xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-inner border">
+                    <h3 id="event-form-title" class="text-xl font-bold text-primary mb-4">Add a New Event</h3>
+                    <input type="hidden" id="edit-event-id">
+                    <div class="mb-4">
+                        <label for="event-title" class="block text-gray-700 font-bold mb-2 text-left">Title</label>
+                        <input type="text" id="event-title" class="w-full p-2 border rounded" placeholder="e.g., Cleggan Fringe Festival">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="event-dates" class="block text-gray-700 font-bold mb-2 text-left">Date(s)</label>
+                            <input type="text" id="event-dates" class="w-full p-2 border rounded" placeholder="Select a date or date range...">
+                        </div>
+                        <div>
+                            <label for="event-time" class="block text-gray-700 font-bold mb-2 text-left">Time (Optional)</label>
+                            <input type="text" id="event-time" class="w-full p-2 border rounded" placeholder="e.g., 6:00 PM - 8:00 PM">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="event-description" class="block text-gray-700 font-bold mb-2 text-left">Description</label>
+                        <textarea id="event-description" class="w-full p-2 border rounded" rows="4" placeholder="Enter event details..."></textarea>
+                    </div>
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" id="cancel-event-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button>
+                        <button type="submit" id="submit-event-btn" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Save Event</button>
+                    </div>
+                </form>
             </div>
         </section>
 
@@ -541,6 +566,7 @@
             const editEventIdInput = document.getElementById('edit-event-id');
             const eventTitleInput = document.getElementById('event-title');
             const eventDatesInput = document.getElementById('event-dates');
+            const eventTimeInput = document.getElementById('event-time');
             const eventDescriptionInput = document.getElementById('event-description');
             
             const galleryGrid = document.getElementById('gallery-grid');
@@ -589,7 +615,21 @@
 
             flatpickr(jamDateInput, { dateFormat: "j M:", onChange: function(selectedDates) { if (selectedDates.length > 0) { jamDayInput.value = dayNames[selectedDates[0].getDay()]; } }, });
             flatpickr(jamTimeInput, { enableTime: true, noCalendar: true, dateFormat: "h:i K", defaultDate: "2:00 PM" });
-            flatpickr(eventDatesInput, { mode: "range", dateFormat: "j M Y", onClose: function(selectedDates, dateStr, instance) { if (selectedDates.length === 2) { const start = selectedDates[0]; const end = selectedDates[1]; const format = (date) => `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}`; instance.input.value = `${format(start)} - ${format(end)} ${end.getFullYear()}`; } } });
+            flatpickr(eventDatesInput, { 
+                mode: "range", 
+                dateFormat: "j M Y",
+                onClose: function(selectedDates, dateStr, instance) {
+                    if (selectedDates.length === 1) {
+                        const date = selectedDates[0];
+                        instance.input.value = `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()}`;
+                    } else if (selectedDates.length === 2) {
+                        const start = selectedDates[0];
+                        const end = selectedDates[1];
+                        const format = (date) => `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}`;
+                        instance.input.value = `${format(start)} - ${format(end)} ${end.getFullYear()}`;
+                    }
+                }
+            });
             flatpickr(testDateInput, { dateFormat: "Y-m-d" });
 
             function parseJamDate(dateStr) { const year = 2025; const dateWithYear = dateStr.replace(':', '').trim() + ` ${year}`; return new Date(dateWithYear); }
@@ -662,7 +702,8 @@
                 events.forEach(event => {
                     const div = document.createElement('div');
                     div.className = 'bg-white p-6 rounded-lg shadow-md relative border border-gray-200';
-                    div.innerHTML = `<div class="admin-controls-inline absolute top-2 right-2 space-x-2"><button data-id="${event.id}" class="edit-event-btn text-blue-500 hover:text-blue-700">Edit</button><button data-id="${event.id}" class="delete-event-btn text-red-500 hover:text-red-700">Delete</button></div><h3 class="text-2xl font-bold text-primary">${event.title}</h3><p class="text-lg font-semibold text-gray-700 mt-1">${event.dates}</p><p class="mt-4 text-gray-600">${event.description}</p>`;
+                    const timeHTML = event.time ? `<span class="text-gray-600 font-semibold">${event.time}</span>` : '';
+                    div.innerHTML = `<div class="admin-controls-inline absolute top-2 right-2 space-x-2"><button data-id="${event.id}" class="edit-event-btn text-blue-500 hover:text-blue-700">Edit</button><button data-id="${event.id}" class="delete-event-btn text-red-500 hover:text-red-700">Delete</button></div><h3 class="text-2xl font-bold text-primary">${event.title}</h3><div class="flex items-center space-x-4 mt-1"><p class="text-lg font-semibold text-gray-700">${event.dates}</p>${timeHTML}</div><p class="mt-4 text-gray-600">${event.description}</p>`;
                     eventList.appendChild(div);
                 });
             }
@@ -737,8 +778,21 @@
             function hideJamForm() { addJamForm.style.display = 'none'; }
             function showEventForm(mode = 'add', event = null) {
                 addEventForm.style.display = 'block';
-                if (mode === 'edit') { eventFormTitle.textContent = 'Edit Event'; editEventIdInput.value = event.id; eventTitleInput.value = event.title; eventDatesInput.value = event.dates; eventDescriptionInput.value = event.description; } 
-                else { eventFormTitle.textContent = 'Add a New Event'; editEventIdInput.value = ''; eventTitleInput.value = ''; eventDatesInput.value = ''; eventDescriptionInput.value = ''; }
+                if (mode === 'edit') { 
+                    eventFormTitle.textContent = 'Edit Event'; 
+                    editEventIdInput.value = event.id; 
+                    eventTitleInput.value = event.title; 
+                    eventDatesInput.value = event.dates; 
+                    eventTimeInput.value = event.time || '';
+                    eventDescriptionInput.value = event.description; 
+                } else { 
+                    eventFormTitle.textContent = 'Add a New Event'; 
+                    editEventIdInput.value = ''; 
+                    eventTitleInput.value = ''; 
+                    eventDatesInput.value = ''; 
+                    eventTimeInput.value = '';
+                    eventDescriptionInput.value = ''; 
+                }
                 eventTitleInput.focus();
             }
             function hideEventForm() { addEventForm.style.display = 'none'; }
@@ -796,7 +850,7 @@
             addEventBtn.addEventListener('click', () => showEventForm('add'));
             cancelEventBtn.addEventListener('click', hideEventForm);
             async function saveEvent(eventData) { await setDoc(doc(db, "events", String(eventData.id)), eventData); await loadData(); }
-            addEventForm.addEventListener('submit', async (e) => { e.preventDefault(); const title = eventTitleInput.value.trim(); const dates = eventDatesInput.value.trim(); const description = eventDescriptionInput.value.trim(); let id = editEventIdInput.value; if (!title || !dates || !description) { showModal('Please fill in all event fields.', 'alert'); return; } if (!id) { id = String(Date.now()); } await saveEvent({ id, title, dates, description }); hideEventForm(); });
+            addEventForm.addEventListener('submit', async (e) => { e.preventDefault(); const title = eventTitleInput.value.trim(); const dates = eventDatesInput.value.trim(); const description = eventDescriptionInput.value.trim(); let id = editEventIdInput.value; const time = eventTimeInput.value.trim(); if (!title || !dates || !description) { showModal('Please fill in all event fields.', 'alert'); return; } if (!id) { id = String(Date.now()); } await saveEvent({ id, title, dates, description, time }); hideEventForm(); });
             eventList.addEventListener('click', async (e) => { const target = e.target; const eventId = target.dataset.id; if (!eventId) return; if (target.classList.contains('edit-event-btn')) { const eventToEdit = initialEvents.find(ev => ev.id == eventId); if (eventToEdit) showEventForm('edit', eventToEdit); } else if (target.classList.contains('delete-event-btn')) { showModal('Are you sure you want to delete this event?', 'confirm', async () => { await deleteDoc(doc(db, "events", eventId)); await loadData(); }); } });
             
             // Config Logic (Cover Photo & Video)
@@ -900,7 +954,14 @@
                     let needsSeeding = false;
                     const batch = writeBatch(db);
                     if (initialJams.length === 0) { needsSeeding = true; /* ... seed jams ... */ }
-                    if (initialEvents.length === 0) { needsSeeding = true; /* ... seed events ... */ }
+                    if (initialEvents.length === 0) { 
+                        needsSeeding = true;
+                        const seedEvents = [
+                            { id: "101", title: "Cleggan Fringe Festival", dates: "Friday, 12 Sept - Sunday, 14 Sept 2025", description: "The annual Cleggan Fringe Festival is a highlight of the year! Featuring a host of traditional and folk musicians in the pubs and venues around Cleggan. Keep an eye out for GJC members playing sessions!", time: ""},
+                            { id: "102", title: "Culture Night with the Galway Jam Circle", dates: "Friday, 19 Sept 2025", time: "5:45 PM - 7:45 PM", description: "Join us for a special evening of music to celebrate Culture Night! We'll be hosting an open and inclusive jam session at the Mechanics' Institute, with smaller groups also playing outside on the street. All are welcome to play, sing along, or just enjoy the atmosphere as we share our love of music with the city."}
+                        ];
+                        seedEvents.forEach(event => batch.set(doc(db, "events", event.id), event));
+                     }
                     if (initialPhotos.length === 0) { needsSeeding = true; /* ... seed photos ... */ }
                     if (initialVenues.length === 0) { needsSeeding = true; /* ... seed venues ... */ }
                     if (initialCommunityItems.length === 0) {
