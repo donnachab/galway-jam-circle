@@ -67,36 +67,33 @@
         /* Community Slideshow Styles */
         .community-swiper {
             width: 100%;
-            height: 500px; /* Adjust height as needed */
             border-radius: 0.5rem;
         }
         .community-swiper .swiper-slide {
-            background-size: cover;
-            background-position: center;
             position: relative;
-        }
-        .community-swiper .slide-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            color: white;
-            padding: 3rem 1.5rem 1.5rem;
-        }
-        .community-swiper .swiper-button-next,
-        .community-swiper .swiper-button-prev {
-            color: var(--accent-color);
-            --swiper-navigation-size: 30px;
-        }
-        .community-swiper .swiper-pagination-bullet-active {
-            background-color: var(--accent-color) !important;
         }
         .community-swiper .slide-admin-controls {
             position: absolute;
             top: 1rem;
             right: 1rem;
             z-index: 10;
+        }
+        .community-swiper .swiper-button-next,
+        .community-swiper .swiper-button-prev {
+            color: var(--accent-color);
+            background-color: rgba(0,0,0,0.3);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            --swiper-navigation-size: 22px;
+        }
+         .community-swiper .swiper-button-next:hover,
+        .community-swiper .swiper-button-prev:hover {
+             background-color: rgba(0,0,0,0.5);
+        }
+        .community-swiper .swiper-pagination {
+            position: static;
+            margin-top: 1rem;
         }
     </style>
 </head>
@@ -243,7 +240,7 @@
             </div>
         </section>
 
-        <!-- NEW: Community & Charity Section -->
+        <!-- Community & Charity Section -->
         <section id="community" class="py-16 sm:py-24 bg-white">
             <div class="container mx-auto px-4 sm:px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-4">Community & Charity</h2>
@@ -251,15 +248,15 @@
                 
                 <div id="community-slider-container" class="max-w-4xl mx-auto">
                     <!-- Swiper -->
-                    <div class="swiper community-swiper shadow-lg">
+                    <div class="swiper community-swiper">
                         <div class="swiper-wrapper" id="community-swiper-wrapper">
                             <!-- Slides will be injected here by JavaScript -->
                         </div>
-                        <!-- Add Pagination -->
-                        <div class="swiper-pagination"></div>
                         <!-- Add Navigation -->
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination"></div>
                     </div>
                 </div>
 
@@ -287,7 +284,7 @@
                     </div>
                     <div id="amount-raised-wrapper" class="mb-4 hidden">
                         <label for="community-amount-raised" class="block text-gray-700 font-bold mb-2 text-left">Amount Raised</label>
-                        <input type="text" id="community-amount-raised" class="w-full p-2 border rounded" placeholder="Enter amount...">
+                        <input type="text" id="community-amount-raised" class="w-full p-2 border rounded" placeholder="e.g., €1,200">
                     </div>
                     <div class="flex justify-end space-x-4">
                         <button type="button" id="cancel-community-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button>
@@ -418,7 +415,7 @@
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.792 2.013 10.146 2 12.315 2zm0 1.623c-2.403 0-2.748.01-3.728.058-1.006.047-1.634.21-2.203.434a3.272 3.272 0 00-1.15 1.15c-.224.57-.386 1.198-.434 2.203-.048.98-.058 1.325-.058 3.728s.01 2.748.058 3.728c.048 1.006.21 1.634.434 2.203a3.272 3.272 0 001.15 1.15c.57.224 1.198.386 2.203.434.98.048 1.325.058 3.728.058s2.748-.01 3.728-.058c1.006-.047 1.634-.21 2.203-.434a3.272 3.272 0 001.15-1.15c.224-.57.386-1.198.434-2.203.048-.98.058-1.325.058-3.728s-.01-2.748-.058-3.728c-.048-1.006-.21-1.634-.434-2.203a3.272 3.272 0 00-1.15-1.15c-.57-.224-1.198-.386-2.203-.434C15.063 3.633 14.718 3.623 12.315 3.623zM12 9.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm0 6a3.75 3.75 0 110-7.5 3.75 3.75 0 010 7.5zM16.965 6.57a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" /></svg>
                 </a>
             </div>
-            <p>&copy; 2025 Galway Jam Circle. v1.2. All Rights Reserved.</p>
+            <p>&copy; 2025 Galway Jam Circle. v1.3. All Rights Reserved.</p>
             <p class="text-sm text-stone-400 mt-2">Bringing music to the people of Galway.</p>
             <div class="space-x-4">
                  <a href="feedback.html" class="text-sm text-stone-400 hover:text-white mt-4 inline-block">Website Feedback</a>
@@ -520,7 +517,7 @@
             const featuredVideoUrlInput = document.getElementById('featured-video-url');
             const cancelFeaturedVideoBtn = document.getElementById('cancel-featured-video-btn');
 
-            // NEW Community Section Elements
+            // Community Section Elements
             const communitySwiperWrapper = document.getElementById('community-swiper-wrapper');
             const addCommunityItemBtn = document.getElementById('add-community-item-btn');
             const addCommunityForm = document.getElementById('add-community-form');
@@ -549,10 +546,7 @@
 
             const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-            const jamDatepicker = flatpickr(jamDateInput, {
-                dateFormat: "j M:",
-                onChange: function(selectedDates) { if (selectedDates.length > 0) { jamDayInput.value = dayNames[selectedDates[0].getDay()]; } },
-            });
+            flatpickr(jamDateInput, { dateFormat: "j M:", onChange: function(selectedDates) { if (selectedDates.length > 0) { jamDayInput.value = dayNames[selectedDates[0].getDay()]; } }, });
             flatpickr(jamTimeInput, { enableTime: true, noCalendar: true, dateFormat: "H:i", defaultDate: "14:00" });
             flatpickr(eventDatesInput, { mode: "range", dateFormat: "j M Y", onClose: function(selectedDates, dateStr, instance) { if (selectedDates.length === 2) { const start = selectedDates[0]; const end = selectedDates[1]; const format = (date) => `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}`; instance.input.value = `${format(start)} - ${format(end)} ${end.getFullYear()}`; } } });
             flatpickr(testDateInput, { dateFormat: "Y-m-d" });
@@ -633,32 +627,43 @@
                 });
             }
 
-            // NEW: Render Community Slider
             function renderCommunitySlider() {
                 communityItems = [...initialCommunityItems];
                 communitySwiperWrapper.innerHTML = '';
                 if (communityItems.length === 0) {
-                    communitySwiperWrapper.innerHTML = `<div class="swiper-slide flex items-center justify-center bg-gray-100 text-gray-500">No community events to show.</div>`;
+                    communitySwiperWrapper.innerHTML = `<div class="swiper-slide flex items-center justify-center bg-gray-100 text-gray-500 p-4 rounded-lg">No community events to show.</div>`;
                 } else {
                     communityItems.forEach(item => {
                         const slide = document.createElement('div');
                         slide.className = 'swiper-slide';
-                        slide.style.backgroundImage = `url('${item.imageUrl}')`;
+
+                        const amountRaisedHTML = item.type === 'charity' && item.amountRaised ? `
+                            <div>
+                                <h4 class="font-bold text-primary mb-1 uppercase tracking-wider text-sm">Amount Raised</h4>
+                                <p class="text-gray-700 text-lg">${item.amountRaised}</p>
+                            </div>` : '';
                         
-                        const amountRaisedHTML = item.type === 'charity' && item.amountRaised ? `<h4 class="font-bold text-accent text-lg">Amount Raised: ${item.amountRaised}</h4>` : '';
+                        const itemTypeDisplay = item.type === 'charity' ? 'Charity Fundraiser' : 'Community Event';
 
                         slide.innerHTML = `
-                            <div class="slide-admin-controls admin-controls-inline space-x-2">
-                                <button data-id="${item.id}" class="edit-community-btn bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 shadow-md">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" /><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" /></svg>
-                                </button>
-                                <button data-id="${item.id}" class="delete-community-btn bg-red-500 text-white p-2 rounded-full hover:bg-red-600 shadow-md">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" /></svg>
-                                </button>
-                            </div>
-                            <div class="slide-overlay">
-                                ${amountRaisedHTML}
-                                <p class="text-white/90">${item.description}</p>
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                                <div class="relative">
+                                    <img src="${item.imageUrl}" alt="${item.description.substring(0, 50)}" class="w-full h-80 object-cover">
+                                    <div class="slide-admin-controls admin-controls-inline space-x-2">
+                                        <button data-id="${item.id}" class="edit-community-btn bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 shadow-md"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" /><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" /></svg></button>
+                                        <button data-id="${item.id}" class="delete-community-btn bg-red-500 text-white p-2 rounded-full hover:bg-red-600 shadow-md"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" /></svg></button>
+                                    </div>
+                                </div>
+                                <div class="p-6">
+                                    <div class="grid grid-cols-1 ${item.type === 'charity' ? 'sm:grid-cols-2' : ''} gap-4 mb-4">
+                                        <div>
+                                            <h4 class="font-bold text-primary mb-1 uppercase tracking-wider text-sm">Event Type</h4>
+                                            <p class="text-gray-700 text-lg">${itemTypeDisplay}</p>
+                                        </div>
+                                        ${amountRaisedHTML}
+                                    </div>
+                                    <p class="text-gray-600">${item.description}</p>
+                                </div>
                             </div>
                         `;
                         communitySwiperWrapper.appendChild(slide);
@@ -670,7 +675,7 @@
                     effect: 'fade',
                     fadeEffect: { crossFade: true },
                     loop: communityItems.length > 1,
-                    autoplay: { delay: 5000, disableOnInteraction: false },
+                    autoplay: { delay: 6000, disableOnInteraction: false },
                     pagination: { el: '.swiper-pagination', clickable: true },
                     navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
                 });
@@ -695,7 +700,6 @@
             function showPhotoForm() { addPhotoForm.style.display = 'block'; }
             function hidePhotoForm() { addPhotoForm.style.display = 'none'; }
             
-            // NEW: Show/Hide Community Form
             function showCommunityForm(mode = 'add', item = null) {
                 addCommunityForm.style.display = 'block';
                 if (mode === 'edit') {
@@ -710,7 +714,6 @@
                     editCommunityIdInput.value = '';
                     addCommunityForm.reset();
                 }
-                // Trigger change event to ensure correct UI state
                 communityItemTypeInput.dispatchEvent(new Event('change'));
                 communityImageUrlInput.focus();
             }
@@ -722,7 +725,7 @@
                  renderJams();
                  renderEvents();
                  renderGallery();
-                 renderCommunitySlider(); // Re-render to show/hide admin buttons
+                 renderCommunitySlider();
             }
 
             function handleAdminClick(e) {
@@ -763,13 +766,12 @@
             addPhotoForm.addEventListener('submit', async (e) => { e.preventDefault(); const url = photoUrlInput.value.trim(); const caption = photoCaptionInput.value.trim(); const id = String(Date.now()); if (!url || !caption) { showModal('Please provide both a URL and a caption.', 'alert'); return; } await setDoc(doc(db, "photos", id), { id, type: 'image', url, caption }); await loadData(); hidePhotoForm(); });
             galleryGrid.addEventListener('click', async (e) => { const deleteBtn = e.target.closest('.delete-photo-btn'); if (!deleteBtn) return; const photoId = deleteBtn.dataset.id; showModal('Are you sure you want to delete this media?', 'confirm', async () => { await deleteDoc(doc(db, "photos", photoId)); await loadData(); }); });
 
-            // NEW: Community Section Logic
+            // Community Section Logic
             addCommunityItemBtn.addEventListener('click', () => showCommunityForm('add'));
             cancelCommunityBtn.addEventListener('click', hideCommunityForm);
             communityItemTypeInput.addEventListener('change', (e) => { amountRaisedWrapper.classList.toggle('hidden', e.target.value !== 'charity'); });
             
             async function saveCommunityItem(itemData) { await setDoc(doc(db, "community", String(itemData.id)), itemData); await loadData(); }
-
             addCommunityForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 let id = editCommunityIdInput.value;
@@ -787,16 +789,13 @@
                 await saveCommunityItem(itemData);
                 hideCommunityForm();
             });
-
             communitySwiperWrapper.addEventListener('click', async (e) => {
                 const editBtn = e.target.closest('.edit-community-btn');
                 const deleteBtn = e.target.closest('.delete-community-btn');
                 if (!editBtn && !deleteBtn) return;
-
                 const itemId = (editBtn || deleteBtn).dataset.id;
                 const itemToActOn = initialCommunityItems.find(item => item.id === itemId);
                 if (!itemToActOn) return;
-
                 if (editBtn) { showCommunityForm('edit', itemToActOn); } 
                 else if (deleteBtn) { showModal('Are you sure you want to delete this item?', 'confirm', async () => { await deleteDoc(doc(db, "community", itemId)); await loadData(); }); }
             });
@@ -843,7 +842,7 @@
                     if (initialCommunityItems.length === 0) {
                         needsSeeding = true;
                         const seedCommunity = [
-                            { id: "c1", type: "charity", imageUrl: "https://www.advertiser.ie/images/2018/12/154215.jpg", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.", amountRaised: "€1,234" },
+                            { id: "c1", type: "charity", imageUrl: "https://www.advertiser.ie/images/2018/12/154215.jpg", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.", amountRaised: "€1,234" },
                             { id: "c2", type: "community", imageUrl: "https://i.ytimg.com/vi/WDDg-vo9i5U/maxresdefault.jpg", description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.", amountRaised: "" }
                         ];
                         seedCommunity.forEach(item => batch.set(doc(db, "community", item.id), item));
