@@ -278,14 +278,28 @@
                             <option value="charity">Charity Fundraiser</option>
                         </select>
                     </div>
+                    
+                    <!-- Conditional Fields -->
+                    <div id="community-headline-wrapper" class="mb-4 hidden">
+                        <label for="community-headline" class="block text-gray-700 font-bold mb-2 text-left">Headline</label>
+                        <input type="text" id="community-headline" class="w-full p-2 border rounded" placeholder="e.g., Music for the Community Fair">
+                    </div>
+                    <div id="charity-fields-wrapper" class="hidden">
+                        <div class="mb-4">
+                            <label for="community-amount" class="block text-gray-700 font-bold mb-2 text-left">Amount Raised</label>
+                            <input type="text" id="community-amount" class="w-full p-2 border rounded" placeholder="e.g., €1,200">
+                        </div>
+                        <div class="mb-4">
+                            <label for="community-charity-name" class="block text-gray-700 font-bold mb-2 text-left">For (Charity Name)</label>
+                            <input type="text" id="community-charity-name" class="w-full p-2 border rounded" placeholder="e.g., COPE Galway">
+                        </div>
+                    </div>
+
                     <div class="mb-4">
                         <label for="community-description" class="block text-gray-700 font-bold mb-2 text-left">Description (max 40 words)</label>
                         <textarea id="community-description" class="w-full p-2 border rounded" rows="3" placeholder="A short description of the event or fundraiser..." maxlength="240"></textarea>
                     </div>
-                    <div id="amount-raised-wrapper" class="mb-4 hidden">
-                        <label for="community-amount-raised" class="block text-gray-700 font-bold mb-2 text-left">Amount Raised</label>
-                        <input type="text" id="community-amount-raised" class="w-full p-2 border rounded" placeholder="e.g., €1,200">
-                    </div>
+
                     <div class="flex justify-end space-x-4">
                         <button type="button" id="cancel-community-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button>
                         <button type="submit" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Save Item</button>
@@ -415,7 +429,7 @@
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.792 2.013 10.146 2 12.315 2zm0 1.623c-2.403 0-2.748.01-3.728.058-1.006.047-1.634.21-2.203.434a3.272 3.272 0 00-1.15 1.15c-.224.57-.386 1.198-.434 2.203-.048.98-.058 1.325-.058 3.728s.01 2.748.058 3.728c.048 1.006.21 1.634.434 2.203a3.272 3.272 0 001.15 1.15c.57.224 1.198.386 2.203.434.98.048 1.325.058 3.728.058s2.748-.01 3.728-.058c1.006-.047 1.634-.21 2.203-.434a3.272 3.272 0 001.15-1.15c.224-.57.386-1.198.434-2.203.048-.98.058-1.325.058-3.728s-.01-2.748-.058-3.728c-.048-1.006-.21-1.634-.434-2.203a3.272 3.272 0 00-1.15-1.15c-.57-.224-1.198-.386-2.203-.434C15.063 3.633 14.718 3.623 12.315 3.623zM12 9.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm0 6a3.75 3.75 0 110-7.5 3.75 3.75 0 010 7.5zM16.965 6.57a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" /></svg>
                 </a>
             </div>
-            <p>&copy; 2025 Galway Jam Circle. v1.3. All Rights Reserved.</p>
+            <p>&copy; 2025 Galway Jam Circle. v1.4. All Rights Reserved.</p>
             <p class="text-sm text-stone-400 mt-2">Bringing music to the people of Galway.</p>
             <div class="space-x-4">
                  <a href="feedback.html" class="text-sm text-stone-400 hover:text-white mt-4 inline-block">Website Feedback</a>
@@ -460,7 +474,6 @@
                 });
             }
 
-            // Initialize the festival carousel
             new Swiper('.festival-carousel', {
                 loop: true,
                 autoplay: { delay: 4000, disableOnInteraction: false },
@@ -517,7 +530,6 @@
             const featuredVideoUrlInput = document.getElementById('featured-video-url');
             const cancelFeaturedVideoBtn = document.getElementById('cancel-featured-video-btn');
 
-            // Community Section Elements
             const communitySwiperWrapper = document.getElementById('community-swiper-wrapper');
             const addCommunityItemBtn = document.getElementById('add-community-item-btn');
             const addCommunityForm = document.getElementById('add-community-form');
@@ -527,8 +539,11 @@
             const communityImageUrlInput = document.getElementById('community-image-url');
             const communityItemTypeInput = document.getElementById('community-item-type');
             const communityDescriptionInput = document.getElementById('community-description');
-            const amountRaisedWrapper = document.getElementById('amount-raised-wrapper');
-            const communityAmountRaisedInput = document.getElementById('community-amount-raised');
+            const communityHeadlineWrapper = document.getElementById('community-headline-wrapper');
+            const communityHeadlineInput = document.getElementById('community-headline');
+            const charityFieldsWrapper = document.getElementById('charity-fields-wrapper');
+            const communityAmountInput = document.getElementById('community-amount');
+            const communityCharityNameInput = document.getElementById('community-charity-name');
 
             const modal = document.getElementById('custom-modal');
             const modalMessage = document.getElementById('modal-message');
@@ -637,13 +652,15 @@
                         const slide = document.createElement('div');
                         slide.className = 'swiper-slide';
 
-                        const amountRaisedHTML = item.type === 'charity' && item.amountRaised ? `
-                            <div>
-                                <h4 class="font-bold text-primary mb-1 uppercase tracking-wider text-sm">Amount Raised</h4>
-                                <p class="text-gray-700 text-lg">${item.amountRaised}</p>
-                            </div>` : '';
-                        
-                        const itemTypeDisplay = item.type === 'charity' ? 'Charity Fundraiser' : 'Community Event';
+                        let headlineHTML = '';
+                        if (item.type === 'charity' && item.amountRaised && item.charityName) {
+                            headlineHTML = `
+                                <h3 class="font-bold text-primary text-xl mb-2">
+                                    Amount Raised: ${item.amountRaised} for ${item.charityName}
+                                </h3>`;
+                        } else if (item.type === 'community' && item.headline) {
+                             headlineHTML = `<h3 class="font-bold text-primary text-xl mb-2">${item.headline}</h3>`;
+                        }
 
                         slide.innerHTML = `
                             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -655,13 +672,7 @@
                                     </div>
                                 </div>
                                 <div class="p-6">
-                                    <div class="grid grid-cols-1 ${item.type === 'charity' ? 'sm:grid-cols-2' : ''} gap-4 mb-4">
-                                        <div>
-                                            <h4 class="font-bold text-primary mb-1 uppercase tracking-wider text-sm">Event Type</h4>
-                                            <p class="text-gray-700 text-lg">${itemTypeDisplay}</p>
-                                        </div>
-                                        ${amountRaisedHTML}
-                                    </div>
+                                    ${headlineHTML}
                                     <p class="text-gray-600">${item.description}</p>
                                 </div>
                             </div>
@@ -708,7 +719,9 @@
                     communityImageUrlInput.value = item.imageUrl;
                     communityItemTypeInput.value = item.type;
                     communityDescriptionInput.value = item.description;
-                    communityAmountRaisedInput.value = item.amountRaised || '';
+                    communityHeadlineInput.value = item.headline || '';
+                    communityAmountInput.value = item.amountRaised || '';
+                    communityCharityNameInput.value = item.charityName || '';
                 } else {
                     communityFormTitle.textContent = 'Add New Community/Charity Item';
                     editCommunityIdInput.value = '';
@@ -769,7 +782,11 @@
             // Community Section Logic
             addCommunityItemBtn.addEventListener('click', () => showCommunityForm('add'));
             cancelCommunityBtn.addEventListener('click', hideCommunityForm);
-            communityItemTypeInput.addEventListener('change', (e) => { amountRaisedWrapper.classList.toggle('hidden', e.target.value !== 'charity'); });
+            communityItemTypeInput.addEventListener('change', (e) => {
+                const isCharity = e.target.value === 'charity';
+                charityFieldsWrapper.classList.toggle('hidden', !isCharity);
+                communityHeadlineWrapper.classList.toggle('hidden', isCharity);
+            });
             
             async function saveCommunityItem(itemData) { await setDoc(doc(db, "community", String(itemData.id)), itemData); await loadData(); }
             addCommunityForm.addEventListener('submit', async (e) => {
@@ -778,13 +795,26 @@
                 const imageUrl = communityImageUrlInput.value.trim();
                 const description = communityDescriptionInput.value.trim();
                 const type = communityItemTypeInput.value;
-                const amountRaised = communityAmountRaisedInput.value.trim();
-
+                
                 if (!imageUrl || !description) { showModal('Please provide an Image URL and a Description.', 'alert'); return; }
                 if (!id) { id = String(Date.now()); }
 
                 const itemData = { id, imageUrl, description, type };
-                if (type === 'charity') { itemData.amountRaised = amountRaised; }
+
+                if (type === 'charity') {
+                    itemData.amountRaised = communityAmountInput.value.trim();
+                    itemData.charityName = communityCharityNameInput.value.trim();
+                    if (!itemData.amountRaised || !itemData.charityName) {
+                        showModal('For charity events, please provide both the amount and the charity name.', 'alert');
+                        return;
+                    }
+                } else {
+                    itemData.headline = communityHeadlineInput.value.trim();
+                    if (!itemData.headline) {
+                        showModal('For community events, please provide a headline.', 'alert');
+                        return;
+                    }
+                }
                 
                 await saveCommunityItem(itemData);
                 hideCommunityForm();
@@ -842,8 +872,8 @@
                     if (initialCommunityItems.length === 0) {
                         needsSeeding = true;
                         const seedCommunity = [
-                            { id: "c1", type: "charity", imageUrl: "https://www.advertiser.ie/images/2018/12/154215.jpg", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.", amountRaised: "€1,234" },
-                            { id: "c2", type: "community", imageUrl: "https://i.ytimg.com/vi/WDDg-vo9i5U/maxresdefault.jpg", description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.", amountRaised: "" }
+                            { id: "c1", type: "charity", imageUrl: "https://www.advertiser.ie/images/2018/12/154215.jpg", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.", amountRaised: "€1,234", charityName: "A Local Charity" },
+                            { id: "c2", type: "community", imageUrl: "https://i.ytimg.com/vi/WDDg-vo9i5U/maxresdefault.jpg", description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.", headline: "Music at the Community Fair" }
                         ];
                         seedCommunity.forEach(item => batch.set(doc(db, "community", item.id), item));
                     }
