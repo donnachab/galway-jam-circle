@@ -95,6 +95,30 @@
             position: static;
             margin-top: 1rem;
         }
+        /* Responsive Image container style */
+        .community-image-container {
+            width: 100%;
+            height: 20rem; /* 320px for mobile */
+            background-color: #f0f0f0; /* light gray */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem 0.5rem 0 0;
+            overflow: hidden;
+        }
+        .community-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Default to cover for mobile */
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .community-image-container {
+                height: 24rem; /* 384px for desktop */
+            }
+            .community-image-container img {
+                object-fit: contain; /* Switch to contain for desktop */
+            }
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -139,7 +163,7 @@
             <img id="cover-photo" src="https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/340126198_1202888093755813_6375467148998027340_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=2285d6&_nc_ohc=wA-6pUbx_XYQ7kNvwHkWjV3&_nc_oc=Adnd0Bbs-9bBGiNkVlqTm636JeXERyh16eo2fUrKp5p7sPkeFMlKHcYdyTj8qGDYzQk&_nc_zt=23&_nc_ht=scontent-dub4-1.xx&_nc_gid=Pse2aOVgLI3EOs4_MVhu_Q&oh=00_AfWMKMB5g8K5fFbQO5RjBf8Wp9epHYVIZ5FuDYFFu1qEsg&oe=689D27F9" alt="A group of people playing instruments like guitars and ukuleles by a river in Galway." class="w-full h-[70vh] object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent flex flex-col justify-end items-center p-6 sm:p-12">
                 <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white drop-shadow-2xl">Welcome to the Galway Jam Circle</h1>
-                <p class="mt-4 text-lg sm:text-xl max-w-2xl text-white/90 drop-shadow-xl">A friendly, informal music-making community for all skill levels. Let's Jam!</p>
+                <p class="mt-4 text-lg sm:text-xl max-w-3xl text-white/90 drop-shadow-xl">A friendly, informal music-making community for all skill levels. Let's Jam!</p>
                 <div class="mt-8 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
                     <a href="#jams" class="px-8 py-3 bg-accent text-primary font-bold rounded-full hover:bg-opacity-80 transition duration-300 transform hover:scale-105 shadow-lg">See Regular Jams</a>
                     <div class="flex items-start space-x-4">
@@ -181,13 +205,13 @@
             </form>
         </div>
 
-        <section id="jams" class="py-16 sm:py-24 bg-white">
+        <section id="jams" class="py-16 md:py-20 lg:py-24 bg-white">
             <div class="container mx-auto px-4 sm:px-6">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">Regular Jams</h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Our weekly jam schedule. Voluntary donations are welcome to help cover venue costs.</p>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">Regular Jams</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">Our weekly jam schedule. Voluntary donations are welcome to help cover venue costs.</p>
                     
-                    <div class="mt-6">
+                    <div class="mt-8">
                         <a href="#" onclick="return false;" class="px-8 py-3 bg-accent text-primary font-bold rounded-full transition duration-300 shadow-lg opacity-60 cursor-not-allowed">
                             Contribute €5 for the Jam
                         </a>
@@ -195,7 +219,7 @@
                     </div>
 
                 </div>
-                <div class="max-w-2xl mx-auto">
+                <div class="max-w-4xl mx-auto">
                     <ul id="jam-list" class="space-y-4"></ul>
                     <div class="text-center mt-8 admin-controls-inline flex-wrap justify-center gap-4">
                         <button id="add-jam-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300 shadow-md">Add New Jam</button>
@@ -218,10 +242,10 @@
             </div>
         </section>
 
-        <section id="special-events" class="py-16 sm:py-24 bg-stone-50 border-y border-stone-200">
+        <section id="special-events" class="py-16 md:py-20 lg:py-24 bg-stone-50 border-y border-stone-200">
             <div class="container mx-auto px-4 sm:px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-4">Festivals & Special Events</h2>
-                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">We love taking part in festivals around Ireland. Here are some of our favourites we've been to, and hope to see again!</p>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-primary mb-4">Festivals & Special Events</h2>
+                <p class="text-center text-lg text-gray-600 max-w-4xl mx-auto mb-12">We love taking part in festivals around Ireland. Here are some of our favourites we've been to, and hope to see again!</p>
                 
                 <div class="swiper festival-carousel">
                     <div class="swiper-wrapper">
@@ -234,19 +258,19 @@
                     <div class="swiper-pagination"></div>
                 </div>
 
-                <div id="event-list" class="max-w-3xl mx-auto space-y-8 mt-12"></div>
+                <div id="event-list" class="max-w-4xl mx-auto space-y-8 mt-12"></div>
                 <div class="text-center mt-8 admin-controls-inline"><button id="add-event-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300 shadow-md">Add New Event</button></div>
-                <form id="add-event-form" class="max-w-3xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-inner border"><h3 id="event-form-title" class="text-xl font-bold text-primary mb-4">Add a New Event</h3><input type="hidden" id="edit-event-id"><div class="mb-4"><label for="event-title" class="block text-gray-700 font-bold mb-2 text-left">Title</label><input type="text" id="event-title" class="w-full p-2 border rounded" placeholder="e.g., Cleggan Fringe Festival"></div><div class="mb-4"><label for="event-dates" class="block text-gray-700 font-bold mb-2 text-left">Dates</label><input type="text" id="event-dates" class="w-full p-2 border rounded" placeholder="Select a date or date range..."></div><div class="mb-4"><label for="event-description" class="block text-gray-700 font-bold mb-2 text-left">Description</label><textarea id="event-description" class="w-full p-2 border rounded" rows="4" placeholder="Enter event details..."></textarea></div><div class="flex justify-end space-x-4"><button type="button" id="cancel-event-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button><button type="submit" id="submit-event-btn" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Save Event</button></div></form>
+                <form id="add-event-form" class="max-w-4xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-inner border"><h3 id="event-form-title" class="text-xl font-bold text-primary mb-4">Add a New Event</h3><input type="hidden" id="edit-event-id"><div class="mb-4"><label for="event-title" class="block text-gray-700 font-bold mb-2 text-left">Title</label><input type="text" id="event-title" class="w-full p-2 border rounded" placeholder="e.g., Cleggan Fringe Festival"></div><div class="mb-4"><label for="event-dates" class="block text-gray-700 font-bold mb-2 text-left">Dates</label><input type="text" id="event-dates" class="w-full p-2 border rounded" placeholder="Select a date or date range..."></div><div class="mb-4"><label for="event-description" class="block text-gray-700 font-bold mb-2 text-left">Description</label><textarea id="event-description" class="w-full p-2 border rounded" rows="4" placeholder="Enter event details..."></textarea></div><div class="flex justify-end space-x-4"><button type="button" id="cancel-event-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button><button type="submit" id="submit-event-btn" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Save Event</button></div></form>
             </div>
         </section>
 
         <!-- Community & Charity Section -->
-        <section id="community" class="py-16 sm:py-24 bg-white">
+        <section id="community" class="py-16 md:py-20 lg:py-24 bg-white">
             <div class="container mx-auto px-4 sm:px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-4">Community & Charity</h2>
-                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">We're proud to be part of the Galway community and support local causes. Here are some of the events and fundraisers we've been involved with.</p>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-primary mb-4">Community & Charity</h2>
+                <p class="text-center text-lg text-gray-600 max-w-4xl mx-auto mb-12">We're proud to be part of the Galway community and support local causes. Here are some of the events and fundraisers we've been involved with.</p>
                 
-                <div id="community-slider-container" class="max-w-4xl mx-auto">
+                <div id="community-slider-container" class="max-w-5xl mx-auto">
                     <!-- Swiper -->
                     <div class="swiper community-swiper">
                         <div class="swiper-wrapper" id="community-swiper-wrapper">
@@ -308,17 +332,17 @@
             </div>
         </section>
 
-        <section id="format" class="py-16 sm:py-24 bg-stone-50 border-t border-stone-200"><div class="container mx-auto px-4 sm:px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Our Jam Format</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-5xl mx-auto">
+        <section id="format" class="py-16 md:py-20 lg:py-24 bg-stone-50 border-t border-stone-200"><div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-primary mb-12">Our Jam Format</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-7xl mx-auto">
                 <div class="bg-white p-8 rounded-lg shadow-sm border border-stone-200"><h3 class="font-bold text-xl text-primary mb-2">1. Loop Songs First</h3><p class="text-gray-600">We begin with easy, repetitive songs to get everyone warmed up and in the groove.</p></div>
                 <div class="bg-white p-8 rounded-lg shadow-sm border border-stone-200"><h3 class="font-bold text-xl text-primary mb-2">2. Four Chords or Less</h3><p class="text-gray-600">Next, we move to songs that use four simple chords or fewer, making it easy for everyone to join in.</p></div>
                 <div class="bg-white p-8 rounded-lg shadow-sm border border-stone-200"><h3 class="font-bold text-xl text-primary mb-2">3. Then Anything Goes!</h3><p class="text-gray-600">In the final part of the jam, the floor is open! Bring out any song you'd like to play with the group.</p></div>
             </div>
-            <div class="max-w-3xl mx-auto mt-12">
+            <div class="max-w-4xl mx-auto mt-12">
                 <details class="p-4 rounded-lg bg-white border border-stone-200">
                     <summary class="font-bold text-lg text-primary">Jamming Guidelines</summary>
-                    <div class="mt-4 space-y-4 text-gray-700 text-left prose">
+                    <div class="mt-4 space-y-4 text-gray-700 text-left prose max-w-none">
                         <p class="italic">"Jamming's where the magic happens"</p>
                         <p>Jam circles are relaxed, open, inclusive gatherings of musicians and singers who sit in a circle facing each other. Jammers play for enjoyment rather than for audiences, but listeners are welcome.</p>
                         <p>A jam is a safe space to learn and grow jamming skills.</p>
@@ -351,20 +375,22 @@
                     </div>
                 </details>
             </div>
-            <div class="mt-12 text-center bg-accent/30 p-8 rounded-lg max-w-3xl mx-auto border border-amber-200">
+            <div class="mt-12 text-center bg-accent/30 p-8 rounded-lg max-w-4xl mx-auto border border-amber-200">
                 <img src="images/lets_jam_logo.png" alt="Let's Jam Ireland Logo Placeholder" class="mx-auto mb-4 rounded-md h-20">
                 <p class="text-gray-700">Fuller information about the format and rules will be made available on the Let's Jam Ireland site when it is up and running.</p>
             </div>
         </div>
         </section>
         
-        <section id="gallery" class="py-16 sm:py-24 bg-white border-y border-stone-200">
+        <section id="gallery" class="py-16 md:py-20 lg:py-24 bg-white border-y border-stone-200">
             <div class="container mx-auto px-4 sm:px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">Jam Circle Gallery</h2>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-primary mb-12">Jam Circle Gallery</h2>
                 
-                <h3 class="text-2xl font-bold text-center text-primary mb-8">Videos</h3>
-                <div class="aspect-w-16 aspect-h-9 max-w-4xl mx-auto">
-                    <iframe id="featured-video-player" class="w-full h-full rounded-lg shadow-lg" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <h3 class="text-2xl md:text-3xl font-bold text-center text-primary mb-8">Videos</h3>
+                <div class="max-w-5xl mx-auto">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <iframe id="featured-video-player" class="w-full h-full rounded-lg shadow-lg" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
                 </div>
                 <div class="text-center mt-4 admin-controls-inline">
                     <button id="edit-featured-video-btn" class="px-4 py-2 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-600 transition duration-300 shadow-md">Change Featured Video</button>
@@ -386,7 +412,7 @@
                     </div>
                 </form>
 
-                <h3 class="text-2xl font-bold text-center text-primary mt-16 mb-8">Photos</h3>
+                <h3 class="text-2xl md:text-3xl font-bold text-center text-primary mt-16 mb-8">Photos</h3>
                 <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4"></div>
                 <div class="text-center mt-8 admin-controls-inline"><button id="add-photo-btn" class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300 shadow-md">Add Photo</button></div>
                 <form id="add-photo-form" class="max-w-3xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-inner border">
@@ -407,7 +433,7 @@
             </div>
         </section>
         
-        <section id="contact" class="py-16 sm:py-24 bg-white"><div class="container mx-auto px-4 sm:px-6 text-center"><h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-4">Join Us!</h2><p class="text-gray-600 max-w-xl mx-auto mb-8">Want to join our mailing list for updates or have a question? Get in touch! We'd love to hear from you.</p><a href="mailto:info@galwayjamcircle.ie" class="px-8 py-3 bg-primary text-white font-bold rounded-full hover:opacity-90 transition duration-300 transform hover:scale-105 shadow-md">Email Us</a></div></section>
+        <section id="contact" class="py-16 md:py-20 lg:py-24 bg-white"><div class="container mx-auto px-4 sm:px-6 text-center"><h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-primary mb-4">Join Us!</h2><p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">Want to join our mailing list for updates or have a question? Get in touch! We'd love to hear from you.</p><a href="mailto:info@galwayjamcircle.ie" class="px-8 py-3 bg-primary text-white font-bold rounded-full hover:opacity-90 transition duration-300 transform hover:scale-105 shadow-md">Email Us</a></div></section>
     </main>
     
     <footer class="bg-primary text-white/80 py-8">
@@ -429,7 +455,7 @@
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.792 2.013 10.146 2 12.315 2zm0 1.623c-2.403 0-2.748.01-3.728.058-1.006.047-1.634.21-2.203.434a3.272 3.272 0 00-1.15 1.15c-.224.57-.386 1.198-.434 2.203-.048.98-.058 1.325-.058 3.728s.01 2.748.058 3.728c.048 1.006.21 1.634.434 2.203a3.272 3.272 0 001.15 1.15c.57.224 1.198.386 2.203.434.98.048 1.325.058 3.728.058s2.748-.01 3.728-.058c1.006-.047 1.634-.21 2.203-.434a3.272 3.272 0 001.15-1.15c.224-.57.386-1.198.434-2.203.048-.98.058-1.325.058-3.728s-.01-2.748-.058-3.728c-.048-1.006-.21-1.634-.434-2.203a3.272 3.272 0 00-1.15-1.15c-.57-.224-1.198-.386-2.203-.434C15.063 3.633 14.718 3.623 12.315 3.623zM12 9.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm0 6a3.75 3.75 0 110-7.5 3.75 3.75 0 010 7.5zM16.965 6.57a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" /></svg>
                 </a>
             </div>
-            <p>&copy; 2025 Galway Jam Circle. v1.4. All Rights Reserved.</p>
+            <p>&copy; 2025 Galway Jam Circle. v1.5. All Rights Reserved.</p>
             <p class="text-sm text-stone-400 mt-2">Bringing music to the people of Galway.</p>
             <div class="space-x-4">
                  <a href="feedback.html" class="text-sm text-stone-400 hover:text-white mt-4 inline-block">Website Feedback</a>
@@ -654,18 +680,15 @@
 
                         let headlineHTML = '';
                         if (item.type === 'charity' && item.amountRaised && item.charityName) {
-                            headlineHTML = `
-                                <h3 class="font-bold text-primary text-xl mb-2">
-                                    Amount Raised: ${item.amountRaised} for ${item.charityName}
-                                </h3>`;
+                            headlineHTML = `<h3 class="font-bold text-primary text-xl mb-2">Amount Raised: ${item.amountRaised} for ${item.charityName}</h3>`;
                         } else if (item.type === 'community' && item.headline) {
                              headlineHTML = `<h3 class="font-bold text-primary text-xl mb-2">${item.headline}</h3>`;
                         }
 
                         slide.innerHTML = `
                             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                                <div class="relative">
-                                    <img src="${item.imageUrl}" alt="${item.description.substring(0, 50)}" class="w-full h-80 object-cover">
+                                <div class="relative community-image-container">
+                                    <img src="${item.imageUrl}" alt="${item.description.substring(0, 50)}">
                                     <div class="slide-admin-controls admin-controls-inline space-x-2">
                                         <button data-id="${item.id}" class="edit-community-btn bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 shadow-md"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" /><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" /></svg></button>
                                         <button data-id="${item.id}" class="delete-community-btn bg-red-500 text-white p-2 rounded-full hover:bg-red-600 shadow-md"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" /></svg></button>
