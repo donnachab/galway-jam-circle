@@ -528,7 +528,6 @@
                 breakpoints: { 640: { slidesPerView: 3, spaceBetween: 30 }, 1024: { slidesPerView: 5, spaceBetween: 50 } }
             });
 
-            const ADMIN_PASSWORD = '4519';
             let initialJams = [], initialEvents = [], initialPhotos = [], initialVenues = [], initialCommunityItems = [];
             let jams = [], events = [], photos = [], communityItems = [];
             let communitySwiper = null;
@@ -684,7 +683,6 @@
                 jams.sort((a, b) => parseJamDate(a.date) - parseJamDate(b.date)).forEach(jam => {
                     const li = document.createElement('li');
                     const isSaturday = jam.day.toLowerCase() === 'saturday';
-                    // BUG FIX: Changed justify-between to sm:justify-between
                     li.className = 'p-4 rounded-lg shadow-sm border-l-4 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center bg-white border-gray-200';
                     li.classList.toggle('jam-special-day', !isSaturday);
                     if (jam.cancelled) { li.classList.add('jam-cancelled'); } 
@@ -864,12 +862,63 @@
                  renderCommunitySlider();
             }
 
+            // Check session storage on page load to see if user is already an admin
+            if (sessionStorage.getItem('gjc_isAdmin') === 'true') {
+                // We don't need to re-verify the PIN, just enable the mode
+                toggleAdminMode(true);
+            }
+
+            async function verifyPin(pin) {
+                try {
+                    // Get the specific document named 'auth' from the '_config' collection
+                    const docRef = doc(db, "_config", "auth");
+                    const docSnap = await getDoc(docRef);
+
+                    if (docSnap.exists()) {
+                        const correctPin = docSnap.data().pin;
+                        // Compare the submitted pin with the one from the database
+                        return pin === correctPin;
+                    } else {
+                        // This error means the document wasn't found in Firestore
+                        console.error("Auth document not found in Firestore!");
+                        showModal('Security configuration not found. Please contact support.', 'alert');
+                        return false;
+                    }
+                } catch (error) {
+                    console.error("Error verifying PIN with Firestore:", error);
+                    showModal('Could not verify PIN. Please check your connection.', 'alert');
+                    return false;
+                }
+            }
+
             function handleAdminClick(e) {
                 e.preventDefault();
                 const isAdmin = document.body.classList.contains('admin-mode');
-                if (isAdmin) { toggleAdminMode(false); } 
-                else { showModal('Enter admin password:', 'prompt', (password) => { if (password === ADMIN_PASSWORD) { toggleAdminMode(true); } else { showModal('Incorrect password.', 'alert'); } }); }
+                
+                if (isAdmin) {
+                    sessionStorage.removeItem('gjc_isAdmin'); // Log out
+                    toggleAdminMode(false);
+                } else {
+                    // Use the same modal prompt as before
+                    showModal('Enter admin PIN:', 'prompt', async (pin) => {
+                        if (!pin) return; // User cancelled the prompt
+
+                        // Call our new secure function
+                        const isCorrect = await verifyPin(pin);
+
+                        if (isCorrect) {
+                            console.log("Successful admin login.");
+                            // Store a simple flag in session storage to stay logged in
+                            sessionStorage.setItem('gjc_isAdmin', 'true');
+                            toggleAdminMode(true);
+                        } else {
+                            console.warn("Failed admin login attempt.");
+                            showModal('Incorrect PIN.', 'alert');
+                        }
+                    });
+                }
             }
+
             adminModeBtn.addEventListener('click', handleAdminClick);
             document.body.addEventListener('click', (e) => { if (e.target.classList.contains('exit-admin-btn')) { toggleAdminMode(false); } });
 
