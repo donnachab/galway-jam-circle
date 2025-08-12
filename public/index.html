@@ -864,22 +864,21 @@
 
             // Check session storage on page load to see if user is already an admin
             if (sessionStorage.getItem('gjc_isAdmin') === 'true') {
-                // We don't need to re-verify the PIN, just enable the mode
                 toggleAdminMode(true);
             }
 
             async function verifyPin(pin) {
                 try {
-                    // Get the specific document named 'auth' from the '_config' collection
                     const docRef = doc(db, "_config", "auth");
                     const docSnap = await getDoc(docRef);
 
                     if (docSnap.exists()) {
                         const correctPin = docSnap.data().pin;
-                        // Compare the submitted pin with the one from the database
-                        return pin === correctPin;
+                        // Robust check: Ensure PIN from DB exists and is a string before trimming and comparing.
+                        if (correctPin && typeof correctPin === 'string') {
+                            return pin.trim() === correctPin.trim();
+                        }
                     } else {
-                        // This error means the document wasn't found in Firestore
                         console.error("Auth document not found in Firestore!");
                         showModal('Security configuration not found. Please contact support.', 'alert');
                         return false;
@@ -889,6 +888,7 @@
                     showModal('Could not verify PIN. Please check your connection.', 'alert');
                     return false;
                 }
+                return false; // Default to false if something goes wrong
             }
 
             function handleAdminClick(e) {
@@ -899,16 +899,13 @@
                     sessionStorage.removeItem('gjc_isAdmin'); // Log out
                     toggleAdminMode(false);
                 } else {
-                    // Use the same modal prompt as before
                     showModal('Enter admin PIN:', 'prompt', async (pin) => {
-                        if (!pin) return; // User cancelled the prompt
+                        if (!pin) return;
 
-                        // Call our new secure function
                         const isCorrect = await verifyPin(pin);
 
                         if (isCorrect) {
                             console.log("Successful admin login.");
-                            // Store a simple flag in session storage to stay logged in
                             sessionStorage.setItem('gjc_isAdmin', 'true');
                             toggleAdminMode(true);
                         } else {
