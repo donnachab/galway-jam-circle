@@ -6,7 +6,6 @@
     <title>Galway Jam Circle - Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <!-- Swiper.js CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -88,7 +87,7 @@
         }
          .community-swiper .swiper-button-next:hover,
         .community-swiper .swiper-button-prev:hover {
-             background-color: rgba(0,0,0,0.5);
+           background-color: rgba(0,0,0,0.5);
         }
         .community-swiper .swiper-pagination {
             position: static;
@@ -121,7 +120,6 @@
 </head>
 <body class="text-gray-800">
 
-    <!-- HEADER SECTION -->
     <header class="bg-primary shadow-lg sticky top-0 z-50">
         <nav class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-2 sm:space-x-4">
@@ -341,22 +339,17 @@
             </div>
         </section>
 
-        <!-- Community & Charity Section -->
         <section id="community" class="py-16 md:py-20 lg:py-24 bg-white">
             <div class="container mx-auto px-4 sm:px-6">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-primary mb-4">Community & Charity</h2>
                 <p class="text-center text-lg text-gray-600 max-w-4xl mx-auto mb-12">We're proud to be part of the Galway community and support local causes. Here are some of the events and fundraisers we've been involved with.</p>
                 
                 <div id="community-slider-container" class="max-w-5xl mx-auto">
-                    <!-- Swiper -->
                     <div class="swiper community-swiper">
                         <div class="swiper-wrapper" id="community-swiper-wrapper">
-                            <!-- Slides will be injected here by JavaScript -->
-                        </div>
-                        <!-- Add Navigation -->
+                            </div>
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
-                        <!-- Add Pagination -->
                         <div class="swiper-pagination"></div>
                     </div>
                 </div>
@@ -380,7 +373,6 @@
                         </select>
                     </div>
                     
-                    <!-- Conditional Fields -->
                     <div id="community-headline-wrapper" class="mb-4 hidden">
                         <label for="community-headline" class="block text-gray-700 font-bold mb-2 text-left">Headline</label>
                         <input type="text" id="community-headline" class="w-full p-2 border rounded" placeholder="e.g., Music for the Community Fair">
@@ -423,7 +415,7 @@
                     <button id="edit-featured-video-btn" class="px-4 py-2 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-600 transition duration-300 shadow-md">Change Featured Video</button>
                 </div>
                       <div class="text-center mt-8">
-                     <a href="https://youtube.com/playlist?list=PLG9xaR5hTnatoLYd337wPFrbVkjHmWErw" target="_blank" class="inline-block px-8 py-3 bg-accent text-primary font-bold rounded-full hover:bg-opacity-80 transition duration-300 shadow-md">
+                       <a href="https://youtube.com/playlist?list=PLG9xaR5hTnatoLYd337wPFrbVkjHmWErw" target="_blank" class="inline-block px-8 py-3 bg-accent text-primary font-bold rounded-full hover:bg-opacity-80 transition duration-300 shadow-md">
                             See our YouTube Channel
                         </a>
                 </div>
@@ -482,7 +474,7 @@
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.792 2.013 10.146 2 12.315 2zm0 1.623c-2.403 0-2.748.01-3.728.058-1.006.047-1.634.21-2.203.434a3.272 3.272 0 00-1.15 1.15c-.224.57-.386 1.198-.434 2.203-.048.98-.058 1.325-.058 3.728s.01 2.748.058 3.728c.048 1.006.21 1.634.434 2.203a3.272 3.272 0 001.15 1.15c.57.224 1.198.386 2.203.434.98.048 1.325.058 3.728.058s2.748-.01 3.728-.058c1.006-.047 1.634-.21 2.203-.434a3.272 3.272 0 001.15-1.15c.224-.57.386-1.198.434-2.203.048-.98.058-1.325.058-3.728s-.01-2.748-.058-3.728c-.048-1.006-.21-1.634-.434-2.203a3.272 3.272 0 00-1.15-1.15c-.57-.224-1.198-.386-2.203-.434C15.063 3.633 14.718 3.623 12.315 3.623zM12 9.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm0 6a3.75 3.75 0 110-7.5 3.75 3.75 0 010 7.5zM16.965 6.57a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" /></svg>
                 </a>
             </div>
-            <p>&copy; 2025 Galway Jam Circle. v1.5. All Rights Reserved.</p>
+            <p>© 2025 Galway Jam Circle. v1.5. All Rights Reserved.</p>
             <p class="text-sm text-stone-400 mt-2">Bringing music to the people of Galway.</p>
             <div class="space-x-4">
                  <a href="feedback.html" class="text-sm text-stone-400 hover:text-white mt-4 inline-block">Website Feedback</a>
@@ -540,6 +532,7 @@
             let initialJams = [], initialEvents = [], initialPhotos = [], initialVenues = [], initialCommunityItems = [];
             let jams = [], events = [], photos = [], communityItems = [];
             let communitySwiper = null;
+            let jamDatepicker = null; // Bug Fix 1: Declare datepicker instance variable here
 
             // Element declarations
             const coverPhotoElement = document.getElementById('cover-photo');
@@ -616,7 +609,15 @@
 
             const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-            flatpickr(jamDateInput, { dateFormat: "j M:", onChange: function(selectedDates) { if (selectedDates.length > 0) { jamDayInput.value = dayNames[selectedDates[0].getDay()]; } }, });
+            // Bug Fix 1: Assign the flatpickr instance to the variable
+            jamDatepicker = flatpickr(jamDateInput, { 
+                dateFormat: "j M:", 
+                onChange: function(selectedDates) { 
+                    if (selectedDates.length > 0) { 
+                        jamDayInput.value = dayNames[selectedDates[0].getDay()]; 
+                    } 
+                }, 
+            });
             flatpickr(jamTimeInput, { enableTime: true, noCalendar: true, dateFormat: "h:i K", defaultDate: "2:00 PM" });
             flatpickr(eventDatesInput, { 
                 mode: "range", 
@@ -692,7 +693,7 @@
                         if (isSaturday) { adminButtons += jam.cancelled ? `<button data-id="${jam.id}" class="reinstate-btn text-green-600 hover:text-green-800 ml-2">Reinstate</button>` : `<button data-id="${jam.id}" class="cancel-btn text-yellow-600 hover:text-yellow-800 ml-2">Cancel Jam</button>`; } 
                         else { adminButtons += `<button data-id="${jam.id}" class="delete-btn text-red-500 hover:text-red-700 ml-2">Delete</button>`; }
                     }
-                    let mapLink = jam.mapLink ? `&nbsp;<a href="${jam.mapLink}" onclick="window.open(this.href, '_blank'); return false;" class="text-blue-500 hover:underline whitespace-nowrap">(Map)</a>` : '';
+                    let mapLink = jam.mapLink ? ` <a href="${jam.mapLink}" onclick="window.open(this.href, '_blank'); return false;" class="text-blue-500 hover:underline whitespace-nowrap">(Map)</a>` : '';
                     li.innerHTML = `<div class="flex-grow jam-info"><div class="flex flex-col sm:flex-row sm:items-baseline sm:space-x-2"><span class="font-bold text-lg ${isSaturday ? 'text-gray-500' : 'text-yellow-600'}">${jam.day}</span><span class="text-lg font-bold text-primary">${jam.date}</span><span class="text-lg font-bold text-gray-600">${formatTime(jam.time || '2:00 PM')}</span></div><span class="text-gray-700 text-lg">${jam.venue}${mapLink}</span>${jam.cancelled ? '<span class="font-bold text-red-600 mt-1 sm:ml-4">(CANCELLED)</span>' : ''}</div><div class="admin-controls-inline space-x-2 mt-2 sm:mt-0">${adminButtons}</div>`;
                     jamList.appendChild(li);
                 });
@@ -715,7 +716,7 @@
                     const div = document.createElement('div');
                     div.className = 'bg-white p-6 rounded-lg shadow-md relative border border-gray-200';
                     const timeHTML = event.time ? `<span class="text-gray-600 font-semibold">${event.time}</span>` : '';
-                    const mapLinkHTML = event.mapLink ? `&nbsp;<a href="${event.mapLink}" onclick="window.open(this.href, '_blank'); return false;" class="text-blue-500 hover:underline whitespace-nowrap">(Map)</a>` : '';
+                    const mapLinkHTML = event.mapLink ? ` <a href="${event.mapLink}" onclick="window.open(this.href, '_blank'); return false;" class="text-blue-500 hover:underline whitespace-nowrap">(Map)</a>` : '';
 
                     div.innerHTML = `<div class="admin-controls-inline absolute top-2 right-2 space-x-2"><button data-id="${event.id}" class="edit-event-btn text-blue-500 hover:text-blue-700">Edit</button><button data-id="${event.id}" class="delete-event-btn text-red-500 hover:text-red-700">Delete</button></div><h3 class="text-2xl font-bold text-primary">${event.title}</h3><div class="flex items-center space-x-4 mt-1"><p class="text-lg font-semibold text-gray-700">${event.dates}</p>${timeHTML}${mapLinkHTML}</div><p class="mt-4 text-gray-600">${event.description}</p>`;
                     eventList.appendChild(div);
@@ -783,10 +784,29 @@
 
             function showJamForm(mode = 'add', jam = null) {
                 addJamForm.style.display = 'block';
+                // Bug Fix 2: Scroll the form into view
+                addJamForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
                 jamVenueInput.innerHTML = '';
                 initialVenues.forEach(venue => { const option = document.createElement('option'); option.value = venue.name; option.textContent = venue.name; jamVenueInput.appendChild(option); });
-                if (mode === 'edit') { formTitle.textContent = 'Edit Jam'; editJamIdInput.value = jam.id; jamDatepicker.setDate(parseJamDate(jam.date)); jamDayInput.value = jam.day; jamVenueInput.value = jam.venue; jamMapLinkInput.value = jam.mapLink || ''; flatpickr(jamTimeInput, { enableTime: true, noCalendar: true, dateFormat: "h:i K", defaultDate: jam.time || "2:00 PM" }); } 
-                else { formTitle.textContent = 'Add a New Jam'; editJamIdInput.value = ''; const lastJamDate = jams.length > 0 ? parseJamDate(jams[jams.length - 1].date) : new Date(); lastJamDate.setDate(lastJamDate.getDate() + 7); jamDatepicker.setDate(lastJamDate); jamDayInput.value = dayNames[lastJamDate.getDay()]; jamVenueInput.value = ''; jamMapLinkInput.value = ''; flatpickr(jamTimeInput, { enableTime: true, noCalendar: true, dateFormat: "h:i K", defaultDate: "2:00 PM" }); }
+                if (mode === 'edit') { 
+                    formTitle.textContent = 'Edit Jam'; 
+                    editJamIdInput.value = jam.id; 
+                    jamDatepicker.setDate(parseJamDate(jam.date)); // This now works
+                    jamDayInput.value = jam.day; 
+                    jamVenueInput.value = jam.venue; 
+                    jamMapLinkInput.value = jam.mapLink || ''; 
+                    flatpickr(jamTimeInput, { enableTime: true, noCalendar: true, dateFormat: "h:i K", defaultDate: jam.time || "2:00 PM" }); 
+                } else { 
+                    formTitle.textContent = 'Add a New Jam'; 
+                    editJamIdInput.value = ''; 
+                    const lastJamDate = jams.length > 0 ? parseJamDate(jams[jams.length - 1].date) : new Date(); 
+                    lastJamDate.setDate(lastJamDate.getDate() + 7); 
+                    jamDatepicker.setDate(lastJamDate); 
+                    jamDayInput.value = dayNames[lastJamDate.getDay()]; 
+                    jamVenueInput.value = ''; jamMapLinkInput.value = ''; 
+                    flatpickr(jamTimeInput, { enableTime: true, noCalendar: true, dateFormat: "h:i K", defaultDate: "2:00 PM" }); 
+                }
                 jamVenueInput.focus();
             }
             function hideJamForm() { addJamForm.style.display = 'none'; }
@@ -963,7 +983,7 @@
                         if (configData.featuredVideoUrl) { const videoId = configData.featuredVideoUrl.split('v=')[1]?.split('&')[0] || configData.featuredVideoUrl.split('/').pop(); featuredVideoPlayer.src = `https://www.youtube.com/embed/${videoId}`; } 
                         else { featuredVideoPlayer.src = `https://www.youtube.com/embed/SeFUhhhVZ9k`; }
                     } else {
-                        await setDoc(doc(db, "site_config", "main"), { coverPhotoUrl: "...", featuredVideoUrl: "..." });
+                        await setDoc(doc(db, "site_config", "main"), { coverPhotoUrl: "https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/340126198_1202888093755813_6375467148998027340_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=2285d6&_nc_ohc=wA-6pUbx_XYQ7kNvwHkWjV3&_nc_oc=Adnd0Bbs-9bBGiNkVlqTm636JeXERyh16eo2fUrKp5p7sPkeFMlKHcYdyTj8qGDYzQk&_nc_zt=23&_nc_ht=scontent-dub4-1.xx&_nc_gid=Pse2aOVgLI3EOs4_MVhu_Q&oh=00_AfWMKMB5g8K5fFbQO5RjBf8Wp9epHYVIZ5FuDYFFu1qEsg&oe=689D27F9", featuredVideoUrl: "https://www.youtube.com/watch?v=SeFUhhhVZ9k" });
                         await loadData(); return;
                     }
 
@@ -973,18 +993,18 @@
                     if (initialEvents.length === 0) { 
                         needsSeeding = true;
                         const seedEvents = [
-                            { id: "101", title: "Cleggan Fringe Festival", dates: "Friday, 12 Sept - Sunday, 14 Sept 2025", description: "The annual Cleggan Fringe Festival is a highlight of the year! Featuring a host of traditional and folk musicians in the pubs and venues around Cleggan. Keep an eye out for GJC members playing sessions!", time: "", mapLink: ""},
-                            { id: "102", title: "Culture Night with the Galway Jam Circle", dates: "Friday, 19 Sept 2025", time: "5:45 PM - 7:45 PM", description: "Join us for a special evening of music to celebrate Culture Night! We'll be hosting an open and inclusive jam session at the Mechanics' Institute, with smaller groups also playing outside on the street. All are welcome to play, sing along, or just enjoy the atmosphere as we share our love of music with the city.", mapLink: "https://maps.app.goo.gl/example"}
+                            { id: "101", title: "Cleggan Fringe Festival", dates: "Friday, 12 Sep 2025 - Sunday, 14 Sep 2025", description: "The annual Cleggan Fringe Festival is a highlight of the year! Featuring a host of traditional and folk musicians in the pubs and venues around Cleggan. Keep an eye out for GJC members playing sessions!", time: "", mapLink: ""},
+                            { id: "102", title: "Culture Night with the Galway Jam Circle", dates: "Friday, 19 Sep 2025", time: "5:45 PM - 7:45 PM", description: "Join us for a special evening of music to celebrate Culture Night! We'll be hosting an open and inclusive jam session at the Mechanics' Institute, with smaller groups also playing outside on the street. All are welcome to play, sing along, or just enjoy the atmosphere as we share our love of music with the city.", mapLink: "https://goo.gl/maps/example"}
                         ];
                         seedEvents.forEach(event => batch.set(doc(db, "events", event.id), event));
-                     }
+                       }
                     if (initialPhotos.length === 0) { needsSeeding = true; /* ... seed photos ... */ }
                     if (initialVenues.length === 0) { needsSeeding = true; /* ... seed venues ... */ }
                     if (initialCommunityItems.length === 0) {
                         needsSeeding = true;
                         const seedCommunity = [
-                            { id: "c1", type: "charity", imageUrl: "https://www.advertiser.ie/images/2018/12/154215.jpg", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.", amountRaised: "€1,234", charityName: "A Local Charity" },
-                            { id: "c2", type: "community", imageUrl: "https://i.ytimg.com/vi/WDDg-vo9i5U/maxresdefault.jpg", description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.", headline: "Music at the Community Fair" }
+                            { id: "c1", type: "charity", imageUrl: "https://www.advertiser.ie/images/2018/12/154215.jpg", description: "We had a great time busking to raise money for a local charity, managing to raise a significant amount thanks to the generous people of Galway!", amountRaised: "€1,234", charityName: "A Local Charity" },
+                            { id: "c2", type: "community", imageUrl: "https://i.ytimg.com/vi/WDDg-vo9i5U/maxresdefault.jpg", description: "It was a pleasure to provide some background music and a singalong for the annual St. Nicholas' Community Fair.", headline: "Music at the Community Fair" }
                         ];
                         seedCommunity.forEach(item => batch.set(doc(db, "community", item.id), item));
                     }
