@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Walkthrough Mockups</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Define the brand colors for consistency */
+        :root {
+            --primary-color: #371087;
+            --accent-color: #F3EAD3;
+        }
+        .bg-primary { background-color: var(--primary-color); }
+        .text-primary { color: var(--primary-color); }
+        .bg-accent { background-color: var(--accent-color); }
+        .text-accent { color: var(--accent-color); }
+        .border-primary { border-color: var(--primary-color); }
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <div class="max-w-2xl mx-auto bg-white shadow-lg">
+        
+        <!-- Header -->
+        <header class="bg-primary p-6 text-center">
+            <h1 class="text-3xl font-bold text-white">Website Walkthrough</h1>
+            <p class="text-white/90 mt-1">A Visual Guide for the Galway Jam Circle</p>
+        </header>
+
+        <div class="p-6 sm:p-8">
+
+            <!-- Section 1: The Public Experience -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold text-slate-800 mb-4 border-b-2 border-primary pb-2">The Public Experience</h2>
+                <p class="text-slate-600 mb-6">The site is designed for clarity and ease of use, with a mobile-first approach to cater to the majority of our visitors.</p>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-slate-700 mb-3">Key Features for Users</h3>
+                    <div class="space-y-6">
+                        <!-- Automated Jam Schedule -->
+                        <div class="bg-slate-50 p-4 rounded-lg shadow-inner">
+                            <h4 class="font-semibold text-slate-800">Live & Automated Jam Schedule</h4>
+                            <p class="text-sm text-slate-600 mt-1 mb-3">The site always shows the next five upcoming jams. Old events disappear automatically, meaning the list is always current and requires no manual cleanup.</p>
+                            <ul class="space-y-2 text-sm">
+                                <li class="p-2 rounded-md shadow-sm bg-white">Sat, 16 Aug @ Mechanics' Institute <a href="#" class="text-blue-600 font-semibold">(Map)</a></li>
+                                <li class="p-2 rounded-md shadow-sm bg-white ring-1 ring-amber-400">Sun, 31 Aug @ Mechanics' Institute <a href="#" class="text-blue-600 font-semibold">(Map)</a> <span class="text-amber-600 font-semibold">(Rescheduled)</span></li>
+                            </ul>
+                        </div>
+                        <!-- Our Welcoming Jam Format -->
+                        <div class="bg-slate-50 p-4 rounded-lg shadow-inner">
+                            <h4 class="font-semibold text-slate-800">Our Welcoming Jam Format</h4>
+                            <p class="text-sm text-slate-600 mt-1 mb-3">The three-phase structure is designed to be inclusive for all skill levels, helping newcomers ease into the session before opening up to more complex songs.</p>
+                            <div class="space-y-2 mt-2">
+                                <div class="bg-white p-2 rounded-md shadow-sm text-sm"><span class="font-bold text-primary">1. Loop Songs First:</span> Easy, repetitive songs to get everyone warmed up.</div>
+                                <div class="bg-white p-2 rounded-md shadow-sm text-sm"><span class="font-bold text-primary">2. Four Chords or Less:</span> Simple, well-known songs that are easy to join in on.</div>
+                                <div class="bg-white p-2 rounded-md shadow-sm text-sm"><span class="font-bold text-primary">3. Anything Goes!</span> The floor is open to any song you'd like to play.</div>
+                            </div>
+                        </div>
+                        <!-- Jamming Guidelines -->
+                        <div class="bg-slate-50 p-4 rounded-lg shadow-inner">
+                            <h4 class="font-semibold text-slate-800">Clear Jamming Guidelines</h4>
+                            <p class="text-sm text-slate-600 mt-1 mb-3">A dedicated, expandable section clearly outlines the jam format and etiquette. This is crucial for making newcomers feel welcome and ensuring everyone has a good experience.</p>
+                             <div class="bg-white p-3 rounded-lg shadow-md border">
+                                <details>
+                                    <summary class="font-bold text-primary cursor-pointer">Jamming Guidelines</summary>
+                                    <div class="mt-2 text-xs text-slate-600 space-y-2">
+                                        <p>Jammers take turns to Play, Pass, or Pick.</p>
+                                        <ul class="list-disc list-inside pl-4">
+                                            <li><b>Play</b> means to play a song.</li>
+                                            <li><b>Pass</b> means pass to the next jammer.</li>
+                                            <li><b>Pick</b> means pick a song that another jammer plays.</li>
+                                        </ul>
+                                        <p>The singer is the song leader...</p>
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+                        <!-- Festivals Carousel -->
+                        <div class="bg-slate-50 p-4 rounded-lg shadow-inner">
+                            <h4 class="font-semibold text-slate-800">Festivals Carousel & Event Listings</h4>
+                            <p class="text-sm text-slate-600 mt-1 mb-3">An auto-playing carousel shows our involvement in various festivals. Below it, upcoming major events like Culture Night are listed with full details, including descriptions and map links.</p>
+                            <div class="bg-white p-3 rounded-md shadow-sm overflow-hidden">
+                                <div class="flex space-x-4 items-center justify-center">
+                                    <img src="images/cleggan-fringe-festival.jpg" class="h-12 object-contain">
+                                    <img src="images/doolin-folkfest-2025.png" class="h-12 object-contain">
+                                    <img src="images/galway-folk-festival.png" class="h-12 object-contain">
+                                </div>
+                            </div>
+                             <div class="bg-white p-4 mt-3 rounded-lg shadow-md border">
+                                <h5 class="text-md font-bold text-primary">Culture Night with the Galway Jam Circle</h5>
+                                <div class="flex items-center space-x-3 mt-1 text-sm">
+                                    <p class="font-semibold text-gray-700">Friday, 19 Sep 2025</p>
+                                    <a href="#" class="text-blue-600 font-semibold hover:underline">(Map)</a>
+                                </div>
+                                <p class="mt-2 text-gray-600 text-sm">Join us for a special evening of music to celebrate Culture Night! We'll be hosting an open and inclusive jam session...</p>
+                            </div>
+                        </div>
+                         <!-- Community Slideshow -->
+                        <div class="bg-slate-50 p-4 rounded-lg shadow-inner">
+                            <h4 class="font-semibold text-slate-800">Community & Charity Slideshow</h4>
+                            <p class="text-sm text-slate-600 mt-1 mb-3">This section uses a more narrative format to tell stories about our community impact, featuring one event at a time.</p>
+                            <div class="bg-white rounded-lg shadow-sm overflow-hidden border">
+                                <img src="https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/482009261_655703690372375_3847994029459281438_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=GsiIyXf1BWoQ7kNvwEfbcvH&_nc_oc=Adkhsfw3wZFNfzHdf6qDFaqR0S_rZld7dfxCKr1K2LlWLCvzBZyAAQlIsfXbJWy_9lQ&_nc_zt=23&_nc_ht=scontent-dub4-1.xx&_nc_gid=Bh-oosLtR54WvtSlZ_Hxvg&oh=00_AfVmhTIij3nDdDy-LeNVUnmkGPsj5kR3_pbksPh9gfeTQw&oe=689FBC50" alt="Leave No Trace premiere event">
+                                <div class="p-4">
+                                    <h5 class="font-bold text-primary">"Leave No Trace" Premiere</h5>
+                                    <p class="text-gray-600 text-sm mt-1">Galway Jam Circle, Galway Adult Strings, and Claddagh Choral premiered "Leave No Trace" by composer Naomi Berrill to raise marine climate awareness, uniting community music and environmental science.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: The Admin Experience -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold text-slate-800 mb-4 border-b-2 border-primary pb-2">The Admin Experience</h2>
+                <p class="text-slate-600 mb-6">The system is designed to be simple and intuitive, following a "What You See Is What You Edit" philosophy.</p>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="font-semibold text-lg text-slate-700">1. Access via Footer</h3>
+                        <div class="bg-primary text-white/80 py-4 rounded-lg mt-2 text-center text-sm">
+                            <p>&copy; 2025 Galway Jam Circle</p>
+                            <a href="#" class="text-accent hover:text-white mt-2 inline-block ring-1 ring-accent rounded-md px-2 py-1">Admin</a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-lg text-slate-700">2. Secure PIN Entry</h3>
+                        <p class="text-sm text-slate-600 mb-2">The PIN is <b>not</b> stored in the website's code. When a user enters a PIN, the website asks the secure database if it's correct. This provides robust security without needing complex accounts.</p>
+                        <div class="bg-slate-50 p-4 rounded-lg shadow-inner mt-2">
+                            <div class="bg-white p-4 rounded-lg shadow-lg max-w-xs mx-auto">
+                                <p class="mb-2 text-slate-800">Enter admin PIN:</p>
+                                <input type="password" class="w-full p-2 border rounded mb-2" value="••••">
+                                <div class="flex justify-end"><button class="px-4 py-2 bg-accent text-primary font-bold rounded-md text-sm">Submit</button></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-lg text-slate-700">3. Inline Editing</h3>
+                        <p class="text-sm text-slate-600 mb-2">Admin controls appear directly on the page. Here, an admin can easily cancel a jam or reinstate it.</p>
+                        <div class="bg-slate-50 p-4 rounded-lg shadow-inner">
+                            <ul class="space-y-3">
+                                <li class="p-3 rounded-lg shadow-sm bg-white flex justify-between items-center">
+                                    <div><span class="font-bold text-primary">Sat, 16 Aug:</span> Mechanics'</div>
+                                    <div class="space-x-2"><button class="text-blue-600 text-sm font-semibold">Edit</button><button class="text-yellow-600 text-sm font-semibold">Cancel</button></div>
+                                </li>
+                                <li class="p-3 rounded-lg shadow-sm bg-red-100 opacity-70 flex justify-between items-center">
+                                    <div><del class="text-gray-500"><span class="font-bold">Sat, 23 Aug:</span> Joyce's</del><span class="font-bold text-red-600 text-xs ml-1">(CANCELLED)</span></div>
+                                    <div class="space-x-2"><button class="text-blue-600 text-sm font-semibold">Edit</button><button class="text-green-600 text-sm font-semibold">Reinstate</button></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                     <div>
+                        <h3 class="font-semibold text-lg text-slate-700">4. Simple Edit Forms</h3>
+                        <p class="text-sm text-slate-600 mb-2">The edit form is simple and includes all necessary fields, like the venue dropdown and map link.</p>
+                        <div class="bg-slate-50 p-4 rounded-lg shadow-inner">
+                            <form class="space-y-3 text-sm">
+                                <h4 class="text-md font-bold text-primary">Edit Jam</h4>
+                                <div><label class="block text-gray-700 font-bold mb-1">Venue</label><select class="w-full p-2 border rounded bg-white"><option>Mechanics' Institute</option><option>Joyce's Knocknacarra</option></select></div>
+                                <div><label class="block text-gray-700 font-bold mb-1">Google Maps Link</label><input type="url" value="https://www.google.com/maps/place/..." class="w-full p-2 border rounded"><p class="text-xs text-slate-500 mt-1">Note: Please use the full URL from Google Maps.</p></div>
+                                <div class="flex justify-end"><button type="submit" class="px-4 py-2 bg-primary text-white rounded-md font-semibold">Save Jam</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section 3: Design Choices & Trade-offs -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold text-slate-800 mb-4 border-b-2 border-primary pb-2">Design Choices & Trade-offs</h2>
+                <div class="bg-white p-4 rounded-lg shadow-md border">
+                    <h3 class="font-bold text-lg text-primary flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>Conciseness vs. Detail</h3>
+                    <p class="mt-2 text-gray-600">A key challenge is serving two audiences: <b>jammers</b>, who want quick, visual info on their phones, and <b>potential funders or partners</b>, who may want more detail.</p>
+                    <p class="mt-2 text-gray-600">We've prioritized the jammers. For example, the community slideshow has a strict 40-word limit. While we could say more about the "Leave No Trace" event, the limit ensures every slide is consistent and easy to read on a small screen. A potential future upgrade could be adding "Read More" buttons for those who want deeper information.</p>
+                </div>
+            </section>
+
+            <!-- Section 4: Future Plans & Discussion Points -->
+            <section>
+                <h2 class="text-2xl font-bold text-slate-800 mb-4 border-b-2 border-primary pb-2">Future Plans & Discussion</h2>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow-md border">
+                        <h3 class="font-bold text-lg text-primary flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>Vision: Let's Jam Ireland</h3>
+                        <p class="mt-2 text-gray-600">This website is built to serve as a model. The long-term vision is to create a network of similar sites (e.g., Clare Jam Circle, Dublin Jam Circle) under a parent "Let's Jam Ireland" identity, sharing the same easy-to-use technology.</p>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow-md border">
+                        <h3 class="font-bold text-lg text-primary flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>Branding & Visual Identity</h3>
+                        <p class="mt-2 text-gray-600">For the "Let's Jam Ireland" vision to work, we need a cohesive brand. This means developing a flexible logo system with a <b>common, recognizable element</b> (like stylized instruments) that is shared across all circles. Each location would then have a unique variant (e.g., adding the county map or name). Crucially, any design must work well as a small, circular icon for social media profiles and website headers.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border">
+                        <h3 class="font-bold text-lg text-primary flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>Creating a Website Template</h3>
+                        <p class="mt-2 text-gray-600">To support the "Let's Jam" vision, the site's code can be turned into a reusable template. This means we could quickly launch a new, fully functional website for another Jam Circle by simply copying the code and changing the name, logo, and colours.</p>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow-md border">
+                        <h3 class="font-bold text-lg text-primary flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>Search Engine Visibility (SEO)</h3>
+                        <p class="mt-2 text-gray-600">To help new members find us, we need to implement basic "free" SEO. This involves adding a good meta description to the site's code so we have a compelling snippet on Google, and ensuring all images have descriptive alt text to appear in image searches.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border">
+                        <h3 class="font-bold text-lg text-primary flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>Songbook</h3>
+                        <p class="mt-2 text-gray-600">The current songbook links to a PDF. We need to discuss potential copyright implications. Creating fully licensed, web-friendly versions is a significant technical challenge.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border">
+                        <h3 class="font-bold text-lg text-primary flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>Payment Feature</h3>
+                        <p class="mt-2 text-gray-600">We could add a simple online option (e.g., Stripe or PayPal) for the voluntary €5 contribution. This would be a no-monthly-fee service, making it convenient for members.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border">
+                        <h3 class="font-bold text-lg text-primary flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>Technical Sustainability</h3>
+                        <p class="mt-2 text-gray-600">The website is a single `index.html` file, making it very straightforward. This simplicity is a key feature. For most technical issues (like a browser update causing a problem), the entire file can be pasted into an AI tool like Gemini with a request to fix it. This makes maintenance manageable even without a dedicated coder.</p>
+                        <details class="mt-3">
+                            <summary class="text-sm font-semibold text-primary cursor-pointer">Technical Setup Guide</summary>
+                            <div class="mt-2 text-xs text-slate-600 space-y-2 border-t pt-2">
+                                <p><b>Single HTML File:</b> The entire site is one file, `index.html`. All styling and logic is self-contained.</p>
+                                <p><b>Firebase:</b> A free service from Google that acts as the website's "brain".</p>
+                                <ul class="list-disc list-inside pl-4">
+                                    <li><b>Firestore Database:</b> Stores all text content (jam details, events, the admin PIN).</li>
+                                    <li><b>Firebase Storage:</b> Stores all image files (logos, etc).</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+</body>
+</html>
