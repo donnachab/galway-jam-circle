@@ -532,7 +532,7 @@
             let initialJams = [], initialEvents = [], initialPhotos = [], initialVenues = [], initialCommunityItems = [];
             let jams = [], events = [], photos = [], communityItems = [];
             let communitySwiper = null;
-            let jamDatepicker = null; // Bug Fix 1: Declare datepicker instance variable here
+            let jamDatepicker = null; 
 
             // Element declarations
             const coverPhotoElement = document.getElementById('cover-photo');
@@ -609,7 +609,6 @@
 
             const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-            // Bug Fix 1: Assign the flatpickr instance to the variable
             jamDatepicker = flatpickr(jamDateInput, { 
                 dateFormat: "j M:", 
                 onChange: function(selectedDates) { 
@@ -685,7 +684,8 @@
                 jams.sort((a, b) => parseJamDate(a.date) - parseJamDate(b.date)).forEach(jam => {
                     const li = document.createElement('li');
                     const isSaturday = jam.day.toLowerCase() === 'saturday';
-                    li.className = 'p-4 rounded-lg shadow-sm border-l-4 flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white border-gray-200';
+                    // BUG FIX: Changed justify-between to sm:justify-between
+                    li.className = 'p-4 rounded-lg shadow-sm border-l-4 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center bg-white border-gray-200';
                     li.classList.toggle('jam-special-day', !isSaturday);
                     if (jam.cancelled) { li.classList.add('jam-cancelled'); } 
                     let adminButtons = `<button data-id="${jam.id}" class="edit-btn text-blue-500 hover:text-blue-700">Edit</button>`;
@@ -784,7 +784,6 @@
 
             function showJamForm(mode = 'add', jam = null) {
                 addJamForm.style.display = 'block';
-                // Bug Fix 2: Scroll the form into view
                 addJamForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 
                 jamVenueInput.innerHTML = '';
@@ -792,7 +791,7 @@
                 if (mode === 'edit') { 
                     formTitle.textContent = 'Edit Jam'; 
                     editJamIdInput.value = jam.id; 
-                    jamDatepicker.setDate(parseJamDate(jam.date)); // This now works
+                    jamDatepicker.setDate(parseJamDate(jam.date));
                     jamDayInput.value = jam.day; 
                     jamVenueInput.value = jam.venue; 
                     jamMapLinkInput.value = jam.mapLink || ''; 
