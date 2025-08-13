@@ -466,176 +466,194 @@
               </p>
             </div>
           </div>
-          <div class="max-w-4xl mx-auto">
-            <ul id="jam-list" class="space-y-4"></ul>
-            <div
-              class="text-center mt-8 admin-controls-inline flex-wrap justify-center gap-4"
-            >
-              <button
-                id="add-jam-btn"
-                class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300 shadow-md"
-              >
-                Add New Jam
-              </button>
-              <button
-                id="manage-venues-btn"
-                class="px-6 py-2 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-600 transition duration-300 shadow-md"
-              >
-                Manage Venues
-              </button>
-              <button
-                class="exit-admin-btn px-4 py-2 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 transition duration-300 shadow-md"
-              >
-                Exit Admin Mode
-              </button>
-            </div>
-            <form
-              id="add-jam-form"
-              class="mt-8 p-6 bg-gray-50/50 rounded-lg shadow-inner border"
-            >
-              <h3 id="form-title" class="text-xl font-bold text-primary mb-4">
-                Add/Edit Jam
-              </h3>
-              <input type="hidden" id="edit-jam-id" />
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                <div class="md:col-span-2">
-                  <label
-                    for="jam-date"
-                    class="block text-gray-700 font-bold mb-2 text-left"
-                    >Date</label
-                  ><input
-                    type="text"
-                    id="jam-date"
-                    class="w-full p-2 border rounded"
-                    placeholder="Select a date..."
-                  />
-                </div>
-                <div>
-                  <label
-                    for="jam-day"
-                    class="block text-gray-700 font-bold mb-2 text-left"
-                    >Day</label
-                  ><input
-                    type="text"
-                    id="jam-day"
-                    class="w-full p-2 border rounded bg-gray-200"
-                    readonly
-                  />
-                </div>
-              </div>
-              <div class="mb-4">
-                <label
-                  for="jam-time"
-                  class="block text-gray-700 font-bold mb-2 text-left"
-                  >Time</label
-                ><input
-                  type="text"
-                  id="jam-time"
-                  class="w-full p-2 border rounded"
-                  placeholder="Select a time..."
-                />
-              </div>
-              <div class="mb-4">
-                <label
-                  for="jam-venue"
-                  class="block text-gray-700 font-bold mb-2 text-left"
-                  >Venue</label
-                ><select
-                  id="jam-venue"
-                  class="w-full p-2 border rounded"
-                ></select>
-              </div>
-              <div class="mb-4">
-                <label
-                  for="jam-map-link"
-                  class="block text-gray-700 font-bold mb-2 text-left"
-                  >Google Maps Link (Optional)</label
-                ><input
-                  type="url"
-                  id="jam-map-link"
-                  class="w-full p-2 border rounded"
-                  placeholder="Paste Google Maps share link..."
-                />
-              </div>
-              <div class="flex justify-end space-x-4">
-                <button
-                  type="button"
-                  id="cancel-btn"
-                  class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
-                >
-                  Exit</button
-                ><button
-                  type="submit"
-                  id="submit-btn"
-                  class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90"
-                >
-                  Save Jam
-                </button>
-              </div>
-            </form>
-            <div
-              id="venue-management-section"
-              class="mt-8 p-6 bg-gray-50/50 rounded-lg shadow-inner border"
-            >
-              <h3 class="text-xl font-bold text-primary mb-4">Manage Venues</h3>
-              <ul id="venue-list-admin" class="space-y-2 mb-4"></ul>
-              <form id="add-venue-form">
-                <h4 class="text-lg font-bold text-primary mb-2">
-                  Add New Venue
-                </h4>
-                <div class="mb-2">
-                  <input
-                    type="text"
-                    id="new-venue-name"
-                    class="w-full p-2 border rounded"
-                    placeholder="Venue Name"
-                  />
-                </div>
-                <div class="mb-2">
-                  <input
-                    type="url"
-                    id="new-venue-map-link"
-                    class="w-full p-2 border rounded"
-                    placeholder="Google Maps Link"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-                >
-                  Add Venue
-                </button>
-              </form>
-            </div>
+<div class="max-w-4xl mx-auto">
+            <ul id="jam-list" class="space-y-4"></ul>
+            <div
+              class="text-center mt-8 admin-controls-inline flex-wrap justify-center gap-4"
+            >
+              <button
+                id="add-jam-btn"
+                class="px-6 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition duration-300 shadow-md"
+              >
+                Add New Jam
+              </button>
+              <button
+                id="manage-venues-btn"
+                class="px-6 py-2 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-600 transition duration-300 shadow-md"
+              >
+                Manage Venues
+              </button>
+              <button
+                class="exit-admin-btn px-4 py-2 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 transition duration-300 shadow-md"
+              >
+                Exit Admin Mode
+              </button>
+            </div>
+            <form
+              id="add-jam-form"
+              class="mt-8 p-6 bg-gray-50/50 rounded-lg shadow-inner border"
+            >
+              <h3 id="form-title" class="text-xl font-bold text-primary mb-4">
+                Add/Edit Jam
+              </h3>
+              <input type="hidden" id="edit-jam-id" />
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div class="md:col-span-2">
+                  <label
+                    for="jam-date"
+                    class="block text-gray-700 font-bold mb-2 text-left"
+                    >Date</label
+                  ><input
+                    type="text"
+                    id="jam-date"
+                    class="w-full p-2 border rounded"
+                    placeholder="Select a date..."
+                  />
+                </div>
+                <div>
+                  <label
+                    for="jam-day"
+                    class="block text-gray-700 font-bold mb-2 text-left"
+                    >Day</label
+                  ><input
+                    type="text"
+                    id="jam-day"
+                    class="w-full p-2 border rounded bg-gray-200"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="mb-4">
+                <label
+                  for="jam-time"
+                  class="block text-gray-700 font-bold mb-2 text-left"
+                  >Time</label
+                ><input
+                  type="text"
+                  id="jam-time"
+                  class="w-full p-2 border rounded"
+                  placeholder="Select a time..."
+                />
+              </div>
+              <div class="mb-4">
+                <label
+                  for="jam-venue"
+                  class="block text-gray-700 font-bold mb-2 text-left"
+                  >Venue</label
+                ><select
+                  id="jam-venue"
+                  class="w-full p-2 border rounded"
+                ></select>
+              </div>
+              <div class="mb-4">
+                <label
+                  for="jam-map-link"
+                  class="block text-gray-700 font-bold mb-2 text-left"
+                  >Google Maps Link (Optional)</label
+                ><input
+                  type="url"
+                  id="jam-map-link"
+                  class="w-full p-2 border rounded"
+                  placeholder="Paste Google Maps share link..."
+                />
+              </div>
+              <div class="flex justify-end space-x-4">
+                <button
+                  type="button"
+                  id="cancel-btn"
+                  class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+                >
+                  Exit</button
+                ><button
+                  type="submit"
+                  id="submit-btn"
+                  class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90"
+                >
+                  Save Jam
+                </button>
+              </div>
+            </form>
             <div class="admin-controls mt-8 border-t pt-6 border-gray-200">
-              <div class="w-full">
-                <h4 class="text-lg font-bold text-gray-700 mb-2">
-                  Date Testing Module
-                </h4>
-                <p class="text-sm text-gray-600 mb-2">
-                  See how the list will look on a specific date.
-                </p>
-                <div class="flex space-x-2">
-                  <input
-                    type="text"
-                    id="test-date-input"
-                    class="w-full p-2 border rounded"
-                    placeholder="Select a test date..."
-                  /><button
-                    id="test-date-btn"
-                    class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 whitespace-nowrap"
-                  >
-                    Test Date</button
-                  ><button
-                    id="reset-date-btn"
-                    class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
-                  >
-                    Reset
-                  </button>
-                </div>
+              <h4 class="text-lg font-bold text-gray-700 mb-2">
+                Default Jam Day
+              </h4>
+              <p class="text-sm text-gray-600 mb-2">
+                Set the regular day for automatically generated weekly jams.
+              </p>
+              <div class="flex space-x-2">
+                <select id="default-day-select" class="w-full p-2 border rounded">
+                  </select>
+                <button
+                  id="save-default-day-btn"
+                  class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90 whitespace-nowrap"
+                >
+                  Save Day
+                </button>
               </div>
             </div>
-          </div>
+            <div
+              id="venue-management-section"
+              class="mt-8 p-6 bg-gray-50/50 rounded-lg shadow-inner border"
+            >
+              <h3 class="text-xl font-bold text-primary mb-4">Manage Venues</h3>
+              <ul id="venue-list-admin" class="space-y-2 mb-4"></ul>
+              <form id="add-venue-form">
+                <h4 class="text-lg font-bold text-primary mb-2">
+                  Add New Venue
+                </h4>
+                <div class="mb-2">
+                  <input
+                    type="text"
+                    id="new-venue-name"
+                    class="w-full p-2 border rounded"
+                    placeholder="Venue Name"
+                  />
+                </div>
+                <div class="mb-2">
+                  <input
+                    type="url"
+                    id="new-venue-map-link"
+                    class="w-full p-2 border rounded"
+                    placeholder="Google Maps Link"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                >
+                  Add Venue
+                </button>
+              </form>
+            </div>
+            <div class="admin-controls mt-8 border-t pt-6 border-gray-200">
+              <div class="w-full">
+                <h4 class="text-lg font-bold text-gray-700 mb-2">
+                  Date Testing Module
+                </h4>
+                <p class="text-sm text-gray-600 mb-2">
+                  See how the list will look on a specific date.
+                </p>
+                <div class="flex space-x-2">
+                  <input
+                    type="text"
+                    id="test-date-input"
+                    class="w-full p-2 border rounded"
+                    placeholder="Select a test date..."
+                  /><button
+                    id="test-date-btn"
+                    class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 whitespace-nowrap"
+                  >
+                    Test Date</button
+                  ><button
+                    id="reset-date-btn"
+                    class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+                  >
+                    Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
