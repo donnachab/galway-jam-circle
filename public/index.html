@@ -2155,40 +2155,55 @@
           }
         });
         jamList.addEventListener("click", async (e) => {
-          const target = e.target;
-          const jamId = target.dataset.id;
-          if (!jamId) return;
-          const jamInDisplay = jams.find((j) => j.id === jamId);
-          if (target.classList.contains("edit-btn")) {
-            if (jamInDisplay) showJamForm("edit", jamInDisplay);
-          } else if (target.classList.contains("delete-btn")) {
-            showModal(
-              "Are you sure you want to delete this special jam?",
-              "confirm",
-              async () => {
-                await deleteDoc(doc(db, "jams", jamId));
-                await loadData();
-              }
-            );
-          } else if (target.classList.contains("cancel-btn")) {
-            showModal(
-              "Are you sure you want to cancel this jam?",
-              "confirm",
-              async () => {
-                if (jamInDisplay) {
-                  jamInDisplay.cancelled = true;
-                  await saveJam(jamInDisplay);
-                }
-              }
-            );
-          } else if (target.classList.contains("reinstate-btn")) {
-            if (jamInDisplay) {
-              jamInDisplay.cancelled = false;
-              await saveJam(jamInDisplay);
-            }
-          }
-        });
-
+          const target = e.target;
+          const jamId = target.dataset.id;
+          if (!jamId) return;
+          const jamInDisplay = jams.find((j) => j.id === jamId);
+          if (target.classList.contains("edit-btn")) {
+            if (jamInDisplay) showJamForm("edit", jamInDisplay);
+          } else if (target.classList.contains("delete-btn")) {
+            showModal(
+              "Are you sure you want to delete this special jam?",
+              "confirm",
+              async () => {
+                await deleteDoc(doc(db, "jams", jamId));
+                await loadData();
+              }
+            );
+          } else if (target.classList.contains("cancel-btn")) {
+            showModal(
+              "Are you sure you want to cancel this jam?",
+              "confirm",
+              async () => {
+                if (jamInDisplay) {
+                  try {
+                    jamInDisplay.cancelled = true;
+                    await saveJam(jamInDisplay);
+                  } catch (error) {
+                    console.error("Failed to cancel jam:", error);
+                    showModal("Error: Could not cancel the jam.", "alert");
+                  }
+                }
+              }
+            );
+          } else if (target.classList.contains("reinstate-btn")) {
+            showModal(
+              "Are you sure you want to reinstate this jam?",
+            	"confirm",
+            	async () => {
+            	if (jamInDisplay) {
+            		try {
+            			jamInDisplay.cancelled = false;
+            			await saveJam(jamInDisplay);
+            		} catch (error) {
+            			console.error("Failed to reinstate jam:", error);
+            			showModal("Error: Could not reinstate the jam.", "alert");
+					}
+            	}
+          	}
+          	);
+          }
+        });
         // Event Logic
         addEventBtn.addEventListener("click", () => showEventForm("add"));
         cancelEventBtn.addEventListener("click", hideEventForm);
