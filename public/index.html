@@ -1390,7 +1390,7 @@
             </svg>
           </a>
         </div>
-        <p>© 2025 Galway Jam Circle. v2.3 DIAGNOSTIC. All Rights Reserved.</p>
+        <p>© 2025 Galway Jam Circle. v2.4 DIAGNOSTIC. All Rights Reserved.</p>
         <p class="text-sm text-stone-400 mt-2">
           Bringing music to the people of Galway.
         </p>
@@ -1455,9 +1455,6 @@
       const db = getFirestore(app);
 
       document.addEventListener("DOMContentLoaded", async () => {
-        
-        alert("JavaScript Loaded Successfully."); // DIAGNOSTIC ALERT 1
-
         const coverPhotoElement = document.getElementById("cover-photo");
         const jamList = document.getElementById("jam-list");
         const addJamForm = document.getElementById("add-jam-form");
@@ -1889,10 +1886,18 @@
         }
         
         function setupEventListeners() {
+            console.log("--- Starting Event Listener Setup ---");
+            
+            console.log("Attaching listener 1: menu-btn");
             document.getElementById("menu-btn").addEventListener("click", () => document.getElementById("mobile-menu").classList.toggle("hidden"));
+            
+            console.log("Attaching listener 2: mobile-menu links");
             document.querySelectorAll("#mobile-menu a").forEach(link => link.addEventListener("click", () => document.getElementById("mobile-menu").classList.add("hidden")));
 
+            console.log("Attaching listener 3: admin-mode-btn");
             document.getElementById("admin-mode-btn").addEventListener("click", handleAdminClick);
+            
+            console.log("Attaching listener 4: exit-admin-btn");
             document.body.addEventListener("click", (e) => {
               if (e.target.classList.contains("exit-admin-btn")) {
                 sessionStorage.removeItem("gjc_isAdmin");
@@ -1900,58 +1905,112 @@
               }
             });
 
+            console.log("Attaching listener 5: add-jam-btn");
             document.getElementById("add-jam-btn").addEventListener("click", () => showJamForm("add"));
+            
+            console.log("Attaching listener 6: cancel-jam-form-btn");
             document.getElementById("cancel-jam-form-btn").addEventListener("click", () => addJamForm.style.display = 'none');
+            
+            console.log("Attaching listener 7: add-jam-form submit");
             addJamForm.addEventListener("submit", handleJamFormSubmit);
+            
+            console.log("Attaching listener 8: jamList click");
             jamList.addEventListener("click", handleJamListClick);
+            
+            console.log("Attaching listener 9: jamVenueInput change");
             jamVenueInput.addEventListener("change", () => {
               const selectedVenue = initialVenues.find(v => v.name === jamVenueInput.value);
               if (selectedVenue) jamMapLinkInput.value = selectedVenue.mapLink;
             });
 
+            console.log("Attaching listener 10: manage-venues-btn");
             document.getElementById("manage-venues-btn").addEventListener("click", () => {
               venueManagementSection.style.display = venueManagementSection.style.display === "none" ? "block" : "none";
             });
+            
+            console.log("Attaching listener 11: add-venue-form submit");
             addVenueForm.addEventListener("submit", handleVenueFormSubmit);
+
+            console.log("Attaching listener 12: venueListAdmin click");
             venueListAdmin.addEventListener("click", handleVenueListClick);
             
+            console.log("Attaching listener 13: save-default-day-btn");
             document.getElementById("save-default-day-btn").addEventListener("click", handleSaveDefaultDay);
+
+            console.log("Attaching listener 14: edit-cover-photo-btn");
             document.getElementById("edit-cover-photo-btn").addEventListener("click", () => editCoverPhotoForm.style.display = "block");
+
+            console.log("Attaching listener 15: cancel-cover-photo-btn");
             document.getElementById("cancel-cover-photo-btn").addEventListener("click", () => editCoverPhotoForm.style.display = "none");
+
+            console.log("Attaching listener 16: edit-cover-photo-form submit");
             editCoverPhotoForm.addEventListener("submit", handleCoverPhotoSubmit);
+
+            console.log("Attaching listener 17: edit-featured-video-btn");
             document.getElementById("edit-featured-video-btn").addEventListener("click", () => editFeaturedVideoForm.style.display = "block");
+
+            console.log("Attaching listener 18: cancel-featured-video-btn");
             document.getElementById("cancel-featured-video-btn").addEventListener("click", () => editFeaturedVideoForm.style.display = "none");
+            
+            console.log("Attaching listener 19: edit-featured-video-form submit");
             editFeaturedVideoForm.addEventListener("submit", handleFeaturedVideoSubmit);
 
+            console.log("Attaching listener 20: add-event-btn");
             document.getElementById("add-event-btn").addEventListener("click", () => addEventForm.style.display = 'block');
+            
+            console.log("Attaching listener 21: cancel-event-btn");
             document.getElementById("cancel-event-btn").addEventListener("click", () => addEventForm.style.display = 'none');
+
+            console.log("Attaching listener 22: add-event-form submit");
             addEventForm.addEventListener("submit", handleEventFormSubmit);
+
+            console.log("Attaching listener 23: eventList click");
             eventList.addEventListener("click", handleEventListClick);
 
+            console.log("Attaching listener 24: add-photo-btn");
             document.getElementById("add-photo-btn").addEventListener("click", () => addPhotoForm.style.display = 'block');
+            
+            console.log("Attaching listener 25: cancel-photo-btn");
             document.getElementById("cancel-photo-btn").addEventListener("click", () => addPhotoForm.style.display = 'none');
+
+            console.log("Attaching listener 26: add-photo-form submit");
             addPhotoForm.addEventListener("submit", handlePhotoFormSubmit);
+
+            console.log("Attaching listener 27: galleryGrid click");
             galleryGrid.addEventListener("click", handleGalleryGridClick);
 
+            console.log("Attaching listener 28: add-community-item-btn");
             document.getElementById("add-community-item-btn").addEventListener("click", () => showCommunityForm("add"));
+
+            console.log("Attaching listener 29: cancel-community-btn");
             document.getElementById("cancel-community-btn").addEventListener("click", () => addCommunityForm.style.display = 'none');
+            
+            console.log("Attaching listener 30: communityItemTypeInput change");
             communityItemTypeInput.addEventListener("change", (e) => {
                 const isCharity = e.target.value === "charity";
                 charityFieldsWrapper.classList.toggle("hidden", !isCharity);
                 communityHeadlineWrapper.classList.toggle("hidden", isCharity);
             });
+
+            console.log("Attaching listener 31: add-community-form submit");
             addCommunityForm.addEventListener("submit", handleCommunityFormSubmit);
+            
+            console.log("Attaching listener 32: communitySwiperWrapper click");
             communitySwiperWrapper.addEventListener("click", handleCommunitySliderClick);
 
+            console.log("Attaching listener 33: test-date-btn");
             document.getElementById("test-date-btn").addEventListener("click", () => {
                 manageJamSchedule(testDateInput.value);
                 renderJams();
             });
+            console.log("Attaching listener 34: reset-date-btn");
             document.getElementById("reset-date-btn").addEventListener("click", () => {
                 testDateInput.value = "";
                 manageJamSchedule();
                 renderJams();
             });
+
+            console.log("--- Event Listener Setup Complete ---");
         }
         
         async function handleJamFormSubmit(e) {
@@ -2216,7 +2275,6 @@
         }
 
         function handleAdminClick(e) {
-            alert("Admin Button Clicked!"); // DIAGNOSTIC ALERT 2
             e.preventDefault();
             if (document.body.classList.contains("admin-mode")) {
                 sessionStorage.removeItem("gjc_isAdmin");
