@@ -16,7 +16,9 @@
       rel="stylesheet"
       href="https://unpkg.com/swiper/swiper-bundle.min.css"
     />
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    
+  <script src="https://cdn.tailwindcss.com"></script>
     <style>
       :root {
         --primary-color: #371087; /* Correct Purple */
@@ -70,10 +72,10 @@
       .jam-cancelled .jam-info {
         text-decoration: line-through;
       }
-      .jam-special {
-        border-left-color: #a78bfa !important; /* A subtle violet for special days */
-        border-left-width: 4px;
-      }
+      .jam-special-day {
+        border-color: #fbbf24 !important;
+        border-width: 2px;
+      } /* Amber for special days */
       .gallery-item {
         position: relative;
       }
@@ -225,8 +227,6 @@
             class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300"
             >Contact</a
           >
-        
-          <a href="#" id="admin-mode-btn" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Admin</a>
         </div>
         <div class="md:hidden">
           <button id="menu-btn" class="text-white focus:outline-none">
@@ -245,8 +245,6 @@
               ></path>
             </svg>
           </button>
-        
-          <a href="#" id="admin-mode-btn" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Admin</a>
         </div>
       </nav>
       <div id="mobile-menu" class="md:hidden hidden bg-primary/95">
@@ -291,9 +289,7 @@
           class="block text-white text-center py-3 hover:bg-white/10"
           >Contact</a
         >
-      
-        <a href="#" id="mobile-admin-btn" class="block text-white text-center py-3 hover:bg-white/10">Admin</a>
-        </div>
+      </div>
     </header>
 
     <main>
@@ -301,7 +297,7 @@
         <img
           id="cover-photo"
           src="https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/340126198_1202888093755813_6375467148998027340_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=2285d6&_nc_ohc=wA-6pUbx_XYQ7kNvwHkWjV3&_nc_oc=Adnd0Bbs-9bBGiNkVlqTm636JeXERyh16eo2fUrKp5p7sPkeFMlKHcYdyTj8qGDYzQk&_nc_zt=23&_nc_ht=scontent-dub4-1.xx&_nc_gid=Pse2aOVgLI3EOs4_MVhu_Q&oh=00_AfWMKMB5g8K5fFbQO5RjBf8Wp9epHYVIZ5FuDYFFu1qEsg&oe=689D27F9"
-          alt="The Spanish Arch in Galway at dusk."
+          alt="A group of people playing instruments like guitars and ukuleles by a river in Galway."
           class="w-full h-[70vh] object-cover"
         />
         <div
@@ -563,46 +559,22 @@
                   placeholder="Paste Google Maps share link..."
                 />
               </div>
-              <div class="mb-4" id="rescheduled-checkbox-container" style="display: none;">
-                <label class="flex items-center">
-                  <input type="checkbox" id="jam-rescheduled-checkbox" class="mr-2">
-                  <span class="text-gray-700 font-bold">Announce as Rescheduled</span>
-                </label>
-              </div>
               <div class="flex justify-end space-x-4">
                 <button
                   type="button"
-                  id="cancel-jam-form-btn"
+                  id="cancel-btn"
                   class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
                 >
-                  Cancel</button
+                  Exit</button
                 ><button
                   type="submit"
-                  id="submit-jam-btn"
+                  id="submit-btn"
                   class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90"
                 >
                   Save Jam
                 </button>
               </div>
             </form>
-            <div class="admin-controls mt-8 border-t pt-6 border-gray-200">
-              <h4 class="text-lg font-bold text-gray-700 mb-2">
-                Default Jam Day
-              </h4>
-              <p class="text-sm text-gray-600 mb-2">
-                Set the regular day for automatically generated weekly jams.
-              </p>
-              <div class="flex space-x-2">
-                <select id="default-day-select" class="w-full p-2 border rounded">
-                </select>
-                <button
-                  id="save-default-day-btn"
-                  class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90 whitespace-nowrap"
-                >
-                  Save Day
-                </button>
-              </div>
-            </div>
             <div
               id="venue-management-section"
               class="mt-8 p-6 bg-gray-50/50 rounded-lg shadow-inner border"
@@ -619,7 +591,6 @@
                     id="new-venue-name"
                     class="w-full p-2 border rounded"
                     placeholder="Venue Name"
-                    required
                   />
                 </div>
                 <div class="mb-2">
@@ -628,7 +599,6 @@
                     id="new-venue-map-link"
                     class="w-full p-2 border rounded"
                     placeholder="Google Maps Link"
-                    required
                   />
                 </div>
                 <button
@@ -853,7 +823,7 @@
 
       <section
         id="special-events"
-        class="py-16 md:py-20 lg:py-24 bg-white"
+        class="py-16 md:py-20 lg:py-24 bg-stone-50 border-y border-stone-200"
       >
         <div class="container mx-auto px-4 sm:px-6">
           <h2
@@ -913,7 +883,7 @@
           </div>
           <form
             id="add-event-form"
-            class="max-w-4xl mx-auto mt-8 p-6 bg-gray-50/50 rounded-lg shadow-inner border"
+            class="max-w-4xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-inner border"
           >
             <h3
               id="event-form-title"
@@ -933,7 +903,6 @@
                 id="event-title"
                 class="w-full p-2 border rounded"
                 placeholder="e.g., Cleggan Fringe Festival"
-                required
               />
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -948,7 +917,6 @@
                   id="event-dates"
                   class="w-full p-2 border rounded"
                   placeholder="Select a date or date range..."
-                  required
                 />
               </div>
               <div>
@@ -989,7 +957,6 @@
                 class="w-full p-2 border rounded"
                 rows="4"
                 placeholder="Enter event details..."
-                required
               ></textarea>
             </div>
             <div class="flex justify-end space-x-4">
@@ -1012,7 +979,7 @@
         </div>
       </section>
 
-      <section id="community" class="py-16 md:py-20 lg:py-24 bg-stone-50 border-t border-stone-200">
+      <section id="community" class="py-16 md:py-20 lg:py-24 bg-white">
         <div class="container mx-auto px-4 sm:px-6">
           <h2
             class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-primary mb-4"
@@ -1275,7 +1242,6 @@
                 id="photo-url"
                 class="w-full p-2 border rounded"
                 placeholder="Paste direct image link..."
-                required
               />
             </div>
             <div class="mb-4">
@@ -1289,7 +1255,6 @@
                 id="photo-caption"
                 class="w-full p-2 border rounded"
                 placeholder="e.g., Jam session by the river"
-                required
               />
             </div>
             <div class="flex justify-end space-x-4">
@@ -1396,7 +1361,7 @@
             </svg>
           </a>
         </div>
-        <p>© 2025 Galway Jam Circle. v2.7 FINAL. All Rights Reserved.</p>
+        <p>© 2025 Galway Jam Circle. v1.5. All Rights Reserved.</p>
         <p class="text-sm text-stone-400 mt-2">
           Bringing music to the people of Galway.
         </p>
@@ -1433,981 +1398,131 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-
-    <script>
-      const firebaseConfig = {
-        apiKey: "AIzaSyC4SnqaOMQWmEFulkN8zZALZsqJLK7hOh0",
-        authDomain: "galway-jam-circle-live.firebaseapp.com",
-        projectId: "galway-jam-circle-live",
-        storageBucket: "galway-jam-circle-live.appspot.com",
-        messagingSenderId: "140452021164",
-        appId: "1:140452021164:web:69703d13213d4ce49a3009",
-      };
-
-      firebase.initializeApp(firebaseConfig);
-      const db = firebase.firestore();
-
-      document.addEventListener("DOMContentLoaded", async () => {
-        const coverPhotoElement = document.getElementById("cover-photo");
-        const jamList = document.getElementById("jam-list");
-        const addJamForm = document.getElementById("add-jam-form");
-        const jamDateInput = document.getElementById("jam-date");
-        const jamDayInput = document.getElementById("jam-day");
-        const jamTimeInput = document.getElementById("jam-time");
-        const jamVenueInput = document.getElementById("jam-venue");
-        const jamMapLinkInput = document.getElementById("jam-map-link");
-        const rescheduledCheckboxContainer = document.getElementById("rescheduled-checkbox-container");
-        const rescheduledCheckbox = document.getElementById("jam-rescheduled-checkbox");
-        const editJamIdInput = document.getElementById("edit-jam-id");
-        const formTitle = document.getElementById("form-title");
-        const defaultDaySelect = document.getElementById("default-day-select");
-        const venueManagementSection = document.getElementById("venue-management-section");
-        const venueListAdmin = document.getElementById("venue-list-admin");
-        const addVenueForm = document.getElementById("add-venue-form");
-        const newVenueNameInput = document.getElementById("new-venue-name");
-        const newVenueMapLinkInput = document.getElementById("new-venue-map-link");
-        const eventList = document.getElementById("event-list");
-        const addEventForm = document.getElementById("add-event-form");
-        const eventTitleInput = document.getElementById("event-title");
-        const eventDatesInput = document.getElementById("event-dates");
-        const eventTimeInput = document.getElementById("event-time");
-        const eventMapLinkInput = document.getElementById("event-map-link");
-        const eventDescriptionInput = document.getElementById("event-description");
-        const editEventIdInput = document.getElementById("edit-event-id");
-        const eventFormTitle = document.getElementById("event-form-title");
-        const galleryGrid = document.getElementById("gallery-grid");
-        const addPhotoForm = document.getElementById("add-photo-form");
-        const photoUrlInput = document.getElementById("photo-url");
-        const photoCaptionInput = document.getElementById("photo-caption");
-        const featuredVideoPlayer = document.getElementById("featured-video-player");
-        const editFeaturedVideoForm = document.getElementById("edit-featured-video-form");
-        const featuredVideoUrlInput = document.getElementById("featured-video-url");
-        const editCoverPhotoForm = document.getElementById("edit-cover-photo-form");
-        const coverPhotoUrlInput = document.getElementById("cover-photo-url");
-        const communitySwiperWrapper = document.getElementById("community-swiper-wrapper");
-        const addCommunityForm = document.getElementById("add-community-form");
-        const editCommunityIdInput = document.getElementById("edit-community-id");
-        const communityImageUrlInput = document.getElementById("community-image-url");
-        const communityItemTypeInput = document.getElementById("community-item-type");
-        const communityDescriptionInput = document.getElementById("community-description");
-        const communityHeadlineWrapper = document.getElementById("community-headline-wrapper");
-        const communityHeadlineInput = document.getElementById("community-headline");
-        const charityFieldsWrapper = document.getElementById("charity-fields-wrapper");
-        const communityAmountInput = document.getElementById("community-amount");
-        const communityCharityNameInput = document.getElementById("community-charity-name");
-        const communityFormTitle = document.getElementById("community-form-title");
-        const modal = document.getElementById("custom-modal");
-        const modalMessage = document.getElementById("modal-message");
-        const modalInput = document.getElementById("modal-input");
-        const modalButtons = document.getElementById("modal-buttons");
-        const testDateInput = document.getElementById("test-date-input");
-
-        const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        let initialJams = [], initialEvents = [], initialPhotos = [], initialVenues = [], initialCommunityItems = [];
-        let jams = [], events = [], photos = [], communityItems = [];
-        let communitySwiper = null;
-        let jamDatePicker, jamTimePicker, eventDatePicker, testDatePicker;
-        let defaultJamDay = "Saturday";
-
-        function parseJamDate(dateStr) {
-          const year = new Date().getFullYear();
-          const dateWithYear = dateStr.replace(":", "").trim() + ` ${year}`;
-          let parsedDate = new Date(dateWithYear);
-          if (parsedDate < new Date() && new Date().getMonth() - parsedDate.getMonth() > 6) {
-              parsedDate.setFullYear(year + 1);
-          }
-          return parsedDate;
-        }
-
-        function formatJamDateForDisplay(dateObj) {
-            return `${dateObj.getDate()} ${dateObj.toLocaleString("default", { month: "short" })}`;
-        }
-
-        function formatJamDateForStorage(dateObj) {
-            return `${formatJamDateForDisplay(dateObj)}:`;
-        }
-        
-        function formatTime(timeStr) {
-            if (!timeStr || !timeStr.includes(':')) return timeStr;
-            const parts = timeStr.match(/(\d+):(\d+)\s*(AM|PM)?/i);
-            if (!parts) return timeStr;
-
-            let hours = parseInt(parts[1], 10);
-            const minutes = parseInt(parts[2], 10);
-            let ampm = parts[3] ? parts[3].toUpperCase() : (hours >= 12 ? 'PM' : 'AM');
-
-            if (hours > 12) {
-              hours -= 12;
-            } else if (hours === 0) {
-              hours = 12;
-            }
-            
-            return `${hours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
-        }
-
-        function initDatePickers() {
-            jamDatePicker = flatpickr(jamDateInput, {
-              dateFormat: "j M Y",
-              onChange: (selectedDates) => {
-                  if (selectedDates.length > 0) {
-                      jamDayInput.value = dayNames[selectedDates[0].getDay()];
-                  }
-              },
-            });
-            jamTimePicker = flatpickr(jamTimeInput, {
-              enableTime: true,
-              noCalendar: true,
-              dateFormat: "h:i K",
-              defaultDate: "3:00 PM",
-              disableMobile: true,
-            });
-            eventDatePicker = flatpickr(eventDatesInput, {
-              mode: "range",
-              dateFormat: "j M Y",
-               onClose: (selectedDates, dateStr, instance) => {
-                   if (selectedDates.length === 1) {
-                       const date = selectedDates[0];
-                       instance.input.value = `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString("default", { month: "short" })} ${date.getFullYear()}`;
-                   } else if (selectedDates.length === 2) {
-                       const start = selectedDates[0];
-                       const end = selectedDates[1];
-                       const format = (date) => `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString("default", { month: "short" })}`;
-                       instance.input.value = `${format(start)} - ${format(end)} ${end.getFullYear()}`;
-                   }
-               }
-            });
-            testDatePicker = flatpickr(testDateInput, { dateFormat: "Y-m-d" });
-        }
-        
-        function initCarousels() {
-            new Swiper(".festival-carousel", {
-                loop: true,
-                autoplay: { delay: 4000, disableOnInteraction: false },
-                pagination: { el: ".swiper-pagination", clickable: true },
-                slidesPerView: 2,
-                spaceBetween: 20,
-                breakpoints: {
-                    640: { slidesPerView: 3, spaceBetween: 30 },
-                    1024: { slidesPerView: 5, spaceBetween: 50 },
-                },
-            });
-
-            if (communitySwiper) communitySwiper.destroy(true, true);
-            communitySwiper = new Swiper(".community-swiper", {
-              effect: "fade",
-              fadeEffect: { crossFade: true },
-              loop: communityItems.length > 1,
-              autoplay: { delay: 6000, disableOnInteraction: false },
-              pagination: { el: ".swiper-pagination", clickable: true },
-              navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-              },
-            });
-        }
-        
-        async function seedDatabase() {
-            const batch = db.batch();
-
-            const seedVenues = [
-                { id: '1', name: 'The Crane Bar', mapLink: 'https://www.google.com/maps/place/The+Crane+Bar/@53.2710379,-9.060183,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96f5b72f0939:0x1531d045855f44b3!8m2!3d53.2710347!4d-9.0576081!16s%2Fm%2F027f9_x' },
-                { id: '2', name: "O'Connor's Famous Pub", mapLink: 'https://www.google.com/maps/place/O\'Connor\'s+Famous+Pub/@53.259979,-9.0768487,17z/data=!3m1!4b1!4m6!3m5!1s0x485b94326557657d:0xd0062c125a07e15a!8m2!3d53.2599758!4d-9.0742738!16s%2Fg%2F1td_15_k' },
-                { id: '3', name: 'Spanish Arch', mapLink: 'https://www.google.com/maps/place/The+Spanish+Arch/@53.2693822,-9.0558645,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96f1b18a1b91:0x548651a5a120063d!8m2!3d53.269379!4d-9.0532896!16zL20vMDh3Mnpf' },
-            ];
-            const seedJams = [
-                { id: '1723298400000', date: '10 Aug:', day: 'Saturday', time: '3:00 PM', venue: 'The Crane Bar', mapLink: 'https://www.google.com/maps/place/The+Crane+Bar/@53.2710379,-9.060183,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96f5b72f0939:0x1531d045855f44b3!8m2!3d53.2710347!4d-9.0576081!16s%2Fm%2F027f9_x', cancelled: false, isRescheduled: false },
-                { id: '1723903200000', date: '17 Aug:', day: 'Saturday', time: '3:00 PM', venue: "O'Connor's Famous Pub", mapLink: 'https://www.google.com/maps/place/O\'Connor\'s+Famous+Pub/@53.259979,-9.0768487,17z/data=!3m1!4b1!4m6!3m5!1s0x485b94326557657d:0xd0062c125a07e15a!8m2!3d53.2599758!4d-9.0742738!16s%2Fg%2F1td_15_k', cancelled: false, isRescheduled: false },
-            ];
-            const seedPhotos = [
-                { id: '1', url: 'https://images.unsplash.com/photo-1561587313-423c8a4365b2?q=80&w=2070&auto=format&fit=crop', caption: 'Musicians playing in a cozy pub setting.' },
-                { id: '2', url: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2070&auto=format&fit=crop', caption: 'A person playing guitar and singing into a vintage microphone.' },
-            ];
-            const seedCommunityItems = [
-                { id: '1', type: 'charity', imageUrl: 'https://images.unsplash.com/photo-1618401471353-b286fb359a35?q=80&w=1932&auto=format&fit=crop', description: 'We had a great time busking for COPE Galway, raising vital funds for their services.', amountRaised: '€750', charityName: 'COPE Galway' },
-                { id: '2', type: 'community', imageUrl: 'https://images.unsplash.com/photo-1519508234439-4f23b43178b4?q=80&w=2070&auto=format&fit=crop', headline: 'Jamming for the Arts Festival', description: 'We were delighted to perform as part of the Galway International Arts Festival, bringing music to the streets.'}
-            ];
-            const defaultConfig = {
-                defaultJamDay: "Saturday",
-                coverPhotoUrl: "https://images.unsplash.com/photo-1593608153489-83955a53a6a4?q=80&w=2070&auto=format&fit=crop",
-                featuredVideoUrl: "https://www.youtube.com/watch?v=k3_52c3tI5Q"
-            };
-
-            seedVenues.forEach(v => batch.set(db.collection("venues").doc(v.id), v));
-            seedJams.forEach(j => batch.set(db.collection("jams").doc(j.id), j));
-            seedPhotos.forEach(p => batch.set(db.collection("photos").doc(p.id), p));
-            seedCommunityItems.forEach(c => batch.set(db.collection("community").doc(c.id), c));
-            batch.set(db.collection("site_config").doc("main"), defaultConfig);
-
-            await batch.commit();
-        }
-
-        function manageJamSchedule(testDateStr = null) {
-            const today = testDateStr ? new Date(testDateStr) : new Date();
-            today.setHours(0, 0, 0, 0);
-
-            let confirmedJams = JSON.parse(JSON.stringify(initialJams));
-            
-            let upcomingConfirmed = confirmedJams.filter(jam => {
-                const jamDate = parseJamDate(jam.date);
-                return jamDate && jamDate >= today;
-            });
-            
-            upcomingConfirmed.sort((a, b) => parseJamDate(a.date) - parseJamDate(b.date));
-
-            let displayJams = [...upcomingConfirmed];
-            let lastDate;
-
-            if (displayJams.length > 0) {
-                lastDate = parseJamDate(displayJams[displayJams.length - 1].date);
-            } else {
-                lastDate = new Date(today);
-                const targetDayIndex = dayNames.indexOf(defaultJamDay);
-                let currentDayIndex = today.getDay();
-                let daysUntilTarget = (targetDayIndex - currentDayIndex + 7) % 7;
-                lastDate.setDate(today.getDate() + daysUntilTarget);
-                lastDate.setDate(lastDate.getDate() - 7);
-            }
-
-            while (displayJams.length < 5) {
-                lastDate.setDate(lastDate.getDate() + 7);
-                const formattedNewDate = formatJamDateForStorage(new Date(lastDate));
-                if (displayJams.some(j => j.date === formattedNewDate)) continue;
-
-                displayJams.push({
-                    id: `placeholder-${displayJams.length}`,
-                    day: defaultJamDay,
-                    date: formattedNewDate,
-                    venue: "To be decided...",
-                    cancelled: false,
-                    isPlaceholder: true,
-                    time: "3:00 PM",
-                });
-            }
-            jams = displayJams;
-        }
-
-        function renderJams() {
-            jamList.innerHTML = "";
-            if (jams.length === 0) {
-              jamList.innerHTML = `<li class="text-center text-gray-500">No upcoming jams scheduled.</li>`;
-              return;
-            }
-            
-            jams.sort((a, b) => parseJamDate(a.date) - parseJamDate(b.date)).forEach(jam => {
-                const li = document.createElement("li");
-                const isSpecial = jam.isRescheduled || jam.day.toLowerCase() !== defaultJamDay.toLowerCase();
-
-                li.className = "p-4 rounded-lg shadow-sm border-l-4 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center bg-white border-gray-200";
-                li.classList.toggle("jam-special", isSpecial);
-                li.classList.toggle("jam-cancelled", jam.cancelled);
-                
-                let adminButtons = '';
-                if (!jam.isPlaceholder) {
-                    adminButtons += `<button data-id="${jam.id}" class="edit-btn text-blue-500 hover:text-blue-700">Edit</button>`;
-                    if (isSpecial) {
-                      adminButtons += `<button data-id="${jam.id}" class="delete-btn text-red-500 hover:text-red-700 ml-2">Delete</button>`;
-                    } else {
-                      adminButtons += jam.cancelled
-                        ? `<button data-id="${jam.id}" class="reinstate-btn text-green-600 hover:text-green-800 ml-2">Reinstate</button>`
-                        : `<button data-id="${jam.id}" class="cancel-btn text-yellow-600 hover:text-yellow-800 ml-2">Cancel</button>`;
-                    }
-                }
-                
-                const mapLink = jam.mapLink ? ` <a href="${jam.mapLink}" target="_blank" class="text-blue-500 hover:underline whitespace-nowrap">(Map)</a>` : "";
-                const statusHTML = jam.cancelled ? `<span class="font-bold text-red-600">(CANCELLED)</span>` : (jam.isRescheduled ? `<span class="font-bold text-violet-600">(Rescheduled)</span>` : '');
-
-                li.innerHTML = `
-                    <div class="flex-grow jam-info">
-                        <div class="flex flex-col sm:flex-row sm:items-baseline sm:space-x-2">
-                            <span class="font-bold text-lg ${isSpecial ? 'text-violet-600' : 'text-gray-500'}">${jam.day}</span>
-                            <span class="text-lg font-bold text-primary">${formatJamDateForDisplay(parseJamDate(jam.date))}</span>
-                            <span class="text-lg font-bold text-gray-600">${formatTime(jam.time || "3:00 PM")}</span>
-                        </div>
-                        <span class="text-gray-700 text-lg">${jam.venue}${mapLink}</span>
-                    </div>
-                    <div class="flex flex-col items-end justify-between self-stretch mt-2 sm:mt-0">
-                        ${statusHTML}
-                        <div class="admin-controls-inline space-x-2 mt-2 sm:mt-0">${adminButtons}</div>
-                    </div>
-                `;
-                jamList.appendChild(li);
-            });
-        }
-        
-        function renderVenues() {
-            venueListAdmin.innerHTML = "";
-            initialVenues.sort((a, b) => a.name.localeCompare(b.name)).forEach(venue => {
-                const li = document.createElement("li");
-                li.className = "flex justify-between items-center p-2 bg-white rounded";
-                li.innerHTML = `
-                    <span>${venue.name}</span>
-                    <button data-id="${venue.id}" class="delete-venue-btn text-red-500 hover:text-red-700">Delete</button>
-                `;
-                venueListAdmin.appendChild(li);
-            });
-        }
-        
-        function renderEvents() {
-            eventList.innerHTML = "";
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-
-            const upcomingEvents = initialEvents.filter(event => {
-                const dateString = event.dates.includes("-") ? event.dates.split("-")[1].trim() : event.dates;
-                const eventEndDate = new Date(dateString);
-                return eventEndDate >= today;
-            });
-            
-            if (upcomingEvents.length === 0) {
-                eventList.innerHTML = `<p class="text-center text-gray-500">No special events scheduled at this time.</p>`;
-            }
-
-            upcomingEvents.sort((a,b) => new Date(a.dates.split("-")[0].trim()) - new Date(b.dates.split("-")[0].trim())).forEach(event => {
-                const div = document.createElement("div");
-                div.className = "bg-white p-6 rounded-lg shadow-md relative border border-gray-200";
-                const timeHTML = event.time ? `<span class="text-gray-600 font-semibold">${event.time}</span>` : "";
-                const mapLinkHTML = event.mapLink ? ` <a href="${event.mapLink}" target="_blank" class="text-blue-500 hover:underline whitespace-nowrap">(Map)</a>` : "";
-                div.innerHTML = `
-                    <div class="admin-controls-inline absolute top-2 right-2 space-x-2">
-                        <button data-id="${event.id}" class="edit-event-btn text-blue-500 hover:text-blue-700">Edit</button>
-                        <button data-id="${event.id}" class="delete-event-btn text-red-500 hover:text-red-700">Delete</button>
-                    </div>
-                    <h3 class="text-2xl font-bold text-primary">${event.title}</h3>
-                    <div class="flex items-center space-x-4 mt-1">
-                        <p class="text-lg font-semibold text-gray-700">${event.dates}</p>
-                        ${timeHTML}${mapLinkHTML}
-                    </div>
-                    <p class="mt-4 text-gray-600">${event.description}</p>
-                `;
-                eventList.appendChild(div);
-            });
-        }
-        
-        function renderGallery() {
-            galleryGrid.innerHTML = "";
-            photos = [...initialPhotos];
-            if (photos.length === 0) {
-                galleryGrid.innerHTML = `<p class="text-center text-gray-500 col-span-full">The photo gallery is empty. Add some photos!</p>`;
-                return;
-            }
-            photos.forEach(photo => {
-                const div = document.createElement("div");
-                div.className = "gallery-item overflow-hidden rounded-lg shadow-lg";
-                div.innerHTML = `
-                    <img src="${photo.url}" alt="${photo.caption}" class="w-full h-full object-cover transform hover:scale-110 transition duration-500">
-                    <button data-id="${photo.id}" class="delete-photo-btn admin-controls-inline bg-red-500 text-white rounded-full p-1 hover:bg-red-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-                    </button>
-                `;
-                galleryGrid.appendChild(div);
-            });
-        }
-
-        function renderCommunitySlider() {
-            communityItems = [...initialCommunityItems];
-            communitySwiperWrapper.innerHTML = "";
-            if (communityItems.length === 0) {
-                communitySwiperWrapper.innerHTML = `<div class="swiper-slide flex items-center justify-center bg-gray-100 text-gray-500 p-4 rounded-lg">No community events to show.</div>`;
-            } else {
-                communityItems.forEach(item => {
-                    const slide = document.createElement("div");
-                    slide.className = "swiper-slide";
-                    let headlineHTML = "";
-                    if (item.type === "charity" && item.amountRaised && item.charityName) {
-                        headlineHTML = `<h3 class="font-bold text-primary text-xl mb-2">Amount Raised: ${item.amountRaised} for ${item.charityName}</h3>`;
-                    } else if (item.type === "community" && item.headline) {
-                        headlineHTML = `<h3 class="font-bold text-primary text-xl mb-2">${item.headline}</h3>`;
-                    }
-                    slide.innerHTML = `
-                        <div class="bg-white overflow-hidden border border-gray-200 h-full">
-                            <div class="relative community-image-container">
-                                <img src="${item.imageUrl}" alt="${item.description.substring(0,50)}">
-                                <div class="slide-admin-controls admin-controls-inline space-x-2">
-                                    <button data-id="${item.id}" class="edit-community-btn bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 shadow-md"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" /><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" /></svg></button>
-                                    <button data-id="${item.id}" class="delete-community-btn bg-red-500 text-white p-2 rounded-full hover:bg-red-600 shadow-md"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" /></svg></button>
-                                </div>
-                            </div>
-                            <div class="p-6">${headlineHTML}<p class="text-gray-600">${item.description}</p></div>
-                        </div>`;
-                    communitySwiperWrapper.appendChild(slide);
-                });
-            }
-            initCarousels();
-        }
-
-        function showJamForm(mode = "add", jam = null) {
-            addJamForm.style.display = "block";
-            addJamForm.scrollIntoView({ behavior: "smooth", block: "center" });
-
-            jamVenueInput.innerHTML = "";
-            initialVenues.forEach(venue => {
-                const option = document.createElement("option");
-                option.value = venue.name;
-                option.textContent = venue.name;
-                jamVenueInput.appendChild(option);
-            });
-            
-            if (mode === "edit" && jam) {
-                formTitle.textContent = "Edit Jam";
-                editJamIdInput.value = jam.id;
-                jamDatePicker.setDate(parseJamDate(jam.date), true);
-                jamDayInput.value = jam.day;
-                jamTimePicker.setDate(jam.time || "3:00 PM", true);
-                jamVenueInput.value = jam.venue;
-                jamMapLinkInput.value = jam.mapLink || "";
-                rescheduledCheckbox.checked = jam.isRescheduled || false;
-                rescheduledCheckboxContainer.style.display = 'block';
-
-            } else {
-                formTitle.textContent = "Add a New Jam";
-                addJamForm.reset();
-                editJamIdInput.value = "";
-                rescheduledCheckboxContainer.style.display = 'none';
-                const lastJamDate = jams.length > 0 ? parseJamDate(jams[jams.length - 1].date) : new Date();
-                lastJamDate.setDate(lastJamDate.getDate() + 7);
-                jamDatePicker.setDate(lastJamDate, true);
-            }
-        }
-        function hideAllForms() {
-            addJamForm.style.display = "none";
-            venueManagementSection.style.display = "none";
-            addEventForm.style.display = "none";
-            addPhotoForm.style.display = "none";
-            addCommunityForm.style.display = "none";
-            editCoverPhotoForm.style.display = "none";
-            editFeaturedVideoForm.style.display = "none";
-        }
-        
-        function setupEventListeners() {
-            document.getElementById("menu-btn").addEventListener("click", () => document.getElementById("mobile-menu").classList.toggle("hidden"));
-            document.querySelectorAll("#mobile-menu a").forEach(link => link.addEventListener("click", () => document.getElementById("mobile-menu").classList.add("hidden")));
-
-            document.getElementById("admin-mode-btn").addEventListener("click", handleAdminClick);
-            document.body.addEventListener("click", (e) => {
-              if (e.target.classList.contains("exit-admin-btn")) {
-                sessionStorage.removeItem("gjc_isAdmin");
-                toggleAdminMode(false);
-              }
-            });
-
-            document.getElementById("add-jam-btn").addEventListener("click", () => showJamForm("add"));
-            document.getElementById("cancel-jam-form-btn").addEventListener("click", () => addJamForm.style.display = 'none');
-            addJamForm.addEventListener("submit", handleJamFormSubmit);
-            jamList.addEventListener("click", handleJamListClick);
-            jamVenueInput.addEventListener("change", () => {
-              const selectedVenue = initialVenues.find(v => v.name === jamVenueInput.value);
-              if (selectedVenue) jamMapLinkInput.value = selectedVenue.mapLink;
-            });
-
-            document.getElementById("manage-venues-btn").addEventListener("click", () => {
-              venueManagementSection.style.display = venueManagementSection.style.display === "none" ? "block" : "none";
-            });
-            addVenueForm.addEventListener("submit", handleVenueFormSubmit);
-            venueListAdmin.addEventListener("click", handleVenueListClick);
-            
-            document.getElementById("save-default-day-btn").addEventListener("click", handleSaveDefaultDay);
-            document.getElementById("edit-cover-photo-btn").addEventListener("click", () => editCoverPhotoForm.style.display = "block");
-            document.getElementById("cancel-cover-photo-btn").addEventListener("click", () => editCoverPhotoForm.style.display = "none");
-            editCoverPhotoForm.addEventListener("submit", handleCoverPhotoSubmit);
-            document.getElementById("edit-featured-video-btn").addEventListener("click", () => editFeaturedVideoForm.style.display = "block");
-            document.getElementById("cancel-featured-video-btn").addEventListener("click", () => editFeaturedVideoForm.style.display = "none");
-            editFeaturedVideoForm.addEventListener("submit", handleFeaturedVideoSubmit);
-
-            document.getElementById("add-event-btn").addEventListener("click", () => addEventForm.style.display = 'block');
-            document.getElementById("cancel-event-btn").addEventListener("click", () => addEventForm.style.display = 'none');
-            addEventForm.addEventListener("submit", handleEventFormSubmit);
-            eventList.addEventListener("click", handleEventListClick);
-
-            document.getElementById("add-photo-btn").addEventListener("click", () => addPhotoForm.style.display = 'block');
-            document.getElementById("cancel-photo-btn").addEventListener("click", () => addPhotoForm.style.display = 'none');
-            addPhotoForm.addEventListener("submit", handlePhotoFormSubmit);
-            galleryGrid.addEventListener("click", handleGalleryGridClick);
-
-            document.getElementById("add-community-item-btn").addEventListener("click", () => showCommunityForm("add"));
-            document.getElementById("cancel-community-btn").addEventListener("click", () => addCommunityForm.style.display = 'none');
-            communityItemTypeInput.addEventListener("change", (e) => {
-                const isCharity = e.target.value === "charity";
-                charityFieldsWrapper.classList.toggle("hidden", !isCharity);
-                communityHeadlineWrapper.classList.toggle("hidden", isCharity);
-            });
-            addCommunityForm.addEventListener("submit", handleCommunityFormSubmit);
-            communitySwiperWrapper.addEventListener("click", handleCommunitySliderClick);
-
-            document.getElementById("test-date-btn").addEventListener("click", () => {
-                manageJamSchedule(testDateInput.value);
-                renderJams();
-            });
-            document.getElementById("reset-date-btn").addEventListener("click", () => {
-                testDateInput.value = "";
-                manageJamSchedule();
-                renderJams();
-            });
-        }
-        
-        async function handleJamFormSubmit(e) {
-            e.preventDefault();
-            const id = editJamIdInput.value;
-            const selectedDate = jamDatePicker.selectedDates[0];
-            if (!selectedDate || !jamVenueInput.value || !jamDayInput.value) {
-              showModal("Please fill in all required jam fields.", "alert");
-              return;
-            }
-            
-            const jamData = {
-                id: id || String(Date.now()),
-                date: formatJamDateForStorage(selectedDate),
-                day: jamDayInput.value,
-                time: jamTimeInput.value,
-                venue: jamVenueInput.value,
-                mapLink: jamMapLinkInput.value.trim(),
-                cancelled: id ? initialJams.find(j => j.id === id).cancelled : false,
-                isRescheduled: rescheduledCheckbox.checked,
-            };
-
-            await db.collection("jams").doc(jamData.id).set(jamData);
-            await loadData(true);
-            addJamForm.style.display = 'none';
-        }
-        
-        async function handleJamListClick(e) {
-            const target = e.target.closest("button");
-            if (!target) return;
-            const jamId = target.dataset.id;
-            const jam = initialJams.find(j => j.id === jamId);
-            if (!jam) return;
-            
-            if (target.classList.contains("edit-btn")) {
-                showJamForm("edit", jam);
-            } else if (target.classList.contains("delete-btn")) {
-                showModal("Are you sure you want to permanently delete this jam?", "confirm", async () => {
-                    await db.collection("jams").doc(jamId).delete();
-                    await loadData(true);
-                });
-            } else if (target.classList.contains("cancel-btn") || target.classList.contains("reinstate-btn")) {
-                const isCancelled = target.classList.contains("cancel-btn");
-                const actionText = isCancelled ? "cancel" : "reinstate";
-                showModal(`Are you sure you want to ${actionText} this jam?`, "confirm", async () => {
-                    jam.cancelled = isCancelled;
-                    await db.collection("jams").doc(jam.id).set(jam);
-                    await loadData(true);
-                });
-            }
-        }
-
-        async function handleVenueFormSubmit(e) {
-            e.preventDefault();
-            const name = newVenueNameInput.value.trim();
-            const mapLink = newVenueMapLinkInput.value.trim();
-            if (!name || !mapLink) return;
-            const id = String(Date.now());
-            await db.collection("venues").doc(id).set({ id, name, mapLink });
-            await loadData(true);
-            addVenueForm.reset();
-        }
-
-        async function handleVenueListClick(e) {
-            if (!e.target.classList.contains("delete-venue-btn")) return;
-            const venueId = e.target.dataset.id;
-            showModal("Are you sure you want to delete this venue?", "confirm", async () => {
-                await db.collection("venues").doc(venueId).delete();
-                await loadData(true);
-            });
-        }
-        
-        async function handleEventFormSubmit(e) {
-            e.preventDefault();
-            const eventData = {
-                id: editEventIdInput.value || String(Date.now()),
-                title: eventTitleInput.value.trim(),
-                dates: eventDatesInput.value.trim(),
-                description: eventDescriptionInput.value.trim(),
-                time: eventTimeInput.value.trim(),
-                mapLink: eventMapLinkInput.value.trim(),
-            };
-            if (!eventData.title || !eventData.dates || !eventData.description) {
-                showModal("Please fill in all event fields.", "alert");
-                return;
-            }
-            await db.collection("events").doc(eventData.id).set(eventData);
-            await loadData(true);
-            addEventForm.style.display = 'none';
-        }
-
-        async function handleEventListClick(e) {
-            const target = e.target.closest("button");
-            if (!target) return;
-            const eventId = target.dataset.id;
-            const eventToEdit = initialEvents.find(ev => ev.id === eventId);
-            if (!eventToEdit) return;
-
-            if (target.classList.contains("edit-event-btn")) {
-                addEventForm.style.display = 'block';
-                eventFormTitle.textContent = "Edit Event";
-                Object.keys(eventToEdit).forEach(key => {
-                    const input = document.getElementById(`event-${key}`);
-                    if (input) input.value = eventToEdit[key] || "";
-                });
-                editEventIdInput.value = eventId;
-            } else if (target.classList.contains("delete-event-btn")) {
-                showModal("Are you sure you want to delete this event?", "confirm", async () => {
-                    await db.collection("events").doc(eventId).delete();
-                    await loadData(true);
-                });
-            }
-        }
-        
-        async function handlePhotoFormSubmit(e) {
-            e.preventDefault();
-            const id = String(Date.now());
-            const photoData = {
-                id,
-                url: photoUrlInput.value.trim(),
-                caption: photoCaptionInput.value.trim(),
-            };
-            if (!photoData.url || !photoData.caption) {
-                showModal("Please provide both a URL and a caption.", "alert");
-                return;
-            }
-            await db.collection("photos").doc(id).set(photoData);
-            await loadData(true);
-            addPhotoForm.style.display = 'none';
-        }
-
-        async function handleGalleryGridClick(e) {
-            const deleteBtn = e.target.closest(".delete-photo-btn");
-            if (!deleteBtn) return;
-            const photoId = deleteBtn.dataset.id;
-            showModal("Are you sure you want to delete this photo?", "confirm", async () => {
-                await db.collection("photos").doc(photoId).delete();
-                await loadData(true);
-            });
-        }
-        
-        async function handleCommunityFormSubmit(e) {
-            e.preventDefault();
-            const itemData = {
-                id: editCommunityIdInput.value || String(Date.now()),
-                imageUrl: communityImageUrlInput.value.trim(),
-                description: communityDescriptionInput.value.trim(),
-                type: communityItemTypeInput.value,
-            };
-
-            if (!itemData.imageUrl || !itemData.description) {
-                showModal("Please provide an Image URL and a Description.", "alert");
-                return;
-            }
-            
-            if (itemData.type === 'charity') {
-                itemData.amountRaised = communityAmountInput.value.trim();
-                itemData.charityName = communityCharityNameInput.value.trim();
-                if (!itemData.amountRaised || !itemData.charityName) {
-                    showModal("For charity items, please provide Amount Raised and Charity Name.", "alert");
-                    return;
-                }
-            } else {
-                itemData.headline = communityHeadlineInput.value.trim();
-                 if (!itemData.headline) {
-                    showModal("For community items, please provide a Headline.", "alert");
-                    return;
-                }
-            }
-
-            await db.collection("community").doc(itemData.id).set(itemData);
-            await loadData(true);
-            addCommunityForm.style.display = 'none';
-        }
-
-        function showCommunityForm(mode = "add", item = null) {
-            addCommunityForm.style.display = "block";
-            addCommunityForm.reset();
-            if (mode === "edit" && item) {
-                communityFormTitle.textContent = "Edit Community/Charity Item";
-                editCommunityIdInput.value = item.id;
-                communityImageUrlInput.value = item.imageUrl;
-                communityItemTypeInput.value = item.type;
-                communityDescriptionInput.value = item.description;
-                communityHeadlineInput.value = item.headline || "";
-                communityAmountInput.value = item.amountRaised || "";
-                communityCharityNameInput.value = item.charityName || "";
-            } else {
-                communityFormTitle.textContent = "Add New Community/Charity Item";
-                editCommunityIdInput.value = "";
-            }
-            communityItemTypeInput.dispatchEvent(new Event("change"));
-        }
-        
-        async function handleCommunitySliderClick(e) {
-            const btn = e.target.closest("button");
-            if (!btn) return;
-            const itemId = btn.dataset.id;
-            const item = initialCommunityItems.find(i => i.id === itemId);
-            if (!item) return;
-
-            if (btn.classList.contains("edit-community-btn")) {
-                showCommunityForm("edit", item);
-            } else if (btn.classList.contains("delete-community-btn")) {
-                showModal("Are you sure you want to delete this item?", "confirm", async () => {
-                    await db.collection("community").doc(itemId).delete();
-                    await loadData(true);
-                });
-            }
-        }
-        
-        async function handleSaveDefaultDay() {
-            const newDefaultDay = defaultDaySelect.value;
-            await db.collection("site_config").doc("main").set({ defaultJamDay: newDefaultDay }, { merge: true });
-            defaultJamDay = newDefaultDay;
-            showModal("Default jam day updated successfully!", "alert", () => {
-                manageJamSchedule();
-                renderJams();
-            });
-        }
-        
-        async function handleCoverPhotoSubmit(e) {
-            e.preventDefault();
-            const newUrl = coverPhotoUrlInput.value.trim();
-            if (!newUrl) return;
-            await db.collection("site_config").doc("main").set({ coverPhotoUrl: newUrl }, { merge: true });
-            await loadData(true);
-            editCoverPhotoForm.style.display = "none";
-        }
-        
-        async function handleFeaturedVideoSubmit(e) {
-            e.preventDefault();
-            const newUrl = featuredVideoUrlInput.value.trim();
-            if (!newUrl) return;
-            await db.collection("site_config").doc("main").set({ featuredVideoUrl: newUrl }, { merge: true });
-            await loadData(true);
-            editFeaturedVideoForm.style.display = "none";
-        }
-
-        function toggleAdminMode(enable) {
-            document.body.classList.toggle("admin-mode", enable);
-            if (!enable) hideAllForms();
-            renderAll();
-        }
-        
-        async function verifyPin(pin) {
-            const functionUrl = "https://script.google.com/macros/s/AKfycby34RunDhZjds7M7rUA5wP-m1M2uBv3UfJ6vpCxqKhMq36oGkHTIQ1BFF3-9kStGaTyAA/exec";
-            try {
-                const response = await fetch(`${functionUrl}?pin=${encodeURIComponent(pin)}&action=check`);
-                if (!response.ok) {
-                    console.error("PIN verification request failed:", response.status, response.statusText);
-                    showModal(`Error: Verification server responded with status ${response.status}. Please check the Google Apps Script deployment.`, "alert");
-                    return false;
-                }
-                const result = await response.json();
-                return result.success === true;
-            } catch (error) {
-                console.error("Error during PIN verification fetch:", error);
-                showModal(`Network Error: Could not reach verification service. Please check your connection. Details: ${error.message}`, "alert");
-                return false;
-            }
-        }
-
-        function handleAdminClick(e) {
-            e.preventDefault();
-            if (document.body.classList.contains("admin-mode")) {
-                sessionStorage.removeItem("gjc_isAdmin");
-                toggleAdminMode(false);
-            } else {
-                showModal("Enter admin PIN:", "prompt", async (pin) => {
-                    if (!pin) return;
-                    const isCorrect = await verifyPin(pin);
-                    if (isCorrect) {
-                        sessionStorage.setItem("gjc_isAdmin", "true");
-                        toggleAdminMode(true);
-                        document.getElementById("jams").scrollIntoView({ behavior: "smooth" });
-                    } else {
-                        if (!modal.classList.contains('flex')) {
-                            showModal("Incorrect PIN.", "alert");
-                        }
-                    }
-                });
-            }
-        }
-        
-        function showModal(message, type = "alert", onConfirm = () => {}) {
-            modalMessage.textContent = message;
-            modalButtons.innerHTML = "";
-            modalInput.classList.toggle("hidden", type !== "prompt");
-            modalInput.value = "";
-            
-            const cancelButton = document.createElement("button");
-            cancelButton.textContent = "Cancel";
-            cancelButton.className = "px-4 py-2 bg-stone-600 text-white rounded-md";
-            cancelButton.onclick = () => modal.classList.remove('flex');
-            
-            const confirmButton = document.createElement("button");
-            confirmButton.className = "px-4 py-2 bg-accent text-primary font-bold rounded-md";
-
-            if (type === "alert") {
-                confirmButton.textContent = "OK";
-                confirmButton.onclick = () => { modal.classList.remove('flex'); onConfirm(); };
-                modalButtons.appendChild(confirmButton);
-            } else if (type === "confirm") {
-                confirmButton.textContent = "Confirm";
-                confirmButton.onclick = () => { modal.classList.remove('flex'); onConfirm(); };
-                modalButtons.append(cancelButton, confirmButton);
-            } else if (type === "prompt") {
-                confirmButton.textContent = "Submit";
-                confirmButton.onclick = () => { modal.classList.remove('flex'); onConfirm(modalInput.value); };
-                modalButtons.append(cancelButton, confirmButton);
-            }
-            
-            modal.classList.add("flex");
-            if (type === "prompt") modalInput.focus();
-        }
-
-        function renderAll() {
-            manageJamSchedule();
-            renderJams();
-            renderVenues();
-            renderEvents();
-            renderGallery();
-            renderCommunitySlider();
-        }
-        
-        async function loadData(forceReload = false) {
-            try {
-                if (!forceReload) {
-                    const jamCheck = await db.collection("jams").get();
-                    if (jamCheck.empty) {
-                        console.log("Database is empty. Seeding...");
-                        await seedDatabase();
-                        showModal("Database has been initialized with sample data. The page will now reload.", "alert", () => {
-                            location.reload();
-                        });
-                        return;
-                    }
-                }
-
-                const [jamSnap, eventSnap, photoSnap, venueSnap, communitySnap, configDoc] = await Promise.all([
-                    db.collection("jams").get(),
-                    db.collection("events").get(),
-                    db.collection("photos").get(),
-                    db.collection("venues").get(),
-                    db.collection("community").get(),
-                    db.collection("site_config").doc("main").get(),
-                ]);
-
-                initialJams = jamSnap.docs.map(doc => doc.data());
-                initialEvents = eventSnap.docs.map(doc => doc.data());
-                initialPhotos = photoSnap.docs.map(doc => doc.data());
-                initialVenues = venueSnap.docs.map(doc => doc.data());
-                initialCommunityItems = communitySnap.docs.map(doc => doc.data());
-                
-                if (configDoc.exists) {
-                    const configData = configDoc.data();
-                    defaultJamDay = configData.defaultJamDay || "Saturday";
-                    if (configData.coverPhotoUrl) coverPhotoElement.src = configData.coverPhotoUrl;
-                    if (configData.featuredVideoUrl) {
-                        const videoIdMatch = configData.featuredVideoUrl.match(/(?:v=|\/embed\/|\/)([\w-]{11})/);
-                        if (videoIdMatch) featuredVideoPlayer.src = `https://www.youtube.com/embed/${videoIdMatch[1]}`;
-                    }
-                }
-                
-                defaultDaySelect.innerHTML = '';
-                dayNames.forEach(day => {
-                    const option = document.createElement("option");
-                    option.value = day;
-                    option.textContent = day;
-                    defaultDaySelect.appendChild(option);
-                });
-                defaultDaySelect.value = defaultJamDay;
-
-                renderAll();
-
-            } catch (error) {
-                console.error("Error loading data: ", error);
-                showModal("Could not load data from the database. Check console for details.", "alert");
-            }
-        }
-        
-        // --- App Entry Point ---
-        try {
-            initDatePickers();
-            setupEventListeners();
-            await loadData();
-            if (sessionStorage.getItem("gjc_isAdmin") === "true") {
-                toggleAdminMode(true);
-            }
-        } catch(err) {
-            console.error("A critical error occurred during initialization:", err);
-            alert("A critical error occurred. Please check the console for details.");
-        }
-      });
-    </script>
-  
+<button id="admin-fab" aria-label="Admin" aria-pressed="false"
+  class="fixed bottom-4 right-4 px-3 py-2 rounded-full text-white shadow-lg transition
+         bg-purple-800/80 hover:bg-purple-800 focus:outline-none focus:ring focus:ring-purple-300
+         opacity-60 hover:opacity-100 z-50">
+  Admin
+</button>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  var adminBtn = document.getElementById('admin-mode-btn');
-  var mobileAdminBtn = document.getElementById('mobile-admin-btn');
+(function () {
+  // ----- Utilities -----
+  function $(sel, root) { return (root || document).querySelector(sel); }
+  function $all(sel, root) { return Array.from((root || document).querySelectorAll(sel)); }
 
-  function setAdminMode(enabled) {
-    if (enabled) {
-      document.body.classList.add('admin-mode');
-      if (adminBtn) adminBtn.textContent = 'Exit Admin';
-      if (mobileAdminBtn) mobileAdminBtn.textContent = 'Exit Admin';
-      sessionStorage.setItem('gjc_isAdmin', 'true');
-    } else {
-      document.body.classList.remove('admin-mode');
-      if (adminBtn) adminBtn.textContent = 'Admin';
-      if (mobileAdminBtn) mobileAdminBtn.textContent = 'Admin';
-      sessionStorage.removeItem('gjc_isAdmin');
-    }
+  function getCoverSrc() {
+    const cover = $('#cover-photo');
+    return cover && cover.getAttribute('src') ? cover.getAttribute('src') : '';
   }
 
-  function toggle() {
-    var enabled = !document.body.classList.contains('admin-mode');
-    setAdminMode(enabled);
-    var jams = document.getElementById('jams');
-    if (jams) jams.scrollIntoView({behavior:'smooth'});
-  }
-
-  if (adminBtn) adminBtn.addEventListener('click', function(e){ e.preventDefault(); toggle(); });
-  if (mobileAdminBtn) mobileAdminBtn.addEventListener('click', function(e){ e.preventDefault(); toggle(); });
-
-  // restore persisted admin mode
-  if (sessionStorage.getItem('gjc_isAdmin') === 'true') {
-    setAdminMode(true);
-  }
-
-  // Fix cover image if missing
-  var cover = document.getElementById('cover-photo');
-  if (cover && (!cover.getAttribute('src') || cover.getAttribute('src').trim() === '')) {
-    cover.setAttribute('src', 'https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/340126198_1202888093755813_6375467148998027340_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=2285d6&_nc_ohc=wA-6pUbx_XYQ7kNvwHkWjV3&_nc_oc=Adnd0Bbs-9bBGiNkVlqTm636JeXERyh16eo2fUrKp5p7sPkeFMlKHcYdyTj8qGDYzQk&_nc_zt=23&_nc_ht=scontent-dub4-1.xx&_nc_gid=Pse2aOVgLI3EOs4_MVhu_Q&oh=00_AfWMKMB5g8K5fFbQO5RjBf8Wp9epHYVIZ5FuDYFFu1qEsg&oe=689D27F9');
-  }
-
-  // Fallback for any images that fail to load or are empty
-  var fallback = 'https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/340126198_1202888093755813_6375467148998027340_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=2285d6&_nc_ohc=wA-6pUbx_XYQ7kNvwHkWjV3&_nc_oc=Adnd0Bbs-9bBGiNkVlqTm636JeXERyh16eo2fUrKp5p7sPkeFMlKHcYdyTj8qGDYzQk&_nc_zt=23&_nc_ht=scontent-dub4-1.xx&_nc_gid=Pse2aOVgLI3EOs4_MVhu_Q&oh=00_AfWMKMB5g8K5fFbQO5RjBf8Wp9epHYVIZ5FuDYFFu1qEsg&oe=689D27F9';
-  function applyFallback(img) {
-    if (!img.getAttribute('src') || img.getAttribute('src').trim() === '') {
+  function setImgFallback(img) {
+    const fallback = getCoverSrc();
+    if (!fallback) return;
+    // Only apply if needed
+    if (!img.getAttribute('src') || img.getAttribute('src').trim() === '' || (img.complete && img.naturalWidth === 0)) {
       img.setAttribute('src', fallback);
     }
-    img.addEventListener('error', function() {
-      if (img.getAttribute('src') !== fallback) {
+    // Bind onerror once
+    if (!img.__fallbackBound) {
+      img.addEventListener('error', function () {
+        // avoid infinite loop
+        if (img.getAttribute('data-fallback-applied') === '1') return;
         img.setAttribute('src', fallback);
-      }
-    });
+        img.setAttribute('data-fallback-applied', '1');
+      }, { once: false });
+      img.__fallbackBound = true;
+    }
   }
-  document.querySelectorAll('img').forEach(applyFallback);
 
-  // Observe late-added images (e.g., gallery/community)
-  var obs = new MutationObserver(function(muts){
-    muts.forEach(function(m){
-      m.addedNodes && m.addedNodes.forEach(function(node){
-        if (node.tagName === 'IMG') applyFallback(node);
-        if (node.querySelectorAll) node.querySelectorAll('img').forEach(applyFallback);
+  function applyFallbacks(root) {
+    const scope = root || document;
+    $all('img', scope).forEach(setImgFallback);
+  }
+
+  // Observe dynamically added images (e.g., gallery/community slides)
+  const mo = new MutationObserver((mutations) => {
+    mutations.forEach(m => {
+      m.addedNodes && m.addedNodes.forEach(node => {
+        if (node.nodeType === 1) { // ELEMENT_NODE
+          if (node.tagName === 'IMG') {
+            setImgFallback(node);
+          } else {
+            applyFallbacks(node);
+          }
+        }
       });
     });
   });
-  obs.observe(document.body, {childList:true, subtree:true});
-});
+
+  // ----- Admin mode toggle -----
+  const STORAGE_KEY = 'adminMode';
+  const body = document.body;
+  let adminFab = $('#admin-fab');
+
+  function setAdminMode(enabled) {
+    if (enabled) {
+      body.classList.add('admin-mode');
+      sessionStorage.setItem(STORAGE_KEY, '1');
+      if (adminFab) {
+        adminFab.textContent = 'Exit Admin';
+        adminFab.setAttribute('aria-pressed', 'true');
+      }
+    } else {
+      body.classList.remove('admin-mode');
+      sessionStorage.removeItem(STORAGE_KEY);
+      if (adminFab) {
+        adminFab.textContent = 'Admin';
+        adminFab.setAttribute('aria-pressed', 'false');
+      }
+    }
+  }
+
+  function toggleAdminMode() {
+    const on = body.classList.contains('admin-mode');
+    setAdminMode(!on);
+  }
+
+  function initAdminFab() {
+    adminFab = $('#admin-fab');
+    if (!adminFab) return;
+    adminFab.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleAdminMode();
+    });
+  }
+
+  function initKeyboardShortcut() {
+    document.addEventListener('keydown', (e) => {
+      // Ctrl+Shift+A toggles admin
+      if (e.key.toLowerCase() === 'a' && e.ctrlKey && e.shiftKey) {
+        e.preventDefault();
+        toggleAdminMode();
+      }
+    });
+  }
+
+  // ----- Initialize on DOM ready -----
+  document.addEventListener('DOMContentLoaded', function () {
+    // apply image fallbacks immediately
+    applyFallbacks();
+
+    // start observing for dynamic changes
+    try {
+      mo.observe(document.documentElement || document.body, { childList: true, subtree: true });
+    } catch (e) {}
+
+    // initialize admin UI/shortcut
+    initAdminFab();
+    initKeyboardShortcut();
+
+    // restore persisted admin mode
+    if (sessionStorage.getItem(STORAGE_KEY) === '1') {
+      setAdminMode(true);
+    } else {
+      setAdminMode(false);
+    }
+  });
+})();
 </script>
 </body>
 </html>
