@@ -295,7 +295,7 @@
         <img
           id="cover-photo"
           src=""
-          alt="A group of people playing instruments like guitars and ukuleles by a river in Galway."
+          alt="The Spanish Arch in Galway at dusk."
           class="w-full h-[70vh] object-cover"
         />
         <div
@@ -1390,7 +1390,7 @@
             </svg>
           </a>
         </div>
-        <p>© 2025 Galway Jam Circle. v2.1. All Rights Reserved.</p>
+        <p>© 2025 Galway Jam Circle. v2.3 DIAGNOSTIC. All Rights Reserved.</p>
         <p class="text-sm text-stone-400 mt-2">
           Bringing music to the people of Galway.
         </p>
@@ -1455,6 +1455,9 @@
       const db = getFirestore(app);
 
       document.addEventListener("DOMContentLoaded", async () => {
+        
+        alert("JavaScript Loaded Successfully."); // DIAGNOSTIC ALERT 1
+
         const coverPhotoElement = document.getElementById("cover-photo");
         const jamList = document.getElementById("jam-list");
         const addJamForm = document.getElementById("add-jam-form");
@@ -1631,10 +1634,11 @@
             ];
             const seedCommunityItems = [
                 { id: '1', type: 'charity', imageUrl: 'https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/434110825_433552092487568_1978257008516886427_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=p-n-G9M9hK4Q7kNvgGfX-Y1&_nc_ht=scontent-dub4-1.xx&oh=00_AYD7o-d2Z0f0j-L9f3a1H9c-w8b6f3o2o2Z2y0G0u1g1iA&oe=668695E6', description: 'We had a great time busking for COPE Galway, raising vital funds for their services.', amountRaised: '€750', charityName: 'COPE Galway' },
+                { id: '2', type: 'community', imageUrl: 'https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/438440571_449339904242120_3534936330999086105_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=y7m8R0o-mE8Q7kNvgEwXo0C&_nc_ht=scontent-dub4-1.xx&oh=00_AYDXu2-c2c3b8t-5H6O3S1c-Y0Q8X3r-o0V1g3A3E2u2Fw&oe=66869408', headline: 'Jamming for the Arts Festival', description: 'We were delighted to perform as part of the Galway International Arts Festival, bringing music to the streets.'}
             ];
             const defaultConfig = {
                 defaultJamDay: "Saturday",
-                coverPhotoUrl: "https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/340126198_1202888093755813_6375467148998027340_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=2285d6&_nc_ohc=wA-6pUbx_XYQ7kNvwHkWjV3&_nc_oc=Adnd0Bbs-9bBGiNkVlqTm636JeXERyh16eo2fUrKp5p7sPkeFMlKHcYdyTj8qGDYzQk&_nc_zt=23&_nc_ht=scontent-dub4-1.xx&_nc_gid=Pse2aOVgLI3EOs4_MVhu_Q&oh=00_AfWMKMB5g8K5fFbQO5RjBf8Wp9epHYVIZ5FuDYFFu1qEsg&oe=689D27F9",
+                coverPhotoUrl: "https://images.unsplash.com/photo-1593608153489-83955a53a6a4?q=80&w=2070&auto=format&fit=crop",
                 featuredVideoUrl: "https://www.youtube.com/watch?v=k3_52c3tI5Q"
             };
 
@@ -2199,19 +2203,20 @@
                 const response = await fetch(`${functionUrl}?pin=${encodeURIComponent(pin)}&action=check`);
                 if (!response.ok) {
                     console.error("PIN verification request failed:", response.status, response.statusText);
-                    showModal(`Error contacting verification server (Status: ${response.status}). Please try again later.`, "alert");
+                    showModal(`Error: Verification server responded with status ${response.status}. Please check the Google Apps Script deployment.`, "alert");
                     return false;
                 }
                 const result = await response.json();
                 return result.success === true;
             } catch (error) {
-                console.error("Error during PIN verification:", error);
-                showModal("Could not verify PIN. Please check your internet connection or try again.", "alert");
+                console.error("Error during PIN verification fetch:", error);
+                showModal(`Network Error: Could not reach verification service. Please check your connection. Details: ${error.message}`, "alert");
                 return false;
             }
         }
 
         function handleAdminClick(e) {
+            alert("Admin Button Clicked!"); // DIAGNOSTIC ALERT 2
             e.preventDefault();
             if (document.body.classList.contains("admin-mode")) {
                 sessionStorage.removeItem("gjc_isAdmin");
