@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galway Jam Circle - Official Website</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="styles.css">
+
+  </head>
+  <body class="text-gray-800">
+    <header class="bg-primary shadow-lg sticky top-0 z-50">
+      <nav class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+        <div class="flex items-center space-x-2 sm:space-x-4">
+          <div class="w-12 h-12 sm:w-14 sm:h-14">
+            <img src="images/logo.jpg" alt="Galway Jam Circle Logo" class="rounded-full" />
+          </div>
+          <div class="text-white text-lg sm:text-2xl font-bold tracking-tight">Galway Jam Circle</div>
+        </div>
+        <div class="hidden md:flex items-center space-x-2">
+          <a href="#home" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Home</a>
+          <a href="#jams" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Regular Jams</a>
+          <a href="#format" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Our Format</a>
+          <a href="#special-events" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Festivals & Events</a>
+          <a href="#community" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Community</a>
+          <a href="#gallery" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Gallery</a>
+          <a href="https://drive.google.com/file/d/1V3X3K5hwUHxZtn3o29Wd6ZZ4twz4x0j_/view?usp=sharing" target="_blank" class="text-primary bg-accent px-4 py-3 rounded-md hover:bg-opacity-80 transition duration-300 font-bold">Songbook</a>
+          <a href="#contact" class="text-white px-4 py-2 rounded-md hover:bg-white/10 transition duration-300">Contact</a>
+        </div>
+        <div class="md:hidden">
+          <button id="menu-btn" class="text-white focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+          </button>
+        </div>
+      </nav>
+      <div id="mobile-menu" class="md:hidden hidden bg-primary/95">
+        <a href="#home" class="block text-white text-center py-3 hover:bg-white/10">Home</a>
+        <a href="#jams" class="block text-white text-center py-3 hover:bg-white/10">Regular Jams</a>
+        <a href="#format" class="block text-white text-center py-3 hover:bg-white/10">Our Format</a>
+        <a href="#special-events" class="block text-white text-center py-3 hover:bg-white/10">Festivals & Events</a>
+        <a href="#community" class="block text-white text-center py-3 hover:bg-white/10">Community</a>
+        <a href="#gallery" class="block text-white text-center py-3 hover:bg-white/10">Gallery</a>
+        <a href="https://drive.google.com/file/d/1V3X3K5hwUHxZtn3o29Wd6ZZ4twz4x0j_/view?usp=sharing" target="_blank" class="block text-primary text-center font-bold py-3 bg-accent hover:bg-opacity-80">Songbook</a>
+        <a href="#contact" class="block text-white text-center py-3 hover:bg-white/10">Contact</a>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="relative text-white text-center">
+        <img id="cover-photo" src="https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/340126198_1202888093755813_6375467148998027340_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=2285d6&_nc_ohc=wA-6pUbx_XYQ7kNvwHkWjV3&_nc_oc=Adnd0Bbs-9bBGiNkVlqTm636JeXERyh16eo2fUrKp5p7sPkeFMlKHcYdyTj8qGDYzQk&_nc_zt=23&_nc_ht=scontent-dub4-1.xx&_nc_gid=Pse2aOVgLI3EOs4_MVhu_Q&oh=00_AfWMKMB5g8K5fFbQO5RjBf8Wp9epHYVIZ5FuDYFFu1qEsg&oe=689D27F9" alt="A group of people playing instruments by a river in Galway." class="w-full h-[70vh] object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent flex flex-col justify-end items-center p-6 sm:p-12">
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white drop-shadow-2xl">Welcome to the Galway Jam Circle</h1>
+          <p class="mt-4 text-lg sm:text-xl max-w-3xl text-white/90 drop-shadow-xl">A friendly, informal music-making community for all skill levels. Let's Jam!</p>
+          <div class="mt-8 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <a href="#jams" class="px-8 py-3 bg-accent text-primary font-bold rounded-full hover:bg-opacity-80 transition duration-300 transform hover:scale-105 shadow-lg">See Regular Jams</a>
+            <div class="flex items-start space-x-4">
+              <div class="text-center">
+                <a href="https://www.facebook.com/groups/116675615376726" target="_blank" class="text-white hover:text-accent transition duration-300">
+                  <svg class="w-8 h-8 mx-auto mb-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V21.878A10.001 10.001 0 0022 12z" clip-rule="evenodd" /></svg>
+                  <span class="text-xs font-semibold">Group</span>
+                </a>
+              </div>
+              <div class="text-center">
+                <a href="https://www.facebook.com/profile.php?id=61570031297498" target="_blank" class="text-white hover:text-accent transition duration-300">
+                  <svg class="w-8 h-8 mx-auto mb-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V21.878A10.001 10.001 0 0022 12z" clip-rule="evenodd" /></svg>
+                  <span class="text-xs font-semibold">Page</span>
+                </a>
+              </div>
+              <a href="https://www.instagram.com/galwayjamcircle42/?hl=en" target="_blank" class="text-white hover:text-accent transition duration-300 pt-1">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.792 2.013 10.146 2 12.315 2zm0 1.623c-2.403 0-2.748.01-3.728.058-1.006.047-1.634.21-2.203.434a3.272 3.272 0 00-1.15 1.15c-.224.57-.386 1.198-.434 2.203-.048.98-.058 1.325-.058 3.728s.01 2.748.058 3.728c.048 1.006.21 1.634.434 2.203a3.272 3.272 0 001.15 1.15c.57.224 1.198.386 2.203.434.98.048 1.325.058 3.728.058s2.748-.01 3.728-.058c1.006-.047 1.634-.21 2.203-.434a3.272 3.272 0 001.15-1.15c.224-.57.386-1.198.434-2.203.048-.98.058-1.325.058-3.728s-.01-2.748-.058-3.728c-.048-1.006-.21-1.634-.434-2.203a3.272 3.272 0 00-1.15-1.15c-.57-.224-1.198-.386-2.203-.434C15.063 3.633 14.718 3.623 12.315 3.623zM12 9.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm0 6a3.75 3.75 0 110-7.5 3.75 3.75 0 010 7.5zM16.965 6.57a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" /></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="container mx-auto px-4 sm:px-6 text-center -mt-8 relative z-10">
+        <div class="admin-controls-inline items-center justify-center">
+          <button id="edit-cover-photo-btn" class="px-4 py-2 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-600 transition duration-300 shadow-md">Change Cover Photo</button>
+          <button class="exit-admin-btn px-4 py-2 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 transition duration-300 shadow-md ml-4">Exit Admin Mode</button>
+        </div>
+        <form id="edit-cover-photo-form" class="max-w-xl mx-auto mt-4 p-6 bg-white rounded-lg shadow-xl border border-gray-200">
+          <h3 class="text-xl font-bold text-primary mb-4">Change Cover Photo</h3>
+          <div class="mb-4">
+            <label for="cover-photo-url" class="block text-gray-700 font-bold mb-2 text-left">New Photo URL</label>
+            <input type="url" id="cover-photo-url" class="w-full p-2 border rounded" placeholder="Paste direct image link..." />
+          </div>
+          <div class="flex justify-end space-x-4">
+            <button type="button" id="cancel-cover-photo-btn" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button>
+            <button type="submit" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Save Photo</button>
+          </div>
+        </form>
+      </div>
+
+      </main>
+    
+    <footer class="bg-primary text-white/80 py-8">
+        <div class="space-x-4">
+          <a href="feedback.html" class="text-sm text-stone-400 hover:text-white mt-4 inline-block">Website Feedback</a>
+          <a href="#" id="admin-mode-btn" class="text-sm text-stone-400 hover:text-white mt-4 inline-block">Admin</a>
+        </div>
+    </footer>
+
+    <div id="custom-modal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center">
+      <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full mx-4">
+        <p id="modal-message" class="text-lg mb-4"></p>
+        <input type="password" id="modal-input" class="w-full p-2 border rounded mb-4 hidden" placeholder="Enter password..." />
+        <div id="modal-buttons" class="flex justify-end space-x-4"></div>
+      </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <script src="script.js" type="module"></script>
+
+  </body>
+</html>
