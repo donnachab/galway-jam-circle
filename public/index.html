@@ -2217,34 +2217,53 @@
             renderAll();
         }
         
-        async function verifyPin(pin) {
-            const functionUrl = "https://script.google.com/macros/s/AKfycby34RunDhZjds7M7rUA5wP-m1M2uBv3UfJ6vpCxqKhMq36oGkHTIQ1BFF3-9kStGaTyAA/exec";
-            try {
-                const response = await fetch(`${functionUrl}?pin=${encodeURIComponent(pin)}&action=check`);
-                if (!response.ok) return false;
-                const result = await response.json();
-                return result.success;
-            } catch (error) {
-                console.error("Error verifying PIN:", error);
-                showModal("Could not verify PIN. Check connection.", "alert");
-                return false;
-            }
-        }
-
-        function handleAdminClick(e) {
+function handleAdminClick(e) {
             e.preventDefault();
             if (document.body.classList.contains("admin-mode")) {
                 sessionStorage.removeItem("gjc_isAdmin");
                 toggleAdminMode(false);
             } else {
                 showModal("Enter admin PIN:", "prompt", async (pin) => {
-                    if (pin && await verifyPin(pin)) {
+                    // Check if a PIN was actually entered
+                    if (!pin) return; 
+
+                    const isCorrect = await verifyPin(pin);
+                    if (isCorrect) {
                         sessionStorage.setItem("gjc_isAdmin", "true");
                         toggleAdminMode(true);
+                        document.getElementById("jams").scrollIntoView({ behavior: "smooth" });
                     } else {
-                        showModal("Incorrect PIN.", "alert");
+                        // The verifyPin function will now show its own detailed error,
+                        // but we still need a fallback for a simple "incorrect pin" result.
+                        if (!document.getElementById('custom-modal').classList.contains('flex')) {
+                           showModal("Incorrect PIN.", "alert");
+                        }
                     }
                 });
+            }
+        }
+
+        async function verifyPin(pin) {
+            const functionUrl = "https://script.google.com/macros/s/AKfycby34RunDhZjds7M7rUA5wP-m1M2uBv3UfJ6vpCxqKhMq36oGkHTIQ1BFF3-9kStGaTyAA/exec";
+            try {
+                const response = await fetch(`${functionUrl}?pin=${encodeURIComponent(pin)}&action=check`);
+
+                // **THIS IS THE KEY FIX**
+                // It now explicitly checks if the network request was successful.
+                if (!response.ok) {
+                    console.error("PIN verification request failed with status:", response.status);
+                    showModal(`Error contacting verification server (Status: ${response.status}). Please try again later.`, "alert");
+                    return false;
+                }
+
+                const result = await response.json();
+                return result.success;
+
+            } catch (error) {
+                // This catch block handles cases where you can't connect at all (e.g., no internet).
+                console.error("Error during PIN verification fetch:", error);
+                showModal("Could not verify PIN. Please check your internet connection.", "alert");
+                return false;
             }
         }
         
