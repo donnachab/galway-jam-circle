@@ -294,7 +294,7 @@
       <section id="home" class="relative text-white text-center">
         <img
           id="cover-photo"
-          src="https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/340126198_1202888093755813_6375467148998027340_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=2285d6&_nc_ohc=wA-6pUbx_XYQ7kNvwHkWjV3&_nc_oc=Adnd0Bbs-9bBGiNkVlqTm636JeXERyh16eo2fUrKp5p7sPkeFMlKHcYdyTj8qGDYzQk&_nc_zt=23&_nc_ht=scontent-dub4-1.xx&_nc_gid=Pse2aOVgLI3EOs4_MVhu_Q&oh=00_AfWMKMB5g8K5fFbQO5RjBf8Wp9epHYVIZ5FuDYFFu1qEsg&oe=689D27F9"
+          src=""
           alt="A group of people playing instruments like guitars and ukuleles by a river in Galway."
           class="w-full h-[70vh] object-cover"
         />
@@ -1390,7 +1390,7 @@
             </svg>
           </a>
         </div>
-        <p>© 2025 Galway Jam Circle. v2.0. All Rights Reserved.</p>
+        <p>© 2025 Galway Jam Circle. v2.1. All Rights Reserved.</p>
         <p class="text-sm text-stone-400 mt-2">
           Bringing music to the people of Galway.
         </p>
@@ -1455,9 +1455,6 @@
       const db = getFirestore(app);
 
       document.addEventListener("DOMContentLoaded", async () => {
-        // --- DOM ELEMENT DECLARATIONS (FIXED) ---
-        // This block is now correctly placed inside the DOMContentLoaded listener,
-        // ensuring elements are loaded before the script tries to access them.
         const coverPhotoElement = document.getElementById("cover-photo");
         const jamList = document.getElementById("jam-list");
         const addJamForm = document.getElementById("add-jam-form");
@@ -1512,7 +1509,6 @@
         const modalButtons = document.getElementById("modal-buttons");
         const testDateInput = document.getElementById("test-date-input");
 
-        // --- GLOBAL STATE & CONSTANTS ---
         const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         let initialJams = [], initialEvents = [], initialPhotos = [], initialVenues = [], initialCommunityItems = [];
         let jams = [], events = [], photos = [], communityItems = [];
@@ -1520,7 +1516,6 @@
         let jamDatePicker, jamTimePicker, eventDatePicker, testDatePicker;
         let defaultJamDay = "Saturday";
 
-        // --- UTILITY & FORMATTING FUNCTIONS ---
         function parseJamDate(dateStr) {
           const year = new Date().getFullYear();
           const dateWithYear = dateStr.replace(":", "").trim() + ` ${year}`;
@@ -1557,7 +1552,6 @@
             return `${hours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
         }
 
-        // --- INITIALIZATION ---
         function initDatePickers() {
             jamDatePicker = flatpickr(jamDateInput, {
               dateFormat: "j M Y",
@@ -1572,7 +1566,7 @@
               noCalendar: true,
               dateFormat: "h:i K",
               defaultDate: "3:00 PM",
-              disableMobile: true, // Fix for mobile usability
+              disableMobile: true,
             });
             eventDatePicker = flatpickr(eventDatesInput, {
               mode: "range",
@@ -1619,43 +1613,40 @@
             });
         }
         
-        // --- DATA SEEDING ---
-        async function seedDatabaseIfEmpty() {
-          if (initialJams.length === 0 && initialVenues.length === 0 && initialPhotos.length === 0) {
-              console.log("Database is empty. Seeding with initial data...");
-              const batch = writeBatch(db);
+        async function seedDatabase() {
+            const batch = writeBatch(db);
 
-              const seedVenues = [
-                { id: '1', name: 'The Crane Bar', mapLink: 'https://maps.app.goo.gl/gQj1b7qE9fR2cW9x6' },
-                { id: '2', name: "O'Connor's Famous Pub", mapLink: 'https://maps.app.goo.gl/kX7sC3Z7wB6Y4p7Y8' },
-                { id: '3', name: 'Spanish Arch', mapLink: 'https://maps.app.goo.gl/VjS1Ua3sH6A2pZqKA' },
-              ];
-
-              const seedJams = [
-                { id: '1672531200000', date: '10 Aug:', day: 'Saturday', time: '3:00 PM', venue: 'The Crane Bar', mapLink: 'https://maps.app.goo.gl/gQj1b7qE9fR2cW9x6', cancelled: false, isRescheduled: false },
-                { id: '1673136000000', date: '17 Aug:', day: 'Saturday', time: '3:00 PM', venue: "O'Connor's Famous Pub", mapLink: 'https://maps.app.goo.gl/kX7sC3Z7wB6Y4p7Y8', cancelled: false, isRescheduled: false },
-              ];
-              
-              const seedPhotos = [
+            const seedVenues = [
+                { id: '1', name: 'The Crane Bar', mapLink: 'https://maps.app.goo.gl/someplace1' },
+                { id: '2', name: "O'Connor's Famous Pub", mapLink: 'https://maps.app.goo.gl/someplace2' },
+                { id: '3', name: 'Spanish Arch', mapLink: 'https://maps.app.goo.gl/someplace3' },
+            ];
+            const seedJams = [
+                { id: '1723298400000', date: '10 Aug:', day: 'Saturday', time: '3:00 PM', venue: 'The Crane Bar', mapLink: 'https://maps.app.goo.gl/someplace1', cancelled: false, isRescheduled: false },
+                { id: '1723903200000', date: '17 Aug:', day: 'Saturday', time: '3:00 PM', venue: "O'Connor's Famous Pub", mapLink: 'https://maps.app.goo.gl/someplace2', cancelled: false, isRescheduled: false },
+            ];
+            const seedPhotos = [
                 { id: '1', url: 'https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/441940984_467137352462375_2069542030018448903_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=fV0i_X2yHcoQ7kNvgFYexA-&_nc_ht=scontent-dub4-1.xx&oh=00_AYBv6u6U1cGNw3vC5u2O-iX2o2oY0X7B9d0b6w0u0g3J3w&oe=6686A3E9', caption: 'A jam session in a cozy pub.' },
                 { id: '2', url: 'https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/438440571_449339904242120_3534936330999086105_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=y7m8R0o-mE8Q7kNvgEwXo0C&_nc_ht=scontent-dub4-1.xx&oh=00_AYDXu2-c2c3b8t-5H6O3S1c-Y0Q8X3r-o0V1g3A3E2u2Fw&oe=66869408', caption: 'Musicians playing together outdoors.' },
-              ];
-
-              const seedCommunityItems = [
+            ];
+            const seedCommunityItems = [
                 { id: '1', type: 'charity', imageUrl: 'https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/434110825_433552092487568_1978257008516886427_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=p-n-G9M9hK4Q7kNvgGfX-Y1&_nc_ht=scontent-dub4-1.xx&oh=00_AYD7o-d2Z0f0j-L9f3a1H9c-w8b6f3o2o2Z2y0G0u1g1iA&oe=668695E6', description: 'We had a great time busking for COPE Galway, raising vital funds for their services.', amountRaised: '€750', charityName: 'COPE Galway' },
-              ];
+            ];
+            const defaultConfig = {
+                defaultJamDay: "Saturday",
+                coverPhotoUrl: "https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/340126198_1202888093755813_6375467148998027340_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=2285d6&_nc_ohc=wA-6pUbx_XYQ7kNvwHkWjV3&_nc_oc=Adnd0Bbs-9bBGiNkVlqTm636JeXERyh16eo2fUrKp5p7sPkeFMlKHcYdyTj8qGDYzQk&_nc_zt=23&_nc_ht=scontent-dub4-1.xx&_nc_gid=Pse2aOVgLI3EOs4_MVhu_Q&oh=00_AfWMKMB5g8K5fFbQO5RjBf8Wp9epHYVIZ5FuDYFFu1qEsg&oe=689D27F9",
+                featuredVideoUrl: "https://www.youtube.com/watch?v=k3_52c3tI5Q"
+            };
 
-              seedVenues.forEach(venue => batch.set(doc(db, "venues", venue.id), venue));
-              seedJams.forEach(jam => batch.set(doc(db, "jams", jam.id), jam));
-              seedPhotos.forEach(photo => batch.set(doc(db, "photos", photo.id), photo));
-              seedCommunityItems.forEach(item => batch.set(doc(db, "community", item.id), item));
-              
-              await batch.commit();
-              await loadData(); // Reload data after seeding
-          }
+            seedVenues.forEach(v => batch.set(doc(db, "venues", v.id), v));
+            seedJams.forEach(j => batch.set(doc(db, "jams", j.id), j));
+            seedPhotos.forEach(p => batch.set(doc(db, "photos", p.id), p));
+            seedCommunityItems.forEach(c => batch.set(doc(db, "community", c.id), c));
+            batch.set(doc(db, "site_config", "main"), defaultConfig);
+
+            await batch.commit();
         }
 
-        // --- CORE LOGIC & RENDERING ---
         function manageJamSchedule(testDateStr = null) {
             const today = testDateStr ? new Date(testDateStr) : new Date();
             today.setHours(0, 0, 0, 0);
@@ -1667,7 +1658,6 @@
                 return jamDate && jamDate >= today;
             });
             
-            // Sort upcoming jams by date to find the last one correctly
             upcomingConfirmed.sort((a, b) => parseJamDate(a.date) - parseJamDate(b.date));
 
             let displayJams = [...upcomingConfirmed];
@@ -1681,13 +1671,11 @@
                 let currentDayIndex = today.getDay();
                 let daysUntilTarget = (targetDayIndex - currentDayIndex + 7) % 7;
                 lastDate.setDate(today.getDate() + daysUntilTarget);
-                // Start generating from the week before the first placeholder
                 lastDate.setDate(lastDate.getDate() - 7);
             }
 
             while (displayJams.length < 5) {
                 lastDate.setDate(lastDate.getDate() + 7);
-                // Ensure we don't add a placeholder that already has a confirmed event
                 const formattedNewDate = formatJamDateForStorage(new Date(lastDate));
                 if (displayJams.some(j => j.date === formattedNewDate)) continue;
 
@@ -1853,7 +1841,6 @@
             initCarousels();
         }
 
-        // --- FORM HANDLING ---
         function showJamForm(mode = "add", jam = null) {
             addJamForm.style.display = "block";
             addJamForm.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -1897,13 +1884,10 @@
             editFeaturedVideoForm.style.display = "none";
         }
         
-        // --- EVENT LISTENERS ---
         function setupEventListeners() {
-            // Mobile Menu
             document.getElementById("menu-btn").addEventListener("click", () => document.getElementById("mobile-menu").classList.toggle("hidden"));
             document.querySelectorAll("#mobile-menu a").forEach(link => link.addEventListener("click", () => document.getElementById("mobile-menu").classList.add("hidden")));
 
-            // Admin Mode
             document.getElementById("admin-mode-btn").addEventListener("click", handleAdminClick);
             document.body.addEventListener("click", (e) => {
               if (e.target.classList.contains("exit-admin-btn")) {
@@ -1912,7 +1896,6 @@
               }
             });
 
-            // Jam Section
             document.getElementById("add-jam-btn").addEventListener("click", () => showJamForm("add"));
             document.getElementById("cancel-jam-form-btn").addEventListener("click", () => addJamForm.style.display = 'none');
             addJamForm.addEventListener("submit", handleJamFormSubmit);
@@ -1922,14 +1905,12 @@
               if (selectedVenue) jamMapLinkInput.value = selectedVenue.mapLink;
             });
 
-            // Venue Management
             document.getElementById("manage-venues-btn").addEventListener("click", () => {
               venueManagementSection.style.display = venueManagementSection.style.display === "none" ? "block" : "none";
             });
             addVenueForm.addEventListener("submit", handleVenueFormSubmit);
             venueListAdmin.addEventListener("click", handleVenueListClick);
             
-            // Site Config (Default Day, Cover Photo, Video)
             document.getElementById("save-default-day-btn").addEventListener("click", handleSaveDefaultDay);
             document.getElementById("edit-cover-photo-btn").addEventListener("click", () => editCoverPhotoForm.style.display = "block");
             document.getElementById("cancel-cover-photo-btn").addEventListener("click", () => editCoverPhotoForm.style.display = "none");
@@ -1938,19 +1919,16 @@
             document.getElementById("cancel-featured-video-btn").addEventListener("click", () => editFeaturedVideoForm.style.display = "none");
             editFeaturedVideoForm.addEventListener("submit", handleFeaturedVideoSubmit);
 
-            // Event Section
             document.getElementById("add-event-btn").addEventListener("click", () => addEventForm.style.display = 'block');
             document.getElementById("cancel-event-btn").addEventListener("click", () => addEventForm.style.display = 'none');
             addEventForm.addEventListener("submit", handleEventFormSubmit);
             eventList.addEventListener("click", handleEventListClick);
 
-            // Gallery Section
             document.getElementById("add-photo-btn").addEventListener("click", () => addPhotoForm.style.display = 'block');
             document.getElementById("cancel-photo-btn").addEventListener("click", () => addPhotoForm.style.display = 'none');
             addPhotoForm.addEventListener("submit", handlePhotoFormSubmit);
             galleryGrid.addEventListener("click", handleGalleryGridClick);
 
-            // Community Section
             document.getElementById("add-community-item-btn").addEventListener("click", () => showCommunityForm("add"));
             document.getElementById("cancel-community-btn").addEventListener("click", () => addCommunityForm.style.display = 'none');
             communityItemTypeInput.addEventListener("change", (e) => {
@@ -1961,7 +1939,6 @@
             addCommunityForm.addEventListener("submit", handleCommunityFormSubmit);
             communitySwiperWrapper.addEventListener("click", handleCommunitySliderClick);
 
-            // Date Tester
             document.getElementById("test-date-btn").addEventListener("click", () => {
                 manageJamSchedule(testDateInput.value);
                 renderJams();
@@ -1973,7 +1950,6 @@
             });
         }
         
-        // --- ASYNC EVENT HANDLERS (DB INTERACTIONS) ---
         async function handleJamFormSubmit(e) {
             e.preventDefault();
             const id = editJamIdInput.value;
@@ -1995,7 +1971,7 @@
             };
 
             await setDoc(doc(db, "jams", jamData.id), jamData);
-            await loadData();
+            await loadData(true);
             addJamForm.style.display = 'none';
         }
         
@@ -2011,7 +1987,7 @@
             } else if (target.classList.contains("delete-btn")) {
                 showModal("Are you sure you want to permanently delete this jam?", "confirm", async () => {
                     await deleteDoc(doc(db, "jams", jamId));
-                    await loadData();
+                    await loadData(true);
                 });
             } else if (target.classList.contains("cancel-btn") || target.classList.contains("reinstate-btn")) {
                 const isCancelled = target.classList.contains("cancel-btn");
@@ -2019,7 +1995,7 @@
                 showModal(`Are you sure you want to ${actionText} this jam?`, "confirm", async () => {
                     jam.cancelled = isCancelled;
                     await setDoc(doc(db, "jams", jam.id), jam);
-                    await loadData();
+                    await loadData(true);
                 });
             }
         }
@@ -2031,7 +2007,7 @@
             if (!name || !mapLink) return;
             const id = String(Date.now());
             await setDoc(doc(db, "venues", id), { id, name, mapLink });
-            await loadData();
+            await loadData(true);
             addVenueForm.reset();
         }
 
@@ -2040,7 +2016,7 @@
             const venueId = e.target.dataset.id;
             showModal("Are you sure you want to delete this venue?", "confirm", async () => {
                 await deleteDoc(doc(db, "venues", venueId));
-                await loadData();
+                await loadData(true);
             });
         }
         
@@ -2059,7 +2035,7 @@
                 return;
             }
             await setDoc(doc(db, "events", eventData.id), eventData);
-            await loadData();
+            await loadData(true);
             addEventForm.style.display = 'none';
         }
 
@@ -2081,7 +2057,7 @@
             } else if (target.classList.contains("delete-event-btn")) {
                 showModal("Are you sure you want to delete this event?", "confirm", async () => {
                     await deleteDoc(doc(db, "events", eventId));
-                    await loadData();
+                    await loadData(true);
                 });
             }
         }
@@ -2099,7 +2075,7 @@
                 return;
             }
             await setDoc(doc(db, "photos", id), photoData);
-            await loadData();
+            await loadData(true);
             addPhotoForm.style.display = 'none';
         }
 
@@ -2109,7 +2085,7 @@
             const photoId = deleteBtn.dataset.id;
             showModal("Are you sure you want to delete this photo?", "confirm", async () => {
                 await deleteDoc(doc(db, "photos", photoId));
-                await loadData();
+                await loadData(true);
             });
         }
         
@@ -2143,7 +2119,7 @@
             }
 
             await setDoc(doc(db, "community", itemData.id), itemData);
-            await loadData();
+            await loadData(true);
             addCommunityForm.style.display = 'none';
         }
 
@@ -2178,7 +2154,7 @@
             } else if (btn.classList.contains("delete-community-btn")) {
                 showModal("Are you sure you want to delete this item?", "confirm", async () => {
                     await deleteDoc(doc(db, "community", itemId));
-                    await loadData();
+                    await loadData(true);
                 });
             }
         }
@@ -2198,7 +2174,7 @@
             const newUrl = coverPhotoUrlInput.value.trim();
             if (!newUrl) return;
             await setDoc(doc(db, "site_config", "main"), { coverPhotoUrl: newUrl }, { merge: true });
-            await loadData();
+            await loadData(true);
             editCoverPhotoForm.style.display = "none";
         }
         
@@ -2207,18 +2183,34 @@
             const newUrl = featuredVideoUrlInput.value.trim();
             if (!newUrl) return;
             await setDoc(doc(db, "site_config", "main"), { featuredVideoUrl: newUrl }, { merge: true });
-            await loadData();
+            await loadData(true);
             editFeaturedVideoForm.style.display = "none";
         }
 
-        // --- ADMIN & MODAL ---
         function toggleAdminMode(enable) {
             document.body.classList.toggle("admin-mode", enable);
             if (!enable) hideAllForms();
-            // Re-render all sections to show/hide admin controls within them
             renderAll();
         }
         
+        async function verifyPin(pin) {
+            const functionUrl = "https://script.google.com/macros/s/AKfycby34RunDhZjds7M7rUA5wP-m1M2uBv3UfJ6vpCxqKhMq36oGkHTIQ1BFF3-9kStGaTyAA/exec";
+            try {
+                const response = await fetch(`${functionUrl}?pin=${encodeURIComponent(pin)}&action=check`);
+                if (!response.ok) {
+                    console.error("PIN verification request failed:", response.status, response.statusText);
+                    showModal(`Error contacting verification server (Status: ${response.status}). Please try again later.`, "alert");
+                    return false;
+                }
+                const result = await response.json();
+                return result.success === true;
+            } catch (error) {
+                console.error("Error during PIN verification:", error);
+                showModal("Could not verify PIN. Please check your internet connection or try again.", "alert");
+                return false;
+            }
+        }
+
         function handleAdminClick(e) {
             e.preventDefault();
             if (document.body.classList.contains("admin-mode")) {
@@ -2226,48 +2218,18 @@
                 toggleAdminMode(false);
             } else {
                 showModal("Enter admin PIN:", "prompt", async (pin) => {
-                    // Check if a PIN was actually entered
-                    if (!pin) return; 
-
+                    if (!pin) return;
                     const isCorrect = await verifyPin(pin);
                     if (isCorrect) {
                         sessionStorage.setItem("gjc_isAdmin", "true");
                         toggleAdminMode(true);
                         document.getElementById("jams").scrollIntoView({ behavior: "smooth" });
                     } else {
-                        // The verifyPin function now shows its own detailed error,
-                        // but we still need a fallback for a simple "incorrect pin" result.
-                        if (!document.getElementById('custom-modal').classList.contains('flex')) {
+                        if (!modal.classList.contains('flex')) {
                             showModal("Incorrect PIN.", "alert");
                         }
                     }
                 });
-            }
-        }
-
-        async function verifyPin(pin) {
-            const functionUrl = "https://script.google.com/macros/s/AKfycby34RunDhZjds7M7rUA5wP-m1M2uBv3UfJ6vpCxqKhMq36oGkHTIQ1BFF3-9kStGaTyAA/exec";
-            try {
-                const response = await fetch(`${functionUrl}?pin=${encodeURIComponent(pin)}&action=check`);
-
-                // This check explicitly handles network errors (e.g., 404, 500).
-                if (!response.ok) {
-                    console.error("PIN verification request failed with status:", response.status);
-                    showModal(`Error contacting verification server (Status: ${response.status}). Please try again later.`, "alert");
-                    return false;
-                }
-
-                const result = await response.json();
-                if (!result.success) {
-                   showModal("Incorrect PIN.", "alert");
-                }
-                return result.success;
-
-            } catch (error) {
-                // This catch block handles cases where you can't connect at all (e.g., no internet).
-                console.error("Error during PIN verification fetch:", error);
-                showModal("Could not verify PIN. Please check your internet connection.", "alert");
-                return false;
             }
         }
         
@@ -2303,7 +2265,6 @@
             if (type === "prompt") modalInput.focus();
         }
 
-        // --- DATA LOADING & INITIAL RENDER ---
         function renderAll() {
             manageJamSchedule();
             renderJams();
@@ -2312,9 +2273,21 @@
             renderGallery();
             renderCommunitySlider();
         }
-
-        async function loadData() {
+        
+        async function loadData(forceReload = false) {
             try {
+                if (!forceReload) {
+                    const jamCheck = await getDocs(collection(db, "jams"));
+                    if (jamCheck.empty) {
+                        console.log("Database is empty. Seeding...");
+                        await seedDatabase();
+                        showModal("Database has been initialized with sample data. The page will now reload.", "alert", () => {
+                            location.reload();
+                        });
+                        return;
+                    }
+                }
+
                 const [jamSnap, eventSnap, photoSnap, venueSnap, communitySnap, configDoc] = await Promise.all([
                     getDocs(collection(db, "jams")),
                     getDocs(collection(db, "events")),
@@ -2330,18 +2303,17 @@
                 initialVenues = venueSnap.docs.map(doc => doc.data());
                 initialCommunityItems = communitySnap.docs.map(doc => doc.data());
                 
-                await seedDatabaseIfEmpty();
-
                 if (configDoc.exists()) {
                     const configData = configDoc.data();
                     defaultJamDay = configData.defaultJamDay || "Saturday";
-                    defaultDaySelect.value = defaultJamDay;
                     if (configData.coverPhotoUrl) coverPhotoElement.src = configData.coverPhotoUrl;
                     if (configData.featuredVideoUrl) {
                         const videoIdMatch = configData.featuredVideoUrl.match(/(?:v=|\/embed\/|\/)([\w-]{11})/);
                         if (videoIdMatch) featuredVideoPlayer.src = `https://www.youtube.com/embed/${videoIdMatch[1]}`;
                     }
                 }
+                
+                defaultDaySelect.innerHTML = '';
                 dayNames.forEach(day => {
                     const option = document.createElement("option");
                     option.value = day;
