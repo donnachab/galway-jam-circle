@@ -1390,7 +1390,7 @@
             </svg>
           </a>
         </div>
-        <p>© 2025 Galway Jam Circle. v2.6 FINAL. All Rights Reserved.</p>
+        <p>© 2025 Galway Jam Circle. v2.7 FINAL. All Rights Reserved.</p>
         <p class="text-sm text-stone-400 mt-2">
           Bringing music to the people of Galway.
         </p>
@@ -1432,7 +1432,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 
-    <script> // <-- FIX: Changed from type="module" to a standard script tag
+    <script>
       const firebaseConfig = {
         apiKey: "AIzaSyC4SnqaOMQWmEFulkN8zZALZsqJLK7hOh0",
         authDomain: "galway-jam-circle-live.firebaseapp.com",
@@ -1608,13 +1608,13 @@
             const batch = db.batch();
 
             const seedVenues = [
-                { id: '1', name: 'The Crane Bar', mapLink: 'https://maps.app.goo.gl/someplace1' },
-                { id: '2', name: "O'Connor's Famous Pub", mapLink: 'https://maps.app.goo.gl/someplace2' },
-                { id: '3', name: 'Spanish Arch', mapLink: 'https://maps.app.goo.gl/someplace3' },
+                { id: '1', name: 'The Crane Bar', mapLink: 'https://www.google.com/maps/place/The+Crane+Bar/@53.2710379,-9.060183,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96f5b72f0939:0x1531d045855f44b3!8m2!3d53.2710347!4d-9.0576081!16s%2Fm%2F027f9_x' },
+                { id: '2', name: "O'Connor's Famous Pub", mapLink: 'https://www.google.com/maps/place/O\'Connor\'s+Famous+Pub/@53.259979,-9.0768487,17z/data=!3m1!4b1!4m6!3m5!1s0x485b94326557657d:0xd0062c125a07e15a!8m2!3d53.2599758!4d-9.0742738!16s%2Fg%2F1td_15_k' },
+                { id: '3', name: 'Spanish Arch', mapLink: 'https://www.google.com/maps/place/The+Spanish+Arch/@53.2693822,-9.0558645,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96f1b18a1b91:0x548651a5a120063d!8m2!3d53.269379!4d-9.0532896!16zL20vMDh3Mnpf' },
             ];
             const seedJams = [
-                { id: '1723298400000', date: '10 Aug:', day: 'Saturday', time: '3:00 PM', venue: 'The Crane Bar', mapLink: 'https://maps.app.goo.gl/someplace1', cancelled: false, isRescheduled: false },
-                { id: '1723903200000', date: '17 Aug:', day: 'Saturday', time: '3:00 PM', venue: "O'Connor's Famous Pub", mapLink: 'https://maps.app.goo.gl/someplace2', cancelled: false, isRescheduled: false },
+                { id: '1723298400000', date: '10 Aug:', day: 'Saturday', time: '3:00 PM', venue: 'The Crane Bar', mapLink: 'https://www.google.com/maps/place/The+Crane+Bar/@53.2710379,-9.060183,17z/data=!3m1!4b1!4m6!3m5!1s0x485b96f5b72f0939:0x1531d045855f44b3!8m2!3d53.2710347!4d-9.0576081!16s%2Fm%2F027f9_x', cancelled: false, isRescheduled: false },
+                { id: '1723903200000', date: '17 Aug:', day: 'Saturday', time: '3:00 PM', venue: "O'Connor's Famous Pub", mapLink: 'https://www.google.com/maps/place/O\'Connor\'s+Famous+Pub/@53.259979,-9.0768487,17z/data=!3m1!4b1!4m6!3m5!1s0x485b94326557657d:0xd0062c125a07e15a!8m2!3d53.2599758!4d-9.0742738!16s%2Fg%2F1td_15_k', cancelled: false, isRescheduled: false },
             ];
             const seedPhotos = [
                 { id: '1', url: 'https://images.unsplash.com/photo-1561587313-423c8a4365b2?q=80&w=2070&auto=format&fit=crop', caption: 'Musicians playing in a cozy pub setting.' },
