@@ -1455,15 +1455,9 @@
       const db = getFirestore(app);
 
       document.addEventListener("DOMContentLoaded", async () => {
-        // --- GLOBAL STATE & CONSTANTS ---
-        const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        let initialJams = [], initialEvents = [], initialPhotos = [], initialVenues = [], initialCommunityItems = [];
-        let jams = [], events = [], photos = [], communityItems = [];
-        let communitySwiper = null;
-        let jamDatePicker, jamTimePicker, eventDatePicker, testDatePicker;
-        let defaultJamDay = "Saturday";
-
-        // --- DOM ELEMENT DECLARATIONS ---
+        // --- DOM ELEMENT DECLARATIONS (FIXED) ---
+        // This block is now correctly placed inside the DOMContentLoaded listener,
+        // ensuring elements are loaded before the script tries to access them.
         const coverPhotoElement = document.getElementById("cover-photo");
         const jamList = document.getElementById("jam-list");
         const addJamForm = document.getElementById("add-jam-form");
@@ -1518,13 +1512,21 @@
         const modalButtons = document.getElementById("modal-buttons");
         const testDateInput = document.getElementById("test-date-input");
 
+        // --- GLOBAL STATE & CONSTANTS ---
+        const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        let initialJams = [], initialEvents = [], initialPhotos = [], initialVenues = [], initialCommunityItems = [];
+        let jams = [], events = [], photos = [], communityItems = [];
+        let communitySwiper = null;
+        let jamDatePicker, jamTimePicker, eventDatePicker, testDatePicker;
+        let defaultJamDay = "Saturday";
+
         // --- UTILITY & FORMATTING FUNCTIONS ---
         function parseJamDate(dateStr) {
           const year = new Date().getFullYear();
           const dateWithYear = dateStr.replace(":", "").trim() + ` ${year}`;
           let parsedDate = new Date(dateWithYear);
           if (parsedDate < new Date() && new Date().getMonth() - parsedDate.getMonth() > 6) {
-             parsedDate.setFullYear(year + 1);
+              parsedDate.setFullYear(year + 1);
           }
           return parsedDate;
         }
@@ -1576,22 +1578,22 @@
               mode: "range",
               dateFormat: "j M Y",
                onClose: (selectedDates, dateStr, instance) => {
-                    if (selectedDates.length === 1) {
-                        const date = selectedDates[0];
-                        instance.input.value = `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString("default", { month: "short" })} ${date.getFullYear()}`;
-                    } else if (selectedDates.length === 2) {
-                        const start = selectedDates[0];
-                        const end = selectedDates[1];
-                        const format = (date) => `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString("default", { month: "short" })}`;
-                        instance.input.value = `${format(start)} - ${format(end)} ${end.getFullYear()}`;
-                    }
+                   if (selectedDates.length === 1) {
+                       const date = selectedDates[0];
+                       instance.input.value = `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString("default", { month: "short" })} ${date.getFullYear()}`;
+                   } else if (selectedDates.length === 2) {
+                       const start = selectedDates[0];
+                       const end = selectedDates[1];
+                       const format = (date) => `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString("default", { month: "short" })}`;
+                       instance.input.value = `${format(start)} - ${format(end)} ${end.getFullYear()}`;
+                   }
                }
             });
             testDatePicker = flatpickr(testDateInput, { dateFormat: "Y-m-d" });
         }
         
         function initCarousels() {
-             new Swiper(".festival-carousel", {
+            new Swiper(".festival-carousel", {
                 loop: true,
                 autoplay: { delay: 4000, disableOnInteraction: false },
                 pagination: { el: ".swiper-pagination", clickable: true },
@@ -1620,36 +1622,36 @@
         // --- DATA SEEDING ---
         async function seedDatabaseIfEmpty() {
           if (initialJams.length === 0 && initialVenues.length === 0 && initialPhotos.length === 0) {
-             console.log("Database is empty. Seeding with initial data...");
-             const batch = writeBatch(db);
+              console.log("Database is empty. Seeding with initial data...");
+              const batch = writeBatch(db);
 
-             const seedVenues = [
+              const seedVenues = [
                 { id: '1', name: 'The Crane Bar', mapLink: 'https://maps.app.goo.gl/gQj1b7qE9fR2cW9x6' },
                 { id: '2', name: "O'Connor's Famous Pub", mapLink: 'https://maps.app.goo.gl/kX7sC3Z7wB6Y4p7Y8' },
                 { id: '3', name: 'Spanish Arch', mapLink: 'https://maps.app.goo.gl/VjS1Ua3sH6A2pZqKA' },
-             ];
+              ];
 
-             const seedJams = [
+              const seedJams = [
                 { id: '1672531200000', date: '10 Aug:', day: 'Saturday', time: '3:00 PM', venue: 'The Crane Bar', mapLink: 'https://maps.app.goo.gl/gQj1b7qE9fR2cW9x6', cancelled: false, isRescheduled: false },
                 { id: '1673136000000', date: '17 Aug:', day: 'Saturday', time: '3:00 PM', venue: "O'Connor's Famous Pub", mapLink: 'https://maps.app.goo.gl/kX7sC3Z7wB6Y4p7Y8', cancelled: false, isRescheduled: false },
-             ];
+              ];
               
-             const seedPhotos = [
+              const seedPhotos = [
                 { id: '1', url: 'https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/441940984_467137352462375_2069542030018448903_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=fV0i_X2yHcoQ7kNvgFYexA-&_nc_ht=scontent-dub4-1.xx&oh=00_AYBv6u6U1cGNw3vC5u2O-iX2o2oY0X7B9d0b6w0u0g3J3w&oe=6686A3E9', caption: 'A jam session in a cozy pub.' },
                 { id: '2', url: 'https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/438440571_449339904242120_3534936330999086105_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=y7m8R0o-mE8Q7kNvgEwXo0C&_nc_ht=scontent-dub4-1.xx&oh=00_AYDXu2-c2c3b8t-5H6O3S1c-Y0Q8X3r-o0V1g3A3E2u2Fw&oe=66869408', caption: 'Musicians playing together outdoors.' },
-             ];
+              ];
 
-             const seedCommunityItems = [
+              const seedCommunityItems = [
                 { id: '1', type: 'charity', imageUrl: 'https://scontent-dub4-1.xx.fbcdn.net/v/t39.30808-6/434110825_433552092487568_1978257008516886427_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=p-n-G9M9hK4Q7kNvgGfX-Y1&_nc_ht=scontent-dub4-1.xx&oh=00_AYD7o-d2Z0f0j-L9f3a1H9c-w8b6f3o2o2Z2y0G0u1g1iA&oe=668695E6', description: 'We had a great time busking for COPE Galway, raising vital funds for their services.', amountRaised: '€750', charityName: 'COPE Galway' },
-             ];
+              ];
 
-             seedVenues.forEach(venue => batch.set(doc(db, "venues", venue.id), venue));
-             seedJams.forEach(jam => batch.set(doc(db, "jams", jam.id), jam));
-             seedPhotos.forEach(photo => batch.set(doc(db, "photos", photo.id), photo));
-             seedCommunityItems.forEach(item => batch.set(doc(db, "community", item.id), item));
+              seedVenues.forEach(venue => batch.set(doc(db, "venues", venue.id), venue));
+              seedJams.forEach(jam => batch.set(doc(db, "jams", jam.id), jam));
+              seedPhotos.forEach(photo => batch.set(doc(db, "photos", photo.id), photo));
+              seedCommunityItems.forEach(item => batch.set(doc(db, "community", item.id), item));
               
-             await batch.commit();
-             await loadData(); // Reload data after seeding
+              await batch.commit();
+              await loadData(); // Reload data after seeding
           }
         }
 
@@ -1719,14 +1721,14 @@
                 
                 let adminButtons = '';
                 if (!jam.isPlaceholder) {
-                   adminButtons += `<button data-id="${jam.id}" class="edit-btn text-blue-500 hover:text-blue-700">Edit</button>`;
-                   if (isSpecial) {
+                    adminButtons += `<button data-id="${jam.id}" class="edit-btn text-blue-500 hover:text-blue-700">Edit</button>`;
+                    if (isSpecial) {
                       adminButtons += `<button data-id="${jam.id}" class="delete-btn text-red-500 hover:text-red-700 ml-2">Delete</button>`;
-                   } else {
+                    } else {
                       adminButtons += jam.cancelled
                         ? `<button data-id="${jam.id}" class="reinstate-btn text-green-600 hover:text-green-800 ml-2">Reinstate</button>`
                         : `<button data-id="${jam.id}" class="cancel-btn text-yellow-600 hover:text-yellow-800 ml-2">Cancel</button>`;
-                   }
+                    }
                 }
                 
                 const mapLink = jam.mapLink ? ` <a href="${jam.mapLink}" target="_blank" class="text-blue-500 hover:underline whitespace-nowrap">(Map)</a>` : "";
@@ -1742,7 +1744,7 @@
                         <span class="text-gray-700 text-lg">${jam.venue}${mapLink}</span>
                     </div>
                     <div class="flex flex-col items-end justify-between self-stretch mt-2 sm:mt-0">
-                         ${statusHTML}
+                        ${statusHTML}
                         <div class="admin-controls-inline space-x-2 mt-2 sm:mt-0">${adminButtons}</div>
                     </div>
                 `;
@@ -1977,8 +1979,8 @@
             const id = editJamIdInput.value;
             const selectedDate = jamDatePicker.selectedDates[0];
             if (!selectedDate || !jamVenueInput.value || !jamDayInput.value) {
-                showModal("Please fill in all required jam fields.", "alert");
-                return;
+              showModal("Please fill in all required jam fields.", "alert");
+              return;
             }
             
             const jamData = {
@@ -2217,7 +2219,7 @@
             renderAll();
         }
         
-function handleAdminClick(e) {
+        function handleAdminClick(e) {
             e.preventDefault();
             if (document.body.classList.contains("admin-mode")) {
                 sessionStorage.removeItem("gjc_isAdmin");
@@ -2233,10 +2235,10 @@ function handleAdminClick(e) {
                         toggleAdminMode(true);
                         document.getElementById("jams").scrollIntoView({ behavior: "smooth" });
                     } else {
-                        // The verifyPin function will now show its own detailed error,
+                        // The verifyPin function now shows its own detailed error,
                         // but we still need a fallback for a simple "incorrect pin" result.
                         if (!document.getElementById('custom-modal').classList.contains('flex')) {
-                           showModal("Incorrect PIN.", "alert");
+                            showModal("Incorrect PIN.", "alert");
                         }
                     }
                 });
@@ -2248,8 +2250,7 @@ function handleAdminClick(e) {
             try {
                 const response = await fetch(`${functionUrl}?pin=${encodeURIComponent(pin)}&action=check`);
 
-                // **THIS IS THE KEY FIX**
-                // It now explicitly checks if the network request was successful.
+                // This check explicitly handles network errors (e.g., 404, 500).
                 if (!response.ok) {
                     console.error("PIN verification request failed with status:", response.status);
                     showModal(`Error contacting verification server (Status: ${response.status}). Please try again later.`, "alert");
@@ -2257,6 +2258,9 @@ function handleAdminClick(e) {
                 }
 
                 const result = await response.json();
+                if (!result.success) {
+                   showModal("Incorrect PIN.", "alert");
+                }
                 return result.success;
 
             } catch (error) {
@@ -2271,6 +2275,7 @@ function handleAdminClick(e) {
             modalMessage.textContent = message;
             modalButtons.innerHTML = "";
             modalInput.classList.toggle("hidden", type !== "prompt");
+            modalInput.value = "";
             
             const cancelButton = document.createElement("button");
             cancelButton.textContent = "Cancel";
