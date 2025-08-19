@@ -2571,6 +2571,81 @@
 
         await loadData();
       });
-    </script>
+    </script><script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Helper function to enter admin mode
+  function enterAdminMode() {
+    document.body.classList.add("admin-mode");
+  }
+  // Helper function to exit admin mode
+  function exitAdminMode() {
+    document.body.classList.remove("admin-mode");
+    // Hide all admin forms when exiting admin mode
+    document.getElementById("edit-cover-photo-form").style.display = "none";
+    document.getElementById("add-jam-form").style.display = "none";
+    document.getElementById("venue-management-section").style.display = "none";
+    document.getElementById("add-event-form").style.display = "none";
+  }
+
+  // Add a simple way to enter admin mode (for demo, via URL hash)
+  if (window.location.hash === "#admin") {
+    enterAdminMode();
+  }
+
+  // You can also add a dedicated button for entering admin mode if you want:
+  // <button id="enter-admin-btn">Enter Admin Mode</button>
+  // document.getElementById("enter-admin-btn").addEventListener("click", enterAdminMode);
+
+  // Attach listeners to all "Exit Admin Mode" buttons
+  document.querySelectorAll(".exit-admin-btn").forEach(function (btn) {
+    btn.addEventListener("click", exitAdminMode);
+  });
+
+  // Edit Cover Photo Button
+  var editCoverBtn = document.getElementById("edit-cover-photo-btn");
+  var editCoverForm = document.getElementById("edit-cover-photo-form");
+  if (editCoverBtn && editCoverForm) {
+    editCoverBtn.addEventListener("click", function () {
+      editCoverForm.style.display = "block";
+    });
+    document.getElementById("cancel-cover-photo-btn").addEventListener("click", function () {
+      editCoverForm.style.display = "none";
+    });
+  }
+
+  // Add Jam Button
+  var addJamBtn = document.getElementById("add-jam-btn");
+  var addJamForm = document.getElementById("add-jam-form");
+  if (addJamBtn && addJamForm) {
+    addJamBtn.addEventListener("click", function () {
+      addJamForm.style.display = "block";
+    });
+    document.getElementById("cancel-btn").addEventListener("click", function () {
+      addJamForm.style.display = "none";
+    });
+  }
+
+  // Manage Venues Button
+  var manageVenuesBtn = document.getElementById("manage-venues-btn");
+  var venueManagementSection = document.getElementById("venue-management-section");
+  if (manageVenuesBtn && venueManagementSection) {
+    manageVenuesBtn.addEventListener("click", function () {
+      venueManagementSection.style.display = "block";
+    });
+  }
+
+  // Add Event Button
+  var addEventBtn = document.getElementById("add-event-btn");
+  var addEventForm = document.getElementById("add-event-form");
+  if (addEventBtn && addEventForm) {
+    addEventBtn.addEventListener("click", function () {
+      addEventForm.style.display = "block";
+    });
+    document.getElementById("cancel-event-btn").addEventListener("click", function () {
+      addEventForm.style.display = "none";
+    });
+  }
+});
+</script>
   </body>
 </html>
