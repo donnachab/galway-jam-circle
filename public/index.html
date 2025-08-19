@@ -1624,7 +1624,7 @@
         }
 
         function renderAll() {
-            manageJamSchedule();
+            if (jamList) manageJamSchedule();
             renderJams();
             renderEvents();
             renderGallery();
