@@ -121,3 +121,9 @@ details > summary { cursor: pointer; }
     object-fit: contain; /* Switch to contain for desktop */
   }
 }
+/* Style for the container of the header logo */
+nav .flex .w-12 {
+  background-color: white;
+  border-radius: 9999px; /* This makes the background a circle */
+  padding: 2px; /* Optional: Adds a small buffer around the logo */
+}
