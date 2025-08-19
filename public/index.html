@@ -2626,18 +2626,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Manage Venues Button
-  var manageVenuesBtn = document.getElementById("manage-venues-btn");
-  var venueManagementSection = document.getElementById("venue-management-section");
+var manageVenuesBtn = document.getElementById("manage-venues-btn");
+var venueManagementSection = document.getElementById("venue-management-section");
 if (manageVenuesBtn && venueManagementSection) {
   manageVenuesBtn.addEventListener("click", function () {
-    // Remove Tailwind's 'hidden' class if present
-    venueManagementSection.classList.remove("hidden");
-    // Also set display to block in case inline style is used
+    // Only change display, do NOT touch class list
     venueManagementSection.style.display = "block";
     venueManagementSection.scrollIntoView({behavior: "smooth"});
   });
 }
-
   // Add Event Button
   var addEventBtn = document.getElementById("add-event-btn");
   var addEventForm = document.getElementById("add-event-form");
