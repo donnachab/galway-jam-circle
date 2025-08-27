@@ -3,7 +3,7 @@
 name: Deploy to Firebase Hosting on merge
 
 # Triggers the workflow on push events but only for the main branch
-'on':
+on:
   push:
     branches:
       - main
@@ -25,7 +25,7 @@ jobs:
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GALWAY_JAM_CIRCLE_OLD_VERSION }}'
-          channelId: live
+          channelId: old-version
           projectId: galway-jam-circle-old-version
       
       # FINAL, GUARANTEED FIX: This step now uses the hardcoded URL and writes to the job summary
