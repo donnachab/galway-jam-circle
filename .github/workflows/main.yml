@@ -24,15 +24,14 @@ jobs:
         id: deploy_action  
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GALWAY_JAM_CIRCLE_LIVE }}'
-          channelId: old-version
-          projectId: galway-jam-circle-live
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GALWAY_JAM_CIRCLE_OLD_VERSION }}'
+          channelId: live
+          projectId: galway-jam-circle-old-version
       
       # FINAL, GUARANTEED FIX: This step now uses the hardcoded URL and writes to the job summary
       - name: Output Deployment URLs
         run: |
-          echo "### ✅ Old Site Deployed for Comparison! 🎉" >> $GITHUB_STEP_SUMMARY
-          echo "You can now view and compare your old site with the new one." >> $GITHUB_STEP_SUMMARY
-          echo "**URL for the Old Site:** https://galway-jam-circle-live--old-version.web.app" >> $GITHUB_STEP_SUMMARY
-          echo "***" >> $GITHUB_STEP_SUMMARY
-          echo "Main site URL: https://galway-jam-circle-live.web.app" >> $GITHUB_STEP_SUMMARY
+          echo "### 🚀 Deployment Successful! 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "**Main Site URL:** https://galway-jam-circle-live.web.app/index.html" >> $GITHUB_STEP_SUMMARY
+          echo "**Feedback Page URL:** https://galway-jam-circle-live.web.app/feedback.html" >> $GITHUB_STEP_SUMMARY
+          echo "**Clear Database:** https://console.firebase.google.com/project/galway-jam-circle-live/firestore/databases/-default-/data" >> $GITHUB_STEP_SUMMARY
