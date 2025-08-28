@@ -1,4 +1,4 @@
-name: Deploy Live Site to Firebase Hosting
+name: Deploy Jam Site to Firebase Hosting
 on:
   push:
     branches:
@@ -8,12 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      # This step installs the Firebase CLI and then calls it directly.
-      # The --project flag tells it which project to use, and the
-      # --only flag tells it which site within that project to deploy to.
+      
+      # This step deploys to your second site.
       - name: Deploy to Firebase
         run: |
           npm install -g firebase-tools
-          firebase deploy --token "${{ secrets.FIREBASE_TOKEN }}" --project galway-jam-circle-live --only hosting:galway-jam-circle-live
-
+          firebase deploy --token "${{ secrets.FIREBASE_TOKEN }}" --project galway-jam-circle-live --only hosting:galwayjam
