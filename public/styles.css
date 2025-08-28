@@ -1,129 +1,44 @@
-:root {
-  --primary-color: #371087; /* Correct Purple */
-  --accent-color: #f3ead3; /* Warm Cream */
-  --background-color: #ffffff;
-  --text-dark: #1f2937;
-  --text-light: #ffffff;
-}
-body {
-  font-family: "Inter", sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-dark);
-}
-.bg-primary { background-color: var(--primary-color); }
-.text-primary { color: var(--primary-color); }
-.bg-accent { background-color: var(--accent-color); }
-.text-accent { color: var(--accent-color); }
-.border-primary { border-color: var(--primary-color); }
-
-.admin-controls,
-.admin-controls-inline {
-  display: none;
-}
-body.admin-mode .admin-controls { display: block; }
-body.admin-mode .admin-controls-inline { display: inline-flex; }
-
-#add-jam-form,
-#add-event-form,
-#add-photo-form,
-#edit-cover-photo-form,
-#edit-featured-video-form,
-#venue-management-section,
-#add-community-form {
-  display: none;
+/* Your custom CSS rules will go here. */
+.admin-controls, .admin-controls-inline {
+    display: none;
 }
 
-.jam-cancelled { background-color: #fee2e2 !important; }
-.jam-cancelled .jam-info { text-decoration: line-through; }
+body.admin-mode .admin-controls {
+    display: block;
+}
+
+body.admin-mode .admin-controls-inline {
+    display: inline-flex;
+}
+
+/* Style for special (non-Saturday) jams */
 .jam-special {
-  border-left-color: #a78bfa !important; /* A subtle violet */
-  border-left-width: 4px;
+    border-left-color: #7c3aed; /* Tailwind violet-600 */
 }
 
-.gallery-item { position: relative; }
+/* Style for cancelled jams */
+.jam-cancelled {
+    background-color: #fee2e2; /* Tailwind red-100 */
+    opacity: 0.7;
+}
+
+/* Ensure admin buttons on gallery items are positioned correctly */
+.gallery-item {
+    position: relative;
+}
+
 .gallery-item .delete-photo-btn {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
 }
 
-details > summary { cursor: pointer; }
-
-/* Festival Carousel Styles */
-.festival-carousel {
-  padding-top: 1rem;
-  padding-bottom: 3rem; /* Space for pagination */
-}
-.festival-carousel .swiper-slide {
-  height: 120px; /* Consistent height for logos */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.festival-carousel .swiper-slide img {
-  max-height: 90px;
-  width: auto;
-  object-fit: contain;
-  opacity: 0.9;
-  transition: all 0.3s ease;
-}
-.festival-carousel .swiper-slide:hover img {
-  opacity: 1;
-  transform: scale(1.05);
-}
-.swiper-pagination-bullet-active { background-color: var(--primary-color) !important; }
-
-/* Community Slideshow Styles */
-.community-swiper { width: 100%; }
-.community-swiper .swiper-slide { position: relative; }
-.community-swiper .slide-admin-controls {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 10;
-}
-.community-swiper .swiper-button-next,
-.community-swiper .swiper-button-prev {
-  color: var(--accent-color);
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  --swiper-navigation-size: 22px;
-}
-.community-swiper .swiper-button-next:hover,
-.community-swiper .swiper-button-prev:hover {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-.community-swiper .swiper-pagination {
-  position: static;
-  margin-top: 1rem;
-}
 .community-image-container {
-  width: 100%;
-  height: 20rem; /* 320px for mobile */
-  background-color: #f0f0f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+    position: relative;
 }
-.community-image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Default to cover for mobile */
-}
-@media (min-width: 768px) {
-  .community-image-container {
-    height: 24rem; /* 384px for desktop */
-  }
-  .community-image-container img {
-    object-fit: contain; /* Switch to contain for desktop */
-  }
-}
-/* Style for the container of the header logo */
-nav .flex .w-12 {
-  background-color: white;
-  border-radius: 9999px; /* This makes the background a circle */
-  padding: 2px; /* Optional: Adds a small buffer around the logo */
+
+.slide-admin-controls {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
 }
