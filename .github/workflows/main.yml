@@ -18,15 +18,17 @@ jobs:
       - name: List files in repository
         run: ls -R
 
-      # This is the main deployment action, now using v1
-      - uses: FirebaseExtended/action-hosting-deploy@v1
+      # This is the main deployment action
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         id: deploy_action  
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GALWAY_JAM_CIRCLE_LIVE }}'
           projectId: galway-jam-circle-live
-          # This line directly specifies the site to deploy to
-          site: galway-jam-circle-live
+          # This tells the action to deploy to the live site, not a preview
+          channelId: live
+          # This line correctly points the deployment to your specific target
+          target: live
       
       # This step now uses the hardcoded URL and writes to the job summary
       - name: Output Deployment URLs
