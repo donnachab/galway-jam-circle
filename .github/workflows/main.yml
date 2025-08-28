@@ -1,5 +1,4 @@
 # GitHub Actions workflow to deploy the website to Firebase Hosting
-
 name: Deploy to Firebase Hosting on merge
 
 # Triggers the workflow on push events but only for the main branch
@@ -25,10 +24,11 @@ jobs:
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GALWAY_JAM_CIRCLE_LIVE }}'
-          channelId: live
           projectId: galway-jam-circle-live
+          # This line correctly points the deployment to your specific site
+          site: galway-jam-circle-live
       
-      # FINAL, GUARANTEED FIX: This step now uses the hardcoded URL and writes to the job summary
+      # This step now uses the hardcoded URL and writes to the job summary
       - name: Output Deployment URLs
         run: |
           echo "### 🚀 Deployment Successful! 🚀" >> $GITHUB_STEP_SUMMARY
