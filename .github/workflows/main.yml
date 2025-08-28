@@ -1,39 +1,15 @@
-# GitHub Actions workflow to deploy the website to Firebase Hosting
-name: Deploy to Firebase Hosting on merge
-
-# Triggers the workflow on push events but only for the main branch
+name: Deploy Live Site to Firebase Hosting
 on:
   push:
     branches:
       - main
-
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
-      # This is a useful debugging step to confirm your files are where you expect them
-      - name: List files in repository
-        run: ls -R
-
-      # This is the main deployment action
       - uses: FirebaseExtended/action-hosting-deploy@v0
-        id: deploy_action  
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GALWAY_JAM_CIRCLE_LIVE }}'
           projectId: galway-jam-circle-live
-          # This tells the action to deploy to the live site, not a preview
-          channelId: live
-          # This line correctly points the deployment to your specific target
-          target: live
-      
-      # This step now uses the hardcoded URL and writes to the job summary
-      - name: Output Deployment URLs
-        run: |
-          echo "### 🚀 Deployment Successful! 🚀" >> $GITHUB_STEP_SUMMARY
-          echo "**Main Site URL:** https://galway-jam-circle-live.web.app/index.html" >> $GITHUB_STEP_SUMMARY
-          echo "**Feedback Page URL:** https://galway-jam-circle-live.web.app/feedback.html" >> $GITHUB_STEP_SUMMARY
-          echo "**Clear Database:** https://console.firebase.google.com/project/galway-jam-circle-live/firestore/databases/-default-/data" >> $GITHUB_STEP_SUMMARY
