@@ -25,8 +25,8 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GALWAY_JAM_CIRCLE_LIVE }}'
           projectId: galway-jam-circle-live
-          # This line correctly points the deployment to your specific site
-          site: galway-jam-circle-live
+          # This line correctly points the deployment to your specific target
+          target: live
       
       # This step now uses the hardcoded URL and writes to the job summary
       - name: Output Deployment URLs
