@@ -25,13 +25,15 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GALWAY_JAM_CIRCLE_LIVE }}'
           projectId: galway-jam-circle-live
+          # This tells the action to deploy to the live site, not a preview
+          channelId: live
           # This line correctly points the deployment to your specific target
-          target: jam
+          target: live
       
       # This step now uses the hardcoded URL and writes to the job summary
       - name: Output Deployment URLs
         run: |
           echo "### 🚀 Deployment Successful! 🚀" >> $GITHUB_STEP_SUMMARY
-          echo "**Main Site URL:** https://galwayjam.web.app/index.html" >> $GITHUB_STEP_SUMMARY
-          echo "**Feedback Page URL:** https://galwayjam.web.app/feedback.html" >> $GITHUB_STEP_SUMMARY
+          echo "**Main Site URL:** https://galway-jam-circle-live.web.app/index.html" >> $GITHUB_STEP_SUMMARY
+          echo "**Feedback Page URL:** https://galway-jam-circle-live.web.app/feedback.html" >> $GITHUB_STEP_SUMMARY
           echo "**Clear Database:** https://console.firebase.google.com/project/galway-jam-circle-live/firestore/databases/-default-/data" >> $GITHUB_STEP_SUMMARY
