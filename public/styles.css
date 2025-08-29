@@ -42,3 +42,11 @@ body.admin-mode .admin-controls-inline {
     top: 0.5rem;
     right: 0.5rem;
 }
+/* Force hide admin controls when not in admin mode */
+body:not(.admin-mode) .admin-controls-inline {
+    display: none !important;
+}
+
+body:not(.admin-mode) #edit-cover-photo-form {
+    display: none !important;
+}
