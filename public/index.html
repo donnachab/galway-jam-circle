@@ -1735,17 +1735,8 @@
         }
 
         async function verifyPin(pin) {
-          const functionUrl = "https://script.google.com/macros/s/AKfycbzxvVayQrfQNZ6PdDimKLoC27Yxl95_ZPlq3jIXL9KV5tsWHAQWOr4tQI89E8seTBeAqA/exec";
-          try {
-            const checkResponse = await fetch(`${functionUrl}?pin=${encodeURIComponent(pin)}&action=check`);
-            if (!checkResponse.ok) return false;
-            const result = await checkResponse.json();
-            return result.success;
-          } catch (error) {
-            console.error("Error verifying PIN:", error);
-            showModal("Could not verify PIN. Please check your connection.", "alert");
-            return false;
-          }
+          const correctPin = "4519";
+          return pin === correctPin;
         }
         
         function handleAdminClick(e) {
