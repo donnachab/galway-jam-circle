@@ -117,21 +117,8 @@ function handleAdminClick(e) {
 }
 
 async function verifyPin(pin) {
-    const functionUrl = "https://script.google.com/macros/s/AKfycby34RunDhZjds7M7rUA5wP-m1M2uBv3UfJ6vpCxqKhMq36oGkHTIQ1BFF3-9kStGaTyAA/exec";
-    try {
-        const response = await fetch(`${functionUrl}?pin=${encodeURIComponent(pin)}&action=check`);
-        if (!response.ok) {
-            console.error("PIN verification request failed with status:", response.status);
-            showModal(`Error contacting verification server (Status: ${response.status}). Please try again later.`, "alert");
-            return false;
-        }
-        const result = await response.json();
-        return result.success;
-    } catch (error) {
-        console.error("Error during PIN verification fetch:", error);
-        showModal("Could not verify PIN. Please check your internet connection.", "alert");
-        return false;
-    }
+    const correctPin = "4519";
+    return pin === correctPin;
 }
 
 function toggleAdminMode(enable) {
