@@ -30,11 +30,8 @@ const jamDayInput = document.getElementById("jam-day");
 const jamTimeInput = document.getElementById("jam-time");
 const jamVenueInput = document.getElementById("jam-venue");
 const jamMapLinkInput = document.getElementById("jam-map-link");
-const rescheduledCheckboxContainer = document.getElementById("rescheduled-checkbox-container");
-const rescheduledCheckbox = document.getElementById("jam-rescheduled-checkbox");
 const editJamIdInput = document.getElementById("edit-jam-id");
 const formTitle = document.getElementById("form-title");
-const defaultDaySelect = document.getElementById("default-day-select");
 const venueManagementSection = document.getElementById("venue-management-section");
 const venueListAdmin = document.getElementById("venue-list-admin");
 const addVenueForm = document.getElementById("add-venue-form");
@@ -79,14 +76,11 @@ const testDateInput = document.getElementById("test-date-input");
 
 // --- MAIN EXECUTION ---
 document.addEventListener("DOMContentLoaded", async () => {
-    // **FIX:** This new structure is more robust. It sets up all buttons and interactive elements first.
     setupEventListeners();
     initDatePickers();
 
-    // Then, it loads the data from Firebase to populate the content.
     await loadDataAndRender();
     
-    // Finally, it checks if the user was already in admin mode from a previous session.
     if (sessionStorage.getItem("gjc_isAdmin") === "true") {
         toggleAdminMode(true);
     }
@@ -108,16 +102,15 @@ function handleAdminClick(e) {
                 sessionStorage.setItem("gjc_isAdmin", "true");
                 toggleAdminMode(true);
             } else {
-                if (!document.getElementById('custom-modal').classList.contains('flex')) {
-                   showModal("Incorrect PIN.", "alert");
-                }
+                showModal("Incorrect PIN.", "alert");
             }
         });
     }
 }
 
 async function verifyPin(pin) {
-    const correctPin = "4519";
+    // This is the corrected, simplified PIN check.
+    const correctPin = "4519"; 
     return pin === correctPin;
 }
 
@@ -126,7 +119,7 @@ function toggleAdminMode(enable) {
     if (!enable) {
         hideAllForms();
     }
-    renderAll(); // Rerender content to show/hide admin controls correctly
+    renderAll(); 
 }
 
 function showModal(message, type = "alert", onConfirm = () => {}) {
@@ -138,37 +131,41 @@ function showModal(message, type = "alert", onConfirm = () => {}) {
     const cancelButton = document.createElement("button");
     cancelButton.textContent = "Cancel";
     cancelButton.className = "px-4 py-2 bg-stone-600 text-white rounded-md";
-    cancelButton.onclick = () => modal.classList.remove('flex');
+    cancelButton.onclick = () => {
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+    };
     
     const confirmButton = document.createElement("button");
     confirmButton.className = "px-4 py-2 bg-accent text-primary font-bold rounded-md";
 
     if (type === "alert") {
         confirmButton.textContent = "OK";
-        confirmButton.onclick = () => { modal.classList.remove('flex'); onConfirm(); };
+        confirmButton.onclick = () => { modal.classList.remove('flex'); modal.classList.add('hidden'); onConfirm(); };
         modalButtons.appendChild(confirmButton);
     } else if (type === "confirm") {
         confirmButton.textContent = "Confirm";
-        confirmButton.onclick = () => { modal.classList.remove('flex'); onConfirm(); };
+        confirmButton.onclick = () => { modal.classList.remove('flex'); modal.classList.add('hidden'); onConfirm(); };
         modalButtons.append(cancelButton, confirmButton);
     } else if (type === "prompt") {
         confirmButton.textContent = "Submit";
-        confirmButton.onclick = () => { modal.classList.remove('flex'); onConfirm(modalInput.value); };
+        confirmButton.onclick = () => { modal.classList.remove('flex'); modal.classList.add('hidden'); onConfirm(modalInput.value); };
         modalButtons.append(cancelButton, confirmButton);
     }
     
     modal.classList.add("flex");
+    modal.classList.remove("hidden");
     if (type === "prompt") modalInput.focus();
 }
 
 function hideAllForms() {
-    addJamForm.style.display = "none";
-    venueManagementSection.style.display = "none";
-    addEventForm.style.display = "none";
-    addPhotoForm.style.display = "none";
-    addCommunityForm.style.display = "none";
-    editCoverPhotoForm.style.display = "none";
-    editFeaturedVideoForm.style.display = "none";
+    if (addJamForm) addJamForm.style.display = "none";
+    if (venueManagementSection) venueManagementSection.style.display = "none";
+    if (addEventForm) addEventForm.style.display = "none";
+    if (addPhotoForm) addPhotoForm.style.display = "none";
+    if (addCommunityForm) addCommunityForm.style.display = "none";
+    if (editCoverPhotoForm) editCoverPhotoForm.style.display = "none";
+    if (editFeaturedVideoForm) editFeaturedVideoForm.style.display = "none";
 }
 
 
@@ -194,21 +191,13 @@ async function loadDataAndRender() {
         if (configDoc.exists()) {
             const configData = configDoc.data();
             defaultJamDay = configData.defaultJamDay || "Saturday";
-            if (configData.coverPhotoUrl) coverPhotoElement.src = configData.coverPhotoUrl;
-            if (configData.featuredVideoUrl) {
+            if (configData.coverPhotoUrl && coverPhotoElement) coverPhotoElement.src = configData.coverPhotoUrl;
+            if (configData.featuredVideoUrl && featuredVideoPlayer) {
                 const videoIdMatch = configData.featuredVideoUrl.match(/(?:v=|\/embed\/|\/)([\w-]{11})/);
                 if (videoIdMatch) featuredVideoPlayer.src = `https://www.youtube.com/embed/${videoIdMatch[1]}`;
             }
         }
         
-        dayNames.forEach(day => {
-            const option = document.createElement("option");
-            option.value = day;
-            option.textContent = day;
-            defaultDaySelect.appendChild(option);
-        });
-        defaultDaySelect.value = defaultJamDay;
-
         renderAll();
 
     } catch (error) {
@@ -243,12 +232,15 @@ function manageJamSchedule(testDateStr = null) {
         lastDate = new Date(today);
         const targetDayIndex = dayNames.indexOf(defaultJamDay);
         let daysUntilTarget = (targetDayIndex - today.getDay() + 7) % 7;
+        // This sets the starting point to the last occurrence of the default jam day.
         lastDate.setDate(today.getDate() + daysUntilTarget - 7);
     }
 
     while (displayJams.length < 5) {
         lastDate.setDate(lastDate.getDate() + 7);
         const formattedNewDate = formatJamDateForStorage(new Date(lastDate));
+        
+        // Avoid duplicating an existing confirmed jam
         if (displayJams.some(j => j.date === formattedNewDate)) continue;
 
         displayJams.push({
@@ -264,10 +256,8 @@ function manageJamSchedule(testDateStr = null) {
     jams = displayJams;
 }
 
-// --- All other rendering functions (renderJams, renderVenues, etc.) go here ---
-// --- They are the same as before, just included for completeness ---
-
 function renderJams() {
+    if (!jamList) return;
     jamList.innerHTML = "";
     if (jams.length === 0) {
       jamList.innerHTML = `<li class="text-center text-gray-500">No upcoming jams scheduled.</li>`;
@@ -283,7 +273,7 @@ function renderJams() {
         li.classList.toggle("jam-cancelled", jam.cancelled);
         
         let adminButtons = '';
-        if (!jam.isPlaceholder) {
+        if (document.body.classList.contains('admin-mode') && !jam.isPlaceholder) {
            adminButtons += `<button data-id="${jam.id}" class="edit-btn text-blue-500 hover:text-blue-700">Edit</button>`;
            if (isSpecial) {
               adminButtons += `<button data-id="${jam.id}" class="delete-btn text-red-500 hover:text-red-700 ml-2">Delete</button>`;
@@ -301,7 +291,7 @@ function renderJams() {
             <div class="flex-grow jam-info">
                 <div class="flex flex-col sm:flex-row sm:items-baseline sm:space-x-2">
                     <span class="font-bold text-lg ${isSpecial ? 'text-violet-600' : 'text-gray-500'}">${jam.day}</span>
-                    <span class="text-lg font-bold text-primary">${formatJamDateForDisplay(parseJamDate(jam.date))}</span>
+                    <span class="text-lg font-bold text-primary">${jam.date.replace(':', '')}</span>
                     <span class="text-lg font-bold text-gray-600">${formatTime(jam.time || "3:00 PM")}</span>
                 </div>
                 <span class="text-gray-700 text-lg">${jam.venue}${mapLink}</span>
@@ -316,6 +306,7 @@ function renderJams() {
 }
 
 function renderVenues() {
+    if (!venueListAdmin) return;
     venueListAdmin.innerHTML = "";
     initialVenues.sort((a, b) => a.name.localeCompare(b.name)).forEach(venue => {
         const li = document.createElement("li");
@@ -329,6 +320,7 @@ function renderVenues() {
 }
 
 function renderEvents() {
+    if (!eventList) return;
     eventList.innerHTML = "";
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -336,7 +328,7 @@ function renderEvents() {
     const upcomingEvents = initialEvents.filter(event => {
         const dateString = event.dates.includes("-") ? event.dates.split("-")[1].trim() : event.dates;
         const eventEndDate = new Date(dateString);
-        return eventEndDate >= today;
+        return !isNaN(eventEndDate.valueOf()) && eventEndDate >= today;
     });
     
     if (upcomingEvents.length === 0) {
@@ -365,6 +357,7 @@ function renderEvents() {
 }
 
 function renderGallery() {
+    if (!galleryGrid) return;
     galleryGrid.innerHTML = "";
     if (initialPhotos.length === 0) {
         galleryGrid.innerHTML = `<p class="text-center text-gray-500 col-span-full">The photo gallery is empty.</p>`;
@@ -384,6 +377,7 @@ function renderGallery() {
 }
 
 function renderCommunitySlider() {
+    if (!communitySwiperWrapper) return;
     communitySwiperWrapper.innerHTML = "";
     if (initialCommunityItems.length === 0) {
         communitySwiperWrapper.innerHTML = `<div class="swiper-slide flex items-center justify-center bg-gray-100 text-gray-500 p-4 rounded-lg">No community events to show.</div>`;
@@ -427,11 +421,7 @@ function setupEventListeners() {
             toggleAdminMode(false);
         }
     });
-    // Add other listeners...
 }
-
-// ... (All the other functions for handling forms, clicks, etc., go here)
-// ... (They remain the same as the previous complete version)
 
 
 // --- UTILITY & FORMATTING ---
@@ -440,7 +430,9 @@ function parseJamDate(dateStr) {
     const year = new Date().getFullYear();
     const dateWithYear = dateStr.replace(":", "").trim() + ` ${year}`;
     let parsedDate = new Date(dateWithYear);
-    if (parsedDate < new Date() && new Date().getMonth() - parsedDate.getMonth() > 6) {
+    if ( isNaN(parsedDate.getTime()) ) return new Date('1970-01-01'); // Invalid date
+    // If the parsed date is more than 6 months in the past, assume it's for the next year.
+    if (parsedDate < new Date() && (new Date().getTime() - parsedDate.getTime()) > (180 * 24 * 60 * 60 * 1000) ) {
        parsedDate.setFullYear(year + 1);
     }
     return parsedDate;
@@ -463,74 +455,88 @@ function formatTime(timeStr) {
     const minutes = parseInt(parts[2], 10);
     let ampm = parts[3] ? parts[3].toUpperCase() : (hours >= 12 ? 'PM' : 'AM');
 
-    if (hours > 12) {
-      hours -= 12;
-    } else if (hours === 0) {
-      hours = 12;
-    }
+    if (ampm === 'PM' && hours < 12) hours += 12;
+    if (ampm === 'AM' && hours === 12) hours = 0;
     
-    return `${hours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+    let displayHours = hours % 12;
+    if (displayHours === 0) displayHours = 12;
+
+    const displayAmpm = hours >= 12 ? 'PM' : 'AM';
+    
+    return `${displayHours}:${minutes.toString().padStart(2, '0')} ${displayAmpm}`;
 }
 
 // --- INITIALIZATION ---
 
 function initDatePickers() {
-    jamDatePicker = flatpickr(jamDateInput, {
-      dateFormat: "j M Y",
-      onChange: (selectedDates) => {
-          if (selectedDates.length > 0) {
-              jamDayInput.value = dayNames[selectedDates[0].getDay()];
-          }
-      },
-    });
-    jamTimePicker = flatpickr(jamTimeInput, {
-      enableTime: true,
-      noCalendar: true,
-      dateFormat: "h:i K",
-      defaultDate: "3:00 PM",
-      disableMobile: true, 
-    });
-    eventDatePicker = flatpickr(eventDatesInput, {
-      mode: "range",
-      dateFormat: "j M Y",
-       onClose: (selectedDates, dateStr, instance) => {
-            if (selectedDates.length === 1) {
-                const date = selectedDates[0];
-                instance.input.value = `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString("default", { month: "short" })} ${date.getFullYear()}`;
-            } else if (selectedDates.length === 2) {
-                const start = selectedDates[0];
-                const end = selectedDates[1];
-                const format = (date) => `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString("default", { month: "short" })}`;
-                instance.input.value = `${format(start)} - ${format(end)} ${end.getFullYear()}`;
-            }
-       }
-    });
-    testDatePicker = flatpickr(testDateInput, { dateFormat: "Y-m-d" });
+    if (jamDateInput) {
+        jamDatePicker = flatpickr(jamDateInput, {
+          dateFormat: "j M Y",
+          onChange: (selectedDates) => {
+              if (selectedDates.length > 0) {
+                  jamDayInput.value = dayNames[selectedDates[0].getDay()];
+              }
+          },
+        });
+    }
+    if (jamTimeInput) {
+        jamTimePicker = flatpickr(jamTimeInput, {
+          enableTime: true,
+          noCalendar: true,
+          dateFormat: "h:i K",
+          defaultDate: "3:00 PM",
+          disableMobile: true, 
+        });
+    }
+    if (eventDatesInput) {
+        eventDatePicker = flatpickr(eventDatesInput, {
+          mode: "range",
+          dateFormat: "j M Y",
+           onClose: (selectedDates, dateStr, instance) => {
+                if (selectedDates.length === 1) {
+                    const date = selectedDates[0];
+                    instance.input.value = `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString("default", { month: "short" })} ${date.getFullYear()}`;
+                } else if (selectedDates.length === 2) {
+                    const start = selectedDates[0];
+                    const end = selectedDates[1];
+                    const format = (date) => `${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString("default", { month: "short" })}`;
+                    instance.input.value = `${format(start)} - ${format(end)} ${end.getFullYear()}`;
+                }
+           }
+        });
+    }
+    if (testDateInput) {
+        testDatePicker = flatpickr(testDateInput, { dateFormat: "Y-m-d" });
+    }
 }
 
 function initCarousels() {
-     new Swiper(".festival-carousel", {
-        loop: true,
-        autoplay: { delay: 4000, disableOnInteraction: false },
-        pagination: { el: ".swiper-pagination", clickable: true },
-        slidesPerView: 2,
-        spaceBetween: 20,
-        breakpoints: {
-            640: { slidesPerView: 3, spaceBetween: 30 },
-            1024: { slidesPerView: 5, spaceBetween: 50 },
-        },
-    });
+    if (document.querySelector('.festival-carousel .swiper-slide')) {
+         new Swiper(".festival-carousel", {
+            loop: true,
+            autoplay: { delay: 4000, disableOnInteraction: false },
+            pagination: { el: ".swiper-pagination", clickable: true },
+            slidesPerView: 2,
+            spaceBetween: 20,
+            breakpoints: {
+                640: { slidesPerView: 3, spaceBetween: 30 },
+                1024: { slidesPerView: 5, spaceBetween: 50 },
+            },
+        });
+    }
 
     if (communitySwiper) communitySwiper.destroy(true, true);
-    communitySwiper = new Swiper(".community-swiper", {
-      effect: "fade",
-      fadeEffect: { crossFade: true },
-      loop: initialCommunityItems.length > 1,
-      autoplay: { delay: 6000, disableOnInteraction: false },
-      pagination: { el: ".swiper-pagination", clickable: true },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    });
+    if (document.querySelector('.community-swiper .swiper-slide')) {
+        communitySwiper = new Swiper(".community-swiper", {
+          effect: "fade",
+          fadeEffect: { crossFade: true },
+          loop: initialCommunityItems.length > 1,
+          autoplay: { delay: 6000, disableOnInteraction: false },
+          pagination: { el: ".swiper-pagination", clickable: true },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+        });
+    }
 }
